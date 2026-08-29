@@ -1,0 +1,586 @@
+/* ==========================================================================
+   Knox's 6th Grade Study Lab — training-ground palette
+   Pale chalked field, mown turf bands, traffic-cone orange as the one accent.
+   ========================================================================== */
+
+:root{
+  --paper:      #EAF0E2;
+  --chalk:      #FFFFFF;
+  --turf:       #2E7D4F;
+  --turf-dark:  #215C3A;
+  --turf-deep:  #153D27;
+  --cone:       #FF6A13;
+  --cone-dark:  #D95100;
+  --card:       #FFD23F;
+  --ink:        #12241A;
+  --ink-soft:   #566A5C;
+  --line:       rgba(18,36,26,.15);
+  --shadow:     0 2px 0 rgba(18,36,26,.14);
+  --radius:     14px;
+  --wrap:       min(1080px, 100% - 2rem);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ -webkit-text-size-adjust:100%; }
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size:17px;
+  line-height:1.55;
+}
+
+.wrap{ width:var(--wrap); margin-inline:auto; }
+
+h1,h2,h3{
+  font-family:"Archivo Black","Archivo",system-ui,sans-serif;
+  font-weight:400;
+  letter-spacing:-.01em;
+  line-height:1.05;
+  margin:0;
+}
+
+a{ color:inherit; }
+
+button{ font:inherit; color:inherit; }
+
+:focus-visible{
+  outline:3px solid var(--cone);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+/* --- Header band: mown pitch stripes ------------------------------------ */
+.pitch-band{
+  background:
+    repeating-linear-gradient(90deg,
+      var(--turf) 0 46px, var(--turf-dark) 46px 92px);
+  border-bottom:5px solid var(--chalk);
+  color:var(--chalk);
+}
+
+.band-inner{
+  padding:1.5rem 0 1.6rem;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-end;
+  gap:.4rem 1.5rem;
+}
+
+.crest{
+  display:flex;
+  align-items:center;
+  gap:.85rem;
+  text-decoration:none;
+}
+
+.crest-ball{
+  width:42px; height:42px; flex:none;
+  border-radius:50%;
+  background:var(--chalk);
+  border:3px solid var(--turf-deep);
+  position:relative;
+}
+.crest-ball::after{
+  content:"";
+  position:absolute; inset:9px;
+  background:var(--turf-deep);
+  clip-path:polygon(50% 0%, 100% 36%, 81% 100%, 19% 100%, 0% 36%);
+}
+
+.crest-text{ display:block; }
+.crest-line1{
+  display:block;
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  opacity:.85;
+}
+.crest-line2{
+  display:block;
+  font-family:"Archivo Black","Archivo",sans-serif;
+  font-size:clamp(1.6rem, 6vw, 2.4rem);
+  line-height:1;
+  letter-spacing:-.02em;
+}
+
+.tagline{
+  margin:0;
+  font-size:.82rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--card);
+}
+
+/* --- Tab bar ------------------------------------------------------------ */
+.tabbar{
+  background:var(--turf-deep);
+  position:sticky; top:0; z-index:20;
+  border-bottom:3px solid var(--cone);
+}
+.tabbar-inner{
+  display:flex;
+  gap:.15rem;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.tabbar-inner::-webkit-scrollbar{ display:none; }
+
+.tab{
+  flex:none;
+  padding:.7rem .95rem;
+  text-decoration:none;
+  color:rgba(255,255,255,.72);
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  border-bottom:4px solid transparent;
+}
+.tab:hover{ color:var(--chalk); }
+.tab[aria-current="page"]{
+  color:var(--chalk);
+  border-bottom-color:var(--cone);
+}
+
+/* --- Generic page furniture --------------------------------------------- */
+#app{ padding:1.75rem 0 3rem; }
+#app:focus{ outline:none; }
+
+.eyebrow{
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  margin:0 0 .35rem;
+}
+
+.page-title{
+  font-size:clamp(1.5rem, 5vw, 2.1rem);
+  margin-bottom:.5rem;
+}
+
+.lede{ color:var(--ink-soft); margin:.25rem 0 1.5rem; max-width:52ch; }
+
+.backlink{
+  display:inline-block;
+  margin-bottom:1.1rem;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  text-decoration:none;
+}
+.backlink:hover{ color:var(--cone-dark); }
+
+/* --- Jersey grid (home) -------------------------------------------------- */
+.jersey-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
+  gap:.9rem;
+  margin-top:1.25rem;
+}
+
+.jersey-link{ text-decoration:none; display:block; }
+
+.jersey{
+  display:block;
+  aspect-ratio:1/1.12;
+  background:var(--chalk);
+  clip-path:polygon(
+    0% 20%, 21% 0%, 34% 0%, 50% 11%, 66% 0%, 79% 0%, 100% 20%,
+    88% 36%, 85% 28%, 85% 100%, 15% 100%, 15% 28%, 12% 36%);
+  position:relative;
+  padding:36% 17% .9rem;
+  text-align:center;
+  transition:transform .18s ease, background .18s ease;
+}
+.jersey-link:hover .jersey,
+.jersey-link:focus-visible .jersey{ transform:translateY(-4px); }
+
+.jersey--active{ background:var(--cone); color:var(--chalk); }
+.jersey--empty{ background:#DCE4D2; color:var(--ink-soft); }
+
+.jersey-num{
+  display:block;
+  font-family:"Archivo Black",sans-serif;
+  font-size:2.6rem;
+  line-height:.9;
+  font-variant-numeric:tabular-nums;
+}
+.jersey-name{
+  display:block;
+  margin-top:.35rem;
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.jersey-sub{
+  display:block;
+  font-size:.62rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  opacity:.75;
+  margin-top:.15rem;
+}
+
+/* --- Cards (study items, drills) ---------------------------------------- */
+.stack{ display:grid; gap:.8rem; }
+
+.card{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:1.05rem 1.1rem;
+  text-decoration:none;
+  display:block;
+  position:relative;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+a.card:hover, a.card:focus-visible{
+  transform:translateY(-2px);
+  box-shadow:0 6px 0 rgba(18,36,26,.16);
+}
+
+.card-title{ font-size:1.12rem; margin-bottom:.3rem; }
+
+.card-meta{
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  display:flex; flex-wrap:wrap; gap:.15rem .7rem;
+}
+
+.card-note{ font-size:.9rem; color:var(--ink-soft); margin:.5rem 0 0; }
+
+.pill{
+  display:inline-block;
+  background:var(--cone);
+  color:var(--chalk);
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:.18rem .5rem;
+  border-radius:999px;
+}
+.pill--soon{ background:var(--cone-dark); }
+.pill--past{ background:var(--ink-soft); }
+
+/* --- Cone bullet list (team sheet) -------------------------------------- */
+.sheet{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  padding:1.1rem 1.2rem;
+  margin-bottom:1rem;
+}
+.sheet h3{
+  font-size:.78rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--cone-dark);
+  margin-bottom:.6rem;
+}
+.sheet ol{ margin:0; padding-left:1.6rem; }
+.sheet li{ margin-bottom:.25rem; }
+.sheet li::marker{ font-weight:700; color:var(--ink-soft); font-size:.85em; }
+
+.def{ margin:0 0 1rem; }
+.def:last-child{ margin-bottom:0; }
+.def dt{
+  font-family:"Archivo Black",sans-serif;
+  font-size:1.05rem;
+}
+.def dd{ margin:.15rem 0 0; }
+.def .ex{ color:var(--ink-soft); font-size:.92rem; font-style:italic; }
+
+/* --- Scoreboard --------------------------------------------------------- */
+.scoreboard{
+  background:var(--turf-deep);
+  color:var(--chalk);
+  border-radius:var(--radius);
+  padding:.7rem 1rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:1.2rem;
+}
+.score-side{ text-align:center; }
+.score-label{
+  display:block;
+  font-size:.6rem; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase;
+  opacity:.7;
+}
+.score-num{
+  display:block;
+  font-family:"Archivo Black",sans-serif;
+  font-size:1.7rem; line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.score-num--miss{ color:var(--card); }
+.score-dots{ display:flex; gap:5px; flex-wrap:wrap; justify-content:center; flex:1; }
+.dot{
+  width:9px; height:9px; border-radius:50%;
+  background:rgba(255,255,255,.22);
+}
+.dot--hit{ background:var(--cone); }
+.dot--miss{ background:var(--card); }
+.dot--now{ box-shadow:0 0 0 3px rgba(255,106,19,.35); background:var(--chalk); }
+
+/* --- Question / answers ------------------------------------------------- */
+.q{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  padding:1.3rem 1.2rem;
+  margin-bottom:1rem;
+  text-align:center;
+}
+.q-kicker{
+  font-size:.7rem; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink-soft);
+  margin:0 0 .6rem;
+}
+.q-text{
+  font-family:"Archivo Black",sans-serif;
+  font-size:clamp(1.2rem, 4.5vw, 1.7rem);
+  line-height:1.2;
+  margin:0;
+}
+.q-text--sentence{
+  font-family:"Archivo",sans-serif;
+  font-weight:500;
+  font-size:1.05rem;
+  line-height:1.5;
+  text-align:left;
+}
+.blank{
+  display:inline-block;
+  min-width:5.5rem;
+  border-bottom:3px solid var(--cone);
+  vertical-align:baseline;
+}
+
+.answers{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
+  gap:.6rem;
+}
+
+.answers--long{ grid-template-columns:1fr; }
+.answers--long .answer{ text-align:left; padding:.85rem 1rem; font-weight:500; }
+
+.answer{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:.9rem .8rem;
+  font-weight:600;
+  cursor:pointer;
+  text-align:center;
+  transition:transform .12s ease, background .12s ease;
+}
+.answer:hover:not(:disabled){ transform:translateY(-2px); background:#F6FAF1; }
+.answer:disabled{ cursor:default; }
+.answer--right{ background:var(--cone); border-color:var(--cone-dark); color:var(--chalk); }
+.answer--wrong{ background:var(--card); border-color:#C79A00; }
+.answer--dim{ opacity:.45; }
+
+.verdict{
+  text-align:center;
+  font-family:"Archivo Black",sans-serif;
+  font-size:1.1rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  min-height:1.6em;
+  margin:1rem 0 .5rem;
+}
+.verdict--goal{ color:var(--cone-dark); }
+.verdict--card{ color:#9A7400; }
+.verdict small{
+  display:block;
+  font-family:"Archivo",sans-serif;
+  font-weight:500;
+  font-size:.85rem;
+  letter-spacing:0;
+  text-transform:none;
+  color:var(--ink-soft);
+  margin-top:.3rem;
+}
+
+/* --- Buttons ------------------------------------------------------------ */
+.btn{
+  display:inline-block;
+  background:var(--cone);
+  color:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:999px;
+  box-shadow:var(--shadow);
+  padding:.7rem 1.5rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-size:.82rem;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .12s ease;
+}
+.btn:hover{ transform:translateY(-2px); }
+.btn--quiet{ background:var(--chalk); color:var(--ink); }
+.btn-row{ display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; margin-top:.4rem; }
+
+/* --- Line-up drill ------------------------------------------------------ */
+.lineup{
+  display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center;
+  margin-bottom:1rem;
+}
+.chip{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:999px;
+  box-shadow:var(--shadow);
+  padding:.55rem 1rem;
+  font-weight:600;
+  cursor:pointer;
+}
+.chip:hover:not(:disabled){ background:#F6FAF1; }
+.chip--placed{ background:var(--cone); color:var(--chalk); border-color:var(--cone-dark); cursor:default; }
+.chip--shake{ animation:shake .3s; background:var(--card); }
+
+.slots{
+  display:flex; flex-wrap:wrap; gap:.4rem; justify-content:center;
+  margin-bottom:1.1rem; min-height:2.4rem;
+}
+.slot{
+  border:2px dashed var(--line);
+  border-radius:999px;
+  padding:.5rem .9rem;
+  font-weight:700;
+  font-size:.9rem;
+  color:var(--ink-soft);
+  min-width:3rem;
+  text-align:center;
+}
+.slot--filled{
+  border-style:solid;
+  border-color:var(--turf-dark);
+  background:var(--turf-dark);
+  color:var(--chalk);
+}
+
+/* --- Flashcards --------------------------------------------------------- */
+.flashcard{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  box-shadow:0 5px 0 rgba(18,36,26,.15);
+  min-height:230px;
+  width:100%;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:.6rem;
+  padding:1.6rem 1.2rem;
+  cursor:pointer;
+  text-align:center;
+}
+.flash-word{ font-family:"Archivo Black",sans-serif; font-size:clamp(1.5rem,6vw,2.2rem); }
+.flash-hint{
+  font-size:.7rem; font-weight:700; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--ink-soft);
+}
+.flash-meaning{ font-size:1.15rem; font-weight:600; max-width:34ch; }
+.flash-ex{ font-size:.92rem; color:var(--ink-soft); font-style:italic; max-width:40ch; }
+.flash-nav{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1rem; margin-top:1rem;
+}
+.counter{
+  font-weight:700; font-variant-numeric:tabular-nums;
+  letter-spacing:.1em; color:var(--ink-soft); font-size:.85rem;
+}
+
+/* --- Result ------------------------------------------------------------- */
+.result{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  padding:2rem 1.2rem;
+  text-align:center;
+}
+.result-rating{
+  font-family:"Archivo Black",sans-serif;
+  font-size:clamp(1.6rem,7vw,2.4rem);
+  color:var(--cone-dark);
+  line-height:1.05;
+  margin-bottom:.5rem;
+}
+.result-score{
+  font-family:"Archivo Black",sans-serif;
+  font-size:3.2rem;
+  font-variant-numeric:tabular-nums;
+  line-height:1;
+}
+.result-of{ font-size:.8rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft); }
+.result-missed{ margin:1.2rem auto 0; max-width:46ch; text-align:left; font-size:.95rem; }
+.result-missed h3{ font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:.4rem; }
+
+/* --- Empty state -------------------------------------------------------- */
+.empty{
+  background:var(--chalk);
+  border:2px dashed var(--line);
+  border-radius:var(--radius);
+  padding:2.2rem 1.2rem;
+  text-align:center;
+  color:var(--ink-soft);
+}
+.empty strong{ display:block; color:var(--ink); font-size:1.1rem; margin-bottom:.3rem; font-family:"Archivo Black",sans-serif; }
+
+/* --- Footer ------------------------------------------------------------- */
+.foot{
+  border-top:4px solid var(--turf-dark);
+  padding:1.2rem 0 2rem;
+  font-size:.8rem;
+  color:var(--ink-soft);
+}
+.foot p{ margin:0; }
+
+/* --- Motion ------------------------------------------------------------- */
+@keyframes shake{
+  0%,100%{ transform:translateX(0); }
+  25%{ transform:translateX(-5px); }
+  75%{ transform:translateX(5px); }
+}
+@keyframes pop{
+  0%{ transform:scale(.94); opacity:0; }
+  100%{ transform:scale(1); opacity:1; }
+}
+.q, .flashcard, .result{ animation:pop .2s ease-out; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; }
+}
+
+@media (max-width:520px){
+  body{ font-size:16px; }
+  .pitch-band{ background-size:auto; }
+  .jersey-grid{ grid-template-columns:repeat(auto-fill, minmax(120px,1fr)); }
+  .jersey-num{ font-size:2.1rem; }
+  .answers{ grid-template-columns:1fr; }
+}
