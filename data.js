@@ -95,7 +95,22 @@ const STUDY_ITEMS = [
     quiz:  "2026-08-31",
     note:  "All 39 books, front to back.",
     type:  "sequence",
-    groups: OT_GROUPS
+    groups: OT_GROUPS,
+
+    /* Short rhythmic lines for the chant and recall drills. This is the
+       traditional way the books get memorized — say each line out loud
+       until it has a beat, then chain the lines together. */
+    lines: [
+      ["Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy"],
+      ["Joshua", "Judges", "Ruth"],
+      ["1 Samuel", "2 Samuel", "1 Kings", "2 Kings"],
+      ["1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah", "Esther"],
+      ["Job", "Psalms", "Proverbs", "Ecclesiastes", "Song of Solomon"],
+      ["Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel"],
+      ["Hosea", "Joel", "Amos", "Obadiah", "Jonah"],
+      ["Micah", "Nahum", "Habakkuk", "Zephaniah"],
+      ["Haggai", "Zechariah", "Malachi"]
+    ]
   },
 
   /* ------------------------------------------------------------------ */

@@ -74,8 +74,11 @@
       { id: "blank",   name: "Fill the blank",     blurb: "Worksheet sentences, one at a time." }
     ],
     sequence: [
-      { id: "next",   name: "What comes next?", blurb: "One book on screen. Pick the one that follows." },
-      { id: "lineup", name: "Line them up",     blurb: "Put a small group in order, six at a time." }
+      { id: "chant",     name: "Say it in lines",      blurb: "Nine short lines. Read each one out loud until it has a beat." },
+      { id: "recall",    name: "Cover and recall",     blurb: "First letters only. Say the line from memory, then check yourself." },
+      { id: "next",      name: "What comes next?",     blurb: "One book on screen. Pick the one that follows." },
+      { id: "lineup",    name: "Line them up",         blurb: "Put a small group in order, six at a time." },
+      { id: "dragorder", name: "Drag all 39 in order", blurb: "The whole list, shuffled. Drag until it's right, then check it." }
     ],
     categorize: [
       { id: "group1",   name: "Which group? — Part 1",  blurb: "Law, History, and Poetry & Wisdom only." },
@@ -344,6 +347,9 @@
     if (!item) { location.hash = "#/"; return; }
 
     if (drillId === "flash") { renderFlash(item); return; }
+    if (drillId === "dragorder") { renderDragOrder(item); return; }
+    if (drillId === "chant") { renderChant(item); return; }
+    if (drillId === "recall") { renderRecall(item, null); return; }
 
     var drill = drillById(item, drillId);
     if (!drill) { location.hash = "#/i/" + itemId; return; }
@@ -508,6 +514,307 @@
     }
 
     paint();
+  }
+
+  /* ---------- say it in lines (the chant) ---------------------------------- */
+
+  function linesFor(item) {
+    if (item.lines && item.lines.length) return item.lines;
+    return chunksOf(item).map(function (c) { return c.answer; });
+  }
+
+  function renderChant(item) {
+    var lines = linesFor(item);
+    var i = 0;
+
+    function paint() {
+      var L = lines[i];
+      var prev = lines.slice(0, i).map(function (p) {
+        return '<li>' + esc(p.join(" \u00b7 ")) + "</li>";
+      }).join("");
+
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<p class="eyebrow">Line ' + (i + 1) + " of " + lines.length + "</p>" +
+        '<div class="chant">' +
+          L.map(function (b) { return '<span class="beat">' + esc(b) + "</span>"; }).join("") +
+        "</div>" +
+        '<p class="chant-hint">Say it out loud three times. Get a rhythm going, ' +
+        "then move to the next line.</p>" +
+        '<div class="btn-row">' +
+          (i > 0 ? '<button class="btn btn--quiet" id="cprev">\u2190 Back</button>' : "") +
+          (i < lines.length - 1
+            ? '<button class="btn" id="cnext">Next line \u2192</button>'
+            : '<a class="btn" href="#/i/' + item.id + '/recall">Now test yourself \u2192</a>') +
+        "</div>" +
+        (prev ? '<div class="chant-prev"><h3>Lines you\'ve done</h3><ol>' + prev + "</ol></div>" : "");
+
+      if (document.getElementById("cprev"))
+        document.getElementById("cprev").addEventListener("click", function () { i--; paint(); });
+      if (document.getElementById("cnext"))
+        document.getElementById("cnext").addEventListener("click", function () { i++; paint(); });
+    }
+    paint();
+  }
+
+  /* ---------- cover and recall -------------------------------------------- */
+
+  function firstLetters(name) {
+    var m = name.match(/^(\d+\s+)?(.*)$/);
+    var lead = m[1] || "";
+    var word = m[2];
+    return esc(lead + word.charAt(0)) +
+      '<span class="masked">' + new Array(word.length).join("\u00b7") + "</span>";
+  }
+
+  function renderRecall(item, subset) {
+    var lines = subset && subset.length ? subset : linesFor(item);
+    var i = 0, shown = false, hints = true;
+    var missed = [];
+
+    function paint() {
+      var L = lines[i];
+      var face = shown
+        ? L.map(function (b) { return '<span class="beat">' + esc(b) + "</span>"; }).join("")
+        : hints
+          ? L.map(function (b) { return '<span class="beat beat--hint">' + firstLetters(b) + "</span>"; }).join("")
+          : '<span class="beat beat--blind">' + L.length + " books</span>";
+
+      var controls = shown
+        ? '<button class="btn" id="got">I said them all right</button>' +
+          '<button class="btn btn--quiet" id="miss">I missed some</button>'
+        : '<button class="btn" id="show">Show me</button>';
+
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<p class="eyebrow">Card ' + (i + 1) + " of " + lines.length + "</p>" +
+        '<div class="chant' + (shown ? " chant--open" : "") + '">' + face + "</div>" +
+        '<p class="chant-hint">' +
+          (shown ? "Did you get every one, in order?" : "Say this whole line out loud from memory, then check.") +
+        "</p>" +
+        '<div class="btn-row">' + controls + "</div>" +
+        (shown ? "" : '<div class="btn-row"><button class="hint-toggle" id="ht">' +
+          (hints ? "Hide the letters" : "Show the letters") + "</button></div>");
+
+      if (document.getElementById("show"))
+        document.getElementById("show").addEventListener("click", function () { shown = true; paint(); });
+      if (document.getElementById("ht"))
+        document.getElementById("ht").addEventListener("click", function () { hints = !hints; paint(); });
+      if (document.getElementById("got"))
+        document.getElementById("got").addEventListener("click", function () { mark(true); });
+      if (document.getElementById("miss"))
+        document.getElementById("miss").addEventListener("click", function () { mark(false); });
+    }
+
+    function mark(ok) {
+      if (!ok) missed.push(lines[i]);
+      i++; shown = false;
+      if (i >= lines.length) done(); else paint();
+    }
+
+    function done() {
+      var got = lines.length - missed.length;
+      var clean = missed.length === 0;
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="result-rating">' + (clean ? "Clean sheet" : "Keep going") + "</p>" +
+          '<p class="result-score">' + got + "/" + lines.length + "</p>" +
+          '<p class="result-of">Lines said from memory</p>' +
+          '<p class="lede" style="margin:1rem auto 0">' +
+            (clean
+              ? "You said every line without looking. Run it once more tomorrow and it'll stick."
+              : "Run just the lines you missed \u2014 that's where the work is.") +
+          "</p>" +
+          (missed.length
+            ? '<div class="result-missed"><h3>Lines to run again</h3><ul>' +
+              missed.map(function (L) { return "<li>" + esc(L.join(" \u00b7 ")) + "</li>"; }).join("") +
+              "</ul></div>"
+            : "") +
+          '<div class="btn-row">' +
+            (missed.length ? '<button class="btn" id="redo">Run those ' + missed.length + ' again</button>' : "") +
+            '<button class="btn' + (missed.length ? " btn--quiet" : "") + '" id="allagain">All ' +
+              linesFor(item).length + " lines again</button>" +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '/chant">Back to the lines</a>' +
+          "</div>" +
+        "</div>";
+
+      if (document.getElementById("redo")) {
+        var again = missed.slice();
+        document.getElementById("redo").addEventListener("click", function () {
+          renderRecall(item, again);
+        });
+      }
+      document.getElementById("allagain").addEventListener("click", function () {
+        renderRecall(item, null);
+      });
+    }
+
+    paint();
+  }
+
+  /* ---------- drag the whole list into order ------------------------------ */
+
+  var GRIP = '<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">' +
+    '<path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="2" ' +
+    'stroke-linecap="round" fill="none"/></svg>';
+
+  function renderDragOrder(item) {
+    var answer = flatBooks(item);
+    var start = shuffle(answer);
+    var list, bar, drag = null, ph = null, offY = 0, lastY = 0, scroller = null;
+
+    app.innerHTML =
+      '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+      '<p class="eyebrow">Drag all 39 in order</p>' +
+      '<h1 class="page-title">Set the whole squad</h1>' +
+      '<p class="lede">Drag by the grip on the left, or tap a grip and use the up and down ' +
+      'arrow keys. Check it as often as you like.</p>' +
+      '<ol class="droplist" id="droplist">' +
+        start.map(function (b, i) {
+          return '<li class="dragrow" data-b="' + esc(b) + '">' +
+            '<button class="drag-handle" aria-label="Move ' + esc(b) + '">' + GRIP + '</button>' +
+            '<span class="drag-num">' + (i + 1) + '</span>' +
+            '<span class="drag-name">' + esc(b) + '</span></li>';
+        }).join("") +
+      "</ol>" +
+      '<div class="checkbar" id="checkbar">' +
+        '<span class="check-score" id="checkscore">39 books to place</span>' +
+        '<button class="btn" id="checkbtn">Check my order</button>' +
+        '<button class="btn btn--quiet" id="reshuffle">Shuffle</button>' +
+      "</div>";
+
+    list = document.getElementById("droplist");
+    bar = document.getElementById("checkscore");
+
+    function liveRows() {
+      return Array.prototype.slice.call(list.querySelectorAll(".dragrow:not(.placeholder)"));
+    }
+
+    function renumber() {
+      liveRows().forEach(function (r, i) {
+        r.querySelector(".drag-num").textContent = i + 1;
+      });
+    }
+
+    function clearMarks() {
+      liveRows().forEach(function (r) { r.classList.remove("row--ok", "row--no"); });
+    }
+
+    /* --- pointer dragging --- */
+
+    list.addEventListener("pointerdown", function (e) {
+      var handle = e.target.closest(".drag-handle");
+      if (!handle || e.button > 0) return;
+      var row = handle.closest(".dragrow");
+      var box = row.getBoundingClientRect();
+
+      drag = row;
+      offY = e.clientY - box.top;
+      lastY = e.clientY;
+      clearMarks();
+
+      ph = document.createElement("li");
+      ph.className = "dragrow placeholder";
+      ph.style.height = box.height + "px";
+      row.after(ph);
+
+      row.classList.add("row--drag");
+      row.style.width = box.width + "px";
+      row.style.left = box.left + "px";
+      row.style.top = box.top + "px";
+      handle.setPointerCapture(e.pointerId);
+      e.preventDefault();
+
+      scroller = setInterval(function () {
+        var h = window.innerHeight, step = 0;
+        if (lastY < 90) step = -14;
+        else if (lastY > h - 90) step = 14;
+        if (step) { window.scrollBy(0, step); reposition(); }
+      }, 16);
+    });
+
+    function reposition() {
+      if (!drag) return;
+      drag.style.top = (lastY - offY) + "px";
+      var others = liveRows().filter(function (r) { return r !== drag; });
+      var before = null;
+      for (var i = 0; i < others.length; i++) {
+        var b = others[i].getBoundingClientRect();
+        if (lastY < b.top + b.height / 2) { before = others[i]; break; }
+      }
+      if (before) list.insertBefore(ph, before);
+      else list.appendChild(ph);
+    }
+
+    list.addEventListener("pointermove", function (e) {
+      if (!drag) return;
+      lastY = e.clientY;
+      reposition();
+      e.preventDefault();
+    });
+
+    function endDrag() {
+      if (!drag) return;
+      clearInterval(scroller);
+      drag.classList.remove("row--drag");
+      drag.style.cssText = "";
+      list.insertBefore(drag, ph);
+      ph.remove();
+      drag = null; ph = null;
+      renumber();
+      bar.textContent = "39 books to place";
+      bar.className = "check-score";
+    }
+
+    list.addEventListener("pointerup", endDrag);
+    list.addEventListener("pointercancel", endDrag);
+
+    /* --- keyboard moving --- */
+
+    list.addEventListener("keydown", function (e) {
+      if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+      var handle = e.target.closest(".drag-handle");
+      if (!handle) return;
+      var row = handle.closest(".dragrow");
+      clearMarks();
+      if (e.key === "ArrowUp" && row.previousElementSibling) {
+        list.insertBefore(row, row.previousElementSibling);
+      } else if (e.key === "ArrowDown" && row.nextElementSibling) {
+        list.insertBefore(row.nextElementSibling, row);
+      }
+      renumber();
+      handle.focus();
+      row.scrollIntoView({ block: "nearest" });
+      e.preventDefault();
+    });
+
+    /* --- checking --- */
+
+    document.getElementById("checkbtn").addEventListener("click", function () {
+      var rows = liveRows(), right = 0, firstWrong = null;
+      rows.forEach(function (r, i) {
+        var ok = r.dataset.b === answer[i];
+        r.classList.remove("row--ok", "row--no");
+        r.classList.add(ok ? "row--ok" : "row--no");
+        if (ok) right++;
+        else if (!firstWrong) firstWrong = r;
+      });
+
+      if (right === answer.length) {
+        bar.textContent = "Clean sheet \u2014 all 39 in the right order!";
+        bar.className = "check-score check-score--win";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        bar.textContent = right + " of " + answer.length + " in the right spot";
+        bar.className = "check-score check-score--part";
+        if (firstWrong) firstWrong.scrollIntoView({ block: "center", behavior: "smooth" });
+      }
+    });
+
+    document.getElementById("reshuffle").addEventListener("click", function () {
+      renderDragOrder(item);
+      window.scrollTo(0, 0);
+    });
   }
 
   /* ---------- flashcards --------------------------------------------------- */
