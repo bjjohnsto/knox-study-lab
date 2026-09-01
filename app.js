@@ -52,6 +52,15 @@
     return STUDY_ITEMS.filter(function (i) { return i.subject === subjectId; });
   }
 
+  /* A quiz whose date has gone by drops off the main pages on its own, so
+     nobody has to do housekeeping. It stays reachable under "Past quizzes". */
+  function isPast(item) {
+    var d = daysUntil(item.quiz);
+    return d !== null && d < 0;
+  }
+  function activeFor(subjectId) { return itemsFor(subjectId).filter(function (i) { return !isPast(i); }); }
+  function pastFor(subjectId)   { return itemsFor(subjectId).filter(isPast); }
+
   function itemById(id) {
     return STUDY_ITEMS.filter(function (i) { return i.id === id; })[0];
   }
@@ -83,19 +92,28 @@
     categorize: [
       { id: "group1",   name: "Which group? — Part 1",  blurb: "Law, History, and Poetry & Wisdom only." },
       { id: "groupall", name: "Which group? — All 39",  blurb: "Everything, prophets included." }
+    ],
+    verse: [
+      { id: "read",  name: "Read it out loud",  blurb: "The whole verse. Say it five times before you move on." },
+      { id: "fade",  name: "Fade it out",       blurb: "Full words, then first letters, then nothing. Say it each time." },
+      { id: "order", name: "Put it in order",   blurb: "Words scrambled. Tap them back into the right order." }
     ]
   };
 
+  var EXTRAS_DRILL = { id: "extras", name: "Study guide questions",
+    blurb: "The written questions. Answer out loud, then check yourself." };
+
   function drillsFor(item) {
-    var list = DRILLS[item.type] || [];
+    var list = (DRILLS[item.type] || []).slice();
     if (item.type === "vocab" && !hasSentences(item)) {
       list = list.filter(function (d) { return d.id !== "blank"; });
     }
+    if (item.extras && item.extras.length) list.push(EXTRAS_DRILL);
     return list;
   }
 
   function hasSentences(item) {
-    return item.words.some(function (w) { return !!w.sentence; });
+    return (item.words || []).some(function (w) { return !!w.sentence; });
   }
 
   function drillById(item, drillId) {
@@ -221,7 +239,7 @@
 
   function renderHome() {
     var cards = SUBJECTS.map(function (s) {
-      var n = itemsFor(s.id).length;
+      var n = activeFor(s.id).length;
       var cls = n ? "jersey jersey--active" : "jersey jersey--empty";
       return '<a class="jersey-link" href="#/s/' + s.id + '">' +
         '<span class="' + cls + '">' +
@@ -274,11 +292,17 @@
   function renderSubject(id) {
     var subj = subjectById(id);
     if (!subj) { location.hash = "#/"; return; }
-    var items = itemsFor(id);
+    var items = activeFor(id);
+    var old = pastFor(id);
     var body = items.length
       ? '<div class="stack">' + items.map(itemCard).join("") + "</div>"
-      : '<div class="empty"><strong>Nothing here yet</strong>' +
+      : '<div class="empty"><strong>Nothing coming up</strong>' +
         "When something gets added to " + esc(subj.name) + ", it shows up on this page.</div>";
+
+    if (old.length) {
+      body += '<details class="past"><summary>Past quizzes (' + old.length + ")</summary>" +
+        '<div class="stack">' + old.map(itemCard).join("") + "</div></details>";
+    }
 
     app.innerHTML =
       '<a class="backlink" href="#/">\u2190 All classes</a>' +
@@ -350,6 +374,10 @@
     if (drillId === "dragorder") { renderDragOrder(item); return; }
     if (drillId === "chant") { renderChant(item); return; }
     if (drillId === "recall") { renderRecall(item, null); return; }
+    if (drillId === "read") { renderVerseRead(item); return; }
+    if (drillId === "fade") { renderVerseFade(item); return; }
+    if (drillId === "order") { renderVerseOrder(item); return; }
+    if (drillId === "extras") { renderSelfCheck(item, item.extras, "extras"); return; }
 
     var drill = drillById(item, drillId);
     if (!drill) { location.hash = "#/i/" + itemId; return; }
@@ -511,6 +539,215 @@
       var nextBtn = document.getElementById("nextq");
       nextBtn.addEventListener("click", renderQuestion);
       nextBtn.focus();
+    }
+
+    paint();
+  }
+
+  /* ---------- verses ------------------------------------------------------- */
+
+  function verseWords(item) {
+    return item.text.split(/\s+/).filter(Boolean);
+  }
+
+  function verseRef(item) {
+    return item.reference + (item.version ? " \u00b7 " + item.version : "");
+  }
+
+  /* Turn "Already" into "A······", keeping trailing punctuation visible. */
+  function wordSkeleton(word) {
+    var m = word.match(/^([^A-Za-z0-9]*)([A-Za-z0-9'\u2019-]*)(.*)$/);
+    var pre = m[1], core = m[2], post = m[3];
+    if (!core) return esc(word);
+    return esc(pre + core.charAt(0)) +
+      '<span class="masked">' + new Array(core.length).join("\u00b7") + "</span>" +
+      esc(post);
+  }
+
+  function renderVerseRead(item) {
+    var reps = 0;
+
+    function paint() {
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<p class="eyebrow">' + esc(verseRef(item)) + "</p>" +
+        '<div class="verse">' + esc(item.text) + "</div>" +
+        '<p class="chant-hint">Say the whole verse out loud, then tap. ' +
+        "Five times and it starts to stick.</p>" +
+        '<div class="btn-row">' +
+          '<button class="btn" id="rep">Said it (' + reps + " of 5)</button>" +
+          (reps >= 5 ? '<a class="btn btn--quiet" href="#/i/' + item.id + '/fade">Now fade it out \u2192</a>' : "") +
+        "</div>";
+
+      document.getElementById("rep").addEventListener("click", function () {
+        if (reps < 5) reps++;
+        paint();
+      });
+    }
+    paint();
+  }
+
+  function renderVerseFade(item) {
+    var words = verseWords(item);
+    var full = esc(item.text);
+    var letters = words.map(wordSkeleton).join(" ");
+    var blanks = words.map(function (w) {
+      return '<span class="masked">' + new Array(Math.max(w.length, 2)).join("\u00b7") + "</span>";
+    }).join(" ");
+
+    var cards = [
+      { prompt: full,    answer: item.text, label: "Every word in front of you" },
+      { prompt: letters, answer: item.text, label: "First letters only" },
+      { prompt: blanks,  answer: item.text, label: "Nothing but blanks" }
+    ];
+    renderSelfCheck(item, cards, "fade");
+  }
+
+  function renderVerseOrder(item) {
+    var words = verseWords(item);
+    var bank = shuffle(words.map(function (w, i) { return { w: w, i: i }; }));
+    var placed = [];   /* indexes into bank, in tap order */
+
+    function paint(msg) {
+      var built = placed.map(function (b) { return esc(bank[b].w); }).join(" ");
+
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<p class="eyebrow">' + esc(verseRef(item)) + "</p>" +
+        '<div class="verse verse--build">' +
+          (built || '<span class="verse-empty">Tap the first word</span>') +
+        "</div>" +
+        '<div class="lineup" id="bank">' +
+          bank.map(function (b, n) {
+            var used = placed.indexOf(n) > -1;
+            return '<button class="chip' + (used ? " chip--placed" : "") + '"' +
+              (used ? " disabled" : "") + ' data-n="' + n + '">' + esc(b.w) + "</button>";
+          }).join("") +
+        "</div>" +
+        '<div class="verdict" id="verdict" role="status" aria-live="polite">' + (msg || "") + "</div>" +
+        '<div class="btn-row">' +
+          (placed.length ? '<button class="btn btn--quiet" id="undo">Undo last word</button>' : "") +
+          '<button class="btn btn--quiet" id="restart">Start over</button>' +
+        "</div>";
+
+      document.getElementById("bank").addEventListener("click", function (e) {
+        var chip = e.target.closest(".chip");
+        if (chip && !chip.disabled) tap(+chip.dataset.n);
+      });
+      if (document.getElementById("undo"))
+        document.getElementById("undo").addEventListener("click", function () {
+          placed.pop(); paint();
+        });
+      document.getElementById("restart").addEventListener("click", function () {
+        renderVerseOrder(item);
+      });
+    }
+
+    function tap(n) {
+      /* Compare the word itself, so repeated words ("you") both work. */
+      if (bank[n].w === words[placed.length]) {
+        placed.push(n);
+        if (placed.length === words.length) return win();
+        paint();
+      } else {
+        paint('<span class="verdict--card">Yellow card \u2014 not that one yet</span>');
+      }
+    }
+
+    function win() {
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="result-rating">Clean sheet</p>' +
+          '<div class="verse chant--open" style="margin:1rem 0">' + esc(item.text) + "</div>" +
+          '<p class="result-of">' + esc(verseRef(item)) + "</p>" +
+          '<p class="lede" style="margin:1rem auto 0">Word for word. Now say it once with your eyes shut.</p>' +
+          '<div class="btn-row">' +
+            '<button class="btn" id="again">Scramble it again</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '/fade">Fade it out</a>' +
+          "</div>" +
+        "</div>";
+      document.getElementById("again").addEventListener("click", function () {
+        renderVerseOrder(item);
+      });
+    }
+
+    paint("");
+  }
+
+  /* ---------- generic say-it-then-check cards ------------------------------ */
+
+  function renderSelfCheck(item, cards, drillId, subset) {
+    var deck = subset && subset.length ? subset : cards;
+    var i = 0, shown = false;
+    var missed = [];
+
+    function paint() {
+      var c = deck[i];
+      var front = c.prompt;
+      var isVerse = drillId === "fade";
+
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<p class="eyebrow">' + esc(c.label || ("Question " + (i + 1) + " of " + deck.length)) + "</p>" +
+        (isVerse ? "" : '<div class="prompt-card">' + esc(c.prompt) + "</div>") +
+        (shown
+          ? '<div class="verse chant--open">' + esc(c.answer) + "</div>"
+          : isVerse ? '<div class="verse">' + front + "</div>" : "") +
+        '<p class="chant-hint">' +
+          (shown ? "Did you get it? Be honest \u2014 nobody's keeping score."
+                 : isVerse ? "Say the whole verse out loud, then check."
+                           : "Answer it out loud in a full sentence, then check.") +
+        "</p>" +
+        '<div class="btn-row">' +
+          (shown
+            ? '<button class="btn" id="got">I got it</button>' +
+              '<button class="btn btn--quiet" id="miss">I missed it</button>'
+            : '<button class="btn" id="show">Show me</button>') +
+        "</div>" +
+        '<p class="card-counter">' + (i + 1) + " of " + deck.length + "</p>";
+
+      if (document.getElementById("show"))
+        document.getElementById("show").addEventListener("click", function () { shown = true; paint(); });
+      if (document.getElementById("got"))
+        document.getElementById("got").addEventListener("click", function () { mark(true); });
+      if (document.getElementById("miss"))
+        document.getElementById("miss").addEventListener("click", function () { mark(false); });
+    }
+
+    function mark(ok) {
+      if (!ok) missed.push(deck[i]);
+      i++; shown = false;
+      if (i >= deck.length) done(); else paint();
+    }
+
+    function done() {
+      var got = deck.length - missed.length;
+      var clean = missed.length === 0;
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="result-rating">' + (clean ? "Clean sheet" : "Keep going") + "</p>" +
+          '<p class="result-score">' + got + "/" + deck.length + "</p>" +
+          '<p class="result-of">Answered from memory</p>' +
+          '<p class="lede" style="margin:1rem auto 0">' +
+            (clean ? "All of them, no peeking. Run it again tomorrow."
+                   : "Run the ones you missed \u2014 that's where the work is.") +
+          "</p>" +
+          '<div class="btn-row">' +
+            (missed.length ? '<button class="btn" id="redo">Run those ' + missed.length + ' again</button>' : "") +
+            '<button class="btn' + (missed.length ? " btn--quiet" : "") + '" id="allagain">Start over</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '">Other drills</a>' +
+          "</div>" +
+        "</div>";
+
+      if (document.getElementById("redo")) {
+        var again = missed.slice();
+        document.getElementById("redo").addEventListener("click", function () {
+          renderSelfCheck(item, cards, drillId, again);
+        });
+      }
+      document.getElementById("allagain").addEventListener("click", function () {
+        renderSelfCheck(item, cards, drillId, null);
+      });
     }
 
     paint();

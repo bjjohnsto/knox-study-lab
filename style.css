@@ -742,3 +742,77 @@ a.card:hover, a.card:focus-visible{
 }
 .chant-prev ol{ margin:0; padding-left:1.4rem; color:var(--ink-soft); }
 .chant-prev li{ margin-bottom:.2rem; font-size:.92rem; }
+
+/* --- Verses + self-check cards ------------------------------------------ */
+.verse{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  box-shadow:0 4px 0 rgba(18,36,26,.14);
+  padding:1.6rem 1.3rem;
+  font-family:"Archivo Black",sans-serif;
+  font-size:clamp(1.15rem, 4.4vw, 1.6rem);
+  line-height:1.4;
+  text-align:center;
+  min-height:130px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.verse.chant--open{ background:#E4F5E6; border-color:var(--turf); }
+.verse .masked{ color:var(--line); letter-spacing:.1em; }
+.verse--build{
+  font-size:clamp(1.05rem, 4vw, 1.4rem);
+  border-style:dashed;
+  border-color:var(--cone);
+  box-shadow:none;
+}
+.verse-empty{
+  font-family:"Archivo",sans-serif;
+  font-weight:600;
+  font-size:.8rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+
+.prompt-card{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  box-shadow:0 4px 0 rgba(18,36,26,.14);
+  padding:1.4rem 1.2rem;
+  font-family:"Archivo Black",sans-serif;
+  font-size:clamp(1.05rem, 4vw, 1.35rem);
+  line-height:1.3;
+  text-align:center;
+  margin-bottom:.9rem;
+}
+
+.card-counter{
+  text-align:center;
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  margin:1.2rem 0 0;
+}
+
+/* --- Past quizzes --------------------------------------------------------- */
+.past{ margin-top:2rem; border-top:2px solid var(--line); padding-top:1rem; }
+.past > summary{
+  cursor:pointer;
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  padding:.4rem 0;
+  list-style:none;
+}
+.past > summary::-webkit-details-marker{ display:none; }
+.past > summary::before{ content:"\25B8  "; color:var(--cone); }
+.past[open] > summary::before{ content:"\25BE  "; }
+.past > summary:hover{ color:var(--cone-dark); }
+.past .stack{ margin-top:.8rem; opacity:.72; }

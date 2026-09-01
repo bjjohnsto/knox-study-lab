@@ -123,6 +123,89 @@ const STUDY_ITEMS = [
     note:  "Part 1 is Law, History, and Poetry & Wisdom (22 books).",
     type:  "categorize",
     groups: OT_GROUPS
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
+    id: "hist-mesopotamia-ch2",
+    subject: "history",
+    title: "Ancient Mesopotamia Chapter 2 Vocab",
+    added: "2026-08-31",
+    quiz:  "2026-09-04",
+    note:  "Chapter test Friday.",
+    type:  "vocab",
+    words: [
+      { word: "Silt",
+        meaning: "The fertile soil left behind by rivers after they flood." },
+      { word: "Irrigation",
+        meaning: "A system that brings water to crops using canals, ditches, or other methods." },
+      { word: "Mesopotamia",
+        meaning: "The region between the Tigris and Euphrates Rivers, often called the 'land between the rivers.'" },
+      { word: "Sumer",
+        meaning: "An ancient civilization in southern Mesopotamia known for developing some of the world's earliest cities." },
+      { word: "Surplus",
+        meaning: "More of something than is needed; extra food or goods that can be stored or traded." },
+      { word: "City-State",
+        meaning: "A type of government in which a city and the surrounding land form an independent country." },
+      { word: "Ur",
+        meaning: "A city in ancient Mesopotamia that became an important center of trade and religion." },
+      { word: "Social Class",
+        meaning: "A group of people in a society who have a similar level of wealth, power, or status." },
+      { word: "Barter",
+        meaning: "The process of exchanging goods or services without using money." },
+      { word: "Scribes",
+        meaning: "People in ancient societies who were trained to read and write and kept records." }
+    ]
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
+    id: "bible-john-15-3",
+    subject: "bible",
+    title: "John 15:3 verse quiz",
+    added: "2026-08-31",
+    quiz:  "2026-09-04",
+    note:  "Word for word, ESV. Test Friday.",
+    type:  "verse",
+    reference: "John 15:3",
+    version:   "ESV",
+    text: "Already you are clean because of the word that I have spoken to you."
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
+    id: "bible-unit-1",
+    subject: "bible",
+    title: "Bible Unit 1",
+    added: "2026-08-31",
+    quiz:  "2026-09-03",
+    note:  "Worldview definitions and the worldview diagram. Test Thursday.",
+    type:  "vocab",
+    words: [
+      { word: "Basic Beliefs",
+        meaning: "Ideas people believe." },
+      { word: "Assumptions",
+        meaning: "Ideas people believe without analyzing them and without proof." },
+      { word: "Creation",
+        meaning: "The act of God to make the heavens and the earth in six days." },
+      { word: "Big Story",
+        meaning: "Where the world came from, why the world is the way it is, and where the world is going." },
+      { word: "Dualism",
+        meaning: "Believing there are two gods to be worshiped." },
+      { word: "Redemption",
+        meaning: "God restores sinners to Himself." }
+    ],
+
+    /* Study-guide questions he has to answer in his own words.
+       These become the "Study guide questions" drill. */
+    extras: [
+      { prompt: "Name the three parts of a worldview, in order from the center out.",
+        answer: "1. Big Story   2. Basic Beliefs   3. Actions" },
+      { prompt: "What three questions does the Big Story answer?",
+        answer: "Where the world came from, why the world is the way it is, and where the world is going." },
+      { prompt: "Explain how the three parts of a worldview produce each other.",
+        answer: "The Big Story explains God's authority and why man was created. Out of the Big Story come our basic beliefs. Out of our beliefs come our actions \u2014 what we believe becomes what we do." }
+    ]
   }
 
   /* ------------------------------------------------------------------
