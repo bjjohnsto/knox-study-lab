@@ -52,14 +52,15 @@
     return STUDY_ITEMS.filter(function (i) { return i.subject === subjectId; });
   }
 
-  /* A quiz whose date has gone by drops off the main pages on its own, so
-     nobody has to do housekeeping. It stays reachable under "Past quizzes". */
+  /* Once a quiz date has gone by, that item disappears from the site on its
+     own. Delete its block from data.js when you want it gone for good. */
   function isPast(item) {
     var d = daysUntil(item.quiz);
     return d !== null && d < 0;
   }
-  function activeFor(subjectId) { return itemsFor(subjectId).filter(function (i) { return !isPast(i); }); }
-  function pastFor(subjectId)   { return itemsFor(subjectId).filter(isPast); }
+  function activeFor(subjectId) {
+    return itemsFor(subjectId).filter(function (i) { return !isPast(i); });
+  }
 
   function itemById(id) {
     return STUDY_ITEMS.filter(function (i) { return i.id === id; })[0];
@@ -85,9 +86,10 @@
     sequence: [
       { id: "chant",     name: "Say it in lines",      blurb: "Nine short lines. Read each one out loud until it has a beat." },
       { id: "recall",    name: "Cover and recall",     blurb: "First letters only. Say the line from memory, then check yourself." },
+      { id: "bank",      name: "Word bank \u2014 like the test", blurb: "Every book in a bank, blank numbered lines. Exactly how the test works." },
       { id: "next",      name: "What comes next?",     blurb: "One book on screen. Pick the one that follows." },
       { id: "lineup",    name: "Line them up",         blurb: "Put a small group in order, six at a time." },
-      { id: "dragorder", name: "Drag all 39 in order", blurb: "The whole list, shuffled. Drag until it's right, then check it." }
+      { id: "dragorder", name: "Drag all {n} in order", blurb: "The whole list, shuffled. Drag until it's right, then check it." }
     ],
     categorize: [
       { id: "group1",   name: "Which group? — Part 1",  blurb: "Law, History, and Poetry & Wisdom only." },
@@ -109,6 +111,13 @@
       list = list.filter(function (d) { return d.id !== "blank"; });
     }
     if (item.extras && item.extras.length) list.push(EXTRAS_DRILL);
+    if (item.type === "sequence") {
+      var count = flatBooks(item).length;
+      list = list.map(function (dd) {
+        return { id: dd.id, blurb: dd.blurb,
+                 name: dd.name.replace("{n}", count) };
+      });
+    }
     return list;
   }
 
@@ -293,16 +302,10 @@
     var subj = subjectById(id);
     if (!subj) { location.hash = "#/"; return; }
     var items = activeFor(id);
-    var old = pastFor(id);
     var body = items.length
       ? '<div class="stack">' + items.map(itemCard).join("") + "</div>"
       : '<div class="empty"><strong>Nothing coming up</strong>' +
         "When something gets added to " + esc(subj.name) + ", it shows up on this page.</div>";
-
-    if (old.length) {
-      body += '<details class="past"><summary>Past quizzes (' + old.length + ")</summary>" +
-        '<div class="stack">' + old.map(itemCard).join("") + "</div></details>";
-    }
 
     app.innerHTML =
       '<a class="backlink" href="#/">\u2190 All classes</a>' +
@@ -313,7 +316,7 @@
 
   function renderItem(id) {
     var item = itemById(id);
-    if (!item) { location.hash = "#/"; return; }
+    if (!item || isPast(item)) { location.hash = "#/"; return; }
     var subj = subjectById(item.subject);
 
     var drills = drillsFor(item).map(function (d) {
@@ -374,6 +377,7 @@
     if (drillId === "dragorder") { renderDragOrder(item); return; }
     if (drillId === "chant") { renderChant(item); return; }
     if (drillId === "recall") { renderRecall(item, null); return; }
+    if (drillId === "bank") { renderBankOrder(item); return; }
     if (drillId === "read") { renderVerseRead(item); return; }
     if (drillId === "fade") { renderVerseFade(item); return; }
     if (drillId === "order") { renderVerseOrder(item); return; }
@@ -542,6 +546,86 @@
     }
 
     paint();
+  }
+
+  /* ---------- word bank into numbered lines (mirrors the paper test) ------- */
+
+  function renderBankOrder(item) {
+    var answer = flatBooks(item);
+    var bank = shuffle(answer.map(function (b, i) { return { b: b, i: i }; }));
+    var placed = [];   /* indexes into bank, in tap order */
+
+    function paint(msg) {
+      var slots = answer.map(function (_, n) {
+        var got = placed[n] !== undefined ? bank[placed[n]].b : null;
+        return '<li class="bankslot' + (got ? " bankslot--filled" : "") +
+          (n === placed.length ? " bankslot--now" : "") + '">' +
+          '<span class="bankslot-n">' + (n + 1) + "</span>" +
+          '<span class="bankslot-b">' + (got ? esc(got) : "") + "</span></li>";
+      }).join("");
+
+      var chips = bank.map(function (x, n) {
+        var used = placed.indexOf(n) > -1;
+        return '<button class="chip' + (used ? " chip--placed" : "") + '"' +
+          (used ? " disabled" : "") + ' data-n="' + n + '">' + esc(x.b) + "</button>";
+      }).join("");
+
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<p class="eyebrow">Line ' + Math.min(placed.length + 1, answer.length) +
+          " of " + answer.length + "</p>" +
+        '<ol class="banklist">' + slots + "</ol>" +
+        '<p class="chant-hint">Tap the book that goes on line ' +
+          Math.min(placed.length + 1, answer.length) + ".</p>" +
+        '<div class="lineup" id="bank">' + chips + "</div>" +
+        '<div class="verdict" id="verdict" role="status" aria-live="polite">' + (msg || "") + "</div>" +
+        '<div class="btn-row">' +
+          (placed.length ? '<button class="btn btn--quiet" id="undo">Undo last</button>' : "") +
+          '<button class="btn btn--quiet" id="restart">Start over</button>' +
+        "</div>";
+
+      document.getElementById("bank").addEventListener("click", function (e) {
+        var chip = e.target.closest(".chip");
+        if (chip && !chip.disabled) tap(+chip.dataset.n);
+      });
+      if (document.getElementById("undo"))
+        document.getElementById("undo").addEventListener("click", function () {
+          placed.pop(); paint("");
+        });
+      document.getElementById("restart").addEventListener("click", function () {
+        renderBankOrder(item);
+      });
+    }
+
+    function tap(n) {
+      if (bank[n].b === answer[placed.length]) {
+        placed.push(n);
+        if (placed.length === answer.length) return win();
+        paint("");
+      } else {
+        paint('<span class="verdict--card">Yellow card \u2014 that one comes later</span>');
+      }
+    }
+
+    function win() {
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="result-rating">Clean sheet</p>' +
+          '<p class="result-score">' + answer.length + "/" + answer.length + "</p>" +
+          '<p class="result-of">Word bank \u2014 like the test</p>' +
+          '<p class="lede" style="margin:1rem auto 0">Every book on the right line. ' +
+          "That is the test, start to finish.</p>" +
+          '<div class="btn-row">' +
+            '<button class="btn" id="again">Scramble and go again</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '">Other drills</a>' +
+          "</div>" +
+        "</div>";
+      document.getElementById("again").addEventListener("click", function () {
+        renderBankOrder(item);
+      });
+    }
+
+    paint("");
   }
 
   /* ---------- verses ------------------------------------------------------- */
@@ -902,7 +986,7 @@
 
     app.innerHTML =
       '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
-      '<p class="eyebrow">Drag all 39 in order</p>' +
+      '<p class="eyebrow">Drag all ' + answer.length + ' in order</p>' +
       '<h1 class="page-title">Set the whole squad</h1>' +
       '<p class="lede">Drag by the grip on the left, or tap a grip and use the up and down ' +
       'arrow keys. Check it as often as you like.</p>' +
@@ -915,7 +999,7 @@
         }).join("") +
       "</ol>" +
       '<div class="checkbar" id="checkbar">' +
-        '<span class="check-score" id="checkscore">39 books to place</span>' +
+        '<span class="check-score" id="checkscore">' + answer.length + ' to place</span>' +
         '<button class="btn" id="checkbtn">Check my order</button>' +
         '<button class="btn btn--quiet" id="reshuffle">Shuffle</button>' +
       "</div>";
@@ -999,7 +1083,7 @@
       ph.remove();
       drag = null; ph = null;
       renumber();
-      bar.textContent = "39 books to place";
+      bar.textContent = answer.length + " to place";
       bar.className = "check-score";
     }
 
@@ -1038,7 +1122,7 @@
       });
 
       if (right === answer.length) {
-        bar.textContent = "Clean sheet \u2014 all 39 in the right order!";
+        bar.textContent = "Clean sheet \u2014 all " + answer.length + " in the right order!";
         bar.className = "check-score check-score--win";
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {

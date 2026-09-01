@@ -799,20 +799,46 @@ a.card:hover, a.card:focus-visible{
   margin:1.2rem 0 0;
 }
 
-/* --- Past quizzes --------------------------------------------------------- */
-.past{ margin-top:2rem; border-top:2px solid var(--line); padding-top:1rem; }
-.past > summary{
-  cursor:pointer;
-  font-size:.74rem;
-  font-weight:700;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--ink-soft);
-  padding:.4rem 0;
+
+/* --- Word bank into numbered lines -------------------------------------- */
+.banklist{
   list-style:none;
+  margin:0 0 1rem;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
+  gap:5px 10px;
 }
-.past > summary::-webkit-details-marker{ display:none; }
-.past > summary::before{ content:"\25B8  "; color:var(--cone); }
-.past[open] > summary::before{ content:"\25BE  "; }
-.past > summary:hover{ color:var(--cone-dark); }
-.past .stack{ margin-top:.8rem; opacity:.72; }
+
+.bankslot{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  background:var(--chalk);
+  border:2px solid var(--line);
+  border-radius:8px;
+  padding:.35rem .6rem;
+  min-height:36px;
+}
+.bankslot-n{
+  flex:none;
+  width:2ch;
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+  font-size:.78rem;
+  font-weight:700;
+  color:var(--ink-soft);
+}
+.bankslot-b{ font-weight:600; font-size:.95rem; }
+
+.bankslot--filled{
+  background:#E4F5E6;
+  border-color:var(--turf);
+  border-style:solid;
+}
+.bankslot--now{
+  border-color:var(--cone);
+  border-style:dashed;
+  background:#FFF6EF;
+}
+.bankslot--now .bankslot-n{ color:var(--cone-dark); }

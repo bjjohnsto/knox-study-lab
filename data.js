@@ -24,28 +24,6 @@ const SUBJECTS = [
 ];
 
 
-/* --- Old Testament groupings, written once and used by two study items. -- */
-const OT_GROUPS = [
-  { name: "Books of the Law", partOne: true,
-    books: ["Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy"] },
-
-  { name: "Books of History", partOne: true,
-    books: ["Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel", "1 Kings",
-            "2 Kings", "1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah",
-            "Esther"] },
-
-  { name: "Books of Poetry and Wisdom", partOne: true,
-    books: ["Job", "Psalms", "Proverbs", "Ecclesiastes", "Song of Solomon"] },
-
-  { name: "Major Prophets", partOne: false,
-    books: ["Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel"] },
-
-  { name: "Minor Prophets", partOne: false,
-    books: ["Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah", "Nahum",
-            "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi"] }
-];
-
-
 /* ==========================================================================
    STUDY ITEMS  —  add new material at the BOTTOM of this list.
    ========================================================================== */
@@ -84,45 +62,6 @@ const STUDY_ITEMS = [
       { word: "wizened",
         meaning: "Wrinkled, shriveled, or withered from age." }
     ]
-  },
-
-  /* ------------------------------------------------------------------ */
-  {
-    id: "bible-ot-order",
-    subject: "bible",
-    title: "Old Testament Books — In Order",
-    added: "2026-08-29",
-    quiz:  "2026-08-31",
-    note:  "All 39 books, front to back.",
-    type:  "sequence",
-    groups: OT_GROUPS,
-
-    /* Short rhythmic lines for the chant and recall drills. This is the
-       traditional way the books get memorized — say each line out loud
-       until it has a beat, then chain the lines together. */
-    lines: [
-      ["Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy"],
-      ["Joshua", "Judges", "Ruth"],
-      ["1 Samuel", "2 Samuel", "1 Kings", "2 Kings"],
-      ["1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah", "Esther"],
-      ["Job", "Psalms", "Proverbs", "Ecclesiastes", "Song of Solomon"],
-      ["Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel"],
-      ["Hosea", "Joel", "Amos", "Obadiah", "Jonah"],
-      ["Micah", "Nahum", "Habakkuk", "Zephaniah"],
-      ["Haggai", "Zechariah", "Malachi"]
-    ]
-  },
-
-  /* ------------------------------------------------------------------ */
-  {
-    id: "bible-ot-groups",
-    subject: "bible",
-    title: "Old Testament Books — By Section",
-    added: "2026-08-29",
-    quiz:  "2026-08-31",
-    note:  "Part 1 is Law, History, and Poetry & Wisdom (22 books).",
-    type:  "categorize",
-    groups: OT_GROUPS
   },
 
   /* ------------------------------------------------------------------ */
@@ -205,6 +144,30 @@ const STUDY_ITEMS = [
         answer: "Where the world came from, why the world is the way it is, and where the world is going." },
       { prompt: "Explain how the three parts of a worldview produce each other.",
         answer: "The Big Story explains God's authority and why man was created. Out of the Big Story come our basic beliefs. Out of our beliefs come our actions \u2014 what we believe becomes what we do." }
+    ]
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
+    id: "bible-ot-prophets-order",
+    subject: "bible",
+    title: "Old Testament Books \u2014 Isaiah to Malachi",
+    added: "2026-09-01",
+    quiz:  "2026-09-08",
+    note:  "17 books, in order. The test gives a word bank and blank lines, so all that matters is the order.",
+    type:  "sequence",
+    groups: [
+      { name: "Major Prophets", partOne: true,
+        books: ["Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel"] },
+      { name: "Minor Prophets", partOne: true,
+        books: ["Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah", "Nahum",
+                "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi"] }
+    ],
+    lines: [
+      ["Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel"],
+      ["Hosea", "Joel", "Amos", "Obadiah", "Jonah"],
+      ["Micah", "Nahum", "Habakkuk", "Zephaniah"],
+      ["Haggai", "Zechariah", "Malachi"]
     ]
   }
 
