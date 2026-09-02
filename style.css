@@ -842,3 +842,35 @@ a.card:hover, a.card:focus-visible{
   background:#FFF6EF;
 }
 .bankslot--now .bankslot-n{ color:var(--cone-dark); }
+
+/* --- Mark-all-that-apply checkboxes ------------------------------------- */
+.answer--check{
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  text-align:left;
+}
+.tickbox{
+  flex:none;
+  width:22px; height:22px;
+  border:2px solid var(--ink);
+  border-radius:5px;
+  background:var(--paper);
+  position:relative;
+}
+.answer--picked{ background:#FFF0E4; border-color:var(--cone-dark); }
+.answer--picked .tickbox{ background:var(--cone); border-color:var(--cone-dark); }
+.answer--picked .tickbox::after{
+  content:"";
+  position:absolute;
+  left:5px; top:2px;
+  width:7px; height:12px;
+  border:solid var(--chalk);
+  border-width:0 3px 3px 0;
+  transform:rotate(45deg);
+}
+.answer--right .tickbox{ background:var(--chalk); border-color:var(--chalk); }
+.answer--wasmissed{
+  outline:3px dashed var(--card);
+  outline-offset:2px;
+}

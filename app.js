@@ -39,13 +39,34 @@
     return (+p[1]) + "/" + (+p[2]) + "/" + p[0].slice(2);
   }
 
+  /* Every date on this site is figured in Eastern time, not the time zone the
+     phone or iPad happens to be set to. That way a quiz counts down the same
+     way for everyone, wherever they open it. */
+  var ZONE = "America/New_York";
+
+  function todayInZone() {
+    try {
+      var parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: ZONE, year: "numeric", month: "2-digit", day: "2-digit"
+      }).formatToParts(new Date());
+      var got = {};
+      parts.forEach(function (p) { got[p.type] = p.value; });
+      if (got.year && got.month && got.day) {
+        return [+got.year, +got.month, +got.day];
+      }
+    } catch (e) { /* very old browser: fall back to the device clock */ }
+    var d = new Date();
+    return [d.getFullYear(), d.getMonth() + 1, d.getDate()];
+  }
+
   function daysUntil(iso) {
     if (!iso) return null;
     var p = iso.split("-");
-    var target = new Date(+p[0], +p[1] - 1, +p[2]);
-    var now = new Date();
-    now = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    return Math.round((target - now) / 86400000);
+    var t = todayInZone();
+    /* Compare calendar days as UTC midnights so daylight saving can't skew it. */
+    var target = Date.UTC(+p[0], +p[1] - 1, +p[2]);
+    var today = Date.UTC(t[0], t[1] - 1, t[2]);
+    return Math.round((target - today) / 86400000);
   }
 
   function itemsFor(subjectId) {
@@ -94,6 +115,12 @@
     categorize: [
       { id: "group1",   name: "Which group? — Part 1",  blurb: "Law, History, and Poetry & Wisdom only." },
       { id: "groupall", name: "Which group? — All 39",  blurb: "Everything, prophets included." }
+    ],
+    questions: [
+      { id: "tfonly",   name: "True or false",        blurb: "Eight statements. Some are traps \u2014 read them carefully." },
+      { id: "mconly",   name: "Multiple choice",      blurb: "Pick the one right answer out of four." },
+      { id: "multionly",name: "Mark ALL that apply",  blurb: "More than one answer is right every time. Get every one." },
+      { id: "mixed",    name: "Full practice test",   blurb: "All three sections together, like the real thing." }
     ],
     verse: [
       { id: "read",  name: "Read it out loud",  blurb: "The whole verse. Say it five times before you move on." },
@@ -342,7 +369,25 @@
     if (!item) { location.hash = "#/"; return; }
     var body = "";
 
-    if (item.type === "vocab") {
+    if (item.type === "questions") {
+      var byKind = { tf: "True or false", mc: "Multiple choice", multi: "Mark all that apply" };
+      ["tf", "mc", "multi"].forEach(function (k) {
+        var qs = item.questions.filter(function (q) { return q.kind === k; });
+        if (!qs.length) return;
+        body += '<div class="sheet"><h3>' + esc(byKind[k]) + " \u00b7 " + qs.length + "</h3>" +
+          qs.map(function (q) {
+            var ans = q.kind === "tf" ? (q.answer ? "True" : "False")
+                    : q.kind === "multi" ? q.answers.join(", ")
+                    : q.answer;
+            return '<dl class="def"><dt style="font-size:.95rem">' + esc(q.prompt) + "</dt>" +
+              "<dd><strong>" + esc(ans) + "</strong></dd>" +
+              (q.why ? '<dd class="ex">' + esc(q.why) + "</dd>" : "") + "</dl>";
+          }).join("") + "</div>";
+      });
+    } else if (item.type === "verse") {
+      body = '<div class="sheet"><dl class="def"><dt>' + esc(verseRef(item)) + "</dt>" +
+        "<dd>" + esc(item.text) + "</dd></dl></div>";
+    } else if (item.type === "vocab") {
       body = '<div class="sheet">' + item.words.map(function (w) {
         return '<dl class="def"><dt>' + esc(w.word) + "</dt>" +
           "<dd>" + esc(w.meaning) + "</dd>" +
@@ -382,6 +427,7 @@
     if (drillId === "fade") { renderVerseFade(item); return; }
     if (drillId === "order") { renderVerseOrder(item); return; }
     if (drillId === "extras") { renderSelfCheck(item, item.extras, "extras"); return; }
+    if (item.type === "questions") { renderQuestionSet(item, drillId); return; }
 
     var drill = drillById(item, drillId);
     if (!drill) { location.hash = "#/i/" + itemId; return; }
@@ -626,6 +672,191 @@
     }
 
     paint("");
+  }
+
+  /* ---------- mixed question sets (true/false, choice, mark-all) ----------- */
+
+  function renderQuestionSet(item, drillId) {
+    var pool = item.questions.filter(function (q) {
+      if (drillId === "tfonly") return q.kind === "tf";
+      if (drillId === "mconly") return q.kind === "mc";
+      if (drillId === "multionly") return q.kind === "multi";
+      return true;
+    });
+
+    /* Keep true/false and mark-all in book order so the wording stays varied;
+       shuffle the multiple choice so it is not the same run every time. */
+    var deck = drillId === "mconly" ? shuffle(pool).slice(0, 12)
+             : drillId === "mixed"  ? pool
+             : pool;
+
+    var g = { deck: deck, idx: 0, goals: 0, misses: 0, results: [], missed: [] };
+
+    function board() {
+      var dots = g.deck.map(function (_, i) {
+        var cls = "dot";
+        if (i < g.idx) cls += g.results[i] ? " dot--hit" : " dot--miss";
+        else if (i === g.idx) cls += " dot--now";
+        return '<span class="' + cls + '"></span>';
+      }).join("");
+      return '<div class="scoreboard">' +
+        '<div class="score-side"><span class="score-label">Right</span>' +
+          '<span class="score-num">' + g.goals + "</span></div>" +
+        '<div class="score-dots">' + dots + "</div>" +
+        '<div class="score-side"><span class="score-label">Cards</span>' +
+          '<span class="score-num score-num--miss">' + g.misses + "</span></div>" +
+        "</div>";
+    }
+
+    function paint() {
+      if (g.idx >= g.deck.length) return finish();
+      var q = g.deck[g.idx];
+      var kicker = q.kind === "tf" ? "True or false?"
+                 : q.kind === "multi" ? "Mark EVERY right answer"
+                 : "Pick the right answer";
+
+      var body;
+      if (q.kind === "tf") {
+        body = '<div class="answers" id="answers">' +
+          '<button class="answer" data-v="true">True</button>' +
+          '<button class="answer" data-v="false">False</button></div>';
+      } else if (q.kind === "mc") {
+        body = '<div class="answers answers--long" id="answers">' +
+          shuffle(q.options).map(function (o) {
+            return '<button class="answer" data-v="' + esc(o) + '">' + esc(o) + "</button>";
+          }).join("") + "</div>";
+      } else {
+        body = '<div class="answers answers--long" id="answers">' +
+          shuffle(q.options).map(function (o) {
+            return '<button class="answer answer--check" data-v="' + esc(o) + '">' +
+              '<span class="tickbox"></span>' + esc(o) + "</button>";
+          }).join("") + "</div>" +
+          '<div class="btn-row"><button class="btn" id="submit">Lock in my answers</button></div>';
+      }
+
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        board() +
+        '<div class="q"><p class="q-kicker">' + kicker + "</p>" +
+          '<p class="q-text q-text--sentence" style="text-align:center">' + esc(q.prompt) + "</p></div>" +
+        body +
+        '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>';
+
+      if (q.kind === "multi") wireMulti(q); else wireSingle(q);
+    }
+
+    function wireSingle(q) {
+      document.getElementById("answers").addEventListener("click", function (e) {
+        var btn = e.target.closest(".answer");
+        if (!btn || btn.disabled) return;
+        var buttons = Array.prototype.slice.call(document.querySelectorAll(".answer"));
+        buttons.forEach(function (b) { b.disabled = true; });
+
+        var right = q.kind === "tf"
+          ? (btn.dataset.v === "true") === (q.answer === true)
+          : btn.dataset.v === q.answer;
+        var correctVal = q.kind === "tf" ? String(q.answer) : q.answer;
+
+        buttons.forEach(function (b) {
+          if (b.dataset.v === correctVal) b.classList.add("answer--right");
+          else if (b === btn) b.classList.add("answer--wrong");
+          else b.classList.add("answer--dim");
+        });
+        score(right, q);
+      });
+    }
+
+    function wireMulti(q) {
+      var picked = {};
+      document.getElementById("answers").addEventListener("click", function (e) {
+        var btn = e.target.closest(".answer");
+        if (!btn || btn.disabled) return;
+        var v = btn.dataset.v;
+        picked[v] = !picked[v];
+        btn.classList.toggle("answer--picked", !!picked[v]);
+      });
+
+      document.getElementById("submit").addEventListener("click", function () {
+        var buttons = Array.prototype.slice.call(document.querySelectorAll(".answer"));
+        buttons.forEach(function (b) { b.disabled = true; });
+        document.getElementById("submit").remove();
+
+        var missedRight = 0, wrongPicked = 0;
+        buttons.forEach(function (b) {
+          var v = b.dataset.v;
+          var shouldPick = q.answers.indexOf(v) > -1;
+          if (shouldPick) {
+            b.classList.add("answer--right");
+            if (!picked[v]) { b.classList.add("answer--wasmissed"); missedRight++; }
+          } else if (picked[v]) {
+            b.classList.add("answer--wrong");
+            wrongPicked++;
+          } else {
+            b.classList.add("answer--dim");
+          }
+        });
+
+        var right = missedRight === 0 && wrongPicked === 0;
+        var note = right ? ""
+          : missedRight && !wrongPicked
+            ? "You had the right ones but missed " + missedRight + ". This is the section you lost points on last time \u2014 keep going until you have them all."
+            : wrongPicked && !missedRight
+              ? "You picked " + wrongPicked + " that do not belong."
+              : "You missed " + missedRight + " and picked " + wrongPicked + " that do not belong.";
+        score(right, q, note);
+      });
+    }
+
+    function score(right, q, note) {
+      g.results.push(right);
+      if (right) g.goals++; else { g.misses++; g.missed.push(q); }
+
+      var v = document.getElementById("verdict");
+      v.className = "verdict " + (right ? "verdict--goal" : "verdict--card");
+      v.innerHTML = (right ? "Goal!" : "Yellow card") +
+        "<small>" + (note ? esc(note) + " " : "") + esc(q.why || "") + "</small>";
+
+      g.idx++;
+      var last = g.idx >= g.deck.length;
+      var row = document.createElement("div");
+      row.className = "btn-row";
+      row.innerHTML = '<button class="btn" id="nextq">' +
+        (last ? "See the result" : "Next \u2192") + "</button>";
+      v.after(row);
+      var nb = document.getElementById("nextq");
+      nb.addEventListener("click", paint);
+      nb.focus();
+    }
+
+    function finish() {
+      var total = g.deck.length;
+      var pct = total ? g.goals / total : 0;
+      var rating = g.misses === 0 ? "Clean sheet"
+                 : pct >= 0.8 ? "Player of the match"
+                 : pct >= 0.6 ? "Solid 90 minutes"
+                 : "Back to training";
+
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="result-rating">' + rating + "</p>" +
+          '<p class="result-score">' + g.goals + "/" + total + "</p>" +
+          '<p class="result-of">' + esc((drillById(item, drillId) || {}).name || "") + "</p>" +
+          (g.missed.length
+            ? '<div class="result-missed"><h3>Go back over these</h3><ul>' +
+              g.missed.map(function (q) { return "<li>" + esc(q.prompt) + "</li>"; }).join("") +
+              "</ul></div>"
+            : '<p class="lede" style="margin:1rem auto 0">Every one. Run it again tomorrow.</p>') +
+          '<div class="btn-row">' +
+            '<button class="btn" id="again">Play again</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '">Other drills</a>' +
+          "</div>" +
+        "</div>";
+      document.getElementById("again").addEventListener("click", function () {
+        renderQuestionSet(item, drillId);
+      });
+    }
+
+    paint();
   }
 
   /* ---------- verses ------------------------------------------------------- */
