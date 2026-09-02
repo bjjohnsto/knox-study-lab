@@ -12,6 +12,11 @@
    ========================================================================== */
 
 
+/* Bump this whenever you change this file. It shows in the footer of the site,
+   so you can tell at a glance whether your upload actually went live. */
+const BUILD = "Sept 1 \u2014 build 6";
+
+
 /* --- The seven class tabs. You probably never need to change these. ------ */
 const SUBJECTS = [
   { id: "bible",      name: "Bible" },

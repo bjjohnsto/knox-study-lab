@@ -1445,6 +1445,16 @@
 
   /* ---------- go ----------------------------------------------------------- */
 
+  /* Footer stamp: lets you confirm an upload actually took effect. */
+  var foot = document.querySelector(".foot .wrap");
+  if (foot) {
+    var stamp = document.createElement("p");
+    stamp.className = "buildstamp";
+    stamp.textContent = (typeof BUILD === "string" ? BUILD + " \u00b7 " : "") +
+      STUDY_ITEMS.length + " study sets loaded";
+    foot.appendChild(stamp);
+  }
+
   window.addEventListener("hashchange", route);
   route();
 })();

@@ -874,3 +874,12 @@ a.card:hover, a.card:focus-visible{
   outline:3px dashed var(--card);
   outline-offset:2px;
 }
+
+.buildstamp{
+  margin-top:.5rem !important;
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--line);
+}
