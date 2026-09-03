@@ -120,7 +120,8 @@
       { id: "tfonly",   name: "True or false",        blurb: "Eight statements. Some are traps \u2014 read them carefully." },
       { id: "mconly",   name: "Multiple choice",      blurb: "Pick the one right answer out of four." },
       { id: "multionly",name: "Mark ALL that apply",  blurb: "More than one answer is right every time. Get every one." },
-      { id: "mixed",    name: "Full practice test",   blurb: "All three sections together, like the real thing." }
+      { id: "corronly", name: "True, or fix the word",  blurb: "If the statement is false, pick the word that belongs instead." },
+      { id: "mixed",    name: "Full practice test",   blurb: "Every section together, like the real thing." }
     ],
     verse: [
       { id: "read",  name: "Read it out loud",  blurb: "The whole verse. Say it five times before you move on." },
@@ -370,14 +371,18 @@
     var body = "";
 
     if (item.type === "questions") {
-      var byKind = { tf: "True or false", mc: "Multiple choice", multi: "Mark all that apply" };
-      ["tf", "mc", "multi"].forEach(function (k) {
+      var byKind = { correct: "True, or fix the underlined word", tf: "True or false",
+                     mc: "Multiple choice", multi: "Mark all that apply" };
+      ["correct", "tf", "mc", "multi"].forEach(function (k) {
         var qs = item.questions.filter(function (q) { return q.kind === k; });
         if (!qs.length) return;
         body += '<div class="sheet"><h3>' + esc(byKind[k]) + " \u00b7 " + qs.length + "</h3>" +
           qs.map(function (q) {
             var ans = q.kind === "tf" ? (q.answer ? "True" : "False")
                     : q.kind === "multi" ? q.answers.join(", ")
+                    : q.kind === "correct"
+                        ? (q.answer ? "True as written"
+                                    : "False \u2014 \"" + q.underlined + "\" should be \"" + q.correction + "\"")
                     : q.answer;
             return '<dl class="def"><dt style="font-size:.95rem">' + esc(q.prompt) + "</dt>" +
               "<dd><strong>" + esc(ans) + "</strong></dd>" +
@@ -681,6 +686,7 @@
       if (drillId === "tfonly") return q.kind === "tf";
       if (drillId === "mconly") return q.kind === "mc";
       if (drillId === "multionly") return q.kind === "multi";
+      if (drillId === "corronly") return q.kind === "correct";
       return true;
     });
 
@@ -713,10 +719,15 @@
       var q = g.deck[g.idx];
       var kicker = q.kind === "tf" ? "True or false?"
                  : q.kind === "multi" ? "Mark EVERY right answer"
+                 : q.kind === "correct" ? "True? Or does the underlined word need fixing?"
                  : "Pick the right answer";
 
       var body;
-      if (q.kind === "tf") {
+      if (q.kind === "correct") {
+        body = '<div class="answers" id="answers">' +
+          '<button class="answer" data-v="true">True</button>' +
+          '<button class="answer" data-v="false">False \u2014 needs fixing</button></div>';
+      } else if (q.kind === "tf") {
         body = '<div class="answers" id="answers">' +
           '<button class="answer" data-v="true">True</button>' +
           '<button class="answer" data-v="false">False</button></div>';
@@ -738,11 +749,97 @@
         '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
         board() +
         '<div class="q"><p class="q-kicker">' + kicker + "</p>" +
-          '<p class="q-text q-text--sentence" style="text-align:center">' + esc(q.prompt) + "</p></div>" +
+          '<p class="q-text q-text--sentence" style="text-align:center">' +
+            (q.kind === "correct" ? underlineWord(q.prompt, q.underlined) : esc(q.prompt)) +
+          "</p></div>" +
         body +
         '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>';
 
-      if (q.kind === "multi") wireMulti(q); else wireSingle(q);
+      if (q.kind === "multi") wireMulti(q);
+      else if (q.kind === "correct") wireCorrect(q);
+      else wireSingle(q);
+    }
+
+    /* Underline just the word being tested, leaving the rest escaped. */
+    function underlineWord(text, word) {
+      var i = word ? text.indexOf(word) : -1;
+      if (i < 0) return esc(text);
+      return esc(text.slice(0, i)) +
+        '<span class="ul">' + esc(word) + "</span>" +
+        esc(text.slice(i + word.length));
+    }
+
+    function wireCorrect(q) {
+      document.getElementById("answers").addEventListener("click", function (e) {
+        var btn = e.target.closest(".answer");
+        if (!btn || btn.disabled) return;
+        var buttons = Array.prototype.slice.call(document.querySelectorAll(".answer"));
+        buttons.forEach(function (b) { b.disabled = true; });
+
+        var saidTrue = btn.dataset.v === "true";
+        var stageOneRight = saidTrue === (q.answer === true);
+        var correctVal = String(q.answer);
+        buttons.forEach(function (b) {
+          if (b.dataset.v === correctVal) b.classList.add("answer--right");
+          else b.classList.add(b === btn ? "answer--wrong" : "answer--dim");
+        });
+
+        /* A true statement is finished here. A false one still needs the fix. */
+        if (q.answer === true || !stageOneRight) {
+          var note = q.answer === true ? "" : "It was false. The word should be ";
+          var v0 = document.getElementById("verdict");
+          v0.className = "verdict " + (stageOneRight ? "verdict--goal" : "verdict--card");
+          v0.innerHTML = (stageOneRight ? "Goal!" : "Yellow card") +
+            "<small>" + (note ? esc(note) + "<strong>" + esc(q.correction) + "</strong>. " : "") +
+            esc(q.why || "") + "</small>";
+          finishOne(stageOneRight, q);
+          return;
+        }
+
+        /* He spotted the false one. Now make him supply the correction. */
+        var opts = shuffle(q.options.slice());
+        var box = document.createElement("div");
+        box.innerHTML =
+          '<p class="chant-hint">Right \u2014 it is false. Now pick the word that belongs.</p>' +
+          '<div class="answers answers--long" id="fixes">' +
+            opts.map(function (o) {
+              return '<button class="answer" data-v="' + esc(o) + '">' + esc(o) + "</button>";
+            }).join("") + "</div>";
+        document.getElementById("answers").after(box);
+
+        document.getElementById("fixes").addEventListener("click", function (ev) {
+          var fb = ev.target.closest(".answer");
+          if (!fb || fb.disabled) return;
+          var fixes = Array.prototype.slice.call(document.querySelectorAll("#fixes .answer"));
+          fixes.forEach(function (b) { b.disabled = true; });
+          var ok = fb.dataset.v === q.correction;
+          fixes.forEach(function (b) {
+            if (b.dataset.v === q.correction) b.classList.add("answer--right");
+            else b.classList.add(b === fb ? "answer--wrong" : "answer--dim");
+          });
+          var v = document.getElementById("verdict");
+          v.className = "verdict " + (ok ? "verdict--goal" : "verdict--card");
+          v.innerHTML = (ok ? "Goal! Both halves right." : "Half credit \u2014 you spotted it but the fix was wrong") +
+            "<small>The word should be <strong>" + esc(q.correction) + "</strong>. " + esc(q.why || "") + "</small>";
+          finishOne(ok, q);
+        });
+      });
+    }
+
+    /* Shared tail: record the result and draw the Next button. */
+    function finishOne(right, q) {
+      g.results.push(right);
+      if (right) g.goals++; else { g.misses++; g.missed.push(q); }
+      g.idx++;
+      var last = g.idx >= g.deck.length;
+      var row = document.createElement("div");
+      row.className = "btn-row";
+      row.innerHTML = '<button class="btn" id="nextq">' +
+        (last ? "See the result" : "Next \u2192") + "</button>";
+      document.getElementById("verdict").after(row);
+      var nb = document.getElementById("nextq");
+      nb.addEventListener("click", paint);
+      nb.focus();
     }
 
     function wireSingle(q) {

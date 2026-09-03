@@ -883,3 +883,12 @@ a.card:hover, a.card:focus-visible{
   text-transform:uppercase;
   color:var(--line);
 }
+
+/* The word under test in a true-or-fix-it question */
+.q-text .ul{
+  text-decoration:underline;
+  text-decoration-color:var(--cone);
+  text-decoration-thickness:3px;
+  text-underline-offset:3px;
+  font-weight:700;
+}
