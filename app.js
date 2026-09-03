@@ -91,8 +91,13 @@
     return SUBJECTS.filter(function (s) { return s.id === id; })[0];
   }
 
+  /* Ordered material lives in orderGroups on a bundle, groups on a plain
+     sequence item. Sortable material lives in sortGroups or groups. */
+  function orderGroupsOf(item) { return item.orderGroups || item.groups || []; }
+  function sortGroupsOf(item)  { return item.sortGroups  || item.groups || []; }
+
   function flatBooks(item) {
-    return item.groups.reduce(function (acc, g) { return acc.concat(g.books); }, []);
+    return orderGroupsOf(item).reduce(function (acc, g) { return acc.concat(g.books); }, []);
   }
 
   /* ---------- drill catalogue -------------------------------------------- */
@@ -117,6 +122,7 @@
       { id: "groupall", name: "Which group? — All 39",  blurb: "Everything, prophets included." }
     ],
     questions: [
+      { id: "keyonly",  name: "Her 25 \u2014 most likely on the test", blurb: "Exactly the 25 cards from Mrs. Servizzi's Quizlet. Start here." },
       { id: "tfonly",   name: "True or false",        blurb: "Eight statements. Some are traps \u2014 read them carefully." },
       { id: "mconly",   name: "Multiple choice",      blurb: "Pick the one right answer out of four." },
       { id: "multionly",name: "Mark ALL that apply",  blurb: "More than one answer is right every time. Get every one." },
@@ -133,20 +139,83 @@
   var EXTRAS_DRILL = { id: "extras", name: "Study guide questions",
     blurb: "The written questions. Answer out loud, then check yourself." };
 
+  /* Which question kinds does this item actually contain? */
+  function hasKind(item, k) {
+    return (item.questions || []).some(function (q) { return q.kind === k; });
+  }
+
+  /* Material the teacher singled out herself gets its own short round. */
+  function hasKeyMaterial(item) {
+    return (item.words || []).some(function (w) { return w.key; }) ||
+           (item.questions || []).some(function (q) { return q.key; });
+  }
+
+  /* Build that round: her flagged vocabulary as definition-to-term, followed
+     by the flagged true/false and fill-in questions. */
+  function keyDeck(item) {
+    var words = (item.words || []).filter(function (w) { return w.key; });
+    var pool = words.map(function (w) { return w.word; });
+    var deck = shuffle(words).map(function (w) {
+      return { kind: "mc", prompt: w.meaning, options: pool.slice(),
+               answer: w.word, longOptions: false,
+               why: "From her Quizlet." };
+    });
+    return deck.concat((item.questions || []).filter(function (q) { return q.key; }));
+  }
+
+  /* A "bundle" holds every kind of material for one test under one title.
+     Its drill list is built from whichever fields are present, in the order
+     Knox should work through them. */
+  function bundleDrills(item) {
+    var list = [];
+    var pick = function (group, id) {
+      return (DRILLS[group] || []).filter(function (d) { return d.id === id; })[0];
+    };
+
+    if ((item.words || []).length) {
+      list.push(pick("vocab", "flash"), pick("vocab", "meaning"), pick("vocab", "define"));
+      if (hasSentences(item)) list.push(pick("vocab", "blank"));
+    }
+    if (hasKeyMaterial(item)) list.unshift(pick("questions", "keyonly"));
+    if (hasKind(item, "correct")) list.push(pick("questions", "corronly"));
+    if (hasKind(item, "tf")) list.push(pick("questions", "tfonly"));
+    if (hasKind(item, "mc")) list.push(pick("questions", "mconly"));
+    if (hasKind(item, "multi")) list.push(pick("questions", "multionly"));
+    if ((item.questions || []).length > 1) list.push(pick("questions", "mixed"));
+    if ((item.sortGroups || []).length) list.push(pick("categorize", "groupall"));
+    if ((item.orderGroups || []).length) list.push(pick("sequence", "bank"));
+    if ((item.extras || []).length) list.push(EXTRAS_DRILL);
+
+    return list.filter(Boolean);
+  }
+
   function drillsFor(item) {
+    if (item.type === "bundle") return renameForItem(item, bundleDrills(item));
     var list = (DRILLS[item.type] || []).slice();
     if (item.type === "vocab" && !hasSentences(item)) {
       list = list.filter(function (d) { return d.id !== "blank"; });
     }
     if (item.extras && item.extras.length) list.push(EXTRAS_DRILL);
-    if (item.type === "sequence") {
-      var count = flatBooks(item).length;
-      list = list.map(function (dd) {
-        return { id: dd.id, blurb: dd.blurb,
-                 name: dd.name.replace("{n}", count) };
-      });
-    }
-    return list;
+    return renameForItem(item, list);
+  }
+
+  /* Fill in {n} and swap the two Old-Testament-specific labels for something
+     that reads correctly whatever the material is. */
+  function renameForItem(item, list) {
+    var count = (item.orderGroups || item.groups) ? flatBooks(item).length : 0;
+    return list.map(function (d) {
+      var name = d.name.replace("{n}", count);
+      var blurb = d.blurb;
+      if (d.id === "groupall" && item.type === "bundle") {
+        name = "Sort them into groups";
+        blurb = "Every example, into the right category.";
+      }
+      if (d.id === "bank" && item.type === "bundle") {
+        name = "Put them in order";
+        blurb = "A word bank and blank numbered lines, exactly how a test asks it.";
+      }
+      return { id: d.id, name: name, blurb: blurb };
+    });
   }
 
   function hasSentences(item) {
@@ -161,18 +230,23 @@
 
   var ROUND_LENGTH = 10;
 
+  /* Route by which drill was picked, not by the item's type, so a bundle
+     holding several kinds of material works the same as a single-type item. */
   function buildQuestions(item, drillId) {
-    if (item.type === "vocab") return buildVocab(item, drillId);
-    if (item.type === "sequence") return buildSequence(item, drillId);
-    if (item.type === "categorize") return buildCategorize(item, drillId);
+    if (["meaning", "define", "blank"].indexOf(drillId) > -1) return buildVocab(item, drillId);
+    if (["next", "lineup"].indexOf(drillId) > -1) return buildSequence(item, drillId);
+    if (["group1", "groupall"].indexOf(drillId) > -1) return buildCategorize(item, drillId);
     return [];
   }
 
   function buildVocab(item, drillId) {
     var words = item.words.map(function (w) { return w.word; });
     var meanings = item.words.map(function (w) { return w.meaning; });
+    var deck = drillId === "blank"
+      ? item.words.filter(function (w) { return !!w.sentence; })
+      : item.words;
 
-    return shuffle(item.words).map(function (w) {
+    return shuffle(deck).map(function (w) {
       var recall = w.word + " \u2014 " + w.meaning;
 
       if (drillId === "define") {
@@ -213,7 +287,7 @@
 
   function chunksOf(item) {
     var chunks = [];
-    item.groups.forEach(function (g) {
+    orderGroupsOf(item).forEach(function (g) {
       var size = 6;
       for (var i = 0; i < g.books.length; i += size) {
         var slice = g.books.slice(i, i + size);
@@ -227,7 +301,7 @@
   }
 
   function buildCategorize(item, drillId) {
-    var groups = item.groups.filter(function (g) {
+    var groups = sortGroupsOf(item).filter(function (g) {
       return drillId === "groupall" ? true : g.partOne;
     });
     var names = groups.map(function (g) { return g.name; });
@@ -365,30 +439,65 @@
       "</div>";
   }
 
+  function questionSheet(item) {
+    var byKind = { correct: "True, or fix the underlined word", tf: "True or false",
+                   mc: "Multiple choice", multi: "Mark all that apply" };
+    var out = "";
+    ["correct", "tf", "mc", "multi"].forEach(function (k) {
+      var qs = item.questions.filter(function (q) { return q.kind === k; });
+      if (!qs.length) return;
+      out += '<div class="sheet"><h3>' + esc(byKind[k]) + " \u00b7 " + qs.length + "</h3>" +
+        qs.map(function (q) {
+          var ans = q.kind === "tf" ? (q.answer ? "True" : "False")
+                  : q.kind === "multi" ? q.answers.join(", ")
+                  : q.kind === "correct"
+                      ? (q.answer ? "True as written"
+                                  : "False \u2014 \"" + q.underlined + "\" should be \"" + q.correction + "\"")
+                  : q.answer;
+          return '<dl class="def"><dt style="font-size:.95rem">' + esc(q.prompt) + "</dt>" +
+            "<dd><strong>" + esc(ans) + "</strong></dd>" +
+            (q.why ? '<dd class="ex">' + esc(q.why) + "</dd>" : "") + "</dl>";
+        }).join("") + "</div>";
+    });
+    return out;
+  }
+
   function renderSheet(id) {
     var item = itemById(id);
     if (!item) { location.hash = "#/"; return; }
     var body = "";
 
-    if (item.type === "questions") {
-      var byKind = { correct: "True, or fix the underlined word", tf: "True or false",
-                     mc: "Multiple choice", multi: "Mark all that apply" };
-      ["correct", "tf", "mc", "multi"].forEach(function (k) {
-        var qs = item.questions.filter(function (q) { return q.kind === k; });
-        if (!qs.length) return;
-        body += '<div class="sheet"><h3>' + esc(byKind[k]) + " \u00b7 " + qs.length + "</h3>" +
-          qs.map(function (q) {
-            var ans = q.kind === "tf" ? (q.answer ? "True" : "False")
-                    : q.kind === "multi" ? q.answers.join(", ")
-                    : q.kind === "correct"
-                        ? (q.answer ? "True as written"
-                                    : "False \u2014 \"" + q.underlined + "\" should be \"" + q.correction + "\"")
-                    : q.answer;
-            return '<dl class="def"><dt style="font-size:.95rem">' + esc(q.prompt) + "</dt>" +
-              "<dd><strong>" + esc(ans) + "</strong></dd>" +
-              (q.why ? '<dd class="ex">' + esc(q.why) + "</dd>" : "") + "</dl>";
+    if (item.type === "bundle") {
+      if ((item.words || []).length) {
+        body += '<div class="sheet"><h3>Vocabulary \u00b7 ' + item.words.length + "</h3>" +
+          item.words.map(function (w) {
+            return '<dl class="def"><dt>' + esc(w.word) + "</dt><dd>" + esc(w.meaning) + "</dd></dl>";
           }).join("") + "</div>";
-      });
+      }
+      if ((item.sortGroups || []).length) {
+        body += item.sortGroups.map(function (g) {
+          return '<div class="sheet"><h3>' + esc(g.name) + " \u00b7 " + g.books.length + "</h3><ul>" +
+            g.books.map(function (b) { return "<li>" + esc(b) + "</li>"; }).join("") + "</ul></div>";
+        }).join("");
+      }
+      if ((item.orderGroups || []).length) {
+        var m = 0;
+        body += item.orderGroups.map(function (g) {
+          var lis = g.books.map(function (b) { m++; return "<li>" + esc(b) + "</li>"; }).join("");
+          return '<div class="sheet"><h3>' + esc(g.name) + " \u00b7 " + g.books.length + "</h3>" +
+            '<ol start="' + (m - g.books.length + 1) + '">' + lis + "</ol></div>";
+        }).join("");
+      }
+      if ((item.extras || []).length) {
+        body += '<div class="sheet"><h3>Written questions \u00b7 ' + item.extras.length + "</h3>" +
+          item.extras.map(function (x) {
+            return '<dl class="def"><dt style="font-size:.95rem">' + esc(x.prompt) + "</dt>" +
+              "<dd>" + esc(x.answer) + "</dd></dl>";
+          }).join("") + "</div>";
+      }
+      if ((item.questions || []).length) body += questionSheet(item);
+    } else if (item.type === "questions") {
+      body += questionSheet(item);
     } else if (item.type === "verse") {
       body = '<div class="sheet"><dl class="def"><dt>' + esc(verseRef(item)) + "</dt>" +
         "<dd>" + esc(item.text) + "</dd></dl></div>";
@@ -432,7 +541,11 @@
     if (drillId === "fade") { renderVerseFade(item); return; }
     if (drillId === "order") { renderVerseOrder(item); return; }
     if (drillId === "extras") { renderSelfCheck(item, item.extras, "extras"); return; }
-    if (item.type === "questions") { renderQuestionSet(item, drillId); return; }
+    if (item.type === "questions" ||
+        (item.type === "bundle" &&
+         ["keyonly", "tfonly", "mconly", "multionly", "corronly", "mixed"].indexOf(drillId) > -1)) {
+      renderQuestionSet(item, drillId); return;
+    }
 
     var drill = drillById(item, drillId);
     if (!drill) { location.hash = "#/i/" + itemId; return; }
@@ -682,6 +795,7 @@
   /* ---------- mixed question sets (true/false, choice, mark-all) ----------- */
 
   function renderQuestionSet(item, drillId) {
+    if (drillId === "keyonly") return runDeck(item, drillId, keyDeck(item));
     var pool = item.questions.filter(function (q) {
       if (drillId === "tfonly") return q.kind === "tf";
       if (drillId === "mconly") return q.kind === "mc";
@@ -695,7 +809,10 @@
     var deck = drillId === "mconly" ? shuffle(pool).slice(0, 12)
              : drillId === "mixed"  ? pool
              : pool;
+    return runDeck(item, drillId, deck);
+  }
 
+  function runDeck(item, drillId, deck) {
     var g = { deck: deck, idx: 0, goals: 0, misses: 0, results: [], missed: [] };
 
     function board() {
