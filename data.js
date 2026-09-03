@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 3 \u2014 build 11";
+const BUILD = "Sept 3 \u2014 build 12";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -222,7 +222,7 @@ const STUDY_ITEMS = [
     "title": "Chapter 2 History Test",
     "added": "2026-09-03",
     "quiz": "2026-09-04",
-    "note": "Everything for Friday. Start with \"Her 25\" — that is her own Quizlet, card for card.",
+    "note": "Three drills, all built from Mrs. Martinez's own study guide and Quizlet.",
     "type": "bundle",
     "words": [
       {
@@ -1168,6 +1168,11 @@ const STUDY_ITEMS = [
         "answer": "Black",
         "why": "That peninsula is modern-day Turkey."
       }
+    ],
+    "drills": [
+      "keyonly",
+      "corronly",
+      "extras"
     ]
   },
   {
@@ -1176,7 +1181,7 @@ const STUDY_ITEMS = [
     "title": "Science Chapter 2 Test",
     "added": "2026-09-01",
     "quiz": "2026-09-08",
-    "note": "Weathering, soil, and erosion — pages 25–50.",
+    "note": "Three drills. Mark ALL that apply is the section he lost both points on last chapter.",
     "type": "bundle",
     "words": [
       {
@@ -1660,6 +1665,83 @@ const STUDY_ITEMS = [
           "It builds deltas and floodplains"
         ],
         "why": "Wind and ice deposit sediment too — sand dunes and moraines are both deposits."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which soil layer is made of leaf litter and humus?",
+        "options": [
+          "O horizon",
+          "A horizon",
+          "B horizon",
+          "C horizon"
+        ],
+        "answer": "O horizon",
+        "why": "The very top layer. Then A (topsoil), B (subsoil), C, and R (bedrock)."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Topsoil, where most plants germinate and grow roots, is the ___.",
+        "options": [
+          "A horizon",
+          "O horizon",
+          "B horizon",
+          "R horizon"
+        ],
+        "answer": "A horizon",
+        "why": "It has a high proportion of humus along with minerals from weathered rock."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Subsoil, made mostly of weathered minerals from bedrock, is the ___.",
+        "options": [
+          "B horizon",
+          "A horizon",
+          "C horizon",
+          "O horizon"
+        ],
+        "answer": "B horizon",
+        "why": "It holds a few nutrients washed down from the humus above."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Unweathered parent rock underneath all the horizons is the ___.",
+        "options": [
+          "R horizon",
+          "C horizon",
+          "B horizon",
+          "O horizon"
+        ],
+        "answer": "R horizon",
+        "why": "Also called bedrock, or regolith. It shapes the texture of all the soil above it."
+      },
+      {
+        "kind": "mc",
+        "prompt": "From the surface downward, the soil horizons run in what order?",
+        "options": [
+          "O, A, B, C, R",
+          "A, O, B, R, C",
+          "R, C, B, A, O",
+          "O, B, A, C, R"
+        ],
+        "answer": "O, A, B, C, R",
+        "why": "Leaf litter, topsoil, subsoil, weathered bedrock fragments, then bedrock. Her Chapter 1 test had a label-the-diagram section — expect this one."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these belong to MECHANICAL weathering?",
+        "options": [
+          "Pressure release",
+          "Exfoliation",
+          "Tree roots splitting a rock",
+          "Rust forming on iron",
+          "Acid rain"
+        ],
+        "answers": [
+          "Pressure release",
+          "Exfoliation",
+          "Tree roots splitting a rock"
+        ],
+        "why": "Rust is oxidation and acid rain is chemical — both change the rock into a new substance."
       }
     ],
     "sortGroups": [
@@ -1712,6 +1794,11 @@ const STUDY_ITEMS = [
         "C horizon — weathered bedrock fragments",
         "R horizon — bedrock"
       ]
+    ],
+    "drills": [
+      "meaning",
+      "multionly",
+      "mixed"
     ]
   }
 ];

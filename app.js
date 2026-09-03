@@ -122,7 +122,7 @@
       { id: "groupall", name: "Which group? — All 39",  blurb: "Everything, prophets included." }
     ],
     questions: [
-      { id: "keyonly",  name: "Her 25 \u2014 most likely on the test", blurb: "Exactly the 25 cards from Mrs. Servizzi's Quizlet. Start here." },
+      { id: "keyonly",  name: "Her 25 \u2014 most likely on the test", blurb: "Exactly the 25 cards from her Quizlet. Start here." },
       { id: "tfonly",   name: "True or false",        blurb: "Eight statements. Some are traps \u2014 read them carefully." },
       { id: "mconly",   name: "Multiple choice",      blurb: "Pick the one right answer out of four." },
       { id: "multionly",name: "Mark ALL that apply",  blurb: "More than one answer is right every time. Get every one." },
@@ -171,6 +171,19 @@
     var pick = function (group, id) {
       return (DRILLS[group] || []).filter(function (d) { return d.id === id; })[0];
     };
+
+    /* An item can name the handful of drills it wants, in order. Without this
+       it offers everything its fields support, which gets overwhelming fast. */
+    if (item.drills && item.drills.length) {
+      var all = [];
+      ["vocab", "questions", "categorize", "sequence"].forEach(function (grp) {
+        all = all.concat(DRILLS[grp] || []);
+      });
+      all.push(EXTRAS_DRILL);
+      return item.drills.map(function (id) {
+        return all.filter(function (d) { return d.id === id; })[0];
+      }).filter(Boolean);
+    }
 
     if ((item.words || []).length) {
       list.push(pick("vocab", "flash"), pick("vocab", "meaning"), pick("vocab", "define"));
