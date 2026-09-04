@@ -811,14 +811,19 @@
   /* Fast single-tap questions only \u2014 the game needs momentum, so the
      two-stage and mark-all formats sit this one out. */
   function gamePool(item) {
-    var pool = (item.questions || []).filter(function (q) {
-      return q.kind === "tf" || q.kind === "mc";
-    }).map(function (q) {
+    /* When the teacher has flagged her own material, the game plays only that.
+       Otherwise it draws on everything the item holds. */
+    var keyed = hasKeyMaterial(item);
+    var words = (item.words || []).filter(function (w) { return keyed ? w.key : true; });
+    var qs = (item.questions || []).filter(function (q) {
+      return (q.kind === "tf" || q.kind === "mc") && (keyed ? q.key : true);
+    });
+
+    var pool = qs.map(function (q) {
       return { kind: q.kind, prompt: q.prompt, options: q.options,
                answer: q.answer, why: q.why, longOptions: q.longOptions };
     });
 
-    var words = item.words || [];
     if (words.length > 3) {
       var names = words.map(function (w) { return w.word; });
       pool = pool.concat(words.map(function (w) {
@@ -827,7 +832,7 @@
                  answer: w.word, why: "" };
       }));
     }
-    return shuffle(pool).slice(0, 10);
+    return shuffle(pool).slice(0, item.matchLength || 10);
   }
 
   var GOAL_SPOTS = [

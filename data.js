@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 3 \u2014 build 14";
+const BUILD = "Sept 3 \u2014 build 15";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -222,7 +222,7 @@ const STUDY_ITEMS = [
     "title": "Chapter 2 History Test",
     "added": "2026-09-03",
     "quiz": "2026-09-04",
-    "note": "Three drills, all built from Mrs. Martinez's own study guide and Quizlet.",
+    "note": "Short on time? Match Day, then Her 25. That is about seven minutes.",
     "type": "bundle",
     "words": [
       {
@@ -1170,10 +1170,13 @@ const STUDY_ITEMS = [
       }
     ],
     "drills": [
+      "match",
       "keyonly",
       "corronly",
       "extras"
-    ]
+    ],
+    "rival": "Sumer City",
+    "matchLength": 8
   },
   {
     "id": "sci-ch2-test",
