@@ -127,7 +127,8 @@
       { id: "mconly",   name: "Multiple choice",      blurb: "Pick the one right answer out of four." },
       { id: "multionly",name: "Mark ALL that apply",  blurb: "More than one answer is right every time. Get every one." },
       { id: "corronly", name: "True, or fix the word",  blurb: "If the statement is false, pick the word that belongs instead." },
-      { id: "mixed",    name: "Full practice test",   blurb: "Every section together, like the real thing." }
+      { id: "mixed",    name: "Full practice test",   blurb: "Every section together, like the real thing." },
+      { id: "match",    name: "Match Day",            blurb: "Play a match. Right answers earn you a shot on goal \u2014 but the keeper gets a say." }
     ],
     verse: [
       { id: "read",  name: "Read it out loud",  blurb: "The whole verse. Say it five times before you move on." },
@@ -556,7 +557,7 @@
     if (drillId === "extras") { renderSelfCheck(item, item.extras, "extras"); return; }
     if (item.type === "questions" ||
         (item.type === "bundle" &&
-         ["keyonly", "tfonly", "mconly", "multionly", "corronly", "mixed"].indexOf(drillId) > -1)) {
+         ["match", "keyonly", "tfonly", "mconly", "multionly", "corronly", "mixed"].indexOf(drillId) > -1)) {
       renderQuestionSet(item, drillId); return;
     }
 
@@ -805,9 +806,215 @@
     paint("");
   }
 
+  /* ---------- Match Day: a game layered over the same questions ------------ */
+
+  /* Fast single-tap questions only \u2014 the game needs momentum, so the
+     two-stage and mark-all formats sit this one out. */
+  function gamePool(item) {
+    var pool = (item.questions || []).filter(function (q) {
+      return q.kind === "tf" || q.kind === "mc";
+    }).map(function (q) {
+      return { kind: q.kind, prompt: q.prompt, options: q.options,
+               answer: q.answer, why: q.why, longOptions: q.longOptions };
+    });
+
+    var words = item.words || [];
+    if (words.length > 3) {
+      var names = words.map(function (w) { return w.word; });
+      pool = pool.concat(words.map(function (w) {
+        return { kind: "mc", prompt: w.meaning,
+                 options: shuffle(sample(names, 3, w.word).concat([w.word])),
+                 answer: w.word, why: "" };
+      }));
+    }
+    return shuffle(pool).slice(0, 10);
+  }
+
+  var GOAL_SPOTS = [
+    { id: "left",   label: "Bottom left" },
+    { id: "middle", label: "Down the middle" },
+    { id: "right",  label: "Top right" }
+  ];
+
+  function renderMatch(item) {
+    var rival = item.rival || "The Rivals";
+    var g = { deck: gamePool(item), idx: 0, us: 0, them: 0, streak: 0, best: 0 };
+
+    function board(extra) {
+      var minute = Math.min(90, Math.round((g.idx / Math.max(g.deck.length, 1)) * 90));
+      return '<div class="scoreboard match-board">' +
+        '<div class="score-side"><span class="score-label">Knox FC</span>' +
+          '<span class="score-num">' + g.us + "</span></div>" +
+        '<div class="match-clock"><span class="match-min">' + minute + "\u2032</span>" +
+          (g.streak > 1 ? '<span class="streak">' + g.streak + " in a row</span>" : "") + "</div>" +
+        '<div class="score-side"><span class="score-label">' + esc(rival) + "</span>" +
+          '<span class="score-num score-num--miss">' + g.them + "</span></div>" +
+        "</div>" + (extra || "");
+    }
+
+    function kickoff() {
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the match</a>' +
+        '<div class="result">' +
+          '<p class="eyebrow">Match Day</p>' +
+          '<p class="result-rating">Knox FC<br>v<br>' + esc(rival) + "</p>" +
+          '<p class="lede" style="margin:1rem auto">' + g.deck.length + " questions. Get one right and you " +
+          "get a shot on goal \u2014 pick your corner and hope the keeper guesses wrong. " +
+          "Three right in a row earns a power shot that cannot be saved.</p>" +
+          '<div class="btn-row"><button class="btn" id="ko">Kick off</button></div>' +
+        "</div>";
+      document.getElementById("ko").addEventListener("click", question);
+    }
+
+    function question() {
+      if (g.idx >= g.deck.length) return fullTime();
+      var q = g.deck[g.idx];
+      var opts = q.kind === "tf"
+        ? [{ v: "true", t: "True" }, { v: "false", t: "False" }]
+        : shuffle(q.options).map(function (o) { return { v: o, t: o }; });
+
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the match</a>' +
+        board() +
+        '<div class="q"><p class="q-kicker">Question ' + (g.idx + 1) + " of " + g.deck.length + "</p>" +
+          '<p class="q-text q-text--sentence" style="text-align:center">' + esc(q.prompt) + "</p></div>" +
+        '<div class="answers' + (q.kind === "mc" ? " answers--long" : "") + '" id="answers">' +
+          opts.map(function (o) {
+            return '<button class="answer" data-v="' + esc(o.v) + '">' + esc(o.t) + "</button>";
+          }).join("") + "</div>" +
+        '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>';
+
+      document.getElementById("answers").addEventListener("click", function (e) {
+        var btn = e.target.closest(".answer");
+        if (!btn || btn.disabled) return;
+        var buttons = Array.prototype.slice.call(document.querySelectorAll(".answer"));
+        buttons.forEach(function (b) { b.disabled = true; });
+
+        var want = q.kind === "tf" ? String(q.answer) : q.answer;
+        var right = btn.dataset.v === want;
+        buttons.forEach(function (b) {
+          if (b.dataset.v === want) b.classList.add("answer--right");
+          else b.classList.add(b === btn ? "answer--wrong" : "answer--dim");
+        });
+
+        if (right) {
+          g.streak++;
+          if (g.streak > g.best) g.best = g.streak;
+          setVerdict("verdict--goal", "Through on goal!", q.why);
+          nextButton(g.streak >= 3 ? "Take the power shot" : "Take your shot", shoot);
+        } else {
+          g.streak = 0;
+          setVerdict("verdict--card", "Lost the ball", q.why);
+          nextButton(esc(rival) + " break away \u2192", defend);
+        }
+      });
+    }
+
+    /* The scoreboard is drawn once per screen, so it has to be refreshed
+       explicitly when a goal goes in mid-screen. */
+    function syncBoard() {
+      var el = document.querySelector(".match-board");
+      if (el) el.outerHTML = board();
+    }
+
+    function setVerdict(cls, head, why) {
+      var v = document.getElementById("verdict");
+      v.className = "verdict " + cls;
+      v.innerHTML = head + (why ? "<small>" + esc(why) + "</small>" : "");
+    }
+
+    function nextButton(label, fn) {
+      var row = document.createElement("div");
+      row.className = "btn-row";
+      row.innerHTML = '<button class="btn" id="go">' + label + "</button>";
+      document.getElementById("verdict").after(row);
+      var b = document.getElementById("go");
+      b.addEventListener("click", fn);
+      b.focus();
+    }
+
+    function shoot() {
+      var power = g.streak >= 3;
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the match</a>' +
+        board() +
+        '<div class="q"><p class="q-kicker">' +
+          (power ? "Power shot \u2014 unstoppable" : "Pick your corner") + "</p>" +
+          '<p class="q-text">Where do you put it?</p></div>' +
+          '<div class="goalmouth" id="spots">' +
+            GOAL_SPOTS.map(function (s) {
+              return '<button class="spot" data-s="' + s.id + '">' + esc(s.label) + "</button>";
+            }).join("") +
+          "</div>" +
+        '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>';
+
+      document.getElementById("spots").addEventListener("click", function (e) {
+        var b = e.target.closest(".spot");
+        if (!b || b.disabled) return;
+        Array.prototype.slice.call(document.querySelectorAll(".spot"))
+          .forEach(function (x) { x.disabled = true; });
+
+        var keeper = GOAL_SPOTS[Math.floor(Math.random() * GOAL_SPOTS.length)].id;
+        var scored = power || keeper !== b.dataset.s;
+        if (scored) { g.us++; b.classList.add("spot--goal"); }
+        else b.classList.add("spot--save");
+        syncBoard();
+
+        setVerdict(scored ? "verdict--goal" : "verdict--card",
+          scored ? (power ? "GOAL \u2014 no chance for the keeper!" : "GOAL!")
+                 : "Saved! The keeper guessed right.",
+          scored ? "" : "Nothing you did wrong \u2014 that one was luck.");
+        g.idx++;
+        nextButton(g.idx >= g.deck.length ? "Full time" : "Play on \u2192", question);
+      });
+    }
+
+    function defend() {
+      var conceded = Math.random() < 0.45;
+      if (conceded) g.them++;
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the match</a>' +
+        board() +
+        '<div class="q"><p class="q-kicker">' + esc(rival) + " on the counter</p>" +
+          '<p class="q-text">' + (conceded ? "They score." : "Off the post! You get away with it.") + "</p></div>" +
+        '<div class="verdict verdict--' + (conceded ? "card" : "goal") + '" id="verdict">' +
+          (conceded ? "1\u20130 to them from that move" : "Let off the hook") +
+        "</div>";
+      g.idx++;
+      nextButton(g.idx >= g.deck.length ? "Full time" : "Play on \u2192", question);
+    }
+
+    function fullTime() {
+      var result = g.us > g.them ? "Win" : g.us === g.them ? "Draw" : "Loss";
+      var line = g.us > g.them
+        ? "Three points. Run it back and try to keep a clean sheet."
+        : g.us === g.them
+          ? "A point on the road. Answer two more right next time and it is a win."
+          : "Rough one. The questions you missed are the goals they got.";
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="eyebrow">Full time</p>' +
+          '<p class="result-rating">' + result + "</p>" +
+          '<p class="result-score">' + g.us + " \u2013 " + g.them + "</p>" +
+          '<p class="result-of">Knox FC v ' + esc(rival) + "</p>" +
+          '<p class="lede" style="margin:1rem auto 0">Best streak: ' + g.best + ". " + line + "</p>" +
+          '<div class="btn-row">' +
+            '<button class="btn" id="again">Play again</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '">Back to drills</a>' +
+          "</div>" +
+        "</div>";
+      document.getElementById("again").addEventListener("click", function () {
+        renderMatch(item);
+      });
+    }
+
+    kickoff();
+  }
+
   /* ---------- mixed question sets (true/false, choice, mark-all) ----------- */
 
   function renderQuestionSet(item, drillId) {
+    if (drillId === "match") return renderMatch(item);
     if (drillId === "keyonly") return runDeck(item, drillId, keyDeck(item));
     var pool = item.questions.filter(function (q) {
       if (drillId === "tfonly") return q.kind === "tf";

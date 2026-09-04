@@ -892,3 +892,67 @@ a.card:hover, a.card:focus-visible{
   text-underline-offset:3px;
   font-weight:700;
 }
+
+/* --- Match Day ----------------------------------------------------------- */
+.match-board .score-label{ font-size:.58rem; }
+.match-clock{
+  flex:1;
+  text-align:center;
+}
+.match-min{
+  display:block;
+  font-family:"Archivo Black",sans-serif;
+  font-size:1.1rem;
+  color:var(--card);
+  font-variant-numeric:tabular-nums;
+}
+.streak{
+  display:inline-block;
+  margin-top:.2rem;
+  background:var(--cone);
+  color:var(--chalk);
+  font-size:.58rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:.15rem .45rem;
+  border-radius:999px;
+}
+
+/* The goal mouth: three targets, netting behind */
+.goalmouth{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:.5rem;
+  padding:1rem .8rem;
+  border:4px solid var(--chalk);
+  border-top-width:6px;
+  border-radius:6px 6px 0 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.55) 0 1px, transparent 1px 14px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.55) 0 1px, transparent 1px 14px),
+    var(--turf-dark);
+  margin-bottom:1rem;
+}
+
+.spot{
+  background:rgba(255,255,255,.92);
+  border:2px solid var(--ink);
+  border-radius:10px;
+  box-shadow:var(--shadow);
+  padding:1.4rem .4rem;
+  font-weight:700;
+  font-size:.8rem;
+  line-height:1.2;
+  cursor:pointer;
+  transition:transform .12s ease;
+}
+.spot:hover:not(:disabled){ transform:translateY(-3px); }
+.spot:disabled{ cursor:default; }
+.spot--goal{ background:var(--cone); color:var(--chalk); border-color:var(--cone-dark); }
+.spot--save{ background:var(--card); border-color:#C79A00; }
+
+@media (max-width:420px){
+  .goalmouth{ gap:.35rem; padding:.7rem .5rem; }
+  .spot{ padding:1.1rem .25rem; font-size:.72rem; }
+}

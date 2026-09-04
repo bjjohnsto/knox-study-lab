@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 3 \u2014 build 12";
+const BUILD = "Sept 3 \u2014 build 14";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -1796,9 +1796,11 @@ const STUDY_ITEMS = [
       ]
     ],
     "drills": [
+      "match",
       "meaning",
       "multionly",
       "mixed"
-    ]
+    ],
+    "rival": "Granite Rovers"
   }
 ];
