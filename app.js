@@ -130,6 +130,12 @@
       { id: "mixed",    name: "Full practice test",   blurb: "Every section together, like the real thing." },
       { id: "match",    name: "Match Day",            blurb: "Play a match. Right answers earn you a shot on goal \u2014 but the keeper gets a say." }
     ],
+    math: [
+      { id: "numpad", name: "Work it out", blurb: "Problems made fresh every round. Tap the digits \u2014 no multiple choice to guess from." }
+    ],
+    spelling: [
+      { id: "spell", name: "Look, cover, build it", blurb: "Study the word, then build it back from scrambled letters with it hidden." }
+    ],
     verse: [
       { id: "read",  name: "Read it out loud",  blurb: "The whole verse. Say it five times before you move on." },
       { id: "fade",  name: "Fade it out",       blurb: "Full words, then first letters, then nothing. Say it each time." },
@@ -173,18 +179,6 @@
       return (DRILLS[group] || []).filter(function (d) { return d.id === id; })[0];
     };
 
-    /* An item can name the handful of drills it wants, in order. Without this
-       it offers everything its fields support, which gets overwhelming fast. */
-    if (item.drills && item.drills.length) {
-      var all = [];
-      ["vocab", "questions", "categorize", "sequence"].forEach(function (grp) {
-        all = all.concat(DRILLS[grp] || []);
-      });
-      all.push(EXTRAS_DRILL);
-      return item.drills.map(function (id) {
-        return all.filter(function (d) { return d.id === id; })[0];
-      }).filter(Boolean);
-    }
 
     if ((item.words || []).length) {
       list.push(pick("vocab", "flash"), pick("vocab", "meaning"), pick("vocab", "define"));
@@ -198,12 +192,33 @@
     if ((item.questions || []).length > 1) list.push(pick("questions", "mixed"));
     if ((item.sortGroups || []).length) list.push(pick("categorize", "groupall"));
     if ((item.orderGroups || []).length) list.push(pick("sequence", "bank"));
+    if ((item.spellWords || []).length) list.unshift(pick("spelling", "spell"));
+    if ((item.mathTopics || []).length) list.unshift(pick("math", "numpad"));
     if ((item.extras || []).length) list.push(EXTRAS_DRILL);
 
     return list.filter(Boolean);
   }
 
+  /* Every drill the app knows about, for resolving an item's own list. */
+  function allDrills() {
+    var all = [];
+    ["vocab", "questions", "categorize", "sequence", "verse", "spelling", "math"].forEach(function (grp) {
+      all = all.concat(DRILLS[grp] || []);
+    });
+    all.push(EXTRAS_DRILL);
+    return all;
+  }
+
   function drillsFor(item) {
+    /* An item of ANY type can name the handful of drills it wants, in order.
+       Without this it offers everything its fields support, which gets
+       overwhelming fast. */
+    if (item.drills && item.drills.length) {
+      var all = allDrills();
+      return renameForItem(item, item.drills.map(function (id) {
+        return all.filter(function (d) { return d.id === id; })[0];
+      }).filter(Boolean));
+    }
     if (item.type === "bundle") return renameForItem(item, bundleDrills(item));
     var list = (DRILLS[item.type] || []).slice();
     if (item.type === "vocab" && !hasSentences(item)) {
@@ -509,6 +524,12 @@
               "<dd>" + esc(x.answer) + "</dd></dl>";
           }).join("") + "</div>";
       }
+      if ((item.spellWords || []).length) {
+        body += '<div class="sheet"><h3>Spelling words \u00b7 ' + item.spellWords.length + "</h3>" +
+          '<ul class="wordgrid">' + item.spellWords.map(function (x) {
+            return "<li>" + esc(x) + "</li>";
+          }).join("") + "</ul></div>";
+      }
       if ((item.questions || []).length) body += questionSheet(item);
     } else if (item.type === "questions") {
       body += questionSheet(item);
@@ -557,7 +578,8 @@
     if (drillId === "extras") { renderSelfCheck(item, item.extras, "extras"); return; }
     if (item.type === "questions" ||
         (item.type === "bundle" &&
-         ["match", "keyonly", "tfonly", "mconly", "multionly", "corronly", "mixed"].indexOf(drillId) > -1)) {
+         ["numpad", "spell", "match", "keyonly", "tfonly", "mconly",
+          "multionly", "corronly", "mixed"].indexOf(drillId) > -1)) {
       renderQuestionSet(item, drillId); return;
     }
 
@@ -806,6 +828,303 @@
     paint("");
   }
 
+  /* ---------- Maths: problems generated and marked by the site itself ------ */
+
+  function gcdOf(a, b) { while (b) { var t = b; b = a % b; a = t; } return a; }
+  function factorsOf(n) {
+    var f = [];
+    for (var i = 1; i <= n; i++) if (n % i === 0) f.push(i);
+    return f;
+  }
+  function isPrimeNum(n) {
+    if (n < 2) return false;
+    for (var i = 2; i * i <= n; i++) if (n % i === 0) return false;
+    return true;
+  }
+  function primeFactorsOf(n) {
+    var out = [], dd = 2;
+    while (n > 1) { while (n % dd === 0) { out.push(dd); n /= dd; } dd++; }
+    return out;
+  }
+  function randInt(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
+
+  var MATH_TOPICS = {
+    gcf: function () {
+      var a, b;
+      do { a = randInt(8, 60); b = randInt(8, 60); }
+      while (a === b || gcdOf(a, b) === 1);
+      return { prompt: "What is the greatest common factor of " + a + " and " + b + "?",
+               answer: gcdOf(a, b),
+               why: a + " = " + primeFactorsOf(a).join(" \u00d7 ") + " and " +
+                    b + " = " + primeFactorsOf(b).join(" \u00d7 ") +
+                    ". The largest factor they share is " + gcdOf(a, b) + "." };
+    },
+    lcm: function () {
+      var a, b;
+      do { a = randInt(3, 14); b = randInt(3, 14); } while (a === b);
+      var l = a * b / gcdOf(a, b);
+      return { prompt: "What is the least common multiple of " + a + " and " + b + "?",
+               answer: l,
+               why: "Count up in " + a + "s and in " + b + "s. " + l +
+                    " is the first number both reach (" + a + " \u00d7 " + (l / a) + " and " +
+                    b + " \u00d7 " + (l / b) + ")." };
+    },
+    factorcount: function () {
+      var n = randInt(12, 60);
+      var f = factorsOf(n);
+      return { prompt: "How many factors does " + n + " have?",
+               answer: f.length,
+               why: "They are " + f.join(", ") + " \u2014 that is " + f.length + "." };
+    },
+    largestprime: function () {
+      var n;
+      do { n = randInt(20, 99); } while (isPrimeNum(n));
+      var pf = primeFactorsOf(n);
+      return { prompt: "What is the largest prime factor of " + n + "?",
+               answer: Math.max.apply(null, pf),
+               why: n + " = " + pf.join(" \u00d7 ") + ", so the largest prime factor is " +
+                    Math.max.apply(null, pf) + "." };
+    },
+    primefactorcount: function () {
+      var n;
+      do { n = randInt(16, 96); } while (isPrimeNum(n));
+      var pf = primeFactorsOf(n);
+      return { prompt: "Counting repeats, how many prime factors does " + n + " have?",
+               answer: pf.length,
+               why: n + " = " + pf.join(" \u00d7 ") + ", which is " + pf.length + " prime factors." };
+    },
+    nextprime: function () {
+      var n = randInt(8, 50), p = n + 1;
+      while (!isPrimeNum(p)) p++;
+      return { prompt: "What is the smallest prime number greater than " + n + "?",
+               answer: p,
+               why: p + " has no factors except 1 and itself." };
+    }
+  };
+
+  function renderNumpad(item) {
+    var topics = (item.mathTopics || []).filter(function (t) { return MATH_TOPICS[t]; });
+    var rounds = item.mathRound || 10;
+    var deck = [];
+    for (var i = 0; i < rounds; i++) {
+      var t = topics[Math.floor(Math.random() * topics.length)];
+      deck.push(MATH_TOPICS[t]());
+    }
+    var g = { deck: deck, idx: 0, right: 0, entry: "" };
+
+    function paint(state) {
+      if (g.idx >= g.deck.length) return done();
+      var p = g.deck[g.idx];
+      var dots = g.deck.map(function (_, n) {
+        var cls = "dot";
+        if (n < g.idx) cls += " dot--hit";
+        else if (n === g.idx) cls += " dot--now";
+        return '<span class="' + cls + '"></span>';
+      }).join("");
+
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<div class="scoreboard"><div class="score-side">' +
+          '<span class="score-label">Right</span><span class="score-num">' + g.right + "</span></div>" +
+          '<div class="score-dots">' + dots + "</div>" +
+          '<div class="score-side"><span class="score-label">Of</span>' +
+          '<span class="score-num">' + g.deck.length + "</span></div></div>" +
+        '<div class="q"><p class="q-kicker">Problem ' + (g.idx + 1) + " of " + g.deck.length + "</p>" +
+          '<p class="q-text q-text--sentence" style="text-align:center">' + esc(p.prompt) + "</p></div>" +
+        '<div class="numdisplay' + (state ? " numdisplay--" + state : "") + '" id="disp">' +
+          (g.entry || '<span class="numplaceholder">tap your answer</span>') + "</div>" +
+        '<div class="numpad" id="pad">' +
+          [1,2,3,4,5,6,7,8,9].map(function (n) {
+            return '<button class="numkey" data-k="' + n + '">' + n + "</button>";
+          }).join("") +
+          '<button class="numkey numkey--wide" data-k="clear">Clear</button>' +
+          '<button class="numkey" data-k="0">0</button>' +
+          '<button class="numkey numkey--go" data-k="enter">Check</button>' +
+        "</div>" +
+        '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>';
+
+      document.getElementById("pad").addEventListener("click", function (e) {
+        var b = e.target.closest(".numkey");
+        if (!b || b.disabled) return;
+        var k = b.dataset.k;
+        if (k === "clear") { g.entry = ""; paint(); return; }
+        if (k === "enter") { if (g.entry !== "") submit(p); return; }
+        if (g.entry.length < 4) { g.entry += k; paint(); }
+      });
+    }
+
+    function submit(p) {
+      var right = parseInt(g.entry, 10) === p.answer;
+      if (right) g.right++;
+      var wasEntry = g.entry;
+      g.entry = "";
+
+      var pad = document.getElementById("pad");
+      Array.prototype.slice.call(pad.querySelectorAll(".numkey"))
+        .forEach(function (b) { b.disabled = true; });
+      var disp = document.getElementById("disp");
+      disp.className = "numdisplay numdisplay--" + (right ? "ok" : "no");
+      disp.innerHTML = esc(wasEntry) + (right ? "" : ' <span class="numwas">\u2192 ' + p.answer + "</span>");
+
+      var v = document.getElementById("verdict");
+      v.className = "verdict " + (right ? "verdict--goal" : "verdict--card");
+      v.innerHTML = (right ? "Correct" : "Not quite") + "<small>" + esc(p.why) + "</small>";
+
+      g.idx++;
+      var row = document.createElement("div");
+      row.className = "btn-row";
+      row.innerHTML = '<button class="btn" id="nextp">' +
+        (g.idx >= g.deck.length ? "See the result" : "Next problem \u2192") + "</button>";
+      v.after(row);
+      var nb = document.getElementById("nextp");
+      nb.addEventListener("click", function () { paint(); });
+      nb.focus();
+    }
+
+    function done() {
+      var pct = g.right / g.deck.length;
+      var rating = g.right === g.deck.length ? "Clean sheet"
+                 : pct >= 0.8 ? "Player of the match"
+                 : pct >= 0.6 ? "Solid 90 minutes"
+                 : "Back to training";
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="result-rating">' + rating + "</p>" +
+          '<p class="result-score">' + g.right + "/" + g.deck.length + "</p>" +
+          '<p class="result-of">Worked out, not guessed</p>' +
+          '<p class="lede" style="margin:1rem auto 0">Every round is a brand new set of ' +
+          "problems, so playing again is never the same twice.</p>" +
+          '<div class="btn-row">' +
+            '<button class="btn" id="again">New problems</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '">Other drills</a>' +
+          "</div>" +
+        "</div>";
+      document.getElementById("again").addEventListener("click", function () { renderNumpad(item); });
+    }
+
+    paint();
+  }
+
+  /* ---------- Look, cover, build it: spelling without a keyboard ----------- */
+
+  function renderSpell(item) {
+    var deck = shuffle(item.spellWords || []).slice(0, item.spellRound || 10);
+    var g = { idx: 0, clean: 0, misses: 0 };
+
+    function study() {
+      if (g.idx >= deck.length) return done();
+      var word = deck[g.idx];
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<p class="eyebrow">Word ' + (g.idx + 1) + " of " + deck.length + "</p>" +
+        '<div class="spellword">' + esc(word) + "</div>" +
+        '<p class="chant-hint">Look at it carefully. Say the letters out loud. ' +
+        "When you tap below it disappears and you build it back.</p>" +
+        '<div class="btn-row"><button class="btn" id="ready">Cover it up</button></div>';
+      document.getElementById("ready").addEventListener("click", function () { build(word); });
+    }
+
+    function build(word) {
+      var letters = word.split("");
+      /* Track tiles by index so repeated letters each stay tappable. */
+      var bank = shuffle(letters.map(function (ch, i) { return { ch: ch, i: i }; }));
+      var placed = [];
+      var wrong = 0;
+
+      function paint(msg) {
+        var slots = letters.map(function (_, n) {
+          var got = placed[n] !== undefined ? bank[placed[n]].ch : null;
+          return '<span class="lslot' + (got ? " lslot--filled" : "") +
+            (n === placed.length ? " lslot--now" : "") + '">' + (got ? esc(got) : "") + "</span>";
+        }).join("");
+
+        app.innerHTML =
+          '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+          '<p class="eyebrow">Word ' + (g.idx + 1) + " of " + deck.length + "</p>" +
+          '<div class="lslots">' + slots + "</div>" +
+          '<div class="ltiles" id="tiles">' +
+            bank.map(function (b, n) {
+              var used = placed.indexOf(n) > -1;
+              return '<button class="ltile' + (used ? " ltile--used" : "") + '"' +
+                (used ? " disabled" : "") + ' data-n="' + n + '">' + esc(b.ch) + "</button>";
+            }).join("") +
+          "</div>" +
+          '<div class="verdict" id="verdict" role="status" aria-live="polite">' + (msg || "") + "</div>" +
+          '<div class="btn-row">' +
+            (placed.length ? '<button class="btn btn--quiet" id="undo">Undo</button>' : "") +
+            '<button class="btn btn--quiet" id="peek">Show me the word</button>' +
+          "</div>";
+
+        document.getElementById("tiles").addEventListener("click", function (e) {
+          var t = e.target.closest(".ltile");
+          if (t && !t.disabled) tap(+t.dataset.n);
+        });
+        if (document.getElementById("undo"))
+          document.getElementById("undo").addEventListener("click", function () {
+            placed.pop(); paint("");
+          });
+        document.getElementById("peek").addEventListener("click", function () {
+          wrong++; g.misses++;
+          paint('<span class="verdict--card">It is <strong>' + esc(word) + "</strong></span>");
+        });
+      }
+
+      function tap(n) {
+        if (bank[n].ch === letters[placed.length]) {
+          placed.push(n);
+          if (placed.length === letters.length) return won();
+          paint("");
+        } else {
+          wrong++; g.misses++;
+          paint('<span class="verdict--card">Not that letter next</span>');
+        }
+      }
+
+      function won() {
+        if (wrong === 0) g.clean++;
+        app.innerHTML =
+          '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+          '<p class="eyebrow">Word ' + (g.idx + 1) + " of " + deck.length + "</p>" +
+          '<div class="spellword spellword--done">' + esc(word) + "</div>" +
+          '<div class="verdict verdict--goal">' +
+            (wrong === 0 ? "Spelled it first time" : "Got there \u2014 run this one again later") +
+          "</div>" +
+          '<div class="btn-row"><button class="btn" id="next">' +
+            (g.idx + 1 >= deck.length ? "See the result" : "Next word \u2192") + "</button></div>";
+        g.idx++;
+        var b = document.getElementById("next");
+        b.addEventListener("click", study);
+        b.focus();
+      }
+
+      paint("");
+    }
+
+    function done() {
+      var rating = g.clean === deck.length ? "Clean sheet"
+                 : g.clean >= deck.length * 0.7 ? "Nearly there"
+                 : "Back to training";
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="result-rating">' + rating + "</p>" +
+          '<p class="result-score">' + g.clean + "/" + deck.length + "</p>" +
+          '<p class="result-of">Spelled right first time</p>' +
+          '<p class="lede" style="margin:1rem auto 0">' +
+            (g.clean === deck.length
+              ? "Every one first time. Play again for a different ten."
+              : "Play again \u2014 it deals a different ten from the list of " +
+                (item.spellWords || []).length + ".") + "</p>" +
+          '<div class="btn-row">' +
+            '<button class="btn" id="again">Play again</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '">Other drills</a>' +
+          "</div>" +
+        "</div>";
+      document.getElementById("again").addEventListener("click", function () { renderSpell(item); });
+    }
+
+    study();
+  }
+
   /* ---------- Match Day: a game layered over the same questions ------------ */
 
   /* Fast single-tap questions only \u2014 the game needs momentum, so the
@@ -1019,6 +1338,8 @@
   /* ---------- mixed question sets (true/false, choice, mark-all) ----------- */
 
   function renderQuestionSet(item, drillId) {
+    if (drillId === "numpad") return renderNumpad(item);
+    if (drillId === "spell") return renderSpell(item);
     if (drillId === "match") return renderMatch(item);
     if (drillId === "keyonly") return runDeck(item, drillId, keyDeck(item));
     var pool = item.questions.filter(function (q) {

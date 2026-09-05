@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 3 \u2014 build 15";
+const BUILD = "Sept 5 \u2014 build 18";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -1183,8 +1183,8 @@ const STUDY_ITEMS = [
     "subject": "science",
     "title": "Science Chapter 2 Test",
     "added": "2026-09-01",
-    "quiz": "2026-09-08",
-    "note": "Three drills. Mark ALL that apply is the section he lost both points on last chapter.",
+    "quiz": "2026-09-09",
+    "note": "Test Wednesday. Mark ALL that apply is the section he lost both points on last chapter.",
     "type": "bundle",
     "words": [
       {
@@ -1805,5 +1805,462 @@ const STUDY_ITEMS = [
       "mixed"
     ],
     "rival": "Granite Rovers"
+  },
+  {
+    "id": "bible-john-15-4",
+    "subject": "bible",
+    "title": "John 15:4 verse quiz",
+    "added": "2026-09-04",
+    "quiz": "2026-09-11",
+    "note": "Word for word, ESV. Quiz Friday. Study a little every day.",
+    "type": "verse",
+    "reference": "John 15:4",
+    "version": "ESV",
+    "text": "Abide in me, and I in you. As the branch cannot bear fruit by itself, unless it abides in the vine, neither can you, unless you abide in me."
+  },
+  {
+    "id": "bible-nt-books",
+    "subject": "bible",
+    "title": "New Testament Books — In Order",
+    "added": "2026-09-04",
+    "quiz": "2026-09-14",
+    "note": "All 27 books. Expect a word bank and blank lines, like the Old Testament quizzes.",
+    "type": "sequence",
+    "drills": [
+      "chant",
+      "recall",
+      "bank"
+    ],
+    "groups": [
+      {
+        "name": "The Gospels",
+        "partOne": true,
+        "books": [
+          "Matthew",
+          "Mark",
+          "Luke",
+          "John"
+        ]
+      },
+      {
+        "name": "History",
+        "partOne": true,
+        "books": [
+          "Acts"
+        ]
+      },
+      {
+        "name": "Paul's Letters",
+        "partOne": true,
+        "books": [
+          "Romans",
+          "1 Corinthians",
+          "2 Corinthians",
+          "Galatians",
+          "Ephesians",
+          "Philippians",
+          "Colossians",
+          "1 Thessalonians",
+          "2 Thessalonians",
+          "1 Timothy",
+          "2 Timothy",
+          "Titus",
+          "Philemon"
+        ]
+      },
+      {
+        "name": "General Letters",
+        "partOne": true,
+        "books": [
+          "Hebrews",
+          "James",
+          "1 Peter",
+          "2 Peter",
+          "1 John",
+          "2 John",
+          "3 John",
+          "Jude"
+        ]
+      },
+      {
+        "name": "Prophecy",
+        "partOne": true,
+        "books": [
+          "Revelation"
+        ]
+      }
+    ],
+    "lines": [
+      [
+        "Matthew",
+        "Mark",
+        "Luke",
+        "John",
+        "Acts"
+      ],
+      [
+        "Romans",
+        "1 Corinthians",
+        "2 Corinthians",
+        "Galatians"
+      ],
+      [
+        "Ephesians",
+        "Philippians",
+        "Colossians"
+      ],
+      [
+        "1 Thessalonians",
+        "2 Thessalonians",
+        "1 Timothy",
+        "2 Timothy"
+      ],
+      [
+        "Titus",
+        "Philemon",
+        "Hebrews",
+        "James"
+      ],
+      [
+        "1 Peter",
+        "2 Peter",
+        "1 John",
+        "2 John",
+        "3 John"
+      ],
+      [
+        "Jude",
+        "Revelation"
+      ]
+    ]
+  },
+  {
+    "id": "ela-spelling-2",
+    "subject": "ela",
+    "title": "Spelling List 2",
+    "added": "2026-09-05",
+    "quiz": "2026-09-10",
+    "note": "Twenty words, test Thursday. Build it from letters, then spot the right spelling.",
+    "type": "bundle",
+    "spellWords": [
+      "automobile",
+      "automotive",
+      "circumstances",
+      "multilingual",
+      "paralegal",
+      "paramount",
+      "photographer",
+      "paramedic",
+      "semifinal",
+      "televised",
+      "television",
+      "finalists",
+      "tiebreaker",
+      "dominating",
+      "irretrievable",
+      "reverberate",
+      "corporate",
+      "corporation",
+      "expel",
+      "repel"
+    ],
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "automobile",
+          "automobil",
+          "autamobile",
+          "automoble"
+        ],
+        "answer": "automobile",
+        "why": "\"automobile\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "automotive",
+          "automotiv",
+          "autamotive",
+          "automotave"
+        ],
+        "answer": "automotive",
+        "why": "\"automotive\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "circumstances",
+          "circumstanses",
+          "circomstances",
+          "circumstansces"
+        ],
+        "answer": "circumstances",
+        "why": "\"circumstances\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "multilingual",
+          "multilingal",
+          "multilinguel",
+          "multalingual"
+        ],
+        "answer": "multilingual",
+        "why": "\"multilingual\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "paralegal",
+          "parelegal",
+          "paralagal",
+          "parralegal"
+        ],
+        "answer": "paralegal",
+        "why": "\"paralegal\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "paramount",
+          "paramont",
+          "paramaunt",
+          "parramount"
+        ],
+        "answer": "paramount",
+        "why": "\"paramount\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "photographer",
+          "photographor",
+          "fotographer",
+          "photografer"
+        ],
+        "answer": "photographer",
+        "why": "\"photographer\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "paramedic",
+          "paremedic",
+          "paramedec",
+          "parramedic"
+        ],
+        "answer": "paramedic",
+        "why": "\"paramedic\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "semifinal",
+          "semifinel",
+          "semmifinal",
+          "semifinial"
+        ],
+        "answer": "semifinal",
+        "why": "\"semifinal\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "televised",
+          "televized",
+          "telivised",
+          "televiced"
+        ],
+        "answer": "televised",
+        "why": "\"televised\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "television",
+          "televison",
+          "telivision",
+          "televission"
+        ],
+        "answer": "television",
+        "why": "\"television\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "finalists",
+          "finalests",
+          "finilists",
+          "finalistes"
+        ],
+        "answer": "finalists",
+        "why": "\"finalists\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "tiebreaker",
+          "tiebraker",
+          "tybreaker",
+          "tiebreacker"
+        ],
+        "answer": "tiebreaker",
+        "why": "\"tiebreaker\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "dominating",
+          "dominateing",
+          "domanating",
+          "dominatting"
+        ],
+        "answer": "dominating",
+        "why": "\"dominating\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "irretrievable",
+          "irretreivable",
+          "iretrievable",
+          "irretrievible"
+        ],
+        "answer": "irretrievable",
+        "why": "\"irretrievable\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "reverberate",
+          "reverbarate",
+          "revervberate",
+          "reverberrate"
+        ],
+        "answer": "reverberate",
+        "why": "\"reverberate\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "corporate",
+          "corperate",
+          "corporet",
+          "coporate"
+        ],
+        "answer": "corporate",
+        "why": "\"corporate\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "corporation",
+          "corperation",
+          "coporation",
+          "corporashion"
+        ],
+        "answer": "corporation",
+        "why": "\"corporation\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "expel",
+          "expell",
+          "exspel",
+          "ecspel"
+        ],
+        "answer": "expel",
+        "why": "\"expel\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "repel",
+          "repell",
+          "rapel",
+          "repelle"
+        ],
+        "answer": "repel",
+        "why": "\"repel\" is the one on her list."
+      }
+    ],
+    "drills": [
+      "spell",
+      "mconly"
+    ]
+  },
+  {
+    "id": "math-unit-1",
+    "subject": "math",
+    "title": "Math Unit 1 — Factors and Multiples",
+    "added": "2026-09-05",
+    "note": "No test date yet. Vocabulary first — factor and multiple are the classic mix-up.",
+    "type": "bundle",
+    "mathTopics": [
+      "gcf",
+      "lcm",
+      "factorcount",
+      "largestprime",
+      "primefactorcount",
+      "nextprime"
+    ],
+    "mathRound": 10,
+    "drills": [
+      "numpad",
+      "meaning",
+      "define"
+    ],
+    "words": [
+      {
+        "word": "Factor",
+        "meaning": "A number that divides into another number evenly, with nothing left over. The factors of 12 are 1, 2, 3, 4, 6, and 12."
+      },
+      {
+        "word": "Multiple",
+        "meaning": "The result of multiplying a number by a whole number. Multiples of 4 are 4, 8, 12, 16, and so on — they get bigger, while factors stay small."
+      },
+      {
+        "word": "Prime number",
+        "meaning": "A number greater than 1 whose only factors are 1 and itself. 2, 3, 5, 7, 11, 13."
+      },
+      {
+        "word": "Composite number",
+        "meaning": "A number greater than 1 that has more than two factors. 4, 6, 8, 9, 10."
+      },
+      {
+        "word": "Greatest common factor (GCF)",
+        "meaning": "The largest factor that two numbers share. The GCF of 18 and 24 is 6."
+      },
+      {
+        "word": "Least common multiple (LCM)",
+        "meaning": "The smallest multiple that two numbers share. The LCM of 6 and 8 is 24."
+      },
+      {
+        "word": "Prime factorization",
+        "meaning": "Writing a number as a multiplication of only prime numbers. 60 = 2 × 2 × 3 × 5."
+      }
+    ]
   }
 ];

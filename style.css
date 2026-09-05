@@ -956,3 +956,130 @@ a.card:hover, a.card:focus-visible{
   .goalmouth{ gap:.35rem; padding:.7rem .5rem; }
   .spot{ padding:1.1rem .25rem; font-size:.72rem; }
 }
+
+/* --- Spelling: look, cover, build ---------------------------------------- */
+.spellword{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  box-shadow:0 4px 0 rgba(18,36,26,.14);
+  padding:2rem 1rem;
+  text-align:center;
+  font-family:"Archivo Black",sans-serif;
+  font-size:clamp(1.5rem, 7vw, 2.6rem);
+  letter-spacing:.02em;
+  word-break:break-word;
+}
+.spellword--done{ background:#E4F5E6; border-color:var(--turf); }
+
+.lslots{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  justify-content:center;
+  margin:1.2rem 0;
+}
+.lslot{
+  width:2rem; height:2.6rem;
+  border-bottom:3px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  font-family:"Archivo Black",sans-serif;
+  font-size:1.3rem;
+}
+.lslot--filled{ border-bottom-color:var(--turf); color:var(--ink); }
+.lslot--now{ border-bottom-color:var(--cone); background:#FFF6EF; border-radius:4px 4px 0 0; }
+
+.ltiles{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4rem;
+  justify-content:center;
+  margin-bottom:.5rem;
+}
+.ltile{
+  width:2.6rem; height:2.6rem;
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:8px;
+  box-shadow:var(--shadow);
+  font-family:"Archivo Black",sans-serif;
+  font-size:1.15rem;
+  cursor:pointer;
+}
+.ltile:hover:not(:disabled){ background:#F6FAF1; transform:translateY(-2px); }
+.ltile--used{ background:var(--cone); color:var(--chalk); border-color:var(--cone-dark); cursor:default; }
+
+.wordgrid{
+  list-style:none;
+  margin:0; padding:0;
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
+  gap:.2rem .8rem;
+}
+.wordgrid li{ font-weight:600; }
+
+/* --- Maths: number pad --------------------------------------------------- */
+.numdisplay{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:.9rem 1rem;
+  margin-bottom:.8rem;
+  text-align:center;
+  font-family:"Archivo Black",sans-serif;
+  font-size:2rem;
+  line-height:1.1;
+  min-height:3.4rem;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.04em;
+}
+.numplaceholder{
+  font-family:"Archivo",sans-serif;
+  font-weight:600;
+  font-size:.78rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--line);
+}
+.numdisplay--ok{ background:#E4F5E6; border-color:var(--turf); }
+.numdisplay--no{ background:#FFF4CF; border-color:#C79A00; }
+.numwas{ font-size:1.2rem; color:var(--turf); }
+
+.numpad{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:.5rem;
+  max-width:340px;
+  margin:0 auto 1rem;
+}
+.numkey{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  padding:.9rem 0;
+  font-family:"Archivo Black",sans-serif;
+  font-size:1.35rem;
+  cursor:pointer;
+  transition:transform .1s ease;
+}
+.numkey:hover:not(:disabled){ background:#F6FAF1; transform:translateY(-2px); }
+.numkey:disabled{ opacity:.5; cursor:default; }
+.numkey--wide{
+  font-family:"Archivo",sans-serif;
+  font-size:.8rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.numkey--go{
+  background:var(--cone);
+  color:var(--chalk);
+  border-color:var(--cone-dark);
+  font-family:"Archivo",sans-serif;
+  font-size:.8rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
