@@ -2545,7 +2545,8 @@ const STUDY_ITEMS = [
         "prompt": "A stadium seats 62,005. There were 58,319 people at the game. How many seats were empty? Give the answer the way she wants it written.",
         "answer": "62,005 − 58,319 = 3,686 empty seats. The word 'seats' is the label — a bare 3,686 loses the mark."
       }
-    ]
+    ],
+    "pin": true
   },
   {
     "id": "math-divisibility",

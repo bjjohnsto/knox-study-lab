@@ -397,9 +397,16 @@
         "</span></a>";
     }).join("");
 
+    /* Chronological is right for the day-to-day, but a big test a week out
+       sinks to the bottom of the list and stops being on anyone's radar.
+       An item with `pin: true` floats to the top and stays there until it
+       retires like anything else. */
     var upcoming = STUDY_ITEMS
       .filter(function (i) { var d = daysUntil(i.quiz); return d !== null && d >= 0 && d <= 10; })
-      .sort(function (a, b) { return daysUntil(a.quiz) - daysUntil(b.quiz); });
+      .sort(function (a, b) {
+        if (!a.pin !== !b.pin) return a.pin ? -1 : 1;
+        return daysUntil(a.quiz) - daysUntil(b.quiz);
+      });
 
     var next = "";
     if (upcoming.length) {
