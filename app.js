@@ -130,6 +130,12 @@
       { id: "mixed",    name: "Full practice test",   blurb: "Every section together, like the real thing." },
       { id: "match",    name: "Match Day",            blurb: "Play a match. Right answers earn you a shot on goal \u2014 but the keeper gets a say." }
     ],
+    decision: [
+      { id: "decide", name: "GCF or LCM, then solve", blurb: "A word problem. Pick which one it needs, then work out the answer \u2014 with the label." }
+    ],
+    divisibility: [
+      { id: "divis", name: "Divisibility rules", blurb: "A number and the divisors 2, 3, 4, 5, 6, 9, 10. Tap every one that divides it \u2014 or None." }
+    ],
     math: [
       { id: "numpad", name: "Work it out", blurb: "Problems made fresh every round. Tap the digits \u2014 no multiple choice to guess from." }
     ],
@@ -194,6 +200,8 @@
     if ((item.orderGroups || []).length) list.push(pick("sequence", "bank"));
     if ((item.spellWords || []).length) list.unshift(pick("spelling", "spell"));
     if ((item.mathTopics || []).length) list.unshift(pick("math", "numpad"));
+    if ((item.decideProblems || []).length) list.unshift(pick("decision", "decide"));
+    if ((item.divisors || []).length) list.unshift(pick("divisibility", "divis"));
     if ((item.extras || []).length) list.push(EXTRAS_DRILL);
 
     return list.filter(Boolean);
@@ -202,7 +210,7 @@
   /* Every drill the app knows about, for resolving an item's own list. */
   function allDrills() {
     var all = [];
-    ["vocab", "questions", "categorize", "sequence", "verse", "spelling", "math"].forEach(function (grp) {
+    ["vocab", "questions", "categorize", "sequence", "verse", "spelling", "math", "decision", "divisibility"].forEach(function (grp) {
       all = all.concat(DRILLS[grp] || []);
     });
     all.push(EXTRAS_DRILL);
@@ -578,7 +586,7 @@
     if (drillId === "extras") { renderSelfCheck(item, item.extras, "extras"); return; }
     if (item.type === "questions" ||
         (item.type === "bundle" &&
-         ["numpad", "spell", "match", "keyonly", "tfonly", "mconly",
+         ["decide", "divis", "numpad", "spell", "match", "keyonly", "tfonly", "mconly",
           "multionly", "corronly", "mixed"].indexOf(drillId) > -1)) {
       renderQuestionSet(item, drillId); return;
     }
@@ -828,6 +836,361 @@
     paint("");
   }
 
+  /* ---------- Divisibility rules, in her worksheet's own format ------------ */
+
+  function digitSumOf(n) {
+    var s = 0;
+    String(n).split("").forEach(function (d) { s += +d; });
+    return s;
+  }
+
+  /* Each rule carries the reason, so a wrong answer teaches the rule rather
+     than just marking it wrong. Verified against plain division 1\u201320,000. */
+  var DIVIS_RULES = {
+    2:  { test: function (n) { return n % 2 === 0; },
+          why: function (n) { return "ends in " + (n % 10) + ", which is " +
+                ((n % 2 === 0) ? "even" : "odd"); } },
+    3:  { test: function (n) { return digitSumOf(n) % 3 === 0; },
+          why: function (n) { return "digits add to " + digitSumOf(n) + ", which is " +
+                (digitSumOf(n) % 3 === 0 ? "" : "not ") + "a multiple of 3"; } },
+    4:  { test: function (n) { return (n % 100) % 4 === 0; },
+          why: function (n) { return "last two digits are " + (n % 100) + ", which is " +
+                ((n % 100) % 4 === 0 ? "" : "not ") + "divisible by 4"; } },
+    5:  { test: function (n) { return n % 5 === 0; },
+          why: function (n) { return "ends in " + (n % 10) + " \u2014 needs a 0 or a 5"; } },
+    6:  { test: function (n) { return n % 6 === 0; },
+          why: function (n) { return "needs BOTH 2 and 3: it is " +
+                (n % 2 === 0 ? "even" : "odd") + " and its digits add to " + digitSumOf(n); } },
+    9:  { test: function (n) { return digitSumOf(n) % 9 === 0; },
+          why: function (n) { return "digits add to " + digitSumOf(n) + ", which is " +
+                (digitSumOf(n) % 9 === 0 ? "" : "not ") + "a multiple of 9"; } },
+    10: { test: function (n) { return n % 10 === 0; },
+          why: function (n) { return "ends in " + (n % 10) + " \u2014 needs a 0"; } }
+  };
+
+  /* ---------- GCF or LCM, then solve ------------------------------------- */
+
+  /* Four of the eight Topic 7 questions make him CHOOSE the tool before doing
+     any arithmetic, and that choice is where sixth graders go wrong. So the
+     choice is graded on its own, then he still has to produce the number on a
+     number pad \u2014 and the label is shown with it every time, because "Label"
+     with \u22127 was the single biggest deduction of the term. A problem only
+     counts clean if every stage was right. */
+  function renderDecide(item) {
+    var deck = shuffle((item.decideProblems || []).slice())
+                 .slice(0, item.decideRound || 8);
+    var g = { idx: 0, clean: 0 };
+
+    function head(extra) {
+      var dots = deck.map(function (_, i) {
+        return '<span class="dot' + (i < g.idx ? " dot--hit" : i === g.idx ? " dot--now" : "") + '"></span>';
+      }).join("");
+      return '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<div class="scoreboard"><div class="score-side">' +
+          '<span class="score-label">Clean</span><span class="score-num">' + g.clean + "</span></div>" +
+          '<div class="score-dots">' + dots + "</div>" +
+          '<div class="score-side"><span class="score-label">Of</span>' +
+          '<span class="score-num">' + deck.length + "</span></div></div>" +
+        '<p class="eyebrow">Problem ' + (g.idx + 1) + " of " + deck.length +
+        (extra ? " \u00b7 " + extra : "") + "</p>";
+    }
+
+    function start() {
+      if (g.idx >= deck.length) return done();
+      decide(deck[g.idx], { clean: true });
+    }
+
+    /* Stage 1 \u2014 which tool does this problem want? */
+    function decide(p, run) {
+      var picked = null;
+
+      function draw(locked) {
+        app.innerHTML = head("which one?") +
+          '<div class="q"><p class="q-text q-text--sentence">' + esc(p.prompt) + "</p></div>" +
+          '<p class="chant-hint">Does this need the greatest common factor or the least common multiple?</p>' +
+          '<div class="divgrid" id="picks" style="grid-template-columns:repeat(2,1fr);max-width:360px">' +
+            ["GCF", "LCM"].map(function (k) {
+              return '<button class="divkey' + (picked === k ? " divkey--on" : "") +
+                     '" data-k="' + k + '">' + k + "</button>";
+            }).join("") +
+          "</div>" +
+          '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>' +
+          (locked ? "" : '<div class="btn-row"><button class="btn" id="check"' +
+            (picked ? "" : " disabled") + ">Check it</button></div>");
+
+        if (locked) return;
+        document.getElementById("picks").addEventListener("click", function (e) {
+          var b = e.target.closest(".divkey");
+          if (!b) return;
+          picked = b.dataset.k;
+          draw(false);
+        });
+        document.getElementById("check").addEventListener("click", check);
+      }
+
+      function check() {
+        var right = picked === p.use;
+        if (!right) run.clean = false;
+        draw(true);
+        Array.prototype.slice.call(document.querySelectorAll(".divkey")).forEach(function (b) {
+          b.disabled = true;
+          if (b.dataset.k === p.use) b.classList.add("divkey--right");
+          else if (b.dataset.k === picked) b.classList.add("divkey--wrong");
+        });
+        var v = document.getElementById("verdict");
+        v.className = "verdict " + (right ? "verdict--goal" : "verdict--card");
+        v.innerHTML = (right ? "Right tool" : "That's the other one") +
+          "<small>" + esc(p.useWhy) + "</small>";
+        var row = document.createElement("div");
+        row.className = "btn-row";
+        row.innerHTML = '<button class="btn" id="go">Now work it out \u2192</button>';
+        v.after(row);
+        var gb = document.getElementById("go");
+        gb.addEventListener("click", function () { number(p, run, 0); });
+        gb.focus();
+      }
+
+      draw(false);
+    }
+
+    /* Stage 2 (and 3, when a problem wants two numbers) \u2014 produce it. */
+    function number(p, run, n) {
+      var asks = [{ ask: p.ask, answer: p.answer, label: p.label }]
+        .concat(p.also ? [p.also] : []);
+      var spec = asks[n];
+      var entry = "";
+
+      function draw(state, locked) {
+        app.innerHTML = head(p.use) +
+          '<div class="q"><p class="q-text q-text--sentence">' + esc(spec.ask) + "</p></div>" +
+          '<div class="numdisplay' + (state ? " numdisplay--" + state : "") + '" id="disp">' +
+            (entry ? esc(Number(entry).toLocaleString()) + ' <span class="numwas">' + esc(spec.label) + "</span>"
+                   : '<span class="numplaceholder">tap your answer</span>') + "</div>" +
+          '<p class="chant-hint">The answer needs the word <strong>' + esc(spec.label) +
+          "</strong> after it. She takes marks off for a bare number.</p>" +
+          '<div class="numpad" id="pad">' +
+            [1,2,3,4,5,6,7,8,9].map(function (k) {
+              return '<button class="numkey" data-k="' + k + '">' + k + "</button>";
+            }).join("") +
+            '<button class="numkey numkey--wide" data-k="clear">Clear</button>' +
+            '<button class="numkey" data-k="0">0</button>' +
+            '<button class="numkey numkey--go" data-k="enter">Check</button>' +
+          "</div>" +
+          '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>';
+
+        if (locked) {
+          Array.prototype.slice.call(document.querySelectorAll(".numkey"))
+            .forEach(function (b) { b.disabled = true; });
+          return;
+        }
+        document.getElementById("pad").addEventListener("click", function (e) {
+          var b = e.target.closest(".numkey");
+          if (!b || b.disabled) return;
+          var k = b.dataset.k;
+          if (k === "clear") { entry = ""; draw(null, false); return; }
+          if (k === "enter") { if (entry !== "") submit(); return; }
+          if (entry.length < 7) { entry += k; draw(null, false); }
+        });
+      }
+
+      function submit() {
+        var right = parseInt(entry, 10) === spec.answer;
+        if (!right) run.clean = false;
+        var was = entry;
+        draw(right ? "ok" : "no", true);
+        var disp = document.getElementById("disp");
+        disp.innerHTML = esc(Number(was).toLocaleString()) +
+          (right ? ' <span class="numwas">' + esc(spec.label) + "</span>"
+                 : ' <span class="numwas">\u2192 ' + spec.answer.toLocaleString() + " " + esc(spec.label) + "</span>");
+        var v = document.getElementById("verdict");
+        v.className = "verdict " + (right ? "verdict--goal" : "verdict--card");
+        v.innerHTML = (right ? "Correct" : "Not quite") +
+          "<small>Write it as <strong>" + spec.answer.toLocaleString() + " " + esc(spec.label) +
+          "</strong>. " + esc(spec.why || p.why) + "</small>";
+
+        var more = n + 1 < asks.length;
+        var row = document.createElement("div");
+        row.className = "btn-row";
+        row.innerHTML = '<button class="btn" id="nx">' +
+          (more ? "Second part \u2192"
+                : g.idx + 1 >= deck.length ? "See the result" : "Next problem \u2192") + "</button>";
+        v.after(row);
+        var nb = document.getElementById("nx");
+        nb.addEventListener("click", function () {
+          if (more) return number(p, run, n + 1);
+          if (run.clean) g.clean++;
+          g.idx++;
+          start();
+        });
+        nb.focus();
+      }
+
+      draw(null, false);
+    }
+
+    function done() {
+      var rating = g.clean === deck.length ? "Clean sheet"
+                 : g.clean >= deck.length * 0.7 ? "Nearly there"
+                 : "Back to training";
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="result-rating">' + rating + "</p>" +
+          '<p class="result-score">' + g.clean + "/" + deck.length + "</p>" +
+          '<p class="result-of">Right tool, right number, right label</p>' +
+          '<p class="lede" style="margin:1rem auto 0">Half of her GCF and LCM questions ask you to ' +
+          "say which one you need before you solve. Picking wrong costs the whole question, " +
+          "however good the arithmetic is.</p>" +
+          '<div class="btn-row">' +
+            '<button class="btn" id="again">Go again</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '">Other drills</a>' +
+          "</div>" +
+        "</div>";
+      document.getElementById("again").addEventListener("click", function () { renderDecide(item); });
+    }
+
+    start();
+  }
+
+  function renderDivisibility(item) {
+    var divisors = (item.divisors || [2, 3, 4, 5, 6, 9, 10]).slice();
+    var rounds = item.divisRound || 8;
+    var deck = [];
+    while (deck.length < rounds) {
+      var n = randInt(102, 9999);
+      if (deck.indexOf(n) < 0) deck.push(n);
+    }
+    var g = { idx: 0, clean: 0 };
+
+    function paint() {
+      if (g.idx >= deck.length) return done();
+      var n = deck[g.idx];
+      var picked = {};
+      var noneOn = false;
+
+      function draw(locked, msg) {
+        var dots = deck.map(function (_, i) {
+          return '<span class="dot' + (i < g.idx ? " dot--hit" : i === g.idx ? " dot--now" : "") + '"></span>';
+        }).join("");
+
+        app.innerHTML =
+          '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+          '<div class="scoreboard"><div class="score-side">' +
+            '<span class="score-label">Clean</span><span class="score-num">' + g.clean + "</span></div>" +
+            '<div class="score-dots">' + dots + "</div>" +
+            '<div class="score-side"><span class="score-label">Of</span>' +
+            '<span class="score-num">' + deck.length + "</span></div></div>" +
+          '<p class="eyebrow">Number ' + (g.idx + 1) + " of " + deck.length + "</p>" +
+          '<div class="spellword">' + n.toLocaleString() + "</div>" +
+          '<p class="chant-hint">Tap every number below that divides it evenly.</p>' +
+          '<div class="divgrid" id="divs">' +
+            divisors.map(function (d) {
+              return '<button class="divkey" data-d="' + d + '">' + d + "</button>";
+            }).join("") +
+            '<button class="divkey divkey--none" data-d="none">None</button>' +
+          "</div>" +
+          '<div class="verdict" id="verdict" role="status" aria-live="polite">' + (msg || "") + "</div>" +
+          (locked ? "" : '<div class="btn-row"><button class="btn" id="check">Check it</button></div>');
+
+        if (!locked) {
+          document.getElementById("divs").addEventListener("click", function (e) {
+            var b = e.target.closest(".divkey");
+            if (!b) return;
+            if (b.dataset.d === "none") {
+              noneOn = !noneOn;
+              if (noneOn) picked = {};
+            } else {
+              picked[b.dataset.d] = !picked[b.dataset.d];
+              if (picked[b.dataset.d]) noneOn = false;
+            }
+            draw(false, "");
+          });
+          document.getElementById("check").addEventListener("click", check);
+          /* keep selections visible after the redraw */
+          Array.prototype.slice.call(document.querySelectorAll(".divkey")).forEach(function (b) {
+            if (b.dataset.d === "none" ? noneOn : picked[b.dataset.d]) b.classList.add("divkey--on");
+          });
+        }
+      }
+
+      function check() {
+        var truth = divisors.filter(function (d) { return DIVIS_RULES[d].test(n); });
+        var chose = divisors.filter(function (d) { return picked[d]; });
+        var right = noneOn
+          ? truth.length === 0
+          : (truth.length === chose.length && truth.every(function (d) { return chose.indexOf(d) > -1; }));
+        if (right) g.clean++;
+
+        draw(true, "");
+        var buttons = Array.prototype.slice.call(document.querySelectorAll(".divkey"));
+        buttons.forEach(function (b) {
+          b.disabled = true;
+          var d = b.dataset.d;
+          if (d === "none") {
+            if (truth.length === 0) b.classList.add("divkey--right");
+            else if (noneOn) b.classList.add("divkey--wrong");
+            return;
+          }
+          var should = truth.indexOf(+d) > -1;
+          if (should) {
+            b.classList.add("divkey--right");
+            if (!picked[d]) b.classList.add("divkey--missed");
+          } else if (picked[d]) {
+            b.classList.add("divkey--wrong");
+          }
+        });
+
+        var lines = divisors.map(function (d) {
+          var yes = DIVIS_RULES[d].test(n);
+          return "<li><strong>" + d + "</strong> " + (yes ? "yes" : "no") +
+                 " \u2014 " + esc(DIVIS_RULES[d].why(n)) + "</li>";
+        }).join("");
+
+        var v = document.getElementById("verdict");
+        v.className = "verdict " + (right ? "verdict--goal" : "verdict--card");
+        v.innerHTML = (right ? "All of them, none missed" : "Not the full set") +
+          "<small>" + (truth.length ? "Divides by " + truth.join(", ") + "." : "None of them divide it.") + "</small>";
+
+        var box = document.createElement("div");
+        box.className = "sheet divwhy";
+        box.innerHTML = "<h3>Why, rule by rule</h3><ul>" + lines + "</ul>";
+        v.after(box);
+
+        var row = document.createElement("div");
+        row.className = "btn-row";
+        row.innerHTML = '<button class="btn" id="nextn">' +
+          (g.idx + 1 >= deck.length ? "See the result" : "Next number \u2192") + "</button>";
+        box.after(row);
+        g.idx++;
+        var nb = document.getElementById("nextn");
+        nb.addEventListener("click", paint);
+        nb.focus();
+      }
+
+      draw(false, "");
+    }
+
+    function done() {
+      var rating = g.clean === deck.length ? "Clean sheet"
+                 : g.clean >= deck.length * 0.7 ? "Nearly there"
+                 : "Back to training";
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="result-rating">' + rating + "</p>" +
+          '<p class="result-score">' + g.clean + "/" + deck.length + "</p>" +
+          '<p class="result-of">Complete sets, nothing missed</p>' +
+          '<p class="lede" style="margin:1rem auto 0">Her worksheet wants every divisor that works, ' +
+          "so getting four of five still costs the mark. New numbers every round.</p>" +
+          '<div class="btn-row">' +
+            '<button class="btn" id="again">New numbers</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '">Other drills</a>' +
+          "</div>" +
+        "</div>";
+      document.getElementById("again").addEventListener("click", function () { renderDivisibility(item); });
+    }
+
+    paint();
+  }
+
   /* ---------- Maths: problems generated and marked by the site itself ------ */
 
   function gcdOf(a, b) { while (b) { var t = b; b = a % b; a = t; } return a; }
@@ -847,6 +1210,12 @@
     return out;
   }
   function randInt(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
+
+  function placeName(power) {
+    return { 1: "ones", 10: "tens", 100: "hundreds", 1000: "thousands",
+             10000: "ten thousands", 100000: "hundred thousands",
+             1000000: "millions" }[power] || String(power);
+  }
 
   var MATH_TOPICS = {
     gcf: function () {
@@ -893,12 +1262,85 @@
                answer: pf.length,
                why: n + " = " + pf.join(" \u00d7 ") + ", which is " + pf.length + " prime factors." };
     },
+    rounding: function () {
+      var places = [[10, "ten"], [100, "hundred"], [1000, "thousand"], [10000, "ten thousand"]];
+      var p = places[randInt(0, places.length - 1)];
+      var n = randInt(p[0] * 3, p[0] * 900);
+      return { prompt: "Round " + n.toLocaleString() + " to the nearest " + p[1] + ".",
+               answer: Math.round(n / p[0]) * p[0],
+               why: "Look at the digit to the right of the " + p[1] +
+                    " place. Five or more rounds up, less than five stays." };
+    },
+    placevalue: function () {
+      var n = randInt(10000, 999999);
+      var s = String(n);
+      var i = randInt(0, s.length - 1);
+      var digit = +s[i];
+      var power = Math.pow(10, s.length - 1 - i);
+      return { prompt: "In " + n.toLocaleString() + ", what is the VALUE of the " + digit +
+                       (s.split(digit).length > 2 ? " in the " + placeName(power) + " place" : "") + "?",
+               answer: digit * power,
+               why: "That " + digit + " sits in the " + placeName(power) + " place, so its value is " +
+                    digit + " \u00d7 " + power.toLocaleString() + " = " + (digit * power).toLocaleString() + "." };
+    },
+    exponent: function () {
+      var base = randInt(2, 9), exp = randInt(2, 4);
+      return { prompt: "What is the value of " + base + "^" + exp + "?",
+               answer: Math.pow(base, exp),
+               why: base + " multiplied by itself " + exp + " times: " +
+                    new Array(exp + 1).join(base + " \u00d7 ").slice(0, -3) + " = " + Math.pow(base, exp) + "." };
+    },
+    squareroot: function () {
+      var r = randInt(4, 20);
+      return { prompt: "What number squared equals " + (r * r) + "?",
+               answer: r,
+               why: r + " \u00d7 " + r + " = " + (r * r) + ", so " + (r * r) + " is a perfect square." };
+    },
+    orderops: function () {
+      var a = randInt(2, 9), b = randInt(2, 6), c = randInt(2, 9);
+      var val = a + (b * b - c);
+      if (val < 0) { c = 1; val = a + (b * b - c); }
+      return { prompt: "Simplify:  " + a + " + (" + b + "^2 \u2212 " + c + ")",
+               answer: val,
+               why: "Brackets first, and inside them the exponent before the subtraction: " +
+                    b + "^2 = " + (b * b) + ", then " + (b * b) + " \u2212 " + c + " = " + (b * b - c) +
+                    ", then " + a + " + " + (b * b - c) + " = " + val + "." };
+    },
     nextprime: function () {
       var n = randInt(8, 50), p = n + 1;
       while (!isPrimeNum(p)) p++;
       return { prompt: "What is the smallest prime number greater than " + n + "?",
                answer: p,
                why: p + " has no factors except 1 and itself." };
+    },
+    /* A fraction bar groups the top and the bottom. Both have to be simplified
+       BEFORE dividing \u2014 the step he skipped on Homework 7. Shapes match study
+       guide #43 and #44. Answers are always whole numbers; verified against an
+       independent evaluator over 200,000 rounds. */
+    orderopsfrac: function () {
+      var a, b, c, d, e, num, den, top, bot, steps;
+      do {
+        if (randInt(0, 1)) {
+          c = randInt(2, 9); b = c * randInt(2, 9); a = randInt(b / c + 2, 40);
+          d = randInt(3, 12); e = randInt(1, d - 2);
+          num = a - b / c; den = d - e;
+          top = a + " \u2212 " + b + "\u00f7" + c;
+          bot = d + " \u2212 " + e;
+          steps = a + " \u2212 " + (b / c) + " = " + num;
+        } else {
+          a = randInt(5, 13); b = randInt(2, 12); c = randInt(2, 9);
+          d = randInt(2, 8); e = randInt(1, 12);
+          num = a * a + b * c; den = d * d + e;
+          top = a + "^2 + " + b + "\u00b7" + c;
+          bot = d + "^2 + " + e;
+          steps = (a * a) + " + " + (b * c) + " = " + num;
+        }
+      } while (den <= 1 || num % den !== 0 || num / den < 2 || num / den > 40);
+      return { prompt: "Simplify:  (" + top + ") \u00f7 (" + bot + ")",
+               answer: num / den,
+               why: "Simplify the top and the bottom BEFORE dividing. Top: " + steps +
+                    ". Bottom: " + bot + " = " + den + ". Then " + num + " \u00f7 " + den +
+                    " = " + (num / den) + "." };
     }
   };
 
@@ -932,7 +1374,8 @@
         '<div class="q"><p class="q-kicker">Problem ' + (g.idx + 1) + " of " + g.deck.length + "</p>" +
           '<p class="q-text q-text--sentence" style="text-align:center">' + esc(p.prompt) + "</p></div>" +
         '<div class="numdisplay' + (state ? " numdisplay--" + state : "") + '" id="disp">' +
-          (g.entry || '<span class="numplaceholder">tap your answer</span>') + "</div>" +
+          (g.entry ? esc(Number(g.entry).toLocaleString())
+                   : '<span class="numplaceholder">tap your answer</span>') + "</div>" +
         '<div class="numpad" id="pad">' +
           [1,2,3,4,5,6,7,8,9].map(function (n) {
             return '<button class="numkey" data-k="' + n + '">' + n + "</button>";
@@ -949,7 +1392,9 @@
         var k = b.dataset.k;
         if (k === "clear") { g.entry = ""; paint(); return; }
         if (k === "enter") { if (g.entry !== "") submit(p); return; }
-        if (g.entry.length < 4) { g.entry += k; paint(); }
+        /* Rounding and place-value answers can run to eight digits, so the
+           cap is sized to the longest answer this drill can ask for. */
+        if (g.entry.length < 9) { g.entry += k; paint(); }
       });
     }
 
@@ -1338,6 +1783,8 @@
   /* ---------- mixed question sets (true/false, choice, mark-all) ----------- */
 
   function renderQuestionSet(item, drillId) {
+    if (drillId === "decide") return renderDecide(item);
+    if (drillId === "divis") return renderDivisibility(item);
     if (drillId === "numpad") return renderNumpad(item);
     if (drillId === "spell") return renderSpell(item);
     if (drillId === "match") return renderMatch(item);

@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 5 \u2014 build 18";
+const BUILD = "Sept 9 \u2014 build 21";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -2214,9 +2214,9 @@ const STUDY_ITEMS = [
   {
     "id": "math-unit-1",
     "subject": "math",
-    "title": "Math Unit 1 — Factors and Multiples",
+    "title": "Math Unit 1 Test",
     "added": "2026-09-05",
-    "note": "No test date yet. Vocabulary first — factor and multiple are the classic mix-up.",
+    "note": "Wednesday 9/16. Whole numbers, exponents, order of operations, properties, prime factorization, GCF and LCM.",
     "type": "bundle",
     "mathTopics": [
       "gcf",
@@ -2224,13 +2224,20 @@ const STUDY_ITEMS = [
       "factorcount",
       "largestprime",
       "primefactorcount",
-      "nextprime"
+      "nextprime",
+      "rounding",
+      "placevalue",
+      "exponent",
+      "squareroot",
+      "orderops",
+      "orderopsfrac"
     ],
     "mathRound": 10,
     "drills": [
+      "decide",
       "numpad",
-      "meaning",
-      "define"
+      "mconly",
+      "extras"
     ],
     "words": [
       {
@@ -2260,6 +2267,337 @@ const STUDY_ITEMS = [
       {
         "word": "Prime factorization",
         "meaning": "Writing a number as a multiplication of only prime numbers. 60 = 2 × 2 × 3 × 5."
+      },
+      {
+        "word": "Commutative property",
+        "meaning": "Changing the ORDER of the numbers does not change the sum or product. 5 + 4 = 4 + 5."
+      },
+      {
+        "word": "Associative property",
+        "meaning": "Changing the GROUPING of the numbers does not change the sum or product. (1 + 9) + 6 = 1 + (9 + 6)."
+      },
+      {
+        "word": "Distributive property",
+        "meaning": "Multiply across a sum: 8 × 23 = 8(20) + 8(3). Used to break a hard product into easy ones."
+      },
+      {
+        "word": "Standard form",
+        "meaning": "A number written the normal way, with digits: 1,423,715."
+      },
+      {
+        "word": "Expanded form",
+        "meaning": "A number written as the sum of each digit's value: 1,000,000 + 400,000 + 20,000 + 3,000 + 700 + 10 + 5."
+      },
+      {
+        "word": "Perfect square",
+        "meaning": "A number you get by multiplying a whole number by itself. 1, 4, 9, 16, 25, 36, 49, 64, 81, 100."
+      },
+      {
+        "word": "Exponent",
+        "meaning": "Tells how many times to multiply the base by itself. In 2^5, the 5 is the exponent and the value is 32."
+      }
+    ],
+    "quiz": "2026-09-16",
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   17(4 + 5) = 17(4) + 17(5)",
+        "options": [
+          "Commutative",
+          "Associative",
+          "Distributive",
+          "Invalid"
+        ],
+        "answer": "Distributive",
+        "why": "Multiplying across the sum inside the brackets."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   (18 · 3) · 7 = 18 · (3 · 7)",
+        "options": [
+          "Commutative",
+          "Associative",
+          "Distributive",
+          "Invalid"
+        ],
+        "answer": "Associative",
+        "why": "The GROUPING moved. Same numbers, same order."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   (10 − 4) − 1 = 1 − (10 − 4)",
+        "options": [
+          "Commutative",
+          "Associative",
+          "Distributive",
+          "Invalid"
+        ],
+        "answer": "Invalid",
+        "why": "Subtraction is not commutative. 5 does not equal −5."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   36 ÷ (7 + 2) = 36 ÷ (2 + 7)",
+        "options": [
+          "Commutative",
+          "Associative",
+          "Distributive",
+          "Invalid"
+        ],
+        "answer": "Commutative",
+        "why": "The ORDER inside the brackets swapped."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   (5 + 14) · 2 = 2 · (5 + 14)",
+        "options": [
+          "Commutative",
+          "Associative",
+          "Distributive",
+          "Invalid"
+        ],
+        "answer": "Commutative",
+        "why": "The order of the two factors swapped."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   8 · 23 = 8(20) + 8(3)",
+        "options": [
+          "Commutative",
+          "Associative",
+          "Distributive",
+          "Invalid"
+        ],
+        "answer": "Distributive",
+        "why": "23 was split into 20 + 3 and 8 multiplied across."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   2 + (13 + 6) = (2 + 13) + 6",
+        "options": [
+          "Commutative",
+          "Associative",
+          "Distributive",
+          "Invalid"
+        ],
+        "answer": "Associative",
+        "why": "The grouping moved; the order did not."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   4(7 + 3) = (4 + 7) · (4 + 3)",
+        "options": [
+          "Commutative",
+          "Associative",
+          "Distributive",
+          "Invalid"
+        ],
+        "answer": "Invalid",
+        "why": "You cannot distribute like that. 40 does not equal 77."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   6(20) + 6(3) = 6(23)",
+        "options": [
+          "Commutative",
+          "Associative",
+          "Distributive",
+          "Invalid"
+        ],
+        "answer": "Distributive",
+        "why": "The distributive property run backwards, pulling the 6 out."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   8(5 · 4) = 8(4 · 5)",
+        "options": [
+          "Commutative",
+          "Associative",
+          "Distributive",
+          "Invalid"
+        ],
+        "answer": "Commutative",
+        "why": "The order of 5 and 4 swapped inside the brackets."
+      }
+    ],
+    "decideProblems": [
+      {
+        "prompt": "Scott is buying snacks for a baseball team. Drink boxes come in packs of 24 and fruit snacks come in packs of 15. He wants an equal number of drink boxes and fruit snacks. How many packages of each will he need to purchase?",
+        "use": "LCM",
+        "useWhy": "Two things repeating until they line up at the same total — that is a least common multiple.",
+        "ask": "How many PACKS OF DRINK BOXES does he need?",
+        "answer": 5,
+        "label": "packs",
+        "why": "LCM(24, 15) = 120, so he needs 120 of each. 120 ÷ 24 = 5 packs of drink boxes.",
+        "also": {
+          "ask": "And how many PACKS OF FRUIT SNACKS?",
+          "answer": 8,
+          "label": "packs",
+          "why": "120 ÷ 15 = 8. The question says 'of each', so both numbers are part of the answer."
+        }
+      },
+      {
+        "prompt": "Nora baked cut-out cookies shaped like hearts and stars to put on plates for children to decorate. She has 108 hearts and 189 stars, and wants each child to get the same combination of hearts and stars. What is the greatest number of plates she will need?",
+        "use": "GCF",
+        "useWhy": "Splitting two piles into identical shares with nothing left over — that is a greatest common factor.",
+        "ask": "What is the greatest number of plates?",
+        "answer": 27,
+        "label": "plates",
+        "why": "108 = 2² × 3³ and 189 = 3³ × 7. The largest factor they share is 27, so 27 plates — 4 hearts and 7 stars on each."
+      },
+      {
+        "prompt": "Plastic eggs are being filled with quarters, dimes, and nickels for an egg hunt. There are 54 quarters, 90 dimes, and 72 nickels, and each coin will be equally distributed to each egg. What is the largest number of eggs that can be filled if there are no leftover coins?",
+        "use": "GCF",
+        "useWhy": "Equal shares out of three piles, nothing left over. Largest number of groups means GCF.",
+        "ask": "What is the largest number of eggs?",
+        "answer": 18,
+        "label": "eggs",
+        "why": "The GCF of 54, 90 and 72 is 18. Each egg gets 3 quarters, 5 dimes and 4 nickels."
+      },
+      {
+        "prompt": "The red-line train arrives every 48 minutes and the blue-line train arrives every 30 minutes. Both arrive at 11:30 am. When is the next time both trains arrive at the station simultaneously?",
+        "use": "LCM",
+        "useWhy": "'When will both happen again' is always a least common multiple.",
+        "ask": "How many MINUTES until they next arrive together?",
+        "answer": 240,
+        "label": "minutes",
+        "why": "LCM(48, 30) = 240 minutes, which is 4 hours. Careful — the question asks WHEN, so the answer she wants is 3:30 pm, not 240."
+      },
+      {
+        "prompt": "Marla gets paid every 8 days at one job and every 28 days at her other job. If both jobs pay her on the same day, how many days until she gets paid by both jobs on the same day again?",
+        "use": "LCM",
+        "useWhy": "Two cycles lining up again — least common multiple.",
+        "ask": "How many days?",
+        "answer": 56,
+        "label": "days",
+        "why": "8 = 2³ and 28 = 2² × 7, so the LCM is 2³ × 7 = 56 days."
+      },
+      {
+        "prompt": "Pencils come in packs of 6, markers come in packs of 9, and erasers come in packs of 18. You want an equal number of each. How many packages should you buy of each?",
+        "use": "LCM",
+        "useWhy": "Different pack sizes reaching the same total — least common multiple.",
+        "ask": "What is the smallest number you can have of each item?",
+        "answer": 18,
+        "label": "of each",
+        "why": "LCM(6, 9, 18) = 18.",
+        "also": {
+          "ask": "How many PACKS OF PENCILS is that?",
+          "answer": 3,
+          "label": "packs",
+          "why": "18 ÷ 6 = 3 packs of pencils. Markers take 2 packs and erasers just 1."
+        }
+      },
+      {
+        "prompt": "A teacher has 40 pencils and 112 erasers. She wants to make identical supply kits using all of them, with nothing left over. What is the greatest number of kits she can make?",
+        "use": "GCF",
+        "useWhy": "Identical kits, nothing left over, greatest number of them — GCF.",
+        "ask": "What is the greatest number of kits?",
+        "answer": 8,
+        "label": "kits",
+        "why": "40 = 2³ × 5 and 112 = 2⁴ × 7. The largest factor they share is 8, so 8 kits — 5 pencils and 14 erasers in each."
+      },
+      {
+        "prompt": "One machine finishes a cycle every 16 seconds and another finishes every 72 seconds. They both start a cycle at the same moment. How many seconds until they start a cycle together again?",
+        "use": "LCM",
+        "useWhy": "Two repeating cycles meeting again — least common multiple.",
+        "ask": "How many seconds?",
+        "answer": 144,
+        "label": "seconds",
+        "why": "16 = 2⁴ and 72 = 2³ × 3², so the LCM is 2⁴ × 3² = 144 seconds."
+      },
+      {
+        "prompt": "A florist has 72 roses and 252 daisies. She wants to make identical bouquets using every flower. What is the greatest number of bouquets she can make?",
+        "use": "GCF",
+        "useWhy": "Identical bouquets using everything up — greatest common factor.",
+        "ask": "What is the greatest number of bouquets?",
+        "answer": 36,
+        "label": "bouquets",
+        "why": "GCF(72, 252) = 36. Each bouquet gets 2 roses and 7 daisies."
+      }
+    ],
+    "decideRound": 8,
+    "extras": [
+      {
+        "prompt": "Use the distributive property to find 4(97). Say every step out loud, including the middle line.",
+        "answer": "4(97) = 4(100 − 3) = 400 − 12 = 388. The middle line is the part she marks — the standard algorithm gets no credit here."
+      },
+      {
+        "prompt": "Use the distributive property to find 9(53) + 7(28).",
+        "answer": "9(53) = 9(50 + 3) = 450 + 27 = 477. 7(28) = 7(30 − 2) = 210 − 14 = 196. Then 477 + 196 = 673."
+      },
+      {
+        "prompt": "On Homework 8 you wrote 5(62) = 5(60 + 2) and then jumped straight to 310. Say the line she wanted in between.",
+        "answer": "5(62) = 5(60 + 2) = 5 · 60 + 5 · 2 = 300 + 10 = 310. That missing line cost a point four separate times."
+      },
+      {
+        "prompt": "Write the prime factorization of 96 — then multiply your factors back together to check it.",
+        "answer": "96 = 2⁵ × 3. Check: 2 × 2 × 2 × 2 × 2 = 32, and 32 × 3 = 96. On the homework you had 2·2·2·3, which multiplies back to only 24 — the check would have caught it."
+      },
+      {
+        "prompt": "Write the prime factorization of 378 — then multiply back to check.",
+        "answer": "378 = 2 × 3³ × 7. Check: 2 × 27 = 54, and 54 × 7 = 378. On the homework you had 2²·5·13, which is 260."
+      },
+      {
+        "prompt": "Write 1,423,715 in word form.",
+        "answer": "one million, four hundred twenty-three thousand, seven hundred fifteen. Hyphen in twenty-three, and no 'and' anywhere in a whole number."
+      },
+      {
+        "prompt": "A stadium seats 62,005. There were 58,319 people at the game. How many seats were empty? Give the answer the way she wants it written.",
+        "answer": "62,005 − 58,319 = 3,686 empty seats. The word 'seats' is the label — a bare 3,686 loses the mark."
+      }
+    ]
+  },
+  {
+    "id": "math-divisibility",
+    "subject": "math",
+    "title": "Divisibility Rules",
+    "added": "2026-09-09",
+    "quiz": "2026-09-16",
+    "note": "The seven rules on her worksheet. Learn the rules, then run the drill.",
+    "type": "bundle",
+    "divisors": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      9,
+      10
+    ],
+    "divisRound": 8,
+    "drills": [
+      "divis",
+      "meaning",
+      "define"
+    ],
+    "words": [
+      {
+        "word": "Divisible by 2",
+        "meaning": "The last digit is even — 0, 2, 4, 6, or 8."
+      },
+      {
+        "word": "Divisible by 3",
+        "meaning": "Add up all the digits. If that sum is a multiple of 3, so is the number."
+      },
+      {
+        "word": "Divisible by 4",
+        "meaning": "Look at the last two digits only. If that two-digit number divides by 4, so does the whole thing."
+      },
+      {
+        "word": "Divisible by 5",
+        "meaning": "The last digit is 0 or 5."
+      },
+      {
+        "word": "Divisible by 6",
+        "meaning": "It must pass BOTH the 2 rule and the 3 rule. Even, and its digits add to a multiple of 3."
+      },
+      {
+        "word": "Divisible by 9",
+        "meaning": "Add up all the digits. If that sum is a multiple of 9, so is the number."
+      },
+      {
+        "word": "Divisible by 10",
+        "meaning": "The last digit is 0."
       }
     ]
   }
