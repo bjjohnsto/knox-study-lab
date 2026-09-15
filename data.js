@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 15 \u2014 build 23";
+const BUILD = "Sept 15 \u2014 build 24";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -98,7 +98,8 @@ const STUDY_ITEMS = [
     "type": "verse",
     "reference": "John 15:3",
     "version": "ESV",
-    "text": "Already you are clean because of the word that I have spoken to you."
+    "text": "Already you are clean because of the word that I have spoken to you.",
+    "assess": "quiz"
   },
   {
     "id": "bible-unit-1",
@@ -214,7 +215,8 @@ const STUDY_ITEMS = [
         "Zechariah",
         "Malachi"
       ]
-    ]
+    ],
+    "assess": "quiz"
   },
   {
     "id": "hist-ch2-test",
@@ -1816,7 +1818,8 @@ const STUDY_ITEMS = [
     "type": "verse",
     "reference": "John 15:4",
     "version": "ESV",
-    "text": "Abide in me, and I in you. As the branch cannot bear fruit by itself, unless it abides in the vine, neither can you, unless you abide in me."
+    "text": "Abide in me, and I in you. As the branch cannot bear fruit by itself, unless it abides in the vine, neither can you, unless you abide in me.",
+    "assess": "quiz"
   },
   {
     "id": "bible-nt-books",
@@ -1932,7 +1935,8 @@ const STUDY_ITEMS = [
         "Jude",
         "Revelation"
       ]
-    ]
+    ],
+    "assess": "quiz"
   },
   {
     "id": "ela-spelling-2",
@@ -2839,7 +2843,8 @@ const STUDY_ITEMS = [
     "type": "verse",
     "reference": "John 15:5",
     "version": "ESV",
-    "text": "I am the vine; you are the branches. Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you can do nothing."
+    "text": "I am the vine; you are the branches. Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you can do nothing.",
+    "assess": "quiz"
   },
   {
     "id": "ela-spelling-3",
@@ -3121,7 +3126,7 @@ const STUDY_ITEMS = [
   {
     "id": "hist-egypt-kush-test",
     "subject": "history",
-    "title": "Egypt & Kush Test",
+    "title": "History Chapter 3 Egypt Test",
     "added": "2026-09-15",
     "quiz": "2026-09-22",
     "note": "Test Tuesday 9/22. Mrs. Martinez: matching, true/false with the underlined word corrected, and short written answers.",

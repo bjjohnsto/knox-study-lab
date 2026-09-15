@@ -59,6 +59,14 @@
     return [d.getFullYear(), d.getMonth() + 1, d.getDate()];
   }
 
+  /* Most of what she gets graded on is a TEST. A few things really are only a
+     quiz — a weekly memory verse, a pop vocab check. Items say which with
+     assess: "quiz"; everything else is called a test. */
+  function assessWord(item, caps) {
+    var w = item && item.assess === "quiz" ? "Quiz" : "Test";
+    return caps ? w.toUpperCase() : w;
+  }
+
   function daysUntil(iso) {
     if (!iso) return null;
     var p = iso.split("-");
@@ -428,8 +436,9 @@
     var pill = "";
     if (item.quiz) {
       var cls = d === null ? "pill" : d < 0 ? "pill pill--past" : d <= 3 ? "pill pill--soon" : "pill";
-      var label = d === null ? "" : d < 0 ? "Quiz passed" : d === 0 ? "Quiz today" :
-                  d === 1 ? "Quiz tomorrow" : "Quiz in " + d + " days";
+      var A = assessWord(item);
+      var label = d === null ? "" : d < 0 ? A + " passed" : d === 0 ? A + " today" :
+                  d === 1 ? A + " tomorrow" : A + " in " + d + " days";
       pill = '<span class="' + cls + '">' + label + "</span>";
     }
     return '<a class="card" href="#/i/' + item.id + '">' +
@@ -437,7 +446,7 @@
       '<div class="card-meta">' +
         "<span>" + esc(subj ? subj.name : item.subject) + "</span>" +
         "<span>Added " + fmtDate(item.added) + "</span>" +
-        (item.quiz ? "<span>Quiz " + fmtDate(item.quiz) + "</span>" : "") +
+        (item.quiz ? "<span>" + assessWord(item) + " " + fmtDate(item.quiz) + "</span>" : "") +
         pill +
       "</div>" +
       (item.note ? '<p class="card-note">' + esc(item.note) + "</p>" : "") +
@@ -473,7 +482,7 @@
 
     app.innerHTML =
       '<a class="backlink" href="#/s/' + item.subject + '">\u2190 ' + esc(subj ? subj.name : "Back") + "</a>" +
-      '<p class="eyebrow">' + (item.quiz ? "Quiz " + fmtDate(item.quiz) : "Study set") + "</p>" +
+      '<p class="eyebrow">' + (item.quiz ? assessWord(item) + " " + fmtDate(item.quiz) : "Study set") + "</p>" +
       '<h1 class="page-title">' + esc(item.title) + "</h1>" +
       (item.note ? '<p class="lede">' + esc(item.note) + "</p>" : "") +
       '<div class="stack">' + drills +
@@ -1635,8 +1644,9 @@
           '<p class="eyebrow">Match Day</p>' +
           '<p class="result-rating">Knox FC<br>v<br>' + esc(rival) + "</p>" +
           '<p class="lede" style="margin:1rem auto">' + g.deck.length + " questions. Get one right and you " +
-          "get a shot on goal \u2014 pick your corner and hope the keeper guesses wrong. " +
-          "Three right in a row earns a power shot that cannot be saved.</p>" +
+          "get a shot on goal. A crosshair sweeps the goal \u2014 stop it where you want " +
+          "the ball. The corners beat the keeper, but the posts don't. " +
+          "Three right in a row and he dives early.</p>" +
           '<div class="btn-row"><button class="btn" id="ko">Kick off</button></div>' +
         "</div>";
       document.getElementById("ko").addEventListener("click", question);
@@ -1709,40 +1719,135 @@
       b.focus();
     }
 
+    /* A shot he can actually miss.
+
+       The old version was three buttons and a coin flip, which is exactly the
+       thing he said was lame. Now a crosshair sweeps across the goal and he
+       stops it where he wants the ball. Near the posts the keeper cannot reach
+       \u2014 but too near and it comes back off the woodwork, so aiming is a real
+       decision. The keeper dives late and short on a power shot rather than
+       being removed from the game. Nothing about this is guaranteed to go in. */
+    var GOAL_L = 56, GOAL_R = 284, GOAL_MID = 170, AIM_Y = 96, BALL_Y = 190;
+
     function shoot() {
       var power = g.streak >= 3;
+      var aimX = GOAL_MID, dir = 1, running = true, fired = false;
+      var speed = power ? 132 : 168;          /* px per second */
+
       app.innerHTML =
         '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the match</a>' +
         board() +
         '<div class="q"><p class="q-kicker">' +
-          (power ? "Power shot \u2014 unstoppable" : "Pick your corner") + "</p>" +
-          '<p class="q-text">Where do you put it?</p></div>' +
-          '<div class="goalmouth" id="spots">' +
-            GOAL_SPOTS.map(function (s) {
-              return '<button class="spot" data-s="' + s.id + '">' + esc(s.label) + "</button>";
-            }).join("") +
-          "</div>" +
+          (power ? "Three in a row \u2014 the keeper is going early" : "Shot on goal") + "</p>" +
+          '<p class="q-text">Stop the crosshair where you want it.</p></div>' +
+        '<div class="shootwrap">' + goalSvg() + "</div>" +
+        '<p class="shoot-hint" id="hint">Corners beat the keeper \u00b7 <b>the posts don\'t</b></p>' +
+        '<div class="btn-row"><button class="btn" id="fire">Shoot</button></div>' +
         '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>';
 
-      document.getElementById("spots").addEventListener("click", function (e) {
-        var b = e.target.closest(".spot");
-        if (!b || b.disabled) return;
-        Array.prototype.slice.call(document.querySelectorAll(".spot"))
-          .forEach(function (x) { x.disabled = true; });
+      var svg    = document.getElementById("shootsvg");
+      var aimG   = document.getElementById("aim");
+      var ballG  = document.getElementById("ball");
+      var keepG  = document.getElementById("keeper");
+      var fireBtn = document.getElementById("fire");
 
-        var keeper = GOAL_SPOTS[Math.floor(Math.random() * GOAL_SPOTS.length)].id;
-        var scored = power || keeper !== b.dataset.s;
-        if (scored) { g.us++; b.classList.add("spot--goal"); }
-        else b.classList.add("spot--save");
-        syncBoard();
+      var last = null;
+      function sweep(ts) {
+        if (!running || !document.body.contains(svg)) return;
+        if (last !== null) {
+          aimX += dir * speed * (ts - last) / 1000;
+          if (aimX >= GOAL_R) { aimX = GOAL_R; dir = -1; }
+          if (aimX <= GOAL_L) { aimX = GOAL_L; dir = 1; }
+          aimG.setAttribute("transform", "translate(" + (aimX - GOAL_MID) + ",0)");
+        }
+        last = ts;
+        requestAnimationFrame(sweep);
+      }
+      requestAnimationFrame(sweep);
 
-        setVerdict(scored ? "verdict--goal" : "verdict--card",
-          scored ? (power ? "GOAL \u2014 no chance for the keeper!" : "GOAL!")
-                 : "Saved! The keeper guessed right.",
-          scored ? "" : "Nothing you did wrong \u2014 that one was luck.");
-        g.idx++;
-        nextButton(g.idx >= g.deck.length ? "Full time" : "Play on \u2192", question);
+      fireBtn.addEventListener("click", function () {
+        if (fired) return;
+        fired = true; running = false;
+        fireBtn.disabled = true;
+        aimG.style.opacity = ".35";
+        document.getElementById("hint").textContent = "";
+
+        /* Keeper picks a side. Triangular spread, so the middle is the most
+           likely guess and the corners are genuinely the better bet. */
+        var keeperX = GOAL_MID + (Math.random() + Math.random() - 1) * 116;
+        var reach   = power ? 26 : 42;
+        var post    = aimX < GOAL_L + 7 || aimX > GOAL_R - 7;
+        var saved   = !post && Math.abs(aimX - keeperX) < reach;
+
+        var t0 = null, DUR = 430;
+        function fly(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min(1, (ts - t0) / DUR);
+          var e = 1 - Math.pow(1 - p, 2);
+          ballG.setAttribute("transform",
+            "translate(" + (GOAL_MID + (aimX - GOAL_MID) * e) + "," +
+                           (BALL_Y + (AIM_Y - BALL_Y) * e) + ") scale(" + (1 - .25 * e) + ")");
+          keepG.setAttribute("transform",
+            "translate(" + ((keeperX - GOAL_MID) * Math.min(1, e * 1.15)) + ",0)");
+          if (p < 1) return requestAnimationFrame(fly);
+          land();
+        }
+        requestAnimationFrame(fly);
+
+        function land() {
+          if (post) {
+            ballG.setAttribute("transform",
+              "translate(" + (aimX < GOAL_MID ? GOAL_L + 26 : GOAL_R - 26) + "," +
+                             (AIM_Y + 34) + ") scale(.85)");
+          }
+          if (!post && !saved) { g.us++; syncBoard(); }
+          setVerdict(
+            (!post && !saved) ? "verdict--goal" : "verdict--card",
+            post  ? "Off the post!"
+                  : saved ? "Saved \u2014 he got a hand to it"
+                          : (power ? "GOAL \u2014 he went early and you went the other way!" : "GOAL!"),
+            post  ? "Nearly. A few inches further in and the keeper had no chance."
+                  : saved ? "He guessed your side. Try further into the corner next time."
+                          : "Right into the corner. He was never getting there.");
+          g.idx++;
+          nextButton(g.idx >= g.deck.length ? "Full time" : "Play on \u2192", question);
+        }
       });
+    }
+
+    /* Goal, net, keeper, ball, crosshair \u2014 all one inline SVG. */
+    function goalSvg() {
+      var net = "";
+      for (var x = 62; x < GOAL_R; x += 13)
+        net += '<line x1="' + x + '" y1="40" x2="' + x + '" y2="150" stroke="#fff" stroke-opacity=".3" stroke-width="1"/>';
+      for (var y = 51; y < 150; y += 13)
+        net += '<line x1="50" y1="' + y + '" x2="290" y2="' + y + '" stroke="#fff" stroke-opacity=".3" stroke-width="1"/>';
+      return '<svg class="shootsvg" id="shootsvg" viewBox="0 0 340 210" ' +
+        'xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Goal, keeper and ball">' +
+        '<rect x="50" y="40" width="240" height="110" fill="#12241A" fill-opacity=".14"/>' + net +
+        /* frame */
+        '<path d="M50 152 V38 H290 V152" fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>' +
+        /* six-yard box + spot */
+        '<path d="M18 186 H322" stroke="#fff" stroke-opacity=".5" stroke-width="3"/>' +
+        /* keeper */
+        '<g id="keeper">' +
+          '<rect x="' + (GOAL_MID - 15) + '" y="112" width="30" height="40" rx="6" fill="#F4A22B" stroke="#12241A" stroke-width="2.5"/>' +
+          '<circle cx="' + GOAL_MID + '" cy="104" r="9" fill="#F4D7B0" stroke="#12241A" stroke-width="2.5"/>' +
+          '<path d="M' + (GOAL_MID - 15) + ' 120 l-13 -9 M' + (GOAL_MID + 15) + ' 120 l13 -9" ' +
+            'stroke="#12241A" stroke-width="4" stroke-linecap="round"/>' +
+        "</g>" +
+        /* crosshair */
+        '<g id="aim">' +
+          '<line x1="' + GOAL_MID + '" y1="44" x2="' + GOAL_MID + '" y2="148" stroke="#E8641A" stroke-width="2" stroke-dasharray="5 4"/>' +
+          '<circle cx="' + GOAL_MID + '" cy="' + AIM_Y + '" r="11" fill="none" stroke="#E8641A" stroke-width="3"/>' +
+          '<circle cx="' + GOAL_MID + '" cy="' + AIM_Y + '" r="2.5" fill="#E8641A"/>' +
+        "</g>" +
+        /* ball */
+        '<g id="ball" transform="translate(' + GOAL_MID + "," + BALL_Y + ')">' +
+          '<circle r="9" fill="#fff" stroke="#12241A" stroke-width="2.5"/>' +
+          '<path d="M0 -5 l4.8 3.5 -1.8 5.6 h-6 l-1.8 -5.6 Z" fill="#12241A"/>' +
+        "</g>" +
+        "</svg>";
     }
 
     function defend() {
@@ -2221,7 +2326,7 @@
         (isVerse ? "" : '<div class="prompt-card">' + esc(c.prompt) + "</div>") +
         (shown
           ? '<div class="verse chant--open">' + esc(c.answer) + "</div>"
-          : isVerse ? '<div class="verse">' + front + "</div>" : "") +
+          : isVerse ? '<div class="verse"><span class="verse-line">' + front + "</span></div>" : "") +
         '<p class="chant-hint">' +
           (shown ? "Did you get it? Be honest \u2014 nobody's keeping score."
                  : isVerse ? "Say the whole verse out loud, then check."
