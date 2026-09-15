@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 9 \u2014 build 21";
+const BUILD = "Sept 15 \u2014 build 23";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -2216,7 +2216,7 @@ const STUDY_ITEMS = [
     "subject": "math",
     "title": "Math Unit 1 Test",
     "added": "2026-09-05",
-    "note": "Wednesday 9/16. Whole numbers, exponents, order of operations, properties, prime factorization, GCF and LCM.",
+    "note": "TEST TOMORROW. Properties, GCF and LCM first — those are the ones costing marks. Then the paper practice test.",
     "type": "bundle",
     "mathTopics": [
       "gcf",
@@ -2234,10 +2234,10 @@ const STUDY_ITEMS = [
     ],
     "mathRound": 10,
     "drills": [
-      "decide",
-      "numpad",
       "mconly",
-      "extras"
+      "decide",
+      "multionly",
+      "numpad"
     ],
     "words": [
       {
@@ -2418,6 +2418,197 @@ const STUDY_ITEMS = [
         ],
         "answer": "Commutative",
         "why": "The order of 5 and 4 swapped inside the brackets."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   13 + (3 + 1) = (13 + 3) + 1",
+        "options": [
+          "Associative Property of Addition",
+          "Associative Property of Multiplication",
+          "Commutative Property of Addition",
+          "Distributive Property"
+        ],
+        "answer": "Associative Property of Addition",
+        "why": "The GROUPING moved and it is addition. Mrs. George writes the full name on her key — say which operation, not just 'associative'."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   (11 + 6) · 8 = 8 · (11 + 6)",
+        "options": [
+          "Commutative Property of Multiplication",
+          "Commutative Property of Addition",
+          "Associative Property of Multiplication",
+          "Distributive Property"
+        ],
+        "answer": "Commutative Property of Multiplication",
+        "why": "The two factors swapped ORDER. The bracket is just one of the factors — nothing was distributed."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   8(5 + 1) = 8(1 + 5)",
+        "options": [
+          "Distributive Property",
+          "Commutative Property of Addition",
+          "Associative Property of Addition",
+          "Commutative Property of Multiplication"
+        ],
+        "answer": "Commutative Property of Addition",
+        "why": "Only the 5 and 1 INSIDE the brackets swapped, and they are being added. The 8 never multiplied across, so it is not distributive."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Name the property:   (2⁴ · 5) · 9 = 2⁴ · (5 · 9)",
+        "options": [
+          "Commutative Property of Multiplication",
+          "Associative Property of Multiplication",
+          "Distributive Property",
+          "Invalid"
+        ],
+        "answer": "Associative Property of Multiplication",
+        "why": "Same order, brackets moved, all multiplication."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which is an example of the commutative property of multiplication?",
+        "options": [
+          "6(11 + 3) = (11 + 3)6",
+          "5(9 + 2) = 5(9) + 5(2)",
+          "(4 · 3) + 8 = 8 + (4 · 3)",
+          "(7 · 5) · 2 = 7 · (5 · 2)"
+        ],
+        "answer": "6(11 + 3) = (11 + 3)6",
+        "why": "Two things being MULTIPLIED swapped order. The third choice also swaps order, but those two things are being added — that one is commutative of addition."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which is an example of the associative property of addition?",
+        "options": [
+          "3 + 12 = 12 + 3",
+          "(2 + 7) + 5 = 2 + (7 + 5)",
+          "(6 · 2) · 4 = 6 · (2 · 4)",
+          "9(4 + 1) = 9(4) + 9(1)"
+        ],
+        "answer": "(2 + 7) + 5 = 2 + (7 + 5)",
+        "why": "Brackets moved, order unchanged, addition. The third choice does the same thing but with multiplication."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which is an example of the commutative property of addition?",
+        "options": [
+          "8(3 + 4) = 8(3) + 8(4)",
+          "(5 + 9) + 1 = 5 + (9 + 1)",
+          "14 + 6 = 6 + 14",
+          "(2 · 8) · 3 = 2 · (8 · 3)"
+        ],
+        "answer": "14 + 6 = 6 + 14",
+        "why": "Order swapped, addition. Nothing regrouped and nothing distributed."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which is an example of the associative property of multiplication?",
+        "options": [
+          "7 · 12 = 12 · 7",
+          "6(10 + 2) = 6(10) + 6(2)",
+          "(9 + 3) + 2 = 9 + (3 + 2)",
+          "(4 · 5) · 6 = 4 · (5 · 6)"
+        ],
+        "answer": "(4 · 5) · 6 = 4 · (5 · 6)",
+        "why": "Brackets moved, order unchanged, multiplication. The third choice is the addition version."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which is an example of the distributive property?",
+        "options": [
+          "4(6 + 5) = 4(5 + 6)",
+          "4 + (6 + 5) = (4 + 6) + 5",
+          "4(6 + 5) = 4(6) + 4(5)",
+          "4(6 + 5) = (6 + 5)4"
+        ],
+        "answer": "4(6 + 5) = 4(6) + 4(5)",
+        "why": "The 4 multiplied across BOTH numbers in the sum. The others only move or reorder things."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which list contains the common factors of 12 and 18?",
+        "options": [
+          "1, 2, 3, and 6",
+          "1 and 6",
+          "36 and 72",
+          "2, 3, and 4"
+        ],
+        "answer": "1, 2, 3, and 6",
+        "why": "It asks for the common FACTORS, all of them — not just the greatest one. 6 alone would be the GCF."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Lana is simplifying   45 − 10 + 18 ÷ 3².   What should she do FIRST?",
+        "options": [
+          "subtract 10 from 45",
+          "add 18 to 10",
+          "divide 18 by 3",
+          "square the 3"
+        ],
+        "answer": "square the 3",
+        "why": "Exponents come before multiply/divide and before add/subtract. Left-to-right only breaks ties within the same level."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which values is 4,050 divisible by? Check ALL that apply.",
+        "options": [
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "9",
+          "10"
+        ],
+        "answers": [
+          "2",
+          "3",
+          "5",
+          "6",
+          "9",
+          "10"
+        ],
+        "why": "Even so 2. Digits add to 9, so 3 AND 9. Ends in 0, so 5 and 10. Even plus digit-sum-of-3 gives 6. Last two digits are 50, which is not divisible by 4."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which values is 1,176 divisible by? Check ALL that apply.",
+        "options": [
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "9",
+          "10"
+        ],
+        "answers": [
+          "2",
+          "3",
+          "4",
+          "6"
+        ],
+        "why": "Even so 2. Digits add to 15 — a multiple of 3 but NOT of 9. Last two digits 76 divide by 4. Even and divisible by 3 gives 6. Ends in 6, so no 5 and no 10."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which values are composite numbers? Check ALL that apply.",
+        "options": [
+          "57",
+          "83",
+          "91",
+          "101",
+          "119"
+        ],
+        "answers": [
+          "57",
+          "91",
+          "119"
+        ],
+        "why": "57 = 3 × 19, 91 = 7 × 13, 119 = 7 × 17. 83 and 101 are prime. Check the sevens and thirteens — they hide well."
       }
     ],
     "decideProblems": [
@@ -2513,6 +2704,42 @@ const STUDY_ITEMS = [
         "answer": 36,
         "label": "bouquets",
         "why": "GCF(72, 252) = 36. Each bouquet gets 2 roses and 7 daisies."
+      },
+      {
+        "prompt": "Maya is packing gift bags with 84 stickers and 126 pencils. She wants the same combination of stickers and pencils in every bag, using all of them. What is the maximum number of bags she can make?",
+        "use": "GCF",
+        "useWhy": "Same combination in each bag, everything used up, maximum number of bags — greatest common factor.",
+        "ask": "What is the maximum number of bags?",
+        "answer": 42,
+        "label": "bags",
+        "why": "84 = 2² × 3 × 7 and 126 = 2 × 3² × 7. The shared factors are 2 × 3 × 7 = 42, so 42 bags — 2 stickers and 3 pencils in each."
+      },
+      {
+        "prompt": "Bus A leaves the station every 24 minutes and Bus B leaves every 36 minutes. Both leave together at 2:15 pm. When is the next time both buses leave together?",
+        "use": "LCM",
+        "useWhy": "Two schedules lining up again — least common multiple.",
+        "ask": "How many MINUTES until they leave together again?",
+        "answer": 72,
+        "label": "minutes",
+        "why": "24 = 2³ × 3 and 36 = 2² × 3², so the LCM is 2³ × 3² = 72 minutes. Careful — it asks WHEN, so the answer she wants is 3:27 pm, not 72."
+      },
+      {
+        "prompt": "Carrie is packing baskets with 150 blueberries and 180 raspberries. She wants the same combination of blueberries and raspberries in each basket. What is the maximum number of baskets she will need?",
+        "use": "GCF",
+        "useWhy": "Same combination in every basket, largest number of them — greatest common factor.",
+        "ask": "What is the maximum number of baskets?",
+        "answer": 30,
+        "label": "baskets",
+        "why": "150 = 2 × 3 × 5² and 180 = 2² × 3² × 5. Shared: 2 × 3 × 5 = 30 baskets — 5 blueberries and 6 raspberries each."
+      },
+      {
+        "prompt": "Radio Station A plays a certain commercial every 18 minutes. Radio Station B plays the same commercial every 33 minutes. Both played it at 4:00 pm. When is the next time both commercials play at the same time?",
+        "use": "LCM",
+        "useWhy": "Two repeating schedules meeting again — least common multiple.",
+        "ask": "How many MINUTES until they play together again?",
+        "answer": 198,
+        "label": "minutes",
+        "why": "18 = 2 × 3² and 33 = 3 × 11, so the LCM is 2 × 3² × 11 = 198 minutes = 3 hours 18 minutes. That makes the answer 7:18 pm — the question asks WHEN."
       }
     ],
     "decideRound": 8,
@@ -2601,5 +2828,895 @@ const STUDY_ITEMS = [
         "meaning": "The last digit is 0."
       }
     ]
+  },
+  {
+    "id": "bible-john-15-5",
+    "subject": "bible",
+    "title": "John 15:5 verse quiz",
+    "added": "2026-09-15",
+    "quiz": "2026-09-18",
+    "note": "Word for word, ESV. Quiz Friday. Same vine passage as 15:3 and 15:4 — the rhythm carries over.",
+    "type": "verse",
+    "reference": "John 15:5",
+    "version": "ESV",
+    "text": "I am the vine; you are the branches. Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you can do nothing."
+  },
+  {
+    "id": "ela-spelling-3",
+    "subject": "ela",
+    "title": "Spelling List 3",
+    "added": "2026-09-15",
+    "quiz": "2026-09-24",
+    "note": "Twenty words, test Thursday 9/24. Build it from letters, then spot the right spelling.",
+    "type": "bundle",
+    "spellWords": [
+      "insist",
+      "difficult",
+      "contact",
+      "method",
+      "attitude",
+      "progress",
+      "anticipate",
+      "physical",
+      "dangerous",
+      "equipment",
+      "basis",
+      "cooperate",
+      "medium",
+      "rotation",
+      "designed",
+      "diameter",
+      "deflect",
+      "reflective",
+      "daydream",
+      "reasons"
+    ],
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "insist",
+          "insest",
+          "insisst",
+          "incist"
+        ],
+        "answer": "insist",
+        "why": "\"insist\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "difficultt",
+          "difficult",
+          "dificult",
+          "diffacult"
+        ],
+        "answer": "difficult",
+        "why": "\"difficult\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "comtact",
+          "contacte",
+          "contact",
+          "contect"
+        ],
+        "answer": "contact",
+        "why": "\"contact\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "methid",
+          "mehtod",
+          "methud",
+          "method"
+        ],
+        "answer": "method",
+        "why": "\"method\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "attitude",
+          "atitude",
+          "attitide",
+          "attatude"
+        ],
+        "answer": "attitude",
+        "why": "\"attitude\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "progresss",
+          "progress",
+          "progres",
+          "prograss"
+        ],
+        "answer": "progress",
+        "why": "\"progress\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "antisipate",
+          "anticipait",
+          "anticipate",
+          "anticapate"
+        ],
+        "answer": "anticipate",
+        "why": "\"anticipate\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "fysical",
+          "physicle",
+          "phisical",
+          "physical"
+        ],
+        "answer": "physical",
+        "why": "\"physical\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "dangerous",
+          "dangerus",
+          "dangeros",
+          "daingerous"
+        ],
+        "answer": "dangerous",
+        "why": "\"dangerous\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "equipement",
+          "equipment",
+          "equipmant",
+          "equiptment"
+        ],
+        "answer": "equipment",
+        "why": "\"equipment\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "bassis",
+          "baseis",
+          "basis",
+          "basus"
+        ],
+        "answer": "basis",
+        "why": "\"basis\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "coperate",
+          "cooparate",
+          "cooperait",
+          "cooperate"
+        ],
+        "answer": "cooperate",
+        "why": "\"cooperate\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "medium",
+          "medum",
+          "meduim",
+          "mediem"
+        ],
+        "answer": "medium",
+        "why": "\"medium\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "rotatoin",
+          "rotation",
+          "rotashion",
+          "rottation"
+        ],
+        "answer": "rotation",
+        "why": "\"rotation\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "desighned",
+          "desinged",
+          "designed",
+          "desined"
+        ],
+        "answer": "designed",
+        "why": "\"designed\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "diamiter",
+          "diamater",
+          "dimeter",
+          "diameter"
+        ],
+        "answer": "diameter",
+        "why": "\"diameter\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "deflect",
+          "deflekt",
+          "defelct",
+          "difflect"
+        ],
+        "answer": "deflect",
+        "why": "\"deflect\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "reflecitve",
+          "reflective",
+          "reflectiv",
+          "refelctive"
+        ],
+        "answer": "reflective",
+        "why": "\"reflective\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "daidream",
+          "daydreme",
+          "daydream",
+          "daydreem"
+        ],
+        "answer": "daydream",
+        "why": "\"daydream\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "reesons",
+          "resons",
+          "reasens",
+          "reasons"
+        ],
+        "answer": "reasons",
+        "why": "\"reasons\" is the one on her list."
+      }
+    ],
+    "drills": [
+      "spell",
+      "mconly"
+    ]
+  },
+  {
+    "id": "hist-egypt-kush-test",
+    "subject": "history",
+    "title": "Egypt & Kush Test",
+    "added": "2026-09-15",
+    "quiz": "2026-09-22",
+    "note": "Test Tuesday 9/22. Mrs. Martinez: matching, true/false with the underlined word corrected, and short written answers.",
+    "type": "bundle",
+    "words": [
+      {
+        "word": "Delta",
+        "meaning": "The fan-shaped area where the Nile splits and empties into the Mediterranean Sea, named for the Greek letter."
+      },
+      {
+        "word": "Silt",
+        "meaning": "The rich, fertile soil the Nile left behind after the yearly flood."
+      },
+      {
+        "word": "Cataract",
+        "meaning": "One of six stretches of shallow, rocky rapids along the Nile that slowed river traffic and blocked invaders from the south."
+      },
+      {
+        "word": "Shadoof",
+        "meaning": "A long pole with a bucket on one end and a weight on the other, used to lift water from the Nile for irrigation."
+      },
+      {
+        "word": "Nilometer",
+        "meaning": "A device used to measure how high the Nile rose; the government used it to set taxes."
+      },
+      {
+        "word": "Hapi",
+        "meaning": "The Egyptians' nickname for the Nile, meaning “well fed” or “fat.” They worshiped the Nile as a god by this name."
+      },
+      {
+        "word": "Mizraim",
+        "meaning": "A son of Ham and grandson of Noah. In the Bible the land of Egypt is called by his name."
+      },
+      {
+        "word": "Dynasty",
+        "meaning": "A line of kings or rulers who all belong to the same family."
+      },
+      {
+        "word": "Menes",
+        "meaning": "The ruler who united Upper and Lower Egypt around 3000 BC and began the first dynasty."
+      },
+      {
+        "word": "Pharaoh",
+        "meaning": "The title for a ruler of Egypt. Egyptians began to believe that the pharaohs were gods."
+      },
+      {
+        "word": "Pyramid",
+        "meaning": "A large tomb built for a pharaoh that showed the power and wealth he had gained during his reign."
+      },
+      {
+        "word": "Great Pyramid",
+        "meaning": "The largest pyramid at Giza, built for the pharaoh Khufu during the Fourth Dynasty. It covers thirteen acres."
+      },
+      {
+        "word": "Sarcophagus",
+        "meaning": "The outer stone, metal, or wood coffin that held a mummy's inner coffins."
+      },
+      {
+        "word": "Mummy",
+        "meaning": "A dead body that has been preserved from decaying."
+      },
+      {
+        "word": "Embalmer",
+        "meaning": "The person a family paid to preserve a body after death. He dressed in the jackal-headed costume of Anubis."
+      },
+      {
+        "word": "Natron",
+        "meaning": "The salt solution a body was soaked in for seventy days during the embalming process."
+      },
+      {
+        "word": "Canopic jars",
+        "meaning": "The four special containers that held the liver, stomach, lungs, and intestines."
+      },
+      {
+        "word": "Anubis",
+        "meaning": "The jackal-headed Egyptian god of embalming."
+      },
+      {
+        "word": "Osiris",
+        "meaning": "The god of the underworld, who presided over the Hall of Judgment where the dead person's heart was weighed."
+      },
+      {
+        "word": "Polytheistic",
+        "meaning": "Believing in and worshiping many gods. The Egyptians had hundreds of them."
+      },
+      {
+        "word": "Amulet",
+        "meaning": "An ornament Egyptians believed protected its wearer from evil spirits."
+      },
+      {
+        "word": "Kohl",
+        "meaning": "The black cosmetic powder both men and women wore to protect their eyes from the glare of the sun."
+      },
+      {
+        "word": "Hieroglyphics",
+        "meaning": "Egyptian picture writing, used from about 3000 BC to AD 1100 — longer than any other form of writing."
+      },
+      {
+        "word": "Rosetta stone",
+        "meaning": "The stele found in 1799 that became the key to unlocking the Egyptian language."
+      },
+      {
+        "word": "Stele",
+        "meaning": "An upright stone monument with writing engraved on it."
+      },
+      {
+        "word": "Jean-François Champollion",
+        "meaning": "The Frenchman who successfully translated Egyptian hieroglyphics in 1822."
+      },
+      {
+        "word": "Papyrus",
+        "meaning": "A plant growing along the Nile that was made into a light writing material. Our word “paper” comes from it."
+      },
+      {
+        "word": "Cartouche",
+        "meaning": "The oval shape drawn around a pharaoh's name in hieroglyphics. French soldiers named it after their gun cartridges."
+      },
+      {
+        "word": "Shenu",
+        "meaning": "The Egyptian word for “encircle” — the original name for the oval around a pharaoh's name."
+      },
+      {
+        "word": "Hyksos",
+        "meaning": "The “foreign rulers” who swept into Egypt and ruled for about 150 years. They brought bronze and iron weapons and the horse-drawn chariot."
+      },
+      {
+        "word": "Ahmose",
+        "meaning": "The Egyptian prince who eventually drove the Hyksos invaders out of Egypt."
+      },
+      {
+        "word": "Queen Hatshepsut",
+        "meaning": "The first woman to be a ruler in Egypt. She ruled with her husband, then for her young nephew, then made herself pharaoh."
+      },
+      {
+        "word": "Thutmose III",
+        "meaning": "The greatest Egyptian warrior king. He stretched the empire to the Euphrates River in the northeast."
+      },
+      {
+        "word": "Tutankhamen",
+        "meaning": "King Tut. He became pharaoh at about nine years old and died at nineteen. Howard Carter found his tomb in 1922."
+      },
+      {
+        "word": "Rameses II",
+        "meaning": "Rameses the Great, one of the last great pharaohs. He defeated the Hittites and later signed a lasting peace treaty with them."
+      },
+      {
+        "word": "Social pyramid",
+        "meaning": "The triangle-shaped diagram of Egypt's social classes — farmers and slaves at the bottom, the pharaoh at the top."
+      },
+      {
+        "word": "Vizier",
+        "meaning": "The highest-ranking official serving under the pharaoh."
+      },
+      {
+        "word": "Kush",
+        "meaning": "The land along the Nile south of Egypt, in what is now Sudan."
+      },
+      {
+        "word": "Meroitic",
+        "meaning": "The written language the Kushites developed, named after their city of Meroë."
+      },
+      {
+        "word": "Aswan High Dam",
+        "meaning": "The dam completed in 1970 that formed Lake Nasser and ended the Nile's annual flooding."
+      }
+    ],
+    "questions": [
+      {
+        "kind": "correct",
+        "prompt": "The Nile River flows from south to north.",
+        "underlined": "south to north",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "It begins in central Africa and runs about four thousand miles north to the Mediterranean."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Egypt has been called “the Gift of the Sahara.”",
+        "underlined": "Sahara",
+        "answer": false,
+        "correction": "Nile",
+        "options": [
+          "Nile",
+          "Sahara",
+          "Mediterranean",
+          "Red Sea"
+        ],
+        "why": "Without the Nile River, Egypt as we know it would not have existed."
+      },
+      {
+        "kind": "correct",
+        "prompt": "There are six cataracts along the Nile.",
+        "underlined": "six",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "They are shallow, rocky stretches that slowed river traffic — and slowed invaders too."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Upper Egypt was the area in the north, around the delta.",
+        "underlined": "north",
+        "answer": false,
+        "correction": "south",
+        "options": [
+          "south",
+          "north",
+          "east",
+          "west"
+        ],
+        "why": "The delta plain in the north was LOWER Egypt. Upper Egypt was upriver, to the south."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Menes united Upper and Lower Egypt around 3000 BC.",
+        "underlined": "Menes",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "He began the first dynasty — a line of kings from the same family."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The Old Kingdom is also known as “the Age of Pyramids.”",
+        "underlined": "Pyramids",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Most of the at least eighty pyramids archaeologists have found were built during the Old Kingdom."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The Great Pyramid was built for the pharaoh Khufu.",
+        "underlined": "Khufu",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "He ruled during the Fourth Dynasty. The pyramid covers thirteen acres."
+      },
+      {
+        "kind": "correct",
+        "prompt": "During embalming the body was soaked in natron for thirty days.",
+        "underlined": "thirty",
+        "answer": false,
+        "correction": "seventy",
+        "options": [
+          "seventy",
+          "thirty",
+          "seven",
+          "one hundred"
+        ],
+        "why": "Seventy days in the salt solution, then it was washed and wrapped in linen strips."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Canopic jars held the heart, stomach, lungs, and intestines.",
+        "underlined": "heart",
+        "answer": false,
+        "correction": "liver",
+        "options": [
+          "liver",
+          "heart",
+          "brain",
+          "kidneys"
+        ],
+        "why": "Liver, stomach, lungs, and intestines. The brain was pulled out through the skull and discarded."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The Rosetta stone was found in 1799.",
+        "underlined": "1799",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "It turned up near the town of Rosetta and was written in hieroglyphics, common Egyptian, and Greek."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Champollion successfully translated Egyptian hieroglyphics in 1822.",
+        "underlined": "Champollion",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Since Greek was a known language, it worked as the key to the Egyptian symbols."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The Hyksos ruled Egypt for about fifty years.",
+        "underlined": "fifty",
+        "answer": false,
+        "correction": "150",
+        "options": [
+          "150",
+          "fifty",
+          "five hundred",
+          "fifteen"
+        ],
+        "why": "About 150 years, until an Egyptian prince named Ahmose drove them out."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Queen Hatshepsut was the first woman to be a ruler in Egypt.",
+        "underlined": "Hatshepsut",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "She ruled with her husband, then for her young nephew, then made herself pharaoh."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Howard Carter discovered King Tut's tomb in 1922.",
+        "underlined": "1922",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "It took him over eight years to catalogue everything inside."
+      },
+      {
+        "kind": "correct",
+        "prompt": "At the bottom of Egypt's social pyramid were the priests.",
+        "underlined": "priests",
+        "answer": false,
+        "correction": "farmers",
+        "options": [
+          "farmers",
+          "priests",
+          "viziers",
+          "nobles"
+        ],
+        "why": "Farmers, merchants, servants, and slaves were the bottom — and the largest class. Priests were a level up."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The ancient Egyptians were monotheistic.",
+        "underlined": "monotheistic",
+        "answer": false,
+        "correction": "polytheistic",
+        "options": [
+          "polytheistic",
+          "monotheistic",
+          "atheistic",
+          "Christian"
+        ],
+        "why": "They had hundreds of gods and refused to believe in the one true God."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The Egyptian calendar had three seasons.",
+        "underlined": "three",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Flood (Akhet), Planting (Peret), and Harvest (Shemu)."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The biblical account of Joseph took place during the New Kingdom.",
+        "underlined": "New",
+        "answer": false,
+        "correction": "Middle",
+        "options": [
+          "Middle",
+          "New",
+          "Old",
+          "Kushite"
+        ],
+        "why": "Joseph belongs to the Middle Kingdom. Moses is the one who belongs to the New Kingdom."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The kingdom of Kush was located south of Egypt.",
+        "underlined": "south",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "It stretched from the first cataract to Khartoum in present-day Sudan."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Kush's first capital was Meroë.",
+        "underlined": "Meroë",
+        "answer": false,
+        "correction": "Kerma",
+        "options": [
+          "Kerma",
+          "Meroë",
+          "Napata",
+          "Thebes"
+        ],
+        "why": "Kerma came first, around 2500 BC. Kush moved the capital to Meroë much later, around 500 BC."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Aksum conquered Kush in AD 330.",
+        "underlined": "Aksum",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "The Kushite kingdom had lasted more than one thousand years."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Our word “paper” comes from papyrus.",
+        "underlined": "papyrus",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "The writing material was made from the pith at the centre of the papyrus plant's stem."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The Aswan High Dam was completed in 1970.",
+        "underlined": "1970",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "It formed Lake Nasser and ended the Nile's annual flooding."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The Hyksos brought the horse-drawn chariot to Egypt.",
+        "underlined": "horse-drawn chariot",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Egyptians also learned to use bronze and iron weapons from them."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What body of water does the Nile flow into?",
+        "options": [
+          "The Mediterranean Sea",
+          "The Red Sea",
+          "The Dead Sea",
+          "The Persian Gulf"
+        ],
+        "answer": "The Mediterranean Sea",
+        "why": "It runs about four thousand miles north from central Africa."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which kingdom is known as “the Age of Pyramids”?",
+        "options": [
+          "The Old Kingdom",
+          "The Middle Kingdom",
+          "The New Kingdom",
+          "The Kushite Kingdom"
+        ],
+        "answer": "The Old Kingdom",
+        "why": "ca. 2700–2200 BC. Most of the eighty-plus pyramids date from it."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Who was the highest-ranking official serving under the pharaoh?",
+        "options": [
+          "The scribe",
+          "The embalmer",
+          "The vizier",
+          "The artisan"
+        ],
+        "answer": "The vizier",
+        "why": "Viziers sat on the social pyramid level with the nobles and generals."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What did Egyptians wear to protect themselves from evil spirits?",
+        "options": [
+          "Kohl",
+          "Amulets",
+          "Wigs",
+          "Linen"
+        ],
+        "answer": "Amulets",
+        "why": "Ornaments of gold and beads. Kohl was the black eye powder — that was for sun glare."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which were Egypt's natural boundaries? Check ALL that apply.",
+        "options": [
+          "The Sahara Desert",
+          "The cataracts",
+          "The Mediterranean Sea",
+          "The Ural Mountains",
+          "The Atlantic Ocean"
+        ],
+        "answers": [
+          "The Sahara Desert",
+          "The cataracts",
+          "The Mediterranean Sea"
+        ],
+        "why": "Desert east and west, cataracts to the south, Mediterranean to the north. Three of them — don't stop at one."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which organs were placed in canopic jars? Check ALL that apply.",
+        "options": [
+          "Liver",
+          "Stomach",
+          "Lungs",
+          "Intestines",
+          "Heart",
+          "Brain"
+        ],
+        "answers": [
+          "Liver",
+          "Stomach",
+          "Lungs",
+          "Intestines"
+        ],
+        "why": "Four organs. The heart stayed in the body and the brain was thrown away."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which were the three seasons of the Egyptian calendar? Check ALL that apply.",
+        "options": [
+          "Flood",
+          "Planting",
+          "Harvest",
+          "Winter",
+          "Drought"
+        ],
+        "answers": [
+          "Flood",
+          "Planting",
+          "Harvest"
+        ],
+        "why": "Akhet, Peret, and Shemu — all three, all built around the Nile."
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "Why has Egypt been called “the Gift of the Nile”?",
+        "answer": "Without the Nile, Egypt would have been desert. The river gave water, food, fertile silt from the yearly flood, and a highway for travel and trade."
+      },
+      {
+        "prompt": "What are Egypt's natural boundaries?",
+        "answer": "The Sahara Desert to the east and west, the cataracts to the south, and the Mediterranean Sea to the north."
+      },
+      {
+        "prompt": "Of what benefit were the cataracts?",
+        "answer": "They slowed river traffic, but they also made it hard for invaders to attack Egypt from the south."
+      },
+      {
+        "prompt": "What were some of the tools early Egyptians used for irrigation?",
+        "answer": "Irrigation canals, the shadoof (a pole with a bucket on one end and a weight on the other), and the water wheel."
+      },
+      {
+        "prompt": "How many seasons did Egypt have, and what were they?",
+        "answer": "Three — Flood (Akhet), Planting (Peret), and Harvest (Shemu)."
+      },
+      {
+        "prompt": "Why did Egyptians make mummies?",
+        "answer": "They believed in an afterlife and thought that without a body a person could not exist in the next world, so they preserved the body."
+      },
+      {
+        "prompt": "What was the significance of the way the embalmer dressed?",
+        "answer": "He wore the jackal-headed costume of Anubis, the Egyptian god of embalming."
+      },
+      {
+        "prompt": "How did the construction of pyramids differ between the Old Kingdom and the Middle Kingdom?",
+        "answer": "Old Kingdom pyramids were large and built of stone. Middle Kingdom pyramids were smaller and less grand, built of mud bricks instead, so not many of them survived."
+      },
+      {
+        "prompt": "Why are there more artifacts in Egypt than in other civilizations?",
+        "answer": "Egyptians were very careful to preserve objects for the afterlife, and Egypt's hot, dry climate preserved them well."
+      },
+      {
+        "prompt": "Who was the first female ruler in Egypt?",
+        "answer": "Queen Hatshepsut, during the New Kingdom."
+      },
+      {
+        "prompt": "What was the social structure of Egypt shaped like? Name the levels from bottom to top.",
+        "answer": "A triangle called a social pyramid. Bottom and largest: farmers, merchants, servants, and slaves. Then priests, soldiers, scribes, and artisans. Then nobles, generals, and viziers. Top and smallest: the pharaoh and the royal family."
+      },
+      {
+        "prompt": "What did Egyptians wear to protect themselves from evil spirits?",
+        "answer": "Amulets — ornaments of gold and beads that they believed protected the wearer."
+      },
+      {
+        "prompt": "What was the role of women in the Kushite civilization?",
+        "answer": "Women held a variety of roles. Some were queens and priestesses and some were warriors, but women were still the primary caregivers of the children and maintained the households."
+      },
+      {
+        "prompt": "How long did the Kushite kingdom exist?",
+        "answer": "More than one thousand years, until Aksum destroyed Meroë and took over the land of Kush in AD 330."
+      }
+    ],
+    "drills": [
+      "match",
+      "corronly",
+      "meaning",
+      "extras"
+    ],
+    "rival": "Kush United",
+    "matchLength": 8
   }
 ];
