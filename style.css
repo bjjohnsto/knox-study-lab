@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@700&display=swap');
+
 /* ==========================================================================
    Knox's 6th Grade Study Lab — training-ground palette
    Pale chalked field, mown turf bands, traffic-cone orange as the one accent.
@@ -252,7 +254,15 @@ a.card:hover, a.card:focus-visible{
   box-shadow:0 6px 0 rgba(18,36,26,.16);
 }
 
-.card-title{ font-size:1.12rem; margin-bottom:.3rem; }
+.card-title{
+  font-family:"Atkinson Hyperlegible","Archivo Black",sans-serif;
+  font-weight:700;
+  font-size:1.14rem;
+  letter-spacing:-.005em;
+  margin-bottom:.3rem;
+}
+.page-title{ font-family:"Atkinson Hyperlegible","Archivo Black",sans-serif; font-weight:700; }
+.sheet h3{ font-family:"Atkinson Hyperlegible","Archivo Black",sans-serif; font-weight:700; }
 
 .card-meta{
   font-size:.74rem;
@@ -759,6 +769,7 @@ a.card:hover, a.card:focus-visible{
   align-items:center;
   justify-content:center;
 }
+.verse > .verse-line{ display:block; width:100%; }
 .verse.chant--open{ background:#E4F5E6; border-color:var(--turf); }
 .verse .masked{ color:var(--line); letter-spacing:.1em; }
 .verse--build{
@@ -1083,3 +1094,64 @@ a.card:hover, a.card:focus-visible{
   letter-spacing:.08em;
   text-transform:uppercase;
 }
+
+/* --- Divisibility rules -------------------------------------------------- */
+.divgrid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:.5rem;
+  max-width:400px;
+  margin:0 auto 1rem;
+}
+.divkey{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  padding:.9rem 0;
+  font-family:"Archivo Black",sans-serif;
+  font-size:1.3rem;
+  cursor:pointer;
+  transition:transform .1s ease;
+}
+.divkey:hover:not(:disabled){ background:#F6FAF1; transform:translateY(-2px); }
+.divkey:disabled{ cursor:default; }
+.divkey--none{
+  font-family:"Archivo",sans-serif;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.divkey--on{ background:var(--cone); color:var(--chalk); border-color:var(--cone-dark); }
+.divkey--right{ background:#CBEBD0; border-color:var(--turf); color:var(--ink); }
+.divkey--wrong{ background:var(--card); border-color:#C79A00; color:var(--ink); }
+.divkey--missed{ outline:3px dashed #C79A00; outline-offset:2px; }
+
+.divwhy{ margin-top:1rem; }
+.divwhy ul{ margin:0; padding-left:1.2rem; }
+.divwhy li{ margin-bottom:.3rem; font-size:.92rem; }
+
+
+/* --- Shootout ------------------------------------------------------------ */
+.shootwrap{
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  background:linear-gradient(#BFD9EC 0 38%, var(--turf) 38% 100%);
+  box-shadow:var(--shadow);
+  padding:.5rem;
+  margin-bottom:.9rem;
+  overflow:hidden;
+}
+.shootsvg{ display:block; width:100%; height:auto; }
+.shoot-hint{
+  text-align:center;
+  font-family:"Atkinson Hyperlegible","Archivo Black",sans-serif;
+  font-weight:700;
+  font-size:.82rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  margin:.1rem 0 .7rem;
+}
+.shoot-hint b{ color:var(--cone-dark); }
