@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 15 \u2014 build 24";
+const BUILD = "Sept 20 \u2014 build 26";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -3723,5 +3723,326 @@ const STUDY_ITEMS = [
     ],
     "rival": "Kush United",
     "matchLength": 8
+  },
+  {
+    "id": "bible-unit-2",
+    "subject": "bible",
+    "title": "Bible Unit 2 Test",
+    "added": "2026-09-20",
+    "quiz": "2026-09-24",
+    "note": "Test Thursday 9/24. Mrs. Vowels — five definitions, then the short answers. Say the definitions out loud; she wants both halves of each one.",
+    "type": "bundle",
+    "words": [
+      {
+        "word": "Covenant",
+        "meaning": "An agreement between two or more people, with certain requirements and promises."
+      },
+      {
+        "word": "Image of God",
+        "meaning": "Being created similarly to God — a smaller resemblance of Him."
+      },
+      {
+        "word": "Structure",
+        "meaning": "The way God created things to be."
+      },
+      {
+        "word": "Direction",
+        "meaning": "The two ways anything with structure can be tugged or pulled — fallen or redemptive."
+      },
+      {
+        "word": "Eternal",
+        "meaning": "Forever in both directions, past and future — in all directions. Exists outside of time."
+      }
+    ],
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "A covenant is —",
+        "options": [
+          "An agreement between two or more people, with requirements and promises",
+          "A promise God makes that people have no part in",
+          "A law written down by Moses",
+          "A sacrifice offered at the temple"
+        ],
+        "answer": "An agreement between two or more people, with requirements and promises",
+        "why": "Two sides, and both requirements AND promises. Say both halves."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Being made in the image of God means —",
+        "options": [
+          "Looking physically identical to God",
+          "Being created similarly to God, a smaller resemblance of Him",
+          "Being sinless from birth",
+          "Being able to create something out of nothing"
+        ],
+        "answer": "Being created similarly to God, a smaller resemblance of Him",
+        "why": "Similar to, not the same as — a smaller resemblance."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word means “the way God created things to be”?",
+        "options": [
+          "Direction",
+          "Covenant",
+          "Structure",
+          "Eternal"
+        ],
+        "answer": "Structure",
+        "why": "Structure is how it was made. Direction is which way it is being pulled."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word means the two ways anything with structure can be tugged or pulled?",
+        "options": [
+          "Structure",
+          "Direction",
+          "Dominion",
+          "Mandate"
+        ],
+        "answer": "Direction",
+        "why": "The two directions are fallen and redemptive."
+      },
+      {
+        "kind": "mc",
+        "prompt": "The two directions anything with structure can be pulled are —",
+        "options": [
+          "Fallen and redemptive",
+          "Good and evil",
+          "Past and future",
+          "Earthly and heavenly"
+        ],
+        "answer": "Fallen and redemptive",
+        "why": "Fallen and redemptive. Past and future belongs to the definition of eternal instead."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Eternal means —",
+        "options": [
+          "Lasting a very long time",
+          "Forever in both directions, past and future — existing outside of time",
+          "Beginning at Creation and never ending",
+          "Never changing"
+        ],
+        "answer": "Forever in both directions, past and future — existing outside of time",
+        "why": "Both directions. Not just no end — no beginning either."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What passage of Scripture describes the fall?",
+        "options": [
+          "Genesis 1",
+          "Genesis 2",
+          "Genesis 3",
+          "Exodus 3"
+        ],
+        "answer": "Genesis 3",
+        "why": "Genesis 3. Genesis 1 and 2 are Creation."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What are the three major points of the true big story of the Bible?",
+        "options": [
+          "Creation, Fall, Redemption",
+          "Creation, Covenant, Curse",
+          "Law, Fall, Grace",
+          "Creation, Flood, Redemption"
+        ],
+        "answer": "Creation, Fall, Redemption",
+        "why": "Creation, Fall, Redemption — in that order."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which blessing-command became more difficult when God cursed the WOMAN after the fall?",
+        "options": [
+          "Childbirth — be fruitful and multiply",
+          "Subduing the earth and having dominion",
+          "Keeping the Sabbath",
+          "Naming the animals"
+        ],
+        "answer": "Childbirth — be fruitful and multiply",
+        "why": "The woman's curse touched be fruitful and multiply, so childbirth."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which blessing-command became more difficult when God cursed the MAN after the fall?",
+        "options": [
+          "Childbirth — be fruitful and multiply",
+          "Subduing the earth and having dominion",
+          "Offering sacrifices",
+          "Walking with God in the garden"
+        ],
+        "answer": "Subduing the earth and having dominion",
+        "why": "The ground was cursed, so working it became hard. Man = the ground, woman = childbirth."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Was work present before the fall?",
+        "options": [
+          "Yes — having dominion was given before the fall",
+          "No, work began as part of the curse",
+          "Only for the animals",
+          "The Bible does not say"
+        ],
+        "answer": "Yes — having dominion was given before the fall",
+        "why": "Work came first. The curse only made it harder; it did not invent it."
+      },
+      {
+        "kind": "multi",
+        "prompt": "What TWO descriptions does the Bible use for how Scripture came to us? Check ALL that apply.",
+        "options": [
+          "Inspired by God, or God-breathed",
+          "Men carried along by the Holy Spirit",
+          "Written down by angels",
+          "Dictated word for word to scribes",
+          "Copied from older religions"
+        ],
+        "answers": [
+          "Inspired by God, or God-breathed",
+          "Men carried along by the Holy Spirit"
+        ],
+        "why": "Two of them. God-breathed AND carried along by the Holy Spirit — the question asks for both."
+      },
+      {
+        "kind": "multi",
+        "prompt": "What are the TWO parts of the Creation Mandate? Check ALL that apply.",
+        "options": [
+          "Be fruitful and multiply",
+          "Subdue the earth and have dominion",
+          "Keep the Sabbath holy",
+          "Offer the firstfruits",
+          "Name the animals"
+        ],
+        "answers": [
+          "Be fruitful and multiply",
+          "Subdue the earth and have dominion"
+        ],
+        "why": "Both halves. Leaving one off is half an answer."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which are the three major points of the true big story of the Bible? Check ALL that apply.",
+        "options": [
+          "Creation",
+          "Fall",
+          "Redemption",
+          "Flood",
+          "Exile"
+        ],
+        "answers": [
+          "Creation",
+          "Fall",
+          "Redemption"
+        ],
+        "why": "Three of them — Creation, Fall, Redemption."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Work was present before the fall.",
+        "answer": true,
+        "why": "Yes — having dominion was given before the fall."
+      },
+      {
+        "kind": "tf",
+        "prompt": "The fall is described in Genesis 2.",
+        "answer": false,
+        "why": "Genesis 3. Genesis 2 is still Creation."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Eternal means something that has no end but did have a beginning.",
+        "answer": false,
+        "why": "Eternal runs forever in BOTH directions — no beginning and no end, outside of time."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Structure is the way God created things to be, and direction is which way they are being pulled.",
+        "answer": true,
+        "why": "That is the pair. Structure = how it was made. Direction = fallen or redemptive."
+      },
+      {
+        "kind": "tf",
+        "prompt": "A covenant only involves promises, not requirements.",
+        "answer": false,
+        "why": "It has both — certain requirements AND promises."
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "Define covenant.",
+        "answer": "An agreement between two or more people, with certain requirements and promises."
+      },
+      {
+        "prompt": "Define image of God.",
+        "answer": "Being created similarly to God — a smaller resemblance of Him."
+      },
+      {
+        "prompt": "Define structure.",
+        "answer": "The way God created things to be."
+      },
+      {
+        "prompt": "Define direction.",
+        "answer": "The two directions, or ways, in which anything with structure can be tugged or pulled — fallen and redemptive."
+      },
+      {
+        "prompt": "Define eternal.",
+        "answer": "Forever in both directions, past and future — in all directions. It exists outside of time."
+      },
+      {
+        "prompt": "What two descriptions does the Bible use to describe how Scripture came to us?",
+        "answer": "Inspired by God — God-breathed — and men carried along by the Holy Spirit. Both parts."
+      },
+      {
+        "prompt": "What are the three major points of the true big story of the Bible?",
+        "answer": "Creation, Fall, Redemption."
+      },
+      {
+        "prompt": "What passage in the Scripture describes the fall?",
+        "answer": "Genesis 3."
+      },
+      {
+        "prompt": "What are the two parts of the Creation Mandate?",
+        "answer": "Be fruitful and multiply; and subdue the earth and have dominion. Both parts."
+      },
+      {
+        "prompt": "Which blessing-command became more difficult when God cursed the WOMAN after the fall?",
+        "answer": "Childbirth — be fruitful and multiply."
+      },
+      {
+        "prompt": "Which blessing-command became more difficult when God cursed the MAN after the fall?",
+        "answer": "The ground — subduing the earth and having dominion."
+      },
+      {
+        "prompt": "Was work present before the fall?",
+        "answer": "Yes — have dominion. Work was there before the fall; the curse only made it harder."
+      }
+    ],
+    "drills": [
+      "match",
+      "meaning",
+      "mconly",
+      "extras"
+    ],
+    "rival": "Unit One Rovers",
+    "matchLength": 8
+  },
+  {
+    "id": "bible-john-15-1-5",
+    "subject": "bible",
+    "title": "John 15:1–5 passage",
+    "added": "2026-09-20",
+    "quiz": "2026-10-02",
+    "note": "Test Friday 10/2. Five verses, word for word, ESV. Learn them one at a time — he already knows verse 5 from the weekly quizzes.",
+    "type": "verse",
+    "reference": "John 15:1–5",
+    "version": "ESV",
+    "text": "I am the true vine, and my Father is the vinedresser. Every branch in me that does not bear fruit he takes away, and every branch that does bear fruit he prunes, that it may bear more fruit. Already you are clean because of the word that I have spoken to you. Abide in me, and I in you. As the branch cannot bear fruit by itself, unless it abides in the vine, neither can you, unless you abide in me. I am the vine; you are the branches. Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you can do nothing.",
+    "lines": [
+      "I am the true vine, and my Father is the vinedresser.",
+      "Every branch in me that does not bear fruit he takes away, and every branch that does bear fruit he prunes, that it may bear more fruit.",
+      "Already you are clean because of the word that I have spoken to you.",
+      "Abide in me, and I in you. As the branch cannot bear fruit by itself, unless it abides in the vine, neither can you, unless you abide in me.",
+      "I am the vine; you are the branches. Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you can do nothing."
+    ]
   }
 ];

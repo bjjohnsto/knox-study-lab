@@ -2180,6 +2180,14 @@
 
   /* ---------- verses ------------------------------------------------------- */
 
+  /* A single memory verse fits in one box. A passage does not — 123 words of
+     John 15 as one bank of scrambled chips is unusable, and 123 blanks in a row
+     teaches nothing. An optional `lines` list splits a passage into verse-sized
+     pieces, and the fade and order drills work through them one at a time. */
+  function verseChunks(item) {
+    return (item.lines && item.lines.length) ? item.lines.slice() : [item.text];
+  }
+
   function verseWords(item) {
     return item.text.split(/\s+/).filter(Boolean);
   }
@@ -2199,46 +2207,77 @@
   }
 
   function renderVerseRead(item) {
-    var reps = 0;
+    /* One verse: say the whole thing five times. A passage: three times through
+       each piece, then three times through the lot. Saying 123 words five times
+       before you have any of it is how a kid gives up. */
+    var chunks = verseChunks(item);
+    var many = chunks.length > 1;
+    var stages = many
+      ? chunks.map(function (c, n) {
+          return { text: c, need: 3, label: "Part " + (n + 1) + " of " + chunks.length };
+        }).concat([{ text: item.text, need: 3, label: "All of it together", whole: true }])
+      : [{ text: item.text, need: 5, label: "" }];
+    var at = 0, reps = 0;
 
     function paint() {
+      var st = stages[at];
+      var big = st.text.split(/\s+/).length > 45;
+      var done = reps >= st.need;
+      var last = at + 1 >= stages.length;
+
       app.innerHTML =
         '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
-        '<p class="eyebrow">' + esc(verseRef(item)) + "</p>" +
-        '<div class="verse">' + esc(item.text) + "</div>" +
-        '<p class="chant-hint">Say the whole verse out loud, then tap. ' +
-        "Five times and it starts to stick.</p>" +
+        '<p class="eyebrow">' + esc(verseRef(item)) +
+          (st.label ? " \u00b7 " + esc(st.label) : "") + "</p>" +
+        '<div class="verse"' +
+          (big ? ' style="font-size:1.02rem;line-height:1.55;text-align:left;padding:1.1rem"' : "") +
+          '><span class="verse-line">' + esc(st.text) + "</span></div>" +
+        '<p class="chant-hint">' +
+          (st.whole ? "Now the whole passage, out loud, start to finish."
+                    : many ? "Say this part out loud, then tap."
+                           : "Say the whole verse out loud, then tap. Five times and it starts to stick.") +
+        "</p>" +
         '<div class="btn-row">' +
-          '<button class="btn" id="rep">Said it (' + reps + " of 5)</button>" +
-          (reps >= 5 ? '<a class="btn btn--quiet" href="#/i/' + item.id + '/fade">Now fade it out \u2192</a>' : "") +
+          '<button class="btn" id="rep"' + (done ? " disabled" : "") + '>Said it (' +
+            reps + " of " + st.need + ")</button>" +
+          (done && !last ? '<button class="btn" id="on">Next part \u2192</button>' : "") +
+          (done && last ? '<a class="btn btn--quiet" href="#/i/' + item.id +
+            '/fade">Now fade it out \u2192</a>' : "") +
         "</div>";
 
       document.getElementById("rep").addEventListener("click", function () {
-        if (reps < 5) reps++;
+        if (reps < st.need) reps++;
         paint();
       });
+      if (document.getElementById("on"))
+        document.getElementById("on").addEventListener("click", function () {
+          at++; reps = 0; paint();
+        });
     }
     paint();
   }
 
   function renderVerseFade(item) {
-    var words = verseWords(item);
-    var full = esc(item.text);
-    var letters = words.map(wordSkeleton).join(" ");
-    var blanks = words.map(function (w) {
-      return '<span class="masked">' + new Array(Math.max(w.length, 2)).join("\u00b7") + "</span>";
-    }).join(" ");
-
-    var cards = [
-      { prompt: full,    answer: item.text, label: "Every word in front of you" },
-      { prompt: letters, answer: item.text, label: "First letters only" },
-      { prompt: blanks,  answer: item.text, label: "Nothing but blanks" }
-    ];
+    var chunks = verseChunks(item);
+    var cards = [];
+    chunks.forEach(function (chunk, n) {
+      var words = chunk.split(/\s+/).filter(Boolean);
+      var tag = chunks.length > 1 ? " \u00b7 " + (n + 1) + " of " + chunks.length : "";
+      var blanks = words.map(function (w) {
+        return '<span class="masked">' + new Array(Math.max(w.length, 2)).join("\u00b7") + "</span>";
+      }).join(" ");
+      cards.push({ prompt: esc(chunk), answer: chunk, label: "Every word in front of you" + tag });
+      cards.push({ prompt: words.map(wordSkeleton).join(" "), answer: chunk, label: "First letters only" + tag });
+      cards.push({ prompt: blanks, answer: chunk, label: "Nothing but blanks" + tag });
+    });
     renderSelfCheck(item, cards, "fade");
   }
 
-  function renderVerseOrder(item) {
-    var words = verseWords(item);
+  function renderVerseOrder(item, part) {
+    var chunks = verseChunks(item);
+    var at = part || 0;
+    var chunk = chunks[at];
+    var words = chunk.split(/\s+/).filter(Boolean);
     var bank = shuffle(words.map(function (w, i) { return { w: w, i: i }; }));
     var placed = [];   /* indexes into bank, in tap order */
 
@@ -2247,7 +2286,8 @@
 
       app.innerHTML =
         '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
-        '<p class="eyebrow">' + esc(verseRef(item)) + "</p>" +
+        '<p class="eyebrow">' + esc(verseRef(item)) +
+          (chunks.length > 1 ? " \u00b7 part " + (at + 1) + " of " + chunks.length : "") + "</p>" +
         '<div class="verse verse--build">' +
           (built || '<span class="verse-empty">Tap the first word</span>') +
         "</div>" +
@@ -2273,7 +2313,7 @@
           placed.pop(); paint();
         });
       document.getElementById("restart").addEventListener("click", function () {
-        renderVerseOrder(item);
+        renderVerseOrder(item, at);
       });
     }
 
@@ -2289,19 +2329,29 @@
     }
 
     function win() {
+      var more = at + 1 < chunks.length;
       app.innerHTML =
         '<div class="result">' +
-          '<p class="result-rating">Clean sheet</p>' +
-          '<div class="verse chant--open" style="margin:1rem 0">' + esc(item.text) + "</div>" +
+          '<p class="result-rating">' + (more ? "Part " + (at + 1) + " down" : "Clean sheet") + "</p>" +
+          '<div class="verse chant--open" style="margin:1rem 0"><span class="verse-line">' +
+            esc(more ? chunk : item.text) + "</span></div>" +
           '<p class="result-of">' + esc(verseRef(item)) + "</p>" +
-          '<p class="lede" style="margin:1rem auto 0">Word for word. Now say it once with your eyes shut.</p>' +
+          '<p class="lede" style="margin:1rem auto 0">' +
+            (more ? "Word for word. Say it once with your eyes shut, then take the next part."
+                  : "The whole passage, word for word. Now say it with your eyes shut.") + "</p>" +
           '<div class="btn-row">' +
-            '<button class="btn" id="again">Scramble it again</button>' +
+            (more ? '<button class="btn" id="next">Next part \u2192</button>' : "") +
+            '<button class="btn' + (more ? " btn--quiet" : "") + '" id="again">' +
+              (more ? "Do this part again" : "Scramble it again") + "</button>" +
             '<a class="btn btn--quiet" href="#/i/' + item.id + '/fade">Fade it out</a>' +
           "</div>" +
         "</div>";
+      if (more)
+        document.getElementById("next").addEventListener("click", function () {
+          renderVerseOrder(item, at + 1);
+        });
       document.getElementById("again").addEventListener("click", function () {
-        renderVerseOrder(item);
+        renderVerseOrder(item, at);
       });
     }
 
