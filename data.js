@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 27 \u2014 build 27";
+const BUILD = "Sept 27 \u2014 build 28";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -37,6 +37,7 @@ const SUBJECTS = [
    "optional" is the gray-italic only-if-not-finished-in-class kind, "test" is
    the red kind. ----------------------------------------------------------- */
 const HOMEWORK = {
+  "asOf": "2026-09-27",
   "label": "Week of Sept 28 – Oct 2",
   "tests": [
     {

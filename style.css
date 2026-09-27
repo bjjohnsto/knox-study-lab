@@ -1215,6 +1215,12 @@ a.card:hover, a.card:focus-visible{
   font-weight:700; color:var(--turf); text-decoration:none;
 }
 .hwlink:hover{ text-decoration:underline; }
+.hwasof{
+  font-size:.78rem;
+  color:var(--ink-soft);
+  margin:-.4rem 0 .9rem;
+  font-style:italic;
+}
 .hwstale{
   border:2px dashed var(--cone-dark); border-radius:12px;
   padding:.5rem .8rem; margin-bottom:.9rem;
