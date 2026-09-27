@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 27 \u2014 build 28";
+const BUILD = "Sept 27 \u2014 build 30";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -47,6 +47,10 @@ const HOMEWORK = {
     {
       "date": "2026-10-02",
       "text": "Bible Quiz: John 15:1–5, word for word"
+    },
+    {
+      "date": "2026-10-02",
+      "text": "Math Test: Multiply and Divide Decimals"
     },
     {
       "date": "2026-10-02",
@@ -114,7 +118,7 @@ const HOMEWORK = {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
-          "text": "TBD — not posted yet"
+          "text": "Dividing decimals by powers of 10 worksheet — due Tuesday"
         }
       ]
     },
@@ -149,7 +153,7 @@ const HOMEWORK = {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
-          "text": "TBD — not posted yet"
+          "text": "Dividing decimals by decimals worksheet — due Wednesday"
         }
       ]
     },
@@ -196,7 +200,7 @@ const HOMEWORK = {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
-          "text": "TBD — not posted yet"
+          "text": "Complete the study guide — due Thursday"
         }
       ]
     },
@@ -231,7 +235,7 @@ const HOMEWORK = {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
-          "text": "TBD — not posted yet"
+          "text": "Review decimals in preparation for tomorrow's test"
         }
       ]
     },
@@ -281,7 +285,8 @@ const HOMEWORK = {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
-          "text": "TBD — not posted yet"
+          "text": "TEST: Multiply and Divide Decimals · no homework",
+          "test": true
         }
       ]
     }
@@ -4301,5 +4306,257 @@ const STUDY_ITEMS = [
       "I am the vine; you are the branches. Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you can do nothing."
     ],
     "assess": "quiz"
+  },
+  {
+    "id": "math-decimals-test",
+    "subject": "math",
+    "title": "Multiply & Divide Decimals Test",
+    "added": "2026-09-27",
+    "quiz": "2026-10-02",
+    "pin": true,
+    "note": "Test Friday 10/2. Your decimal RULES are solid — all four marks you lost were the plain multiplication underneath. Work it out first, then the four you missed.",
+    "type": "bundle",
+    "mathTopics": [
+      "decmul",
+      "decdiv",
+      "decpow"
+    ],
+    "mathRound": 10,
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "3.54 × 2.7 — how many decimal places will the answer have?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "answer": "3",
+        "why": "2 places in 3.54 plus 1 in 2.7 = 3. Count them BEFORE you multiply, then you know where the point goes."
+      },
+      {
+        "kind": "mc",
+        "prompt": "0.049 × 58 — how many decimal places will the answer have?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "5"
+        ],
+        "answer": "3",
+        "why": "3 places in 0.049 plus 0 in 58 = 3. A whole number contributes none."
+      },
+      {
+        "kind": "mc",
+        "prompt": "The digits of 0.67 × 61 work out to 4087. Where does the point go?",
+        "options": [
+          "4.087",
+          "40.87",
+          "408.7",
+          "4087"
+        ],
+        "answer": "40.87",
+        "why": "2 decimal places, so count 2 back from the right: 40.87. Check it against an estimate — 0.67 is about ⅔, and ⅔ of 61 is around 40."
+      },
+      {
+        "kind": "mc",
+        "prompt": "The digits of 23.4 × 3.2 work out to 7488. Where does the point go?",
+        "options": [
+          "7.488",
+          "74.88",
+          "748.8",
+          "7488"
+        ],
+        "answer": "74.88",
+        "why": "1 place plus 1 place = 2. Estimate to check: 23 × 3 is about 70."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which is the best estimate for 7.05 × 1.56?",
+        "options": [
+          "About 1.1",
+          "About 11",
+          "About 29",
+          "About 110"
+        ],
+        "answer": "About 11",
+        "why": "7 × 1.5 is about 11. Estimating first catches an answer like 29 before you write it down."
+      },
+      {
+        "kind": "mc",
+        "prompt": "12.34 ÷ 100 =",
+        "options": [
+          "1234",
+          "1.234",
+          "0.1234",
+          "0.01234"
+        ],
+        "answer": "0.1234",
+        "why": "Dividing makes it SMALLER — slide the point 2 places left."
+      },
+      {
+        "kind": "mc",
+        "prompt": "1.234 × 1,000 =",
+        "options": [
+          "0.001234",
+          "12.34",
+          "123.4",
+          "1,234"
+        ],
+        "answer": "1,234",
+        "why": "Multiplying makes it BIGGER — hop the point 3 places right."
+      },
+      {
+        "kind": "mc",
+        "prompt": "5 ÷ 10 = ?",
+        "options": [
+          "0.5",
+          "50",
+          "5.0",
+          ".5 with nothing in front"
+        ],
+        "answer": "0.5",
+        "why": "Slide left past the 5 and you have run out of digits, so put a 0 in front: 0.5. Never leave a bare point."
+      },
+      {
+        "kind": "mc",
+        "prompt": "3.6 × 100 = ?",
+        "options": [
+          "3.600",
+          "36",
+          "360",
+          "0.036"
+        ],
+        "answer": "360",
+        "why": "Hop 2 places right. You run out of digits after one hop, so annex a zero: 360."
+      },
+      {
+        "kind": "mc",
+        "prompt": "In 60.84 ÷ 12, where does the decimal point go in the quotient?",
+        "options": [
+          "Straight up above the point in 60.84",
+          "At the end of the answer",
+          "You move it 2 places right first",
+          "There isn't one"
+        ],
+        "answer": "Straight up above the point in 60.84",
+        "why": "Place it straight up first, then divide as normal. 60.84 ÷ 12 = 5.07."
+      },
+      {
+        "kind": "mc",
+        "prompt": "When you multiply two decimals, when do you line up the decimal points?",
+        "options": [
+          "Always, like adding",
+          "Never — line the digits up from the right",
+          "Only if both have the same number of places",
+          "Only when one is a whole number"
+        ],
+        "answer": "Never — line the digits up from the right",
+        "why": "Lining up the points is an ADDING rule. For multiplying, line up from the right, multiply as if there were no points, then count places."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Multiplying a number by 10 always makes it bigger.",
+        "answer": true,
+        "why": "Hop right. Dividing by 10 slides left and makes it smaller."
+      },
+      {
+        "kind": "tf",
+        "prompt": "When dividing a decimal by a whole number, you can end up with a remainder.",
+        "answer": false,
+        "why": "Keep annexing zeros and bring them down — the decimal quotient carries on instead of leaving a remainder."
+      },
+      {
+        "kind": "tf",
+        "prompt": "0.023 × 40 = 0.920",
+        "answer": true,
+        "why": "23 × 4 = 92, and 3 decimal places gives 0.920. You got this one right on the graded sheet."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these make a number SMALLER? Check ALL that apply.",
+        "options": [
+          "÷ 10",
+          "× 100",
+          "÷ 1,000",
+          "× 0.5",
+          "× 10"
+        ],
+        "answers": [
+          "÷ 10",
+          "÷ 1,000",
+          "× 0.5"
+        ],
+        "why": "Dividing by a power of ten slides left. Multiplying by a decimal less than 1 also shrinks it — that one catches people out."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which steps belong to MULTIPLYING decimals? Check ALL that apply.",
+        "options": [
+          "Line the digits up from the right",
+          "Count the decimal places in both factors",
+          "Line the decimal points up under each other",
+          "Multiply as if there were no decimal points",
+          "Put the point straight up into the answer"
+        ],
+        "answers": [
+          "Line the digits up from the right",
+          "Count the decimal places in both factors",
+          "Multiply as if there were no decimal points"
+        ],
+        "why": "Lining up the points and bringing the point straight up are the ADDING and DIVIDING rules. Three steps here, not one."
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "Work out 0.67 × 61. Say the whole-number multiplication out loud first.",
+        "answer": "67 × 61 = 4,087. Two decimal places, so 40.87. On the graded sheet you wrote 4.69, which is 67 × 7 — the second partial product was never added in."
+      },
+      {
+        "prompt": "Work out 0.049 × 58.",
+        "answer": "49 × 58 = 2,842. Three decimal places, so 2.842. You had 3.242, so the slip was in the carrying, not the point."
+      },
+      {
+        "prompt": "Work out 23.4 × 3.2. Estimate first.",
+        "answer": "Estimate: 23 × 3 is about 70. Then 234 × 32 = 7,488, and 1 + 1 = 2 places gives 74.88. You wrote 70.20 — close to the estimate, which is why estimating alone won't catch it. Redo the multiplication."
+      },
+      {
+        "prompt": "Work out 7.05 × 1.56. Estimate first.",
+        "answer": "Estimate: 7 × 1.5 is about 11. Then 705 × 156 = 109,980, and 2 + 2 = 4 places gives 10.9980, or 10.998. You wrote 29.780, which the estimate would have caught straight away."
+      },
+      {
+        "prompt": "Say the four steps for multiplying decimals.",
+        "answer": "1. Line the numbers up from the RIGHT. 2. Count how many digits are behind the decimal points. 3. Multiply as normal, ignoring the points. 4. Put the point back into the product, counting that many places from the right. No lining up of points — that is for adding."
+      },
+      {
+        "prompt": "Say the three steps for dividing a decimal by a whole number.",
+        "answer": "1. Set up the equation. 2. Put the decimal point STRAIGHT UP into the quotient. 3. Divide as normal. Example: 60.84 ÷ 12 = 5.07."
+      },
+      {
+        "prompt": "Divide 50.301 by 3. This one was starred on your worksheet and left blank.",
+        "answer": "16.767. Point straight up, then 3 into 5 is 1 remainder 2, 3 into 20 is 6 remainder 2, 3 into 23 is 7 remainder 2, 3 into 20 is 6 remainder 2, 3 into 21 is 7. Check: 16.767 × 3 = 50.301."
+      },
+      {
+        "prompt": "Divide 61.44 by 60.",
+        "answer": "1.024. 60 goes into 61 once with 1.44 left, then 60 into 144 is 2 remainder 24, then 60 into 240 is 4. Check: 1.024 × 60 = 61.44."
+      },
+      {
+        "prompt": "Divide 0.059 by 59.",
+        "answer": "0.001. Point straight up, 59 will not go into 0, 0 or 5, and goes into 59 once. Check: 0.001 × 59 = 0.059."
+      },
+      {
+        "prompt": "What does 5 ÷ 10 equal, and what do you have to remember to write?",
+        "answer": "0.5. Sliding left runs you past all the digits, so put a 0 in FRONT. A bare .5 loses the mark."
+      }
+    ],
+    "drills": [
+      "numpad",
+      "mconly",
+      "extras",
+      "multionly"
+    ],
+    "rival": "Decimal Point FC",
+    "matchLength": 8
   }
 ];

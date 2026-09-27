@@ -1472,8 +1472,82 @@
                why: "Simplify the top and the bottom BEFORE dividing. Top: " + steps +
                     ". Bottom: " + bot + " = " + den + ". Then " + num + " \u00f7 " + den +
                     " = " + (num / den) + "." };
+    },
+
+    /* --- Unit 3: multiplying and dividing decimals -------------------------
+       Built off his graded work, not off the chapter's table of contents.
+       Forty powers-of-ten problems across two worksheets came back essentially
+       perfect, so those get the light touch. All four marks he lost were on
+       decimal x decimal, and in three of the four the decimal point was in the
+       RIGHT place \u2014 it was the plain multi-digit multiplication underneath
+       that broke. And six of the eight long-division boxes were left blank, so
+       that half has never really been tested. Every answer here is built from
+       integer arithmetic and then scaled, so no floating-point dust. */
+
+    /* Hop right, slide left. Kept easy on purpose \u2014 this is revision. */
+    decpow: function () {
+      var digits = randInt(11, 9999);
+      var dp = randInt(1, 3);                       /* places in the start value */
+      var up = randInt(0, 1);
+      /* Sliding left stacks places on, so cap the answer at 4 decimal places —
+         her worksheets never go past three. */
+      var k = up ? randInt(1, 3) : randInt(1, Math.max(1, Math.min(3, 4 - dp)));
+      var e = up ? dp - k : dp + k;                 /* places in the answer */
+      var answer = e <= 0 ? digits * Math.pow(10, -e) : digits / Math.pow(10, e);
+      var start  = digits / Math.pow(10, dp);
+      var pow    = Math.pow(10, k);
+      return {
+        prompt: dec(start, dp) + (up ? " \u00d7 " : " \u00f7 ") + pow.toLocaleString(),
+        answer: answer, dec: true,
+        why: up
+          ? "Multiplying makes it BIGGER \u2014 hop the point " + k + " place" +
+            (k > 1 ? "s" : "") + " right."
+          : "Dividing makes it SMALLER \u2014 slide the point " + k + " place" +
+            (k > 1 ? "s" : "") + " left."
+      };
+    },
+
+    /* Decimal x decimal. Two digits by two digits, which is exactly the shape
+       of 0.67 x 61 and 23.4 x 3.2 \u2014 the two he actually missed. */
+    decmul: function () {
+      var a = randInt(12, 99), b = randInt(12, 99);
+      var pa = randInt(0, 2), pb = randInt(0, 2);
+      if (pa + pb === 0) pa = 1;
+      if (pa + pb > 3) pb = 3 - pa;
+      var raw = a * b;
+      var places = pa + pb;
+      return {
+        prompt: dec(a / Math.pow(10, pa), pa) + " \u00d7 " + dec(b / Math.pow(10, pb), pb),
+        answer: raw / Math.pow(10, places), dec: true,
+        why: "Ignore the points and work out " + a + " \u00d7 " + b + " = " + raw +
+             ". There are " + pa + " + " + pb + " = " + places +
+             " decimal places, so count " + places + " back from the right."
+      };
+    },
+
+    /* Decimal divided by a whole number \u2014 the half of the test he left blank.
+       Built backwards from a clean quotient so it always comes out exactly. */
+    decdiv: function () {
+      var d = randInt(2, 24);
+      var qd = randInt(101, 999);                   /* quotient digits */
+      var qp = randInt(1, 2);                       /* places in the quotient */
+      var quotient = qd / Math.pow(10, qp);
+      var dividend = (qd * d) / Math.pow(10, qp);
+      return {
+        prompt: dec(dividend, qp) + " \u00f7 " + d,
+        answer: quotient, dec: true,
+        why: "Put the decimal point straight up into the quotient first, then " +
+             "divide as normal. " + d + " \u00d7 " + dec(quotient, qp) + " = " +
+             dec(dividend, qp) + ", so it checks out."
+      };
     }
   };
+
+  /* Print a scaled integer as a decimal with a fixed number of places, with no
+     floating-point tail. */
+  function dec(n, places) {
+    return places > 0 ? n.toFixed(places) : String(Math.round(n));
+  }
 
   function renderNumpad(item) {
     var topics = (item.mathTopics || []).filter(function (t) { return MATH_TOPICS[t]; });
@@ -1484,6 +1558,20 @@
       deck.push(MATH_TOPICS[t]());
     }
     var g = { deck: deck, idx: 0, right: 0, entry: "" };
+    /* Whole-number topics keep the old ten-key pad. A decimal topic anywhere in
+       the round adds a point key, because "5.07" cannot be typed without one. */
+    var useDot = deck.some(function (p) { return p.dec; });
+
+    /* Show what he actually typed. Number().toLocaleString() would turn a
+       half-typed "5." into "5" and "0.50" into "0.5". */
+    function fmtEntry(t) {
+      if (t.indexOf(".") < 0) return Number(t).toLocaleString();
+      var bits = t.split(".");
+      return (bits[0] === "" ? "0" : Number(bits[0]).toLocaleString()) + "." + bits[1];
+    }
+    function fmtAnswer(n) {
+      return Number(n.toFixed(6)).toLocaleString(undefined, { maximumFractionDigits: 6 });
+    }
 
     function paint(state) {
       if (g.idx >= g.deck.length) return done();
@@ -1505,15 +1593,20 @@
         '<div class="q"><p class="q-kicker">Problem ' + (g.idx + 1) + " of " + g.deck.length + "</p>" +
           '<p class="q-text q-text--sentence" style="text-align:center">' + esc(p.prompt) + "</p></div>" +
         '<div class="numdisplay' + (state ? " numdisplay--" + state : "") + '" id="disp">' +
-          (g.entry ? esc(Number(g.entry).toLocaleString())
+          (g.entry ? esc(fmtEntry(g.entry))
                    : '<span class="numplaceholder">tap your answer</span>') + "</div>" +
         '<div class="numpad" id="pad">' +
           [1,2,3,4,5,6,7,8,9].map(function (n) {
             return '<button class="numkey" data-k="' + n + '">' + n + "</button>";
           }).join("") +
-          '<button class="numkey numkey--wide" data-k="clear">Clear</button>' +
-          '<button class="numkey" data-k="0">0</button>' +
-          '<button class="numkey numkey--go" data-k="enter">Check</button>' +
+          (useDot
+            ? '<button class="numkey" data-k=".">.</button>' +
+              '<button class="numkey" data-k="0">0</button>' +
+              '<button class="numkey numkey--wide" data-k="clear">Clear</button>' +
+              '<button class="numkey numkey--go numkey--span" data-k="enter">Check</button>'
+            : '<button class="numkey numkey--wide" data-k="clear">Clear</button>' +
+              '<button class="numkey" data-k="0">0</button>' +
+              '<button class="numkey numkey--go" data-k="enter">Check</button>') +
         "</div>" +
         '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>';
 
@@ -1522,7 +1615,11 @@
         if (!b || b.disabled) return;
         var k = b.dataset.k;
         if (k === "clear") { g.entry = ""; paint(); return; }
-        if (k === "enter") { if (g.entry !== "") submit(p); return; }
+        if (k === "enter") { if (g.entry !== "" && g.entry !== ".") submit(p); return; }
+        if (k === ".") {
+          if (g.entry.indexOf(".") < 0) { g.entry += g.entry === "" ? "0." : "."; paint(); }
+          return;
+        }
         /* Rounding and place-value answers can run to eight digits, so the
            cap is sized to the longest answer this drill can ask for. */
         if (g.entry.length < 9) { g.entry += k; paint(); }
@@ -1530,7 +1627,8 @@
     }
 
     function submit(p) {
-      var right = parseInt(g.entry, 10) === p.answer;
+      /* Compare to six decimal places so 0.920 and 0.92 both count. */
+      var right = Math.round(parseFloat(g.entry) * 1e6) === Math.round(p.answer * 1e6);
       if (right) g.right++;
       var wasEntry = g.entry;
       g.entry = "";
@@ -1540,7 +1638,8 @@
         .forEach(function (b) { b.disabled = true; });
       var disp = document.getElementById("disp");
       disp.className = "numdisplay numdisplay--" + (right ? "ok" : "no");
-      disp.innerHTML = esc(wasEntry) + (right ? "" : ' <span class="numwas">\u2192 ' + p.answer + "</span>");
+      disp.innerHTML = esc(fmtEntry(wasEntry)) +
+        (right ? "" : ' <span class="numwas">\u2192 ' + esc(fmtAnswer(p.answer)) + "</span>");
 
       var v = document.getElementById("verdict");
       v.className = "verdict " + (right ? "verdict--goal" : "verdict--card");

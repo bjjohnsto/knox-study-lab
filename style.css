@@ -1077,6 +1077,7 @@ a.card:hover, a.card:focus-visible{
 }
 .numkey:hover:not(:disabled){ background:#F6FAF1; transform:translateY(-2px); }
 .numkey:disabled{ opacity:.5; cursor:default; }
+.numkey--span{ grid-column:1 / -1; }
 .numkey--wide{
   font-family:"Archivo",sans-serif;
   font-size:.8rem;
