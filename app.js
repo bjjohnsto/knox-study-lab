@@ -476,8 +476,20 @@
         return '<li><b>' + esc(L.short) + " " + esc(L.date) + "</b> \u2014 " + esc(t.text) + "</li>";
       }).join("");
 
+      /* When the sheet was copied off Beverly's PDF. If a teacher changes
+         something midweek this line is what tells Knox the screen might be
+         behind the paper. */
+      var asOf = "";
+      if (hw.asOf) {
+        var L = hwDayLabel(hw.asOf), ago = -daysUntil(hw.asOf);
+        asOf = '<p class="hwasof">Up to date as of ' + esc(L.short) + " " + esc(L.date) +
+          (ago === 1 ? " \u00b7 yesterday" : ago > 1 ? " \u00b7 " + ago + " days ago" : " \u00b7 today") +
+          "</p>";
+      }
+
       app.innerHTML =
         '<p class="eyebrow">Homework \u00b7 ' + esc(hw.label) + "</p>" +
+        asOf +
         (stale ? '<p class="hwstale">This sheet has run out \u2014 ask for the new week.</p>' : "") +
         (tests ? '<div class="hwtests"><h2 class="hwtests-h">Tests this week</h2><ul>' +
                  tests + "</ul></div>" : "") +
