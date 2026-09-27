@@ -375,23 +375,126 @@
   function route() {
     var p = parseHash();
     game = null;
-    if (p[0] === "s" && p[1]) renderSubject(p[1]);
+    if (p[0] === "hw") renderHomework(p[1]);
+    else if (p[0] === "s" && p[1]) renderSubject(p[1]);
     else if (p[0] === "i" && p[1] && p[2] === "sheet") renderSheet(p[1]);
     else if (p[0] === "i" && p[1] && p[2]) startGame(p[1], p[2]);
     else if (p[0] === "i" && p[1]) renderItem(p[1]);
     else renderHome();
-    renderTabs(p[0] === "s" ? p[1] : (p[0] === "i" ? (itemById(p[1]) || {}).subject : null));
+    renderTabs(p[0] === "hw" ? "hw"
+               : p[0] === "s" ? p[1]
+               : p[0] === "i" ? (itemById(p[1]) || {}).subject : null);
     window.scrollTo(0, 0);
   }
 
-  function renderTabs(activeSubject) {
-    tabbar.innerHTML = SUBJECTS.map(function (s) {
-      var cur = s.id === activeSubject ? ' aria-current="page"' : "";
+  function renderTabs(active) {
+    var hw = (typeof HOMEWORK !== "undefined" && HOMEWORK)
+      ? '<a class="tab" href="#/hw"' + (active === "hw" ? ' aria-current="page"' : "") + ">Homework</a>"
+      : "";
+    tabbar.innerHTML = hw + SUBJECTS.map(function (s) {
+      var cur = s.id === active ? ' aria-current="page"' : "";
       return '<a class="tab" href="#/s/' + s.id + '"' + cur + ">" + esc(s.name) + "</a>";
     }).join("");
   }
 
   /* ---------- screens ----------------------------------------------------- */
+
+  /* ---------- homework -----------------------------------------------------
+
+     Beverly's sheet is a subject-by-day grid, which reads fine on paper and
+     badly on a phone. The question Knox actually asks is "what do I have to do
+     tonight", so the screen is day-first: one day at a time, today already
+     selected, subjects listed under it. The grid is still there \u2014 it is just
+     turned on its side. */
+
+  var DAYNAME = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  function hwDayLabel(iso) {
+    var p = iso.split("-");
+    var dow = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])).getUTCDay();
+    return { short: DAYNAME[dow], date: (+p[1]) + "/" + (+p[2]) };
+  }
+
+  function renderHomework(which) {
+    var hw = (typeof HOMEWORK !== "undefined") ? HOMEWORK : null;
+    if (!hw || !hw.days || !hw.days.length) {
+      app.innerHTML = '<p class="eyebrow">Homework</p>' +
+        '<p class="lede">No homework sheet loaded yet this week.</p>';
+      return;
+    }
+
+    /* Open on today when today is in the week; otherwise the first day. */
+    var todayIso = (function () {
+      var t = todayInZone();
+      var m = t[1] < 10 ? "0" + t[1] : "" + t[1];
+      var d = t[2] < 10 ? "0" + t[2] : "" + t[2];
+      return t[0] + "-" + m + "-" + d;
+    })();
+    var idx = hw.days.map(function (d) { return d.date; }).indexOf(which);
+    if (idx < 0) idx = hw.days.map(function (d) { return d.date; }).indexOf(todayIso);
+    if (idx < 0) idx = 0;
+
+    var stale = daysUntil(hw.days[hw.days.length - 1].date) < 0;
+
+    function paint() {
+      var day = hw.days[idx];
+      var strip = hw.days.map(function (d, n) {
+        var L = hwDayLabel(d.date);
+        var past = daysUntil(d.date) < 0;
+        var isToday = d.date === todayIso;
+        var none = !(d.tasks || []).length;
+        return '<button class="daykey' + (n === idx ? " daykey--on" : "") +
+          (past && n !== idx ? " daykey--past" : "") + '" data-n="' + n + '">' +
+          '<span class="daykey-d">' + L.short + (isToday ? " \u00b7 today" : "") + "</span>" +
+          '<span class="daykey-n">' + L.date + "</span>" +
+          (none ? '<span class="daykey-dot">\u2014</span>' : "") +
+          "</button>";
+      }).join("");
+
+      var tests = (hw.tests || []).map(function (t) {
+        var L = hwDayLabel(t.date);
+        return '<li><b>' + esc(L.short) + " " + esc(L.date) + "</b> \u2014 " + esc(t.text) + "</li>";
+      }).join("");
+
+      var tasks = (day.tasks || []).length
+        ? day.tasks.map(function (t) {
+            var cls = "hwtask" + (t.test ? " hwtask--test" : "") + (t.optional ? " hwtask--opt" : "");
+            return '<div class="hwrow">' +
+              '<div class="hwclass">' + esc(t.cls) +
+                (t.teacher ? ' <span class="hwwho">' + esc(t.teacher) + "</span>" : "") + "</div>" +
+              '<div class="' + cls + '">' + esc(t.text) + "</div>" +
+              (t.optional ? '<div class="hwtag">only if it isn\'t finished in class</div>' : "") +
+              (t.subject && activeFor(t.subject).length
+                ? '<a class="hwlink" href="#/s/' + t.subject + '">Study set \u2192</a>' : "") +
+              "</div>";
+          }).join("")
+        : '<p class="lede" style="margin:1.2rem 0">Nothing written down for ' +
+          esc(hwDayLabel(day.date).short) + ".</p>";
+
+      var soon = (hw.soon || []).map(function (t) {
+        var L = hwDayLabel(t.date);
+        return '<li><b>' + esc(L.short) + " " + esc(L.date) + "</b> \u2014 " + esc(t.text) + "</li>";
+      }).join("");
+
+      app.innerHTML =
+        '<p class="eyebrow">Homework \u00b7 ' + esc(hw.label) + "</p>" +
+        (stale ? '<p class="hwstale">This sheet has run out \u2014 ask for the new week.</p>' : "") +
+        (tests ? '<div class="hwtests"><h2 class="hwtests-h">Tests this week</h2><ul>' +
+                 tests + "</ul></div>" : "") +
+        '<div class="daystrip" id="strip">' + strip + "</div>" +
+        '<div class="hwday">' + tasks + "</div>" +
+        (soon ? '<div class="hwsoon"><h2 class="hwtests-h">Coming up</h2><ul>' + soon + "</ul></div>" : "");
+
+      document.getElementById("strip").addEventListener("click", function (e) {
+        var b = e.target.closest(".daykey");
+        if (!b) return;
+        idx = +b.dataset.n;
+        paint();
+      });
+    }
+    paint();
+  }
+
 
   function renderHome() {
     var cards = SUBJECTS.map(function (s) {

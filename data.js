@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 20 \u2014 build 26";
+const BUILD = "Sept 27 \u2014 build 27";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -32,6 +32,261 @@ const SUBJECTS = [
 /* ==========================================================================
    STUDY ITEMS  —  add new material at the BOTTOM of this list.
    ========================================================================== */
+/* ---------- This week's homework sheet -------------------------------------
+   Replace this whole block each week. Subject rows become one entry per day;
+   "optional" is the gray-italic only-if-not-finished-in-class kind, "test" is
+   the red kind. ----------------------------------------------------------- */
+const HOMEWORK = {
+  "label": "Week of Sept 28 – Oct 2",
+  "tests": [
+    {
+      "date": "2026-10-02",
+      "text": "ELA Test: AG Ch. 3, Prepositional Phrases"
+    },
+    {
+      "date": "2026-10-02",
+      "text": "Bible Quiz: John 15:1–5, word for word"
+    },
+    {
+      "date": "2026-10-02",
+      "text": "History Spot Check — pop quiz, no studying needed"
+    }
+  ],
+  "soon": [
+    {
+      "date": "2026-10-08",
+      "text": "Spelling List 4 Test"
+    },
+    {
+      "date": "2026-10-09",
+      "text": "Science Cell Project due"
+    }
+  ],
+  "days": [
+    {
+      "date": "2026-09-28",
+      "tasks": [
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:1–5"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Due: Ch. 9–10 Observations"
+        },
+        {
+          "cls": "ELA / Grammar",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "AG Ch. 3: finish evens + short answer"
+        },
+        {
+          "cls": "Spelling",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "New: List 4 (test Thu 10/8)"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "pp. 59–60"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "Due: Extra credit — 1 side = 5 pts, both = 10",
+          "optional": true
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "CYOC presentations"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "TBD — not posted yet"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "tasks": [
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:1–5"
+        },
+        {
+          "cls": "ELA / Grammar",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "AG Ch. 3: finish evens + short answer"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "pp. 61–62"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "CYOC presentations"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "TBD — not posted yet"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "tasks": [
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:1–5"
+        },
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Beauty Application Handout"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Ch. 11–12 Observations"
+        },
+        {
+          "cls": "ELA / Grammar",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "AG Ch. 3: finish evens + short answer"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "pp. 63–64"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "Ancient Israel worksheet"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "TBD — not posted yet"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "tasks": [
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:1–5 for Friday quiz"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Finish Ch. 13–14 Observations (due Fri)"
+        },
+        {
+          "cls": "ELA / Grammar",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "Study for Friday test: Prepositional Phrases"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "pp. 65–66"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "TBD — not posted yet"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "tasks": [
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "QUIZ: John 15:1–5",
+          "test": true
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Due: Ch. 13–14 Observations"
+        },
+        {
+          "cls": "ELA / Grammar",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "TEST: AG Ch. 3, Prepositional Phrases",
+          "test": true
+        },
+        {
+          "cls": "Spelling",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "Weekend: study List 4"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "Essay Question practice · Cell Project due 10/9"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "SPOT CHECK — pop quiz, no study",
+          "test": true
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "TBD — not posted yet"
+        }
+      ]
+    }
+  ]
+};
+
 const STUDY_ITEMS = [
   {
     "id": "lit-furthest-back-vocab",
@@ -4032,7 +4287,7 @@ const STUDY_ITEMS = [
     "title": "John 15:1–5 passage",
     "added": "2026-09-20",
     "quiz": "2026-10-02",
-    "note": "Test Friday 10/2. Five verses, word for word, ESV. Learn them one at a time — he already knows verse 5 from the weekly quizzes.",
+    "note": "Quiz Friday 10/2. Five verses, word for word, ESV. Learn them one at a time — he already knows verse 5 from the weekly quizzes.",
     "type": "verse",
     "reference": "John 15:1–5",
     "version": "ESV",
@@ -4043,6 +4298,7 @@ const STUDY_ITEMS = [
       "Already you are clean because of the word that I have spoken to you.",
       "Abide in me, and I in you. As the branch cannot bear fruit by itself, unless it abides in the vine, neither can you, unless you abide in me.",
       "I am the vine; you are the branches. Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you can do nothing."
-    ]
+    ],
+    "assess": "quiz"
   }
 ];

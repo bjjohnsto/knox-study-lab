@@ -1155,3 +1155,68 @@ a.card:hover, a.card:focus-visible{
   margin:.1rem 0 .7rem;
 }
 .shoot-hint b{ color:var(--cone-dark); }
+
+
+/* --- Homework ------------------------------------------------------------ */
+.daystrip{
+  display:grid; grid-template-columns:repeat(5,1fr); gap:.4rem;
+  margin:.2rem 0 1.1rem;
+}
+.daykey{
+  background:var(--chalk);
+  border:2px solid var(--ink);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  padding:.5rem .2rem .45rem;
+  cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; gap:.1rem;
+  font-family:"Atkinson Hyperlegible","Archivo Black",sans-serif;
+}
+.daykey-d{ font-size:.68rem; letter-spacing:.06em; text-transform:uppercase; font-weight:700; }
+.daykey-n{ font-size:.82rem; font-weight:700; }
+.daykey-dot{ font-size:.66rem; color:var(--line); line-height:1; }
+.daykey--on{ background:var(--cone); color:var(--chalk); border-color:var(--cone-dark); }
+.daykey--past{ opacity:.45; }
+.daykey:hover:not(.daykey--on){ background:#F6FAF1; }
+
+.hwtests, .hwsoon{
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  background:var(--chalk);
+  box-shadow:var(--shadow);
+  padding:.7rem .95rem;
+  margin-bottom:1rem;
+}
+.hwsoon{ margin-top:1.2rem; box-shadow:none; background:transparent; border-style:dashed; }
+.hwtests-h{
+  font-family:"Atkinson Hyperlegible","Archivo Black",sans-serif;
+  font-size:.72rem; letter-spacing:.11em; text-transform:uppercase;
+  margin:0 0 .35rem; color:var(--ink-soft);
+}
+.hwtests ul, .hwsoon ul{ margin:0; padding-left:1.1rem; }
+.hwtests li, .hwsoon li{ margin-bottom:.22rem; font-size:.92rem; }
+.hwtests li{ color:#A3241B; }
+
+.hwrow{ border-bottom:1px solid var(--line); padding:.62rem 0; }
+.hwrow:last-child{ border-bottom:none; }
+.hwclass{
+  font-family:"Atkinson Hyperlegible","Archivo Black",sans-serif;
+  font-size:.68rem; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--ink-soft); margin-bottom:.15rem;
+}
+.hwwho{ text-transform:none; letter-spacing:0; font-weight:400; opacity:.75; }
+.hwtask{ font-size:1rem; line-height:1.35; }
+.hwtask--test{ color:#A3241B; font-weight:700; }
+.hwtask--opt{ color:#5C6660; font-style:italic; }
+.hwtag{ font-size:.74rem; color:#5C6660; font-style:italic; margin-top:.1rem; }
+.hwlink{
+  display:inline-block; margin-top:.25rem;
+  font-size:.76rem; letter-spacing:.06em; text-transform:uppercase;
+  font-weight:700; color:var(--turf); text-decoration:none;
+}
+.hwlink:hover{ text-decoration:underline; }
+.hwstale{
+  border:2px dashed var(--cone-dark); border-radius:12px;
+  padding:.5rem .8rem; margin-bottom:.9rem;
+  font-size:.9rem; color:var(--cone-dark);
+}
