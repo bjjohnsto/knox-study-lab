@@ -463,7 +463,7 @@
               '<div class="hwclass">' + esc(t.cls) +
                 (t.teacher ? ' <span class="hwwho">' + esc(t.teacher) + "</span>" : "") + "</div>" +
               '<div class="' + cls + '">' + esc(t.text) + "</div>" +
-              (t.optional ? '<div class="hwtag">only if it isn\'t finished in class</div>' : "") +
+              (t.optional ? '<div class="hwtag">' + esc(t.tag || "only if it isn\'t finished in class") + "</div>" : "") +
               (t.subject && activeFor(t.subject).length
                 ? '<a class="hwlink" href="#/s/' + t.subject + '">Study set \u2192</a>' : "") +
               "</div>";
@@ -483,7 +483,9 @@
       if (hw.asOf) {
         var L = hwDayLabel(hw.asOf), ago = -daysUntil(hw.asOf);
         asOf = '<p class="hwasof">Up to date as of ' + esc(L.short) + " " + esc(L.date) +
-          (ago === 1 ? " \u00b7 yesterday" : ago > 1 ? " \u00b7 " + ago + " days ago" : " \u00b7 today") +
+          (ago === 1 ? " \u00b7 yesterday"
+             : ago > 1 ? " \u00b7 " + ago + " days ago"
+             : ago === 0 ? " \u00b7 today" : "") +
           "</p>";
       }
 

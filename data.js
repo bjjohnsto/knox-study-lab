@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 27 \u2014 build 30";
+const BUILD = "Sept 28 \u2014 build 31";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -37,7 +37,7 @@ const SUBJECTS = [
    "optional" is the gray-italic only-if-not-finished-in-class kind, "test" is
    the red kind. ----------------------------------------------------------- */
 const HOMEWORK = {
-  "asOf": "2026-09-27",
+  "asOf": "2026-09-28",
   "label": "Week of Sept 28 – Oct 2",
   "tests": [
     {
@@ -58,6 +58,10 @@ const HOMEWORK = {
     }
   ],
   "soon": [
+    {
+      "date": "2026-10-05",
+      "text": "Literature Reading Logs due"
+    },
     {
       "date": "2026-10-08",
       "text": "Spelling List 4 Test"
@@ -81,12 +85,14 @@ const HOMEWORK = {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Due: Ch. 9–10 Observations"
+          "text": "Ch. 9–10 Observations",
+          "optional": true,
+          "tag": "only if not completed over the weekend"
         },
         {
           "cls": "ELA / Grammar",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
+          "subject": "grammar",
           "text": "AG Ch. 3: finish evens + short answer"
         },
         {
@@ -134,7 +140,7 @@ const HOMEWORK = {
         {
           "cls": "ELA / Grammar",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
+          "subject": "grammar",
           "text": "AG Ch. 3: finish evens + short answer"
         },
         {
@@ -176,12 +182,13 @@ const HOMEWORK = {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Ch. 11–12 Observations"
+          "text": "Ch. 11–12 Observations",
+          "optional": true
         },
         {
           "cls": "ELA / Grammar",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
+          "subject": "grammar",
           "text": "AG Ch. 3: finish evens + short answer"
         },
         {
@@ -214,15 +221,9 @@ const HOMEWORK = {
           "text": "Study John 15:1–5 for Friday quiz"
         },
         {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Finish Ch. 13–14 Observations (due Fri)"
-        },
-        {
           "cls": "ELA / Grammar",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
+          "subject": "grammar",
           "text": "Study for Friday test: Prepositional Phrases"
         },
         {
@@ -253,12 +254,13 @@ const HOMEWORK = {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Due: Ch. 13–14 Observations"
+          "text": "Ch. 13 & 14 Observations completed",
+          "optional": true
         },
         {
           "cls": "ELA / Grammar",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
+          "subject": "grammar",
           "text": "TEST: AG Ch. 3, Prepositional Phrases",
           "test": true
         },
@@ -4558,5 +4560,701 @@ const STUDY_ITEMS = [
     ],
     "rival": "Decimal Point FC",
     "matchLength": 8
+  },
+  {
+    "id": "grammar-prepositions",
+    "subject": "grammar",
+    "title": "Prepositional Phrases Test",
+    "added": "2026-09-27",
+    "quiz": "2026-10-02",
+    "pin": true,
+    "note": "Test Friday 10/2 — AG Ch. 3. Find the preposition, then the whole phrase. Mark-ALL is the section to watch.",
+    "type": "bundle",
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "Which word is the preposition?  “The ball rolled under the bench.”",
+        "options": [
+          "ball",
+          "rolled",
+          "under",
+          "bench"
+        ],
+        "answer": "under",
+        "why": "“under the bench” is the phrase. The preposition starts it; “bench” is the object."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word is the preposition?  “Knox put his cleats inside the locker.”",
+        "options": [
+          "put",
+          "cleats",
+          "inside",
+          "locker"
+        ],
+        "answer": "inside",
+        "why": "inside the locker. Ask “inside what?” — the locker."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word is the preposition?  “We ate lunch before practice.”",
+        "options": [
+          "ate",
+          "lunch",
+          "before",
+          "practice"
+        ],
+        "answer": "before",
+        "why": "before practice. Prepositions can show time as well as place."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word is the preposition?  “The dog ran toward the fence.”",
+        "options": [
+          "dog",
+          "ran",
+          "toward",
+          "fence"
+        ],
+        "answer": "toward",
+        "why": "toward the fence."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word is the preposition?  “She sat beside her brother.”",
+        "options": [
+          "sat",
+          "beside",
+          "her",
+          "brother"
+        ],
+        "answer": "beside",
+        "why": "beside her brother. “her” describes the object; it is not the preposition."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word is the preposition?  “The kite flew above the trees.”",
+        "options": [
+          "kite",
+          "flew",
+          "above",
+          "trees"
+        ],
+        "answer": "above",
+        "why": "above the trees."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word is the preposition?  “He finished his work during study hall.”",
+        "options": [
+          "finished",
+          "work",
+          "during",
+          "hall"
+        ],
+        "answer": "during",
+        "why": "during study hall."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word is the preposition?  “Everyone came except Jonathan.”",
+        "options": [
+          "Everyone",
+          "came",
+          "except",
+          "Jonathan"
+        ],
+        "answer": "except",
+        "why": "except Jonathan. “except” is on her list and it catches people out."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word is the preposition?  “They walked along the river.”",
+        "options": [
+          "They",
+          "walked",
+          "along",
+          "river"
+        ],
+        "answer": "along",
+        "why": "along the river."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word is the preposition?  “We drove past the school.”",
+        "options": [
+          "We",
+          "drove",
+          "past",
+          "school"
+        ],
+        "answer": "past",
+        "why": "past the school. Here “past” is a preposition, not a noun meaning long ago."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What is the OBJECT of the preposition?  “The keys are on the kitchen counter.”",
+        "options": [
+          "keys",
+          "on",
+          "kitchen",
+          "counter"
+        ],
+        "answer": "counter",
+        "why": "on WHAT? The counter. “kitchen” only describes the counter — the object is the last noun in the phrase."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What is the OBJECT of the preposition?  “He ran toward the finish line.”",
+        "options": [
+          "He",
+          "toward",
+          "finish",
+          "line"
+        ],
+        "answer": "line",
+        "why": "toward WHAT? The line."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What is the OBJECT of the preposition?  “The gift came from my grandmother.”",
+        "options": [
+          "gift",
+          "came",
+          "my",
+          "grandmother"
+        ],
+        "answer": "grandmother",
+        "why": "from WHOM? My grandmother. An object can be a person."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What is the OBJECT of the preposition?  “The trail goes through the tall pines.”",
+        "options": [
+          "trail",
+          "goes",
+          "tall",
+          "pines"
+        ],
+        "answer": "pines",
+        "why": "through WHAT? The pines. “tall” is only a describing word inside the phrase."
+      },
+      {
+        "kind": "mc",
+        "prompt": "In “The plane flew over,” the word OVER is —",
+        "options": [
+          "a preposition",
+          "an adverb",
+          "a noun",
+          "a verb"
+        ],
+        "answer": "an adverb",
+        "why": "Nothing follows it, so there is no object. A preposition MUST have an object; with nothing after it, the word is an adverb."
+      },
+      {
+        "kind": "mc",
+        "prompt": "In “The plane flew over the lake,” the word OVER is —",
+        "options": [
+          "a preposition",
+          "an adverb",
+          "a conjunction",
+          "an adjective"
+        ],
+        "answer": "a preposition",
+        "why": "Now it has an object — the lake — so it is a preposition and “over the lake” is the phrase. Same word, different job."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which one of these is a preposition?",
+        "options": [
+          "slowly",
+          "beneath",
+          "because",
+          "although"
+        ],
+        "answer": "beneath",
+        "why": "beneath is on her list. because and although join clauses — they are conjunctions. slowly is an adverb."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which one of these is a preposition?",
+        "options": [
+          "however",
+          "versus",
+          "therefore",
+          "instead"
+        ],
+        "answer": "versus",
+        "why": "versus is on her list. The other three are all connecting or transition words, not prepositions."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which one of these is a preposition?",
+        "options": [
+          "nevertheless",
+          "meanwhile",
+          "despite",
+          "otherwise"
+        ],
+        "answer": "despite",
+        "why": "despite is on her list — despite the rain."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Mark ALL the prepositional phrases.  “After the game, we ate pizza at the park.”",
+        "options": [
+          "After the game",
+          "we ate pizza",
+          "ate pizza at",
+          "at the park"
+        ],
+        "answers": [
+          "After the game",
+          "at the park"
+        ],
+        "why": "TWO of them. A sentence can hold more than one phrase — keep reading to the end."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Mark ALL the prepositional phrases.  “The cat under the porch ran across the yard.”",
+        "options": [
+          "The cat under",
+          "under the porch",
+          "ran across",
+          "across the yard"
+        ],
+        "answers": [
+          "under the porch",
+          "across the yard"
+        ],
+        "why": "TWO. A phrase starts at the preposition and ends at its object — it never swallows the word in front of it."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Mark ALL the prepositional phrases.  “During the storm, branches fell onto the roof of the shed.”",
+        "options": [
+          "During the storm",
+          "branches fell",
+          "onto the roof",
+          "fell onto",
+          "of the shed"
+        ],
+        "answers": [
+          "During the storm",
+          "onto the roof",
+          "of the shed"
+        ],
+        "why": "THREE. Phrases can sit right next to each other — “of the shed” is its own phrase describing the roof."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Mark ALL the prepositional phrases.  “Without a word, she walked through the door and into the hall.”",
+        "options": [
+          "Without a word",
+          "she walked",
+          "through the door",
+          "and into",
+          "into the hall"
+        ],
+        "answers": [
+          "Without a word",
+          "through the door",
+          "into the hall"
+        ],
+        "why": "THREE. “and” joins the last two phrases but is not part of either one."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these are on the preposition list? Check ALL that apply.",
+        "options": [
+          "amid",
+          "almost",
+          "among",
+          "always",
+          "aboard"
+        ],
+        "answers": [
+          "amid",
+          "among",
+          "aboard"
+        ],
+        "why": "THREE. almost and always are adverbs — they look similar but never take an object."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Every prepositional phrase ends with a noun or a pronoun.",
+        "answer": true,
+        "why": "That last noun or pronoun is the object of the preposition."
+      },
+      {
+        "kind": "tf",
+        "prompt": "A preposition can stand alone with nothing after it.",
+        "answer": false,
+        "why": "With nothing after it, it has no object — and then it is working as an adverb, not a preposition."
+      },
+      {
+        "kind": "tf",
+        "prompt": "The subject of a sentence is never inside a prepositional phrase.",
+        "answer": true,
+        "why": "That is why crossing out the phrases first makes the subject and verb easy to find."
+      },
+      {
+        "kind": "tf",
+        "prompt": "A prepositional phrase can contain describing words between the preposition and its object.",
+        "answer": true,
+        "why": "“on the kitchen counter” — the and kitchen both sit inside the phrase."
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "What two parts must every prepositional phrase have?",
+        "answer": "A preposition to start it, and an object — a noun or pronoun — to end it. Describing words can sit in between: on the kitchen counter."
+      },
+      {
+        "prompt": "How do you tell a preposition from an adverb?",
+        "answer": "Say the word and then ask “what?” or “whom?” If a noun or pronoun answers, it is a preposition. If nothing answers, it is an adverb. “The plane flew over.” — over what? Nothing. Adverb. “The plane flew over the lake.” — over what? The lake. Preposition."
+      },
+      {
+        "prompt": "Name ten prepositions without looking at the list.",
+        "answer": "Any ten from her sheet — for example: aboard, about, above, across, after, against, along, among, around, at. The list runs alphabetically from aboard to without."
+      },
+      {
+        "prompt": "Find EVERY prepositional phrase: “In the morning, the team from Brownsburg practiced on the field behind the school.”",
+        "answer": "Four of them: in the morning, from Brownsburg, on the field, behind the school."
+      },
+      {
+        "prompt": "Why does crossing out the prepositional phrases help you find the subject and the verb?",
+        "answer": "Because the subject is never inside a prepositional phrase. Cross them out and whatever is left is the skeleton of the sentence. “The team (from Brownsburg) practiced” — team practiced."
+      },
+      {
+        "prompt": "Some words can be prepositions OR something else. Name a few and say how you tell.",
+        "answer": "but, as, since, than, for, like, past. If the word takes an object right after it, it is a preposition (“everyone but Jonathan”). If it joins two whole ideas instead, it is a conjunction (“I ran but I was late”)."
+      },
+      {
+        "prompt": "What is the object of the preposition in “She waited outside the crowded gym”?",
+        "answer": "gym. “outside the crowded gym” is the phrase; “crowded” only describes the object."
+      }
+    ],
+    "drills": [
+      "mconly",
+      "multionly",
+      "extras",
+      "match"
+    ],
+    "rival": "Adverb Athletic",
+    "matchLength": 8
+  },
+  {
+    "id": "ela-spelling-4",
+    "subject": "ela",
+    "title": "Spelling List 4",
+    "added": "2026-09-27",
+    "quiz": "2026-10-08",
+    "note": "Test Thursday 10/8. Nine of the twenty are i-before-e words — that is what the list is really testing.",
+    "type": "bundle",
+    "spellWords": [
+      "seize",
+      "weird",
+      "grief",
+      "receipt",
+      "disbelief",
+      "received",
+      "believers",
+      "sovereign",
+      "foreigner",
+      "traction",
+      "competitive",
+      "inquire",
+      "couple",
+      "sought",
+      "though",
+      "thoroughly",
+      "throughout",
+      "announcements",
+      "extraordinary",
+      "selection"
+    ],
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "seize",
+          "sieze",
+          "seiz",
+          "seaze"
+        ],
+        "answer": "seize",
+        "why": "\"seize\" is the one on her list. Breaks the rule — EI with no C in front. One of the ones you just have to know."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "weard",
+          "weird",
+          "wierd",
+          "werid"
+        ],
+        "answer": "weird",
+        "why": "\"weird\" is the one on her list. Breaks the rule — WE-IRD, EI with no C. 'We are weird' keeps the E before the I."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "greef",
+          "griefe",
+          "grief",
+          "greif"
+        ],
+        "answer": "grief",
+        "why": "\"grief\" is the one on her list. Follows the rule — I before E."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "reciept",
+          "receit",
+          "recipt",
+          "receipt"
+        ],
+        "answer": "receipt",
+        "why": "\"receipt\" is the one on her list. I before E EXCEPT after C — so CEI. And it keeps a silent P."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "disbelief",
+          "disbeleif",
+          "disbelef",
+          "disbeleaf"
+        ],
+        "answer": "disbelief",
+        "why": "\"disbelief\" is the one on her list. Follows the rule — I before E, same as 'belief'."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "receved",
+          "received",
+          "recieved",
+          "receieved"
+        ],
+        "answer": "received",
+        "why": "\"received\" is the one on her list. Except after C — CEI, same as 'receipt'."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "belivers",
+          "believors",
+          "believers",
+          "beleivers"
+        ],
+        "answer": "believers",
+        "why": "\"believers\" is the one on her list. Follows the rule — I before E."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "soveriegn",
+          "sovreign",
+          "soverign",
+          "sovereign"
+        ],
+        "answer": "sovereign",
+        "why": "\"sovereign\" is the one on her list. Breaks the rule — EI, no C. Think SOVER-EIGN."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "foreigner",
+          "foriegner",
+          "foreginer",
+          "forigner"
+        ],
+        "answer": "foreigner",
+        "why": "\"foreigner\" is the one on her list. Breaks the rule — EI, no C. Think FOR-EIGN-ER."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "trackion",
+          "traction",
+          "tracktion",
+          "tractoin"
+        ],
+        "answer": "traction",
+        "why": "\"traction\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "compeditive",
+          "competitve",
+          "competitive",
+          "competative"
+        ],
+        "answer": "competitive",
+        "why": "\"competitive\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "inquier",
+          "inqure",
+          "inquyre",
+          "inquire"
+        ],
+        "answer": "inquire",
+        "why": "\"inquire\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "couple",
+          "cuople",
+          "cupple",
+          "coople"
+        ],
+        "answer": "couple",
+        "why": "\"couple\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "soght",
+          "sought",
+          "sougt",
+          "saught"
+        ],
+        "answer": "sought",
+        "why": "\"sought\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "thouh",
+          "thouge",
+          "though",
+          "thogh"
+        ],
+        "answer": "though",
+        "why": "\"though\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "thouroughly",
+          "thorougly",
+          "thoroughley",
+          "thoroughly"
+        ],
+        "answer": "thoroughly",
+        "why": "\"thoroughly\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "throughout",
+          "throuhout",
+          "throughtout",
+          "thruoghout"
+        ],
+        "answer": "throughout",
+        "why": "\"throughout\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "annoucements",
+          "announcements",
+          "anouncements",
+          "announcments"
+        ],
+        "answer": "announcements",
+        "why": "\"announcements\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "extraordinery",
+          "exraordinary",
+          "extraordinary",
+          "extrordinary"
+        ],
+        "answer": "extraordinary",
+        "why": "\"extraordinary\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "selction",
+          "seleciton",
+          "selecton",
+          "selection"
+        ],
+        "answer": "selection",
+        "why": "\"selection\" is the one on her list."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these list words BREAK the “i before e except after c” rule? Check ALL that apply.",
+        "options": [
+          "seize",
+          "grief",
+          "weird",
+          "believers",
+          "sovereign",
+          "foreigner"
+        ],
+        "answers": [
+          "seize",
+          "weird",
+          "sovereign",
+          "foreigner"
+        ],
+        "why": "Four of them. seize, weird, sovereign and foreigner all put E before I with no C in front. grief and believers follow the rule."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which list words follow “except after C” — the C-E-I spelling? Check ALL that apply.",
+        "options": [
+          "receipt",
+          "received",
+          "grief",
+          "disbelief",
+          "seize"
+        ],
+        "answers": [
+          "receipt",
+          "received"
+        ],
+        "why": "Both come after a C, so CEI. grief and disbelief have no C, so I comes first. seize just breaks the rule."
+      }
+    ],
+    "drills": [
+      "spell",
+      "mconly",
+      "multionly"
+    ]
   }
 ];
