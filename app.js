@@ -1529,6 +1529,29 @@
 
     /* Decimal divided by a whole number \u2014 the half of the test he left blank.
        Built backwards from a clean quotient so it always comes out exactly. */
+    /* Divide a decimal BY a decimal — item 3 on her study guide, and the one
+       method the textbook pages never covered. Move the point in the divisor
+       until it is a whole number, then move it the same number of places in the
+       dividend. Built backwards from a clean quotient so it always comes out. */
+    decdivdec: function () {
+      var dv = randInt(2, 95);                      /* divisor digits */
+      var p  = randInt(1, 2);                       /* places in the divisor */
+      var qd = randInt(11, 999);                    /* quotient digits */
+      var qp = randInt(0, 1);                       /* places in the quotient */
+      var divisor  = dv / Math.pow(10, p);
+      var quotient = qd / Math.pow(10, qp);
+      var dividend = (qd * dv) / Math.pow(10, qp + p);
+      return {
+        prompt: dec(dividend, qp + p) + " \u00f7 " + dec(divisor, p),
+        answer: quotient, dec: true,
+        why: "Move the point in " + dec(divisor, p) + " " + p + " place" +
+             (p > 1 ? "s" : "") + " right to make it " + dv + ", then move it " +
+             p + " place" + (p > 1 ? "s" : "") + " in " + dec(dividend, qp + p) +
+             " too. That turns it into " + dec(qd * dv / Math.pow(10, qp), qp) +
+             " \u00f7 " + dv + " = " + dec(quotient, qp) + "."
+      };
+    },
+
     decdiv: function () {
       var d = randInt(2, 24);
       var qd = randInt(101, 999);                   /* quotient digits */

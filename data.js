@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Sept 28 \u2014 build 31";
+const BUILD = "Oct 1 \u2014 build 32";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -37,7 +37,7 @@ const SUBJECTS = [
    "optional" is the gray-italic only-if-not-finished-in-class kind, "test" is
    the red kind. ----------------------------------------------------------- */
 const HOMEWORK = {
-  "asOf": "2026-09-28",
+  "asOf": "2026-10-01",
   "label": "Week of Sept 28 – Oct 2",
   "tests": [
     {
@@ -4316,12 +4316,13 @@ const STUDY_ITEMS = [
     "added": "2026-09-27",
     "quiz": "2026-10-02",
     "pin": true,
-    "note": "Test Friday 10/2. Your decimal RULES are solid — all four marks you lost were the plain multiplication underneath. Work it out first, then the four you missed.",
+    "note": "Test Friday 10/2. Her study guide lists five things — all five are in here. Work it out covers the arithmetic; the study guide questions cover the word problems and the four you missed.",
     "type": "bundle",
     "mathTopics": [
       "decmul",
       "decdiv",
-      "decpow"
+      "decpow",
+      "decdivdec"
     ],
     "mathRound": 10,
     "questions": [
@@ -4508,6 +4509,149 @@ const STUDY_ITEMS = [
           "Multiply as if there were no decimal points"
         ],
         "why": "Lining up the points and bringing the point straight up are the ADDING and DIVIDING rules. Three steps here, not one."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Sunflower seeds cost $3.69 per pound. How much do 2 lb cost?",
+        "options": [
+          "$1.85",
+          "$5.69",
+          "$7.38",
+          "$7.38 — but with no label"
+        ],
+        "answer": "$7.38",
+        "why": "Cost per pound × number of pounds. 3.69 × 2 = 7.38. Money answers need the dollar sign."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Micah paid $7.12 for 8 lb of jellybeans. What is the price per pound?",
+        "options": [
+          "$56.96",
+          "$0.89",
+          "$0.65",
+          "$8.90"
+        ],
+        "answer": "$0.89",
+        "why": "“Per pound” from a total means DIVIDE. 7.12 ÷ 8 = 0.89. If the answer came out bigger than the total, you multiplied by mistake."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which operation does this need?  “Ribbon costs $1.25 a yard. How much for 3.5 yards?”",
+        "options": [
+          "Multiply",
+          "Divide",
+          "Add",
+          "Subtract"
+        ],
+        "answer": "Multiply",
+        "why": "A price for ONE thing, and you want MANY — multiply. $4.375, which rounds to $4.38."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which operation does this need?  “A 4.5 lb bag of apples costs $8.10. What does one pound cost?”",
+        "options": [
+          "Multiply",
+          "Divide",
+          "Add",
+          "Subtract"
+        ],
+        "answer": "Divide",
+        "why": "A total, and you want ONE — divide. 8.10 ÷ 4.5 = $1.80. This one is a decimal ÷ decimal, so move both points first."
+      },
+      {
+        "kind": "mc",
+        "prompt": "A runner covers 2.4 miles each day. How far in 7 days?",
+        "options": [
+          "0.34 miles",
+          "9.4 miles",
+          "16.8 miles",
+          "16.8 — no label needed"
+        ],
+        "answer": "16.8 miles",
+        "why": "2.4 × 7 = 16.8. The word “miles” is part of the answer."
+      },
+      {
+        "kind": "mc",
+        "prompt": "A 14.4 ft rope is cut into 1.8 ft pieces. How many pieces?",
+        "options": [
+          "8 pieces",
+          "25.92 pieces",
+          "0.125 pieces",
+          "12.6 pieces"
+        ],
+        "answer": "8 pieces",
+        "why": "How many small lengths fit into a big one — divide. Move both points: 144 ÷ 18 = 8. A count of pieces is a whole number, which is a good sign you did it right."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Mrs. Ray bought 3 shirts at $24.95 each and had a $10.00 coupon. What did she pay?",
+        "options": [
+          "$74.85",
+          "$64.85",
+          "$14.95",
+          "$44.85"
+        ],
+        "answer": "$64.85",
+        "why": "TWO steps. 24.95 × 3 = 74.85, then subtract the coupon: 74.85 − 10.00 = 64.85. Re-read the question to check you did every step."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Your answer to a money problem comes out as 7.4. How should you write it?",
+        "options": [
+          "7.4",
+          "$7.4",
+          "$7.40",
+          "7.40"
+        ],
+        "answer": "$7.40",
+        "why": "Money gets a dollar sign AND two decimal places. $7.4 is not a way of writing money."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these word problems need DIVISION? Check ALL that apply.",
+        "options": [
+          "Price per pound from a total cost",
+          "Cost of 6 items at $2.35 each",
+          "How many 0.5 L bottles fill a 4.5 L jug",
+          "Total distance for 5 days at 3.2 miles a day",
+          "Average score from a total"
+        ],
+        "answers": [
+          "Price per pound from a total cost",
+          "How many 0.5 L bottles fill a 4.5 L jug",
+          "Average score from a total"
+        ],
+        "why": "THREE. Going from a total down to ONE, or finding how many small amounts fit in a big one, is division. The other two build a total up, so they multiply."
+      },
+      {
+        "kind": "multi",
+        "prompt": "A finished word-problem answer should have which of these? Check ALL that apply.",
+        "options": [
+          "The number",
+          "A label — the unit word",
+          "The working shown",
+          "A dollar sign if it is money",
+          "The question copied out again"
+        ],
+        "answers": [
+          "The number",
+          "A label — the unit word",
+          "The working shown",
+          "A dollar sign if it is money"
+        ],
+        "why": "FOUR. The label is the one that has cost you the most marks this term."
+      },
+      {
+        "kind": "tf",
+        "prompt": "If a word problem asks for a price per item and your answer is bigger than the total, you have made a mistake.",
+        "answer": true,
+        "why": "One item cannot cost more than all of them. That check catches a multiply-instead-of-divide error straight away."
+      },
+      {
+        "kind": "tf",
+        "prompt": "A word-problem answer of “16.8” is complete.",
+        "answer": false,
+        "why": "16.8 WHAT? Miles, pounds, dollars. The label is part of the answer."
       }
     ],
     "extras": [
@@ -4550,6 +4694,34 @@ const STUDY_ITEMS = [
       {
         "prompt": "What does 5 ÷ 10 equal, and what do you have to remember to write?",
         "answer": "0.5. Sliding left runs you past all the digits, so put a 0 in FRONT. A bare .5 loses the mark."
+      },
+      {
+        "prompt": "Before you work out ANY word problem, what three things do you write down?",
+        "answer": "What am I finding? Which operation and why? Then the answer with its label. The planner takes ten seconds and it is where the marks are."
+      },
+      {
+        "prompt": "How do you tell a multiplying word problem from a dividing one?",
+        "answer": "If you know what ONE costs or weighs and you want MANY, multiply. If you know the TOTAL and you want ONE — or you want to know how many small amounts fit in a big one — divide."
+      },
+      {
+        "prompt": "A 4.5 lb bag of apples costs $8.10. What does one pound cost? Show the move-the-point step.",
+        "answer": "Divide: 8.10 ÷ 4.5. Move the point one place in 4.5 to make it 45, so move it one place in 8.10 too — 81.0 ÷ 45 = 1.8. Answer: $1.80 per pound. Check: 1.80 × 4.5 = 8.10."
+      },
+      {
+        "prompt": "A 14.4 ft rope is cut into 1.8 ft pieces. How many pieces?",
+        "answer": "Divide: 14.4 ÷ 1.8. Move both points one place: 144 ÷ 18 = 8. Answer: 8 pieces. A count comes out whole, which is a good sign."
+      },
+      {
+        "prompt": "Gas costs $3.89 a gallon. William bought 12.7 gallons. How much did he pay?",
+        "answer": "Multiply: 3.89 × 12.7. 389 × 127 = 49,403, and 2 + 1 = 3 decimal places gives 49.403. Money rounds to the nearest cent: $49.40."
+      },
+      {
+        "prompt": "Mrs. Ray bought a shirt for her husband and one for each of her 2 sons at $24.95 each, with $10.00 off. What was the cost?",
+        "answer": "Three shirts, so 24.95 × 3 = 74.85, then 74.85 − 10.00 = $64.85. Two steps — re-read the question before you stop."
+      },
+      {
+        "prompt": "Why is it worth estimating a word-problem answer before you work it out?",
+        "answer": "It catches an answer that is wildly wrong. 7.05 × 1.56 should be about 11 — you wrote 29.78, and the estimate would have caught it on the spot."
       }
     ],
     "drills": [
