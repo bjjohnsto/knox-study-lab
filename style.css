@@ -1227,3 +1227,31 @@ a.card:hover, a.card:focus-visible{
   padding:.5rem .8rem; margin-bottom:.9rem;
   font-size:.9rem; color:var(--cone-dark);
 }
+
+
+/* --- Name it on the map -------------------------------------------------- */
+.mapwrap{
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  background:var(--chalk);
+  box-shadow:var(--shadow);
+  padding:.4rem;
+  margin:.2rem auto 1rem;
+  max-width:420px;
+}
+.mapsvg{ display:block; width:100%; height:auto; border-radius:8px; }
+@keyframes mappulse{
+  0%,100%{ opacity:1; }
+  50%    { opacity:.45; }
+}
+.mappulse{ animation:mappulse 1.1s ease-in-out infinite; }
+.mapbank{
+  display:flex; flex-wrap:wrap; gap:.45rem;
+  justify-content:center;
+  margin:0 auto 1rem;
+  max-width:460px;
+}
+.mapbank .chip{ font-size:.92rem; }
+@media (prefers-reduced-motion: reduce){
+  .mappulse{ animation:none; }
+}

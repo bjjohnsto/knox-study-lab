@@ -138,6 +138,9 @@
       { id: "mixed",    name: "Full practice test",   blurb: "Every section together, like the real thing." },
       { id: "match",    name: "Match Day",            blurb: "Play a match. Right answers earn you a shot on goal \u2014 but the keeper gets a say." }
     ],
+    maps: [
+      { id: "maplabel", name: "Name it on the map", blurb: "The real map sheet. One blank at a time \u2014 tap the name that belongs in it." }
+    ],
     decision: [
       { id: "decide", name: "GCF or LCM, then solve", blurb: "A word problem. Pick which one it needs, then work out the answer \u2014 with the label." }
     ],
@@ -208,6 +211,7 @@
     if ((item.orderGroups || []).length) list.push(pick("sequence", "bank"));
     if ((item.spellWords || []).length) list.unshift(pick("spelling", "spell"));
     if ((item.mathTopics || []).length) list.unshift(pick("math", "numpad"));
+    if ((item.maps || []).length) list.unshift(pick("maps", "maplabel"));
     if ((item.decideProblems || []).length) list.unshift(pick("decision", "decide"));
     if ((item.divisors || []).length) list.unshift(pick("divisibility", "divis"));
     if ((item.extras || []).length) list.push(EXTRAS_DRILL);
@@ -218,7 +222,7 @@
   /* Every drill the app knows about, for resolving an item's own list. */
   function allDrills() {
     var all = [];
-    ["vocab", "questions", "categorize", "sequence", "verse", "spelling", "math", "decision", "divisibility"].forEach(function (grp) {
+    ["vocab", "questions", "categorize", "sequence", "verse", "spelling", "math", "maps", "decision", "divisibility"].forEach(function (grp) {
       all = all.concat(DRILLS[grp] || []);
     });
     all.push(EXTRAS_DRILL);
@@ -719,7 +723,7 @@
     if (drillId === "extras") { renderSelfCheck(item, item.extras, "extras"); return; }
     if (item.type === "questions" ||
         (item.type === "bundle" &&
-         ["decide", "divis", "numpad", "spell", "match", "keyonly", "tfonly", "mconly",
+         ["maplabel", "decide", "divis", "numpad", "spell", "match", "keyonly", "tfonly", "mconly",
           "multionly", "corronly", "mixed"].indexOf(drillId) > -1)) {
       renderQuestionSet(item, drillId); return;
     }
@@ -1182,6 +1186,180 @@
     }
 
     start();
+  }
+
+
+  /* ---------- name it on the map -----------------------------------------
+
+     The multiple-choice map questions taught him facts ABOUT the map but never
+     made him put a name on a blank, which is what the test actually does. This
+     drill shows the real sheet \u2014 the same scan, the same six boxes in the same
+     places \u2014 lights up one blank at a time and makes him choose from the same
+     word bank the sheet prints. The modern map works the same way with a pin
+     on each country, and a right answer fills that country in its colour, so by
+     the end he has the finished map in front of him. */
+
+  function renderMapLabel(item) {
+    var maps = (item.maps || []).filter(function (m) { return (m.blanks || []).length; });
+    if (!maps.length) { app.innerHTML = '<p class="lede">No maps on this item.</p>'; return; }
+
+    var g = { map: 0, pos: 0, clean: 0, total: 0, order: [], solved: {}, missed: false };
+    maps.forEach(function (m) { g.total += m.blanks.length; });
+
+    function startMap() {
+      g.order = shuffle(maps[g.map].blanks.map(function (_, i) { return i; }));
+      g.pos = 0; g.solved = {}; g.missed = false;
+      paint();
+    }
+
+    function overlay(m, bi, b) {
+      var done = g.solved[bi];
+      var now  = !done && g.order[g.pos] === bi;
+      if (b.pin) {
+        /* Countries in the Levant sit very close together, so pins stay small
+           and each one carries its own label offset to stop them colliding. */
+        var r  = m.pinR || Math.max(8, Math.round(m.w / 44));
+        var lw = b.labelW || 86;
+        var lx = b.x + (typeof b.labelDx === "number" ? b.labelDx : r + 3);
+        var ly = b.y + (typeof b.labelDy === "number" ? b.labelDy : 0);
+        var fs = Math.round(r * 1.25);
+        return '<g>' +
+          '<circle cx="' + b.x + '" cy="' + b.y + '" r="' + r + '" ' +
+            'fill="' + (done ? (b.fill || "#CBEBD0") : now ? "#E8641A" : "#FFFFFF") + '" ' +
+            'stroke="#12241A" stroke-width="2"' + (now ? ' class="mappulse"' : "") + "/>" +
+          (done
+            ? '<rect x="' + lx + '" y="' + (ly - r) + '" width="' + lw +
+              '" height="' + (2 * r) + '" rx="4" fill="#FFFFFF" stroke="#12241A" stroke-width="1.5"/>' +
+              '<text x="' + (lx + lw / 2) + '" y="' + (ly + fs * 0.36) + '" text-anchor="middle" ' +
+              'font-size="' + fs + '" font-family="Atkinson Hyperlegible, Arial, sans-serif" ' +
+              'font-weight="700" fill="#12241A">' + esc(b.answer) + "</text>"
+            : '<text x="' + b.x + '" y="' + (b.y + r * 0.42) + '" text-anchor="middle" font-size="' +
+              Math.round(r * 1.2) + '" font-family="Arial, sans-serif" font-weight="700" fill="' +
+              (now ? "#FFFFFF" : "#12241A") + '">?</text>') +
+          "</g>";
+      }
+      var pad = 3;
+      var txt = done ? b.answer : "";
+      /* The Jordan River blank is tall and narrow, like the river. Horizontal
+         text would be unreadably small in it, so that one reads downwards. */
+      var tall = b.h > b.w * 2;
+      var along = tall ? b.h : b.w;
+      var across = tall ? b.w : b.h;
+      var size = Math.min(across * 0.62, (along - 2 * pad) / Math.max(1, txt.length * 0.52));
+      return '<g>' +
+        '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" ' +
+          'fill="#FFFFFF" stroke="' + (now ? "#E8641A" : done ? "#2E7D4F" : "#9AA6A0") + '" ' +
+          'stroke-width="' + (now ? 3 : 2) + '"' + (now ? ' class="mappulse"' : "") + "/>" +
+        (done
+          ? '<text x="' + (b.x + b.w / 2) + '" y="' + (b.y + b.h / 2 + size * 0.36) +
+            '" text-anchor="middle" font-size="' + size.toFixed(1) +
+            '" font-family="Atkinson Hyperlegible, Arial, sans-serif" font-weight="700" ' +
+            'fill="#12241A"' +
+            (tall ? ' transform="rotate(-90 ' + (b.x + b.w / 2) + " " + (b.y + b.h / 2) + ')"' : "") +
+            ">" + esc(b.answer) + "</text>"
+          : now
+            ? '<text x="' + (b.x + b.w / 2) + '" y="' + (b.y + b.h / 2 + b.h * 0.2) +
+              '" text-anchor="middle" font-size="' + (b.h * 0.6).toFixed(1) +
+              '" font-family="Arial, sans-serif" font-weight="700" fill="#E8641A">?</text>'
+            : "") +
+        "</g>";
+    }
+
+    function paint(msg, tone) {
+      var m = maps[g.map];
+      var b = m.blanks[g.order[g.pos]];
+      var used = {};
+      Object.keys(g.solved).forEach(function (i) { used[m.blanks[i].answer] = 1; });
+
+      var dots = m.blanks.map(function (_, i) {
+        return '<span class="dot' + (g.solved[i] ? " dot--hit" : g.order[g.pos] === i ? " dot--now" : "") + '"></span>';
+      }).join("");
+
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<div class="scoreboard"><div class="score-side">' +
+          '<span class="score-label">Clean</span><span class="score-num">' + g.clean + "</span></div>" +
+          '<div class="score-dots">' + dots + "</div>" +
+          '<div class="score-side"><span class="score-label">Of</span>' +
+          '<span class="score-num">' + g.total + "</span></div></div>" +
+        '<p class="eyebrow">' + esc(m.title) +
+          (maps.length > 1 ? " \u00b7 map " + (g.map + 1) + " of " + maps.length : "") + "</p>" +
+        '<div class="mapwrap"><svg class="mapsvg" viewBox="0 0 ' + m.w + " " + m.h + '" ' +
+          'xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + esc(m.title) + '">' +
+          '<image href="' + m.src + '" x="0" y="0" width="' + m.w + '" height="' + m.h + '"/>' +
+          m.blanks.map(function (bb, i) { return overlay(m, i, bb); }).join("") +
+          "</svg></div>" +
+        '<p class="chant-hint">' + esc(b.prompt || "Which name goes in the highlighted blank?") + "</p>" +
+        '<div class="mapbank" id="bank">' +
+          m.bank.map(function (name) {
+            return '<button class="chip' + (used[name] ? " chip--placed" : "") + '"' +
+              (used[name] ? " disabled" : "") + ' data-n="' + esc(name) + '">' + esc(name) + "</button>";
+          }).join("") +
+        "</div>" +
+        '<div class="verdict' + (tone ? " " + tone : "") + '" id="verdict" role="status" aria-live="polite">' +
+          (msg || "") + "</div>";
+
+      document.getElementById("bank").addEventListener("click", function (e) {
+        var t = e.target.closest(".chip");
+        if (!t || t.disabled) return;
+        answer(t.dataset.n);
+      });
+    }
+
+    function answer(name) {
+      var m = maps[g.map];
+      var bi = g.order[g.pos];
+      var b = m.blanks[bi];
+      if (name !== b.answer) {
+        g.missed = true;
+        paint("Not that one<small>" + esc(name) + " goes somewhere else on this map. Look again at where the blank sits.</small>",
+              "verdict--card");
+        return;
+      }
+      g.solved[bi] = true;
+      if (!g.missed) g.clean++;
+      g.missed = false;
+      g.pos++;
+
+      if (g.pos < g.order.length) {
+        paint("<strong>" + esc(b.answer) + "</strong><small>" + esc(b.why || "") + "</small>", "verdict--goal");
+        return;
+      }
+      /* map finished */
+      g.pos = g.order.length - 1;
+      var more = g.map + 1 < maps.length;
+      paint("<strong>" + esc(b.answer) + "</strong><small>" + esc(b.why || "") +
+            " That is the whole map filled in.</small>", "verdict--goal");
+      var row = document.createElement("div");
+      row.className = "btn-row";
+      row.innerHTML = '<button class="btn" id="on">' + (more ? "Next map \u2192" : "See the result") + "</button>";
+      document.getElementById("verdict").after(row);
+      var btn = document.getElementById("on");
+      btn.addEventListener("click", function () {
+        if (more) { g.map++; startMap(); } else done();
+      });
+      btn.focus();
+    }
+
+    function done() {
+      var rating = g.clean === g.total ? "Clean sheet"
+                 : g.clean >= g.total * 0.7 ? "Nearly there" : "Back to the binder";
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="result-rating">' + rating + "</p>" +
+          '<p class="result-score">' + g.clean + "/" + g.total + "</p>" +
+          '<p class="result-of">Named right first time</p>' +
+          '<p class="lede" style="margin:1rem auto 0">The test sheet looks exactly like this, with the ' +
+          "same blanks in the same places. Say where each one goes before you pick.</p>" +
+          '<div class="btn-row">' +
+            '<button class="btn" id="again">Go again</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '">Other drills</a>' +
+          "</div>" +
+        "</div>";
+      document.getElementById("again").addEventListener("click", function () { renderMapLabel(item); });
+    }
+
+    startMap();
   }
 
   function renderDivisibility(item) {
@@ -2134,6 +2312,7 @@
   /* ---------- mixed question sets (true/false, choice, mark-all) ----------- */
 
   function renderQuestionSet(item, drillId) {
+    if (drillId === "maplabel") return renderMapLabel(item);
     if (drillId === "decide") return renderDecide(item);
     if (drillId === "divis") return renderDivisibility(item);
     if (drillId === "numpad") return renderNumpad(item);
