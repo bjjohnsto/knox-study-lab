@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Oct 1 \u2014 build 32";
+const BUILD = "Oct 3 \u2014 build 33";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -5428,5 +5428,958 @@ const STUDY_ITEMS = [
       "mconly",
       "multionly"
     ]
+  },
+  {
+    "id": "hist-israel-map",
+    "subject": "history",
+    "title": "Israel Map Test",
+    "added": "2026-10-03",
+    "quiz": "2026-10-08",
+    "pin": true,
+    "note": "Test Thursday 10/8. Two maps — the ancient one has six labels, the modern one has seven countries to colour. His filled-in copies are in the history binder.",
+    "type": "bundle",
+    "words": [
+      {
+        "word": "Mediterranean Sea",
+        "meaning": "The large sea along the entire WEST coast. Everything on the map drains toward it."
+      },
+      {
+        "word": "Jordan River",
+        "meaning": "The river running north to south down the middle, from the Sea of Galilee down to the Dead Sea. It separates the two kingdoms from the land east of it."
+      },
+      {
+        "word": "Israel",
+        "meaning": "The NORTHERN kingdom after the split. The green area holding Megiddo, Dothan and Shiloh."
+      },
+      {
+        "word": "Judah",
+        "meaning": "The SOUTHERN kingdom after the split. The shaded area holding Bethlehem, Hebron and Beersheba."
+      },
+      {
+        "word": "Samaria",
+        "meaning": "Capital of the NORTHERN kingdom, Israel. Marked with the capital symbol, west of the Jordan and north of Bethel."
+      },
+      {
+        "word": "Jerusalem",
+        "meaning": "Capital of the SOUTHERN kingdom, Judah. Marked with the capital symbol, just north of Bethlehem and west of Jericho."
+      },
+      {
+        "word": "Egypt — ORANGE",
+        "meaning": "Modern map. The large country in the south-west, on the far side of the Red Sea and the Sinai."
+      },
+      {
+        "word": "Israel — BLUE",
+        "meaning": "Modern map. The small country on the eastern Mediterranean coast, between Lebanon and Egypt."
+      },
+      {
+        "word": "Lebanon — YELLOW",
+        "meaning": "Modern map. The small country directly NORTH of Israel, on the coast."
+      },
+      {
+        "word": "Jordan — BROWN",
+        "meaning": "Modern map. The country directly EAST of Israel, across the Jordan River."
+      },
+      {
+        "word": "Syria — PURPLE",
+        "meaning": "Modern map. North-east of Israel, above Jordan and west of Iraq."
+      },
+      {
+        "word": "Iraq — GREEN",
+        "meaning": "Modern map. East of Syria and Jordan, at the top of the Persian Gulf."
+      },
+      {
+        "word": "Saudi Arabia — RED",
+        "meaning": "Modern map. The biggest country on the map, filling the whole peninsula south of Jordan and Iraq."
+      }
+    ],
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "ANCIENT MAP — which body of water forms the entire western border?",
+        "options": [
+          "The Dead Sea",
+          "The Sea of Galilee",
+          "The Mediterranean Sea",
+          "The Red Sea"
+        ],
+        "answer": "The Mediterranean Sea",
+        "why": "It runs the full length of the west coast, past Tyre, Joppa, Ashkelon and Gaza."
+      },
+      {
+        "kind": "mc",
+        "prompt": "ANCIENT MAP — which river runs from the Sea of Galilee down to the Dead Sea?",
+        "options": [
+          "The Nile",
+          "The Jordan River",
+          "The Euphrates",
+          "The Tigris"
+        ],
+        "answer": "The Jordan River",
+        "why": "North to south down the middle of the map. The Sea of Galilee feeds it and the Dead Sea is where it ends."
+      },
+      {
+        "kind": "mc",
+        "prompt": "ANCIENT MAP — which was the NORTHERN kingdom?",
+        "options": [
+          "Judah",
+          "Israel",
+          "Philistia",
+          "Phoenicia"
+        ],
+        "answer": "Israel",
+        "why": "Israel is north, Judah is south. Remember it by the capitals: Samaria up top, Jerusalem down below."
+      },
+      {
+        "kind": "mc",
+        "prompt": "ANCIENT MAP — which was the SOUTHERN kingdom?",
+        "options": [
+          "Israel",
+          "Samaria",
+          "Judah",
+          "Moab"
+        ],
+        "answer": "Judah",
+        "why": "Judah holds Bethlehem, Hebron, Beersheba and En-gedi."
+      },
+      {
+        "kind": "mc",
+        "prompt": "ANCIENT MAP — what was the capital of the northern kingdom?",
+        "options": [
+          "Jerusalem",
+          "Samaria",
+          "Shiloh",
+          "Megiddo"
+        ],
+        "answer": "Samaria",
+        "why": "Samaria is the capital of Israel in the north. Both capitals are marked with the same little capital symbol, so go by position."
+      },
+      {
+        "kind": "mc",
+        "prompt": "ANCIENT MAP — what was the capital of Judah?",
+        "options": [
+          "Samaria",
+          "Hebron",
+          "Bethlehem",
+          "Jerusalem"
+        ],
+        "answer": "Jerusalem",
+        "why": "Jerusalem sits just north of Bethlehem and west of Jericho."
+      },
+      {
+        "kind": "mc",
+        "prompt": "ANCIENT MAP — Bethlehem, Hebron and Beersheba are all in which kingdom?",
+        "options": [
+          "Israel",
+          "Judah",
+          "Philistia",
+          "Edom"
+        ],
+        "answer": "Judah",
+        "why": "All three sit in the southern shaded area."
+      },
+      {
+        "kind": "mc",
+        "prompt": "ANCIENT MAP — Megiddo, Dothan and Shiloh are all in which kingdom?",
+        "options": [
+          "Judah",
+          "Israel",
+          "Moab",
+          "Phoenicia"
+        ],
+        "answer": "Israel",
+        "why": "All three sit in the northern green area."
+      },
+      {
+        "kind": "mc",
+        "prompt": "ANCIENT MAP — which is further NORTH?",
+        "options": [
+          "Jerusalem",
+          "Samaria",
+          "Bethlehem",
+          "Hebron"
+        ],
+        "answer": "Samaria",
+        "why": "Samaria is in the northern kingdom. The other three are all in Judah, in the south."
+      },
+      {
+        "kind": "mc",
+        "prompt": "MODERN MAP — what colour is Egypt?",
+        "options": [
+          "Orange",
+          "Red",
+          "Yellow",
+          "Green"
+        ],
+        "answer": "Orange",
+        "why": "Egypt is ORANGE."
+      },
+      {
+        "kind": "mc",
+        "prompt": "MODERN MAP — what colour is Israel?",
+        "options": [
+          "Green",
+          "Blue",
+          "Purple",
+          "Brown"
+        ],
+        "answer": "Blue",
+        "why": "Israel is BLUE."
+      },
+      {
+        "kind": "mc",
+        "prompt": "MODERN MAP — what colour is Lebanon?",
+        "options": [
+          "Brown",
+          "Purple",
+          "Yellow",
+          "Red"
+        ],
+        "answer": "Yellow",
+        "why": "Lebanon is YELLOW. It is the small one directly north of Israel."
+      },
+      {
+        "kind": "mc",
+        "prompt": "MODERN MAP — what colour is Jordan?",
+        "options": [
+          "Brown",
+          "Orange",
+          "Green",
+          "Blue"
+        ],
+        "answer": "Brown",
+        "why": "Jordan is BROWN. Jordan and Egypt are the two easiest to mix up, so pair them in your head: Jordan BROWN, Egypt ORANGE."
+      },
+      {
+        "kind": "mc",
+        "prompt": "MODERN MAP — what colour is Syria?",
+        "options": [
+          "Red",
+          "Yellow",
+          "Purple",
+          "Brown"
+        ],
+        "answer": "Purple",
+        "why": "Syria is PURPLE."
+      },
+      {
+        "kind": "mc",
+        "prompt": "MODERN MAP — what colour is Iraq?",
+        "options": [
+          "Green",
+          "Blue",
+          "Red",
+          "Orange"
+        ],
+        "answer": "Green",
+        "why": "Iraq is GREEN."
+      },
+      {
+        "kind": "mc",
+        "prompt": "MODERN MAP — what colour is Saudi Arabia?",
+        "options": [
+          "Purple",
+          "Brown",
+          "Yellow",
+          "Red"
+        ],
+        "answer": "Red",
+        "why": "Saudi Arabia is RED. It is the biggest country on the map, so the red block is hard to miss."
+      },
+      {
+        "kind": "mc",
+        "prompt": "MODERN MAP — which country is directly NORTH of Israel?",
+        "options": [
+          "Jordan",
+          "Lebanon",
+          "Syria",
+          "Egypt"
+        ],
+        "answer": "Lebanon",
+        "why": "Lebanon sits on the coast right above Israel. Syria is north-east, further inland."
+      },
+      {
+        "kind": "mc",
+        "prompt": "MODERN MAP — which country is directly EAST of Israel?",
+        "options": [
+          "Iraq",
+          "Saudi Arabia",
+          "Jordan",
+          "Syria"
+        ],
+        "answer": "Jordan",
+        "why": "Straight across the Jordan River."
+      },
+      {
+        "kind": "mc",
+        "prompt": "MODERN MAP — which is the LARGEST country shown?",
+        "options": [
+          "Egypt",
+          "Iraq",
+          "Saudi Arabia",
+          "Syria"
+        ],
+        "answer": "Saudi Arabia",
+        "why": "It fills the whole peninsula south of Jordan and Iraq."
+      },
+      {
+        "kind": "mc",
+        "prompt": "MODERN MAP — which country is west of Israel, across the Sinai Peninsula?",
+        "options": [
+          "Libya",
+          "Egypt",
+          "Jordan",
+          "Lebanon"
+        ],
+        "answer": "Egypt",
+        "why": "Egypt is across the Sinai to the south-west."
+      },
+      {
+        "kind": "multi",
+        "prompt": "ANCIENT MAP — which of these belong to the NORTHERN kingdom of Israel? Check ALL that apply.",
+        "options": [
+          "Samaria",
+          "Megiddo",
+          "Hebron",
+          "Shiloh",
+          "Beersheba"
+        ],
+        "answers": [
+          "Samaria",
+          "Megiddo",
+          "Shiloh"
+        ],
+        "why": "THREE of them. Hebron and Beersheba are both down in Judah."
+      },
+      {
+        "kind": "multi",
+        "prompt": "MODERN MAP — which countries BORDER Israel on this map? Check ALL that apply.",
+        "options": [
+          "Lebanon",
+          "Syria",
+          "Jordan",
+          "Egypt",
+          "Iraq"
+        ],
+        "answers": [
+          "Lebanon",
+          "Syria",
+          "Jordan",
+          "Egypt"
+        ],
+        "why": "FOUR. Iraq does not touch Israel — Jordan and Syria are in between."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which six things do you have to label on the ANCIENT map? Check ALL that apply.",
+        "options": [
+          "Mediterranean Sea",
+          "Jordan River",
+          "Jerusalem",
+          "Samaria",
+          "Judah",
+          "Israel",
+          "Egypt",
+          "Dead Sea"
+        ],
+        "answers": [
+          "Mediterranean Sea",
+          "Jordan River",
+          "Jerusalem",
+          "Samaria",
+          "Judah",
+          "Israel"
+        ],
+        "why": "SIX. Egypt belongs to the other map, and the Dead Sea is already printed on the sheet."
+      },
+      {
+        "kind": "tf",
+        "prompt": "On the ancient map, Israel is the northern kingdom and Judah is the southern kingdom.",
+        "answer": true,
+        "why": "North is Israel, south is Judah."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Jerusalem was the capital of the northern kingdom.",
+        "answer": false,
+        "why": "Jerusalem was the capital of JUDAH in the south. Samaria was the northern capital."
+      },
+      {
+        "kind": "tf",
+        "prompt": "The Jordan River flows into the Dead Sea.",
+        "answer": true,
+        "why": "It runs from the Sea of Galilee in the north down into the Dead Sea."
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "Name the six things you have to label on the ancient Israel map.",
+        "answer": "Mediterranean Sea, Jordan River, Jerusalem, Samaria, Judah, Israel."
+      },
+      {
+        "prompt": "Point to where each one goes on the ancient map, out loud.",
+        "answer": "Mediterranean Sea along the whole west coast. Jordan River down the middle, from the Sea of Galilee to the Dead Sea. Israel the northern region. Judah the southern region. Samaria the capital up in Israel. Jerusalem the capital down in Judah, just above Bethlehem."
+      },
+      {
+        "prompt": "How do you keep Samaria and Jerusalem straight?",
+        "answer": "Samaria is the capital of the northern kingdom and Jerusalem is the capital of the southern kingdom. Both are marked with the same capital symbol on the map, so position is the only way to tell them apart. Samaria is up by Shiloh; Jerusalem is down by Bethlehem."
+      },
+      {
+        "prompt": "Say all seven country colours for the modern map, from memory.",
+        "answer": "Egypt orange, Israel blue, Lebanon yellow, Jordan brown, Syria purple, Iraq green, Saudi Arabia red."
+      },
+      {
+        "prompt": "Which two colours are easiest to mix up, and how will you remember?",
+        "answer": "Jordan brown and Egypt orange. Pair them deliberately: Jordan is BROWN and sits east of Israel; Egypt is ORANGE and sits south-west across the Sinai."
+      },
+      {
+        "prompt": "Starting at Israel on the modern map, name the neighbours going clockwise.",
+        "answer": "Lebanon to the north, Syria to the north-east, Jordan to the east, and Egypt to the south-west. Iraq and Saudi Arabia are further out and do not touch Israel."
+      }
+    ],
+    "drills": [
+      "meaning",
+      "mconly",
+      "multionly",
+      "extras"
+    ],
+    "rival": "Philistia FC",
+    "matchLength": 8
+  },
+  {
+    "id": "hist-israel-vocab",
+    "subject": "history",
+    "title": "Ancient Israel Vocab Test",
+    "added": "2026-10-03",
+    "quiz": "2026-10-09",
+    "note": "Test Friday 10/9. Thirty terms. Mrs. Martinez: matching from a word bank, true/false with the underlined word corrected, and short written answers.",
+    "type": "bundle",
+    "words": [
+      {
+        "word": "Abraham",
+        "meaning": "Patriarch called by God; father of the Hebrew nation."
+      },
+      {
+        "word": "Isaac",
+        "meaning": "Son of Abraham and Sarah; father of Jacob."
+      },
+      {
+        "word": "Jacob / Israel",
+        "meaning": "Son of Isaac whose name was changed to Israel; father of the 12 tribes of Israel."
+      },
+      {
+        "word": "Moses",
+        "meaning": "Leader who delivered the Israelites from Egypt and received the law at Mt. Sinai."
+      },
+      {
+        "word": "Joseph",
+        "meaning": "Son of Jacob sold into slavery in Egypt, who later rose to power and saved his family during a famine."
+      },
+      {
+        "word": "Joshua",
+        "meaning": "Leader who succeeded Moses and led the Israelites into the Promised Land."
+      },
+      {
+        "word": "Samuel",
+        "meaning": "The last judge and a prophet of Israel who anointed the first two kings."
+      },
+      {
+        "word": "David",
+        "meaning": "Israel's second and greatest king, known for establishing Jerusalem as the capital."
+      },
+      {
+        "word": "Solomon",
+        "meaning": "King of Israel known for his wisdom and for building the first Temple."
+      },
+      {
+        "word": "Jeroboam",
+        "meaning": "First king of the northern kingdom of Israel after the kingdom split."
+      },
+      {
+        "word": "Nebuchadnezzar",
+        "meaning": "Babylonian king who conquered Judah and exiled the Jewish people."
+      },
+      {
+        "word": "Esther",
+        "meaning": "Jewish queen of Persia who saved her people from a plot to destroy them."
+      },
+      {
+        "word": "Antiochus IV",
+        "meaning": "Seleucid ruler who desecrated the Jewish Temple and sparked the Maccabean Revolt."
+      },
+      {
+        "word": "Abrahamic Covenant",
+        "meaning": "God's promise that Abraham's descendants would become a great nation and bless all families of the earth."
+      },
+      {
+        "word": "Israel (term)",
+        "meaning": "The nation God made from Jacob's descendants; also the name of the Northern Kingdom after the split."
+      },
+      {
+        "word": "Mosaic Covenant",
+        "meaning": "Conditional laws given at Mt. Sinai with blessings for obedience and curses for disobedience."
+      },
+      {
+        "word": "Monotheism",
+        "meaning": "The belief in one true God (Yahweh)."
+      },
+      {
+        "word": "Passover",
+        "meaning": "A celebration honoring the Lord's deliverance of the Israelites from slavery in Egypt."
+      },
+      {
+        "word": "Exodus",
+        "meaning": "The Israelites' departure from Egypt."
+      },
+      {
+        "word": "Tabernacle",
+        "meaning": "The portable place of worship used in the wilderness, symbolizing God's presence with the people."
+      },
+      {
+        "word": "Yahweh",
+        "meaning": "The Hebrew name for the one true God."
+      },
+      {
+        "word": "Atonement",
+        "meaning": "The restoration of the broken relationship between God and people."
+      },
+      {
+        "word": "Judas Maccabeus",
+        "meaning": "Leader of the Jewish revolt against the Seleucids in the 2nd century BC."
+      },
+      {
+        "word": "Hanukkah",
+        "meaning": "The 8-day celebration marking the Maccabean rededication of the Temple."
+      },
+      {
+        "word": "Diaspora",
+        "meaning": "The intentional scattering of the Israelites into foreign nations."
+      },
+      {
+        "word": "New Covenant",
+        "meaning": "Agreement in which God promised to give His Holy Spirit and transform the hearts of His people."
+      },
+      {
+        "word": "Assimilate",
+        "meaning": "To absorb into a culture."
+      },
+      {
+        "word": "Samaritans",
+        "meaning": "People in the northern kingdom of Israel; descendants of conquered peoples who intermarried with Israelites."
+      },
+      {
+        "word": "Septuagint",
+        "meaning": "The historical Greek translation of the Old Testament Scriptures."
+      },
+      {
+        "word": "Synagogue / Rabbi",
+        "meaning": "A local house of prayer and scripture reading, and the Jewish teacher leading it."
+      }
+    ],
+    "questions": [
+      {
+        "kind": "correct",
+        "prompt": "Abraham was the father of the Hebrew nation.",
+        "underlined": "Abraham",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "The patriarch God called. The line runs Abraham, Isaac, Jacob."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Isaac was the son of Jacob and Sarah.",
+        "underlined": "Jacob",
+        "answer": false,
+        "correction": "Abraham",
+        "options": [
+          "Abraham",
+          "Jacob",
+          "Joseph",
+          "Moses"
+        ],
+        "why": "Isaac is the son of ABRAHAM and Sarah, and the father of Jacob. Keep the order: Abraham, Isaac, Jacob."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Jacob's name was changed to Israel.",
+        "underlined": "Israel",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "And his descendants became the 12 tribes of Israel."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Moses received the law at Mt. Ararat.",
+        "underlined": "Ararat",
+        "answer": false,
+        "correction": "Sinai",
+        "options": [
+          "Sinai",
+          "Ararat",
+          "Carmel",
+          "Nebo"
+        ],
+        "why": "Mt. SINAI. Ararat is where the ark came to rest, which is a different story entirely."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Joseph was sold into slavery in Babylon.",
+        "underlined": "Babylon",
+        "answer": false,
+        "correction": "Egypt",
+        "options": [
+          "Egypt",
+          "Babylon",
+          "Persia",
+          "Assyria"
+        ],
+        "why": "EGYPT. He rose to power there and saved his family during the famine."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Joshua succeeded Moses and led the Israelites into the Promised Land.",
+        "underlined": "Joshua",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Moses led them OUT of Egypt; Joshua led them IN to the Promised Land."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Samuel was the first judge of Israel.",
+        "underlined": "first",
+        "answer": false,
+        "correction": "last",
+        "options": [
+          "last",
+          "first",
+          "greatest",
+          "youngest"
+        ],
+        "why": "The LAST judge, and a prophet. He anointed the first two kings, Saul and David."
+      },
+      {
+        "kind": "correct",
+        "prompt": "David established Jerusalem as the capital.",
+        "underlined": "Jerusalem",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Israel's second and greatest king."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Solomon built the first Temple.",
+        "underlined": "Solomon",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Known for his wisdom and for the Temple."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Jeroboam was the first king of the southern kingdom.",
+        "underlined": "southern",
+        "answer": false,
+        "correction": "northern",
+        "options": [
+          "northern",
+          "southern",
+          "eastern",
+          "united"
+        ],
+        "why": "NORTHERN. Jeroboam took the north, which kept the name Israel."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Nebuchadnezzar was the Assyrian king who conquered Judah.",
+        "underlined": "Assyrian",
+        "answer": false,
+        "correction": "Babylonian",
+        "options": [
+          "Babylonian",
+          "Assyrian",
+          "Persian",
+          "Seleucid"
+        ],
+        "why": "BABYLONIAN. He conquered Judah and carried the people into exile."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Esther was the Jewish queen of Egypt.",
+        "underlined": "Egypt",
+        "answer": false,
+        "correction": "Persia",
+        "options": [
+          "Persia",
+          "Egypt",
+          "Babylon",
+          "Greece"
+        ],
+        "why": "PERSIA. She saved her people from a plot to destroy them."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Antiochus IV desecrated the Temple and sparked the Maccabean Revolt.",
+        "underlined": "Antiochus IV",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "The Seleucid ruler. Judas Maccabeus led the revolt that followed."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Monotheism is the belief in many gods.",
+        "underlined": "many",
+        "answer": false,
+        "correction": "one",
+        "options": [
+          "one",
+          "many",
+          "no",
+          "three"
+        ],
+        "why": "ONE true God, Yahweh. Poly means many; mono means one."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The Tabernacle was a permanent place of worship.",
+        "underlined": "permanent",
+        "answer": false,
+        "correction": "portable",
+        "options": [
+          "portable",
+          "permanent",
+          "stone",
+          "hidden"
+        ],
+        "why": "PORTABLE. They carried it through the wilderness. The permanent one was Solomon's Temple."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The Mosaic Covenant was unconditional.",
+        "underlined": "unconditional",
+        "answer": false,
+        "correction": "conditional",
+        "options": [
+          "conditional",
+          "unconditional",
+          "temporary",
+          "secret"
+        ],
+        "why": "CONDITIONAL, with blessings for obedience and curses for disobedience. The Abrahamic Covenant is the promise one."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The Diaspora was the accidental scattering of the Israelites.",
+        "underlined": "accidental",
+        "answer": false,
+        "correction": "intentional",
+        "options": [
+          "intentional",
+          "accidental",
+          "peaceful",
+          "brief"
+        ],
+        "why": "INTENTIONAL scattering into foreign nations. That word is the whole definition."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Passover honors the deliverance of the Israelites from slavery in Egypt.",
+        "underlined": "Passover",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Deliverance from slavery. The Exodus is the departure itself."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Hanukkah is an 8-day celebration marking the rededication of the Temple.",
+        "underlined": "8-day",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Eight days, after the Maccabean rededication."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The Septuagint is the Greek translation of the Old Testament.",
+        "underlined": "Greek",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Greek translation of the Old Testament Scriptures."
+      },
+      {
+        "kind": "correct",
+        "prompt": "To assimilate means to absorb into a culture.",
+        "underlined": "absorb",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Which is exactly what the Diaspora made happen."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Atonement is the restoration of the broken relationship between God and people.",
+        "underlined": "restoration",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Restoring what was broken."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these are COVENANTS? Check ALL that apply.",
+        "options": [
+          "Abrahamic Covenant",
+          "Mosaic Covenant",
+          "New Covenant",
+          "Exodus",
+          "Diaspora"
+        ],
+        "answers": [
+          "Abrahamic Covenant",
+          "Mosaic Covenant",
+          "New Covenant"
+        ],
+        "why": "THREE. Abrahamic is the promise, Mosaic is the conditional law, New is the one about the Holy Spirit and changed hearts."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these are KINGS? Check ALL that apply.",
+        "options": [
+          "David",
+          "Solomon",
+          "Jeroboam",
+          "Nebuchadnezzar",
+          "Samuel",
+          "Joshua"
+        ],
+        "answers": [
+          "David",
+          "Solomon",
+          "Jeroboam",
+          "Nebuchadnezzar"
+        ],
+        "why": "FOUR. Samuel was a judge and prophet; Joshua was a leader, not a king."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which terms belong to the MACCABEAN story? Check ALL that apply.",
+        "options": [
+          "Antiochus IV",
+          "Judas Maccabeus",
+          "Hanukkah",
+          "Passover",
+          "Esther"
+        ],
+        "answers": [
+          "Antiochus IV",
+          "Judas Maccabeus",
+          "Hanukkah"
+        ],
+        "why": "THREE. Antiochus desecrated the Temple, Judas led the revolt, Hanukkah marks the rededication."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word means the Israelites' DEPARTURE from Egypt?",
+        "options": [
+          "Passover",
+          "Exodus",
+          "Diaspora",
+          "Atonement"
+        ],
+        "answer": "Exodus",
+        "why": "Exodus is the leaving. Passover is the celebration of the deliverance. Easy pair to swap."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Who were the Samaritans?",
+        "options": [
+          "Priests of the Temple",
+          "Conquered peoples who intermarried with Israelites in the north",
+          "Greek translators of the Scriptures",
+          "Babylonian officials"
+        ],
+        "answer": "Conquered peoples who intermarried with Israelites in the north",
+        "why": "People of the northern kingdom, descended from conquered peoples who intermarried with Israelites."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What is a synagogue?",
+        "options": [
+          "The portable place of worship in the wilderness",
+          "The first Temple in Jerusalem",
+          "A local house of prayer and scripture reading",
+          "A Greek translation of Scripture"
+        ],
+        "answer": "A local house of prayer and scripture reading",
+        "why": "And the rabbi is the Jewish teacher who leads it. The portable one is the Tabernacle."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which covenant promised the Holy Spirit and transformed hearts?",
+        "options": [
+          "Abrahamic Covenant",
+          "Mosaic Covenant",
+          "New Covenant",
+          "Davidic Covenant"
+        ],
+        "answer": "New Covenant",
+        "why": "The New Covenant. Abrahamic is descendants and blessing; Mosaic is the law at Sinai."
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "Trace the family line from Abraham to the 12 tribes.",
+        "answer": "Abraham, then his son Isaac, then Isaac's son Jacob. Jacob's name was changed to Israel, and his descendants became the 12 tribes of Israel."
+      },
+      {
+        "prompt": "Name the three covenants and say what each one promised.",
+        "answer": "Abrahamic: Abraham's descendants would become a great nation and bless all families of the earth. Mosaic: conditional laws at Mt. Sinai, blessings for obedience and curses for disobedience. New: God would give His Holy Spirit and transform the hearts of His people."
+      },
+      {
+        "prompt": "What is the difference between Israel the person and Israel the kingdom?",
+        "answer": "Israel the person is Jacob, renamed by God. Israel the kingdom is the nation made from his descendants, and after the split it is the name of the NORTHERN kingdom."
+      },
+      {
+        "prompt": "Who led the Israelites out of Egypt, and who led them into the Promised Land?",
+        "answer": "Moses led them out of Egypt and received the law at Mt. Sinai. Joshua succeeded him and led them into the Promised Land."
+      },
+      {
+        "prompt": "What happened when the kingdom split?",
+        "answer": "It broke into two. The northern kingdom kept the name Israel, with Jeroboam as its first king and Samaria as its capital. The southern kingdom was Judah, with Jerusalem as its capital."
+      },
+      {
+        "prompt": "Who were the Samaritans and where did they come from?",
+        "answer": "People of the northern kingdom of Israel, descended from conquered peoples who intermarried with Israelites after the north fell."
+      },
+      {
+        "prompt": "Tell the Hanukkah story using three of the vocabulary terms.",
+        "answer": "Antiochus IV, the Seleucid ruler, desecrated the Jewish Temple. Judas Maccabeus led the revolt against the Seleucids. Hanukkah is the 8-day celebration marking the rededication of the Temple."
+      },
+      {
+        "prompt": "What is the Diaspora, and which word in the definition matters most?",
+        "answer": "The scattering of the Israelites into foreign nations. The word that matters is INTENTIONAL — it was done on purpose, not by accident."
+      },
+      {
+        "prompt": "Put these in order: Moses, David, Abraham, Judas Maccabeus, Joshua, Solomon.",
+        "answer": "Abraham, Moses, Joshua, David, Solomon, Judas Maccabeus. Patriarch, then the Exodus, then the Promised Land, then the two great kings, then the Maccabean revolt much later."
+      },
+      {
+        "prompt": "Which two terms are about Scripture itself, and what does each mean?",
+        "answer": "Septuagint, the historical Greek translation of the Old Testament Scriptures. And synagogue, the local house of prayer and scripture reading, led by a rabbi."
+      }
+    ],
+    "drills": [
+      "match",
+      "meaning",
+      "corronly",
+      "extras"
+    ],
+    "rival": "Babylon United",
+    "matchLength": 8
   }
 ];
