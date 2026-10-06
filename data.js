@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Oct 3 \u2014 build 33";
+const BUILD = "Oct 5 \u2014 build 35";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -37,258 +37,280 @@ const SUBJECTS = [
    "optional" is the gray-italic only-if-not-finished-in-class kind, "test" is
    the red kind. ----------------------------------------------------------- */
 const HOMEWORK = {
-  "asOf": "2026-10-01",
-  "label": "Week of Sept 28 – Oct 2",
+  "asOf": "2026-10-05",
+  "label": "Week of Oct 5 – Oct 9",
   "tests": [
     {
-      "date": "2026-10-02",
-      "text": "ELA Test: AG Ch. 3, Prepositional Phrases"
+      "date": "2026-10-08",
+      "text": "History Map Test: Israel — filled-in maps are in his history binder"
     },
     {
-      "date": "2026-10-02",
-      "text": "Bible Quiz: John 15:1–5, word for word"
+      "date": "2026-10-08",
+      "text": "Spelling Test: List 4"
     },
     {
-      "date": "2026-10-02",
-      "text": "Math Test: Multiply and Divide Decimals"
+      "date": "2026-10-09",
+      "text": "History Vocab Test: Ancient Israel"
     },
     {
-      "date": "2026-10-02",
-      "text": "History Spot Check — pop quiz, no studying needed"
+      "date": "2026-10-09",
+      "text": "Bible Quiz: John 15:6, word for word"
     }
   ],
   "soon": [
     {
-      "date": "2026-10-05",
-      "text": "Literature Reading Logs due"
-    },
-    {
-      "date": "2026-10-08",
-      "text": "Spelling List 4 Test"
+      "date": "2026-10-09",
+      "text": "Science Cell Project due"
     },
     {
       "date": "2026-10-09",
-      "text": "Science Cell Project due"
+      "text": "Math IXL K.3, K.5, K.6 — 80%+ on each"
+    },
+    {
+      "date": "2026-10-15",
+      "text": "ELA Green Energy Speech due"
     }
   ],
   "days": [
     {
-      "date": "2026-09-28",
+      "date": "2026-10-05",
       "tasks": [
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:1–5"
+          "text": "Study John 15:6"
         },
         {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Ch. 9–10 Observations",
-          "optional": true,
-          "tag": "only if not completed over the weekend"
+          "text": "Ch. 15–18 Observations"
         },
         {
           "cls": "ELA / Grammar",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "grammar",
-          "text": "AG Ch. 3: finish evens + short answer"
+          "text": "New: Green Energy Speech — due Thu 10/15"
         },
         {
           "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "New: List 4 (test Thu 10/8)"
+          "text": "Study List 4 — test Thursday"
         },
         {
           "cls": "Science",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "science",
-          "text": "pp. 59–60"
+          "text": "pp. 71–72"
         },
         {
           "cls": "History",
           "teacher": "Mrs. Martinez",
           "subject": "history",
-          "text": "Due: Extra credit — 1 side = 5 pts, both = 10",
-          "optional": true
-        },
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "CYOC presentations"
+          "text": "Study Israel maps + vocab"
         },
         {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
-          "text": "Dividing decimals by powers of 10 worksheet — due Tuesday"
+          "text": "IXL K.3, K.5, K.6 — 80%+ on each, due Friday"
         }
       ]
     },
     {
-      "date": "2026-09-29",
+      "date": "2026-10-06",
       "tasks": [
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:1–5"
-        },
-        {
-          "cls": "ELA / Grammar",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "grammar",
-          "text": "AG Ch. 3: finish evens + short answer"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "pp. 61–62"
-        },
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "CYOC presentations"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "Dividing decimals by decimals worksheet — due Wednesday"
-        }
-      ]
-    },
-    {
-      "date": "2026-09-30",
-      "tasks": [
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Study John 15:1–5"
+          "text": "Study John 15:6"
         },
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Beauty Application Handout"
+          "text": "Thinking it Through for 3.7"
         },
         {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Ch. 11–12 Observations",
-          "optional": true
+          "text": "Ch. 15–18 Observations"
         },
         {
-          "cls": "ELA / Grammar",
+          "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "grammar",
-          "text": "AG Ch. 3: finish evens + short answer"
+          "subject": "ela",
+          "text": "Study List 4 — test Thursday"
         },
         {
           "cls": "Science",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "science",
-          "text": "pp. 63–64"
+          "text": "pp. 73–74"
         },
         {
           "cls": "History",
           "teacher": "Mrs. Martinez",
           "subject": "history",
-          "text": "Ancient Israel worksheet"
+          "text": "Study Israel maps + vocab"
         },
         {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
-          "text": "Complete the study guide — due Thursday"
+          "text": "Finish pp. 140 & 142 selected exercises — due Wednesday",
+          "optional": true
         }
       ]
     },
     {
-      "date": "2026-10-01",
+      "date": "2026-10-07",
       "tasks": [
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:1–5 for Friday quiz"
-        },
-        {
-          "cls": "ELA / Grammar",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "grammar",
-          "text": "Study for Friday test: Prepositional Phrases"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "pp. 65–66"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "Review decimals in preparation for tomorrow's test"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-02",
-      "tasks": [
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "QUIZ: John 15:1–5",
-          "test": true
+          "text": "Study John 15:6"
         },
         {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Ch. 13 & 14 Observations completed",
+          "text": "Finish Ch. 15–18 Observations — due Thursday",
           "optional": true
         },
         {
-          "cls": "ELA / Grammar",
+          "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "grammar",
-          "text": "TEST: AG Ch. 3, Prepositional Phrases",
+          "subject": "ela",
+          "text": "Study List 4 for Thursday test"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "pp. 75–76"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "Study Israel maps for Thursday test"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "No homework"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-08",
+      "tasks": [
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "MAP TEST: Israel",
           "test": true
         },
         {
           "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "Weekend: study List 4"
+          "text": "TEST: Spelling List 4",
+          "test": true
         },
         {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "Essay Question practice · Cell Project due 10/9"
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:6 for Friday quiz"
+        },
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "“Love According to God”"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Due: Ch. 15–18 Observations"
         },
         {
           "cls": "History",
           "teacher": "Mrs. Martinez",
           "subject": "history",
-          "text": "SPOT CHECK — pop quiz, no study",
-          "test": true
+          "text": "Study vocab for Friday test"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "pp. 77–78"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "Finish Cell Project — due Friday",
+          "optional": true
         },
         {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
-          "text": "TEST: Multiply and Divide Decimals · no homework",
+          "text": "Multiplying fractions & mixed numbers worksheet — due Friday"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "Finish IXL skills — due Friday",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "date": "2026-10-09",
+      "tasks": [
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "VOCAB TEST: Ancient Israel",
           "test": true
+        },
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "QUIZ: John 15:6",
+          "test": true
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "DUE: Cell Project",
+          "test": true
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "pp. 79–80"
+        },
+        {
+          "cls": "ELA / Grammar",
+          "teacher": "Mrs. Servizzi · C208",
+          "text": "Weekend: work on Green Energy Speech"
         }
       ]
     }
@@ -6381,5 +6403,18 @@ const STUDY_ITEMS = [
     ],
     "rival": "Babylon United",
     "matchLength": 8
+  },
+  {
+    "id": "bible-john-15-6",
+    "subject": "bible",
+    "title": "John 15:6",
+    "added": "2026-10-03",
+    "quiz": "2026-10-09",
+    "note": "Quiz Friday 10/9. Word for word, ESV. Picks up straight after 15:5, which he already knows.",
+    "type": "verse",
+    "reference": "John 15:6",
+    "version": "ESV",
+    "text": "If anyone does not abide in me, he is thrown away like a branch and withers; and the branches are gathered, thrown into the fire, and burned.",
+    "assess": "quiz"
   }
 ];
