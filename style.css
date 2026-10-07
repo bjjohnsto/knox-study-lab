@@ -1237,7 +1237,7 @@ a.card:hover, a.card:focus-visible{
   box-shadow:var(--shadow);
   padding:.4rem;
   margin:.2rem auto 1rem;
-  max-width:420px;
+  max-width:470px;
 }
 .mapsvg{ display:block; width:100%; height:auto; border-radius:8px; }
 @keyframes mappulse{

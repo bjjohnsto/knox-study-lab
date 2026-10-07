@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Oct 6 \u2014 build 38";
+const BUILD = "Oct 6 \u2014 build 39";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -6608,7 +6608,7 @@ const STUDY_ITEMS = [
     "added": "2026-10-06",
     "quiz": "2026-10-07",
     "pin": true,
-    "note": "Quiz Wednesday 10/7. Label names match the textbook diagram exactly. Name it on the map uses his own sheet.",
+    "note": "Quiz Wednesday 10/7. Labels taken from her answer key. Name it on the map uses his own sheet.",
     "type": "bundle",
     "maps": [
       {
@@ -6618,26 +6618,26 @@ const STUDY_ITEMS = [
         "w": 620,
         "h": 694,
         "bank": [
-          "cell membrane",
+          "cell wall",
           "mitochondrion",
           "vacuole",
           "chloroplast",
-          "cytoplasm",
+          "cell membrane",
           "ribosomes",
           "endoplasmic reticulum",
-          "chromosomes",
+          "nucleolus",
           "nucleus",
-          "cell wall"
+          "cytoplasm"
         ],
         "blanks": [
           {
-            "answer": "cell membrane",
+            "answer": "cell wall",
             "x": 2,
             "y": 74,
-            "w": 80,
+            "w": 66,
             "h": 16,
-            "why": "The thin pale layer just INSIDE the outer wall. It controls what gets in and out.",
-            "prompt": "Which label goes on this line? It stops on the thin pale layer inside the outer wall."
+            "why": "The thick dark green OUTER layer. Only plant cells have one. It provides support and keeps the cell rigid and firm.",
+            "prompt": "Which label goes here? This line stops on the thick dark outer layer."
           },
           {
             "answer": "mitochondrion",
@@ -6645,7 +6645,7 @@ const STUDY_ITEMS = [
             "y": 153,
             "w": 80,
             "h": 16,
-            "why": "The red bean-shaped one. It breaks down the cell's food and releases energy."
+            "why": "The red bean-shaped one. It breaks down the cell’s food and releases energy."
           },
           {
             "answer": "vacuole",
@@ -6653,7 +6653,7 @@ const STUDY_ITEMS = [
             "y": 320,
             "w": 55,
             "h": 16,
-            "why": "The huge pale blue space. Plant cells usually have one central vacuole, sometimes more than half the cell's volume. When the plant runs short of water it shrinks and the plant droops."
+            "why": "The huge pale blue space. Plant cells usually have one central vacuole, sometimes more than half the cell’s volume."
           },
           {
             "answer": "chloroplast",
@@ -6661,16 +6661,16 @@ const STUDY_ITEMS = [
             "y": 432,
             "w": 66,
             "h": 16,
-            "why": "The striped green oval. It holds chlorophyll, which absorbs energy from sunlight for photosynthesis. Animal cells do not have these."
+            "why": "The striped green oval. It holds chlorophyll, which absorbs sunlight for photosynthesis. Animal cells do not have these."
           },
           {
-            "answer": "cytoplasm",
+            "answer": "cell membrane",
             "x": 128,
             "y": 44,
-            "w": 58,
+            "w": 100,
             "h": 16,
-            "why": "The jelly filling the cell, where the organelles sit. This line ends in open green with no organelle there.",
-            "prompt": "Which label goes on this line? It ends in open green with no organelle there."
+            "why": "The thin pale layer just INSIDE the cell wall. It controls what gets in and out.",
+            "prompt": "Which label goes here? This line stops on the thin pale layer just inside the wall."
           },
           {
             "answer": "ribosomes",
@@ -6686,16 +6686,16 @@ const STUDY_ITEMS = [
             "y": 46,
             "w": 118,
             "h": 16,
-            "why": "The folded ribbon network beside the nucleus. The cell's transportation system, a set of passageways moving material around."
+            "why": "The folded blue ribbon network beside the nucleus. The cell’s transportation system."
           },
           {
-            "answer": "chromosomes",
+            "answer": "nucleolus",
             "x": 405,
             "y": 63,
-            "w": 76,
+            "w": 66,
             "h": 16,
-            "why": "The dark material INSIDE the nucleus. They carry the DNA code.",
-            "prompt": "Which label goes on this line? It points into the dark middle of the nucleus."
+            "why": "The small dark purple circle in the MIDDLE of the nucleus.",
+            "prompt": "Which label goes here? This line points into the dark middle of the nucleus."
           },
           {
             "answer": "nucleus",
@@ -6703,17 +6703,17 @@ const STUDY_ITEMS = [
             "y": 110,
             "w": 58,
             "h": 16,
-            "why": "The big pink sphere, the control centre. The line points into the pink part, not the dark middle.",
-            "prompt": "Which label goes on this line? It points into the pink body, not the dark middle."
+            "why": "The big pink sphere, the control centre. This line points into the PINK part.",
+            "prompt": "Which label goes here? This line points into the pink body, not the dark middle."
           },
           {
-            "answer": "cell wall",
+            "answer": "cytoplasm",
             "x": 316,
             "y": 669,
-            "w": 60,
+            "w": 64,
             "h": 16,
-            "why": "The thick dark green outer layer. It provides support and, with the vacuoles, keeps the plant cell rigid and firm. Only plant cells have one.",
-            "prompt": "Which label goes on this line? It comes in from outside and crosses the thick dark outer layer."
+            "why": "The jelly filling the cell, where the organelles sit. This line comes up from the bottom into open green.",
+            "prompt": "Which label goes here? This line comes up from the bottom of the page."
           }
         ]
       }
@@ -6721,11 +6721,11 @@ const STUDY_ITEMS = [
     "words": [
       {
         "word": "cell wall",
-        "meaning": "The thick, rigid outer layer. It provides support for the plant cell and, along with the vacuoles, helps it stay rigid and firm. Only plant cells have one."
+        "meaning": "The thick, rigid outer layer. Only plant cells have one. It supports the cell and keeps it firm."
       },
       {
         "word": "cell membrane",
-        "meaning": "The thin layer just inside the cell wall that controls what enters and leaves the cell."
+        "meaning": "The thin layer just inside the cell wall that controls what enters and leaves."
       },
       {
         "word": "cytoplasm",
@@ -6733,31 +6733,31 @@ const STUDY_ITEMS = [
       },
       {
         "word": "nucleus",
-        "meaning": "The control centre of the cell. The large sphere that holds the chromosomes."
+        "meaning": "The control centre of the cell. The large sphere."
       },
       {
-        "word": "chromosomes",
-        "meaning": "The structures inside the nucleus that carry the DNA code."
+        "word": "nucleolus",
+        "meaning": "The small dark body inside the nucleus."
       },
       {
         "word": "vacuole",
-        "meaning": "Plant cells usually have one large central vacuole. It can hold more than half the cell’s volume. When a plant cell fails to get enough water the vacuole shrinks and the plant droops."
+        "meaning": "The large fluid-filled space. Plant cells usually have one central vacuole; it can hold more than half the cell’s volume, and when it shrinks the plant droops."
       },
       {
         "word": "chloroplast",
-        "meaning": "A large structure holding chlorophyll, a green pigment that absorbs energy from sunlight. Chloroplasts store that energy for photosynthesis. Animal cells do not have them."
+        "meaning": "Holds chlorophyll, a green pigment that absorbs energy from sunlight for photosynthesis. Animal cells do not have them."
       },
       {
         "word": "mitochondrion",
-        "meaning": "Responsible for breaking down the cell’s food and releasing energy."
+        "meaning": "Breaks down the cell’s food and releases energy."
       },
       {
         "word": "ribosomes",
-        "meaning": "Small organelles found along the ER. They make the proteins the cell needs by reading the code found in the DNA."
+        "meaning": "Small organelles along the ER. They make the proteins the cell needs by reading the code in the DNA."
       },
       {
         "word": "endoplasmic reticulum",
-        "meaning": "The cell’s transportation system — a set of passageways that lets material move from one part of the cell to another. Say EN-duh-PLAZ-mik rih-TIK-yuh-lum."
+        "meaning": "The cell’s transportation system — passageways that let material move around the cell. Say EN-duh-PLAZ-mik rih-TIK-yuh-lum."
       }
     ],
     "drills": [

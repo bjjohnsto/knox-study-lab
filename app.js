@@ -1224,18 +1224,22 @@
         var ly = b.y + (typeof b.labelDy === "number" ? b.labelDy : 0);
         var fs = Math.round(r * 1.25);
         return '<g>' +
+          (now ? '<circle cx="' + b.x + '" cy="' + b.y + '" r="' + (r + 7) +
+                 '" fill="none" stroke="#E8641A" stroke-width="3.5" class="mappulse"/>' : "") +
           '<circle cx="' + b.x + '" cy="' + b.y + '" r="' + r + '" ' +
-            'fill="' + (done ? (b.fill || "#CBEBD0") : now ? "#E8641A" : "#FFFFFF") + '" ' +
-            'stroke="#12241A" stroke-width="2"' + (now ? ' class="mappulse"' : "") + "/>" +
+            'fill="' + (done ? (b.fill || "#CBEBD0") : now ? "#FFF1E4" : "#FFFFFF") + '" ' +
+            'stroke="' + (now ? "#E8641A" : "#12241A") + '" stroke-width="' + (now ? 3 : 2) + '"/>' +
           (done
             ? '<rect x="' + lx + '" y="' + (ly - r) + '" width="' + lw +
               '" height="' + (2 * r) + '" rx="4" fill="#FFFFFF" stroke="#12241A" stroke-width="1.5"/>' +
               '<text x="' + (lx + lw / 2) + '" y="' + (ly + fs * 0.36) + '" text-anchor="middle" ' +
               'font-size="' + fs + '" font-family="Atkinson Hyperlegible, Arial, sans-serif" ' +
               'font-weight="700" fill="#12241A">' + esc(b.answer) + "</text>"
-            : '<text x="' + b.x + '" y="' + (b.y + r * 0.42) + '" text-anchor="middle" font-size="' +
-              Math.round(r * 1.2) + '" font-family="Arial, sans-serif" font-weight="700" fill="' +
-              (now ? "#FFFFFF" : "#12241A") + '">?</text>') +
+            : '<text x="' + b.x + '" y="' + (b.y + (now ? r * 0.75 : r * 0.42)) +
+              '" text-anchor="middle" font-size="' + Math.round(r * (now ? 2.1 : 1.2)) +
+              '" font-family="Arial, sans-serif" font-weight="700" fill="' +
+              (now ? "#E8641A" : "#12241A") + '"' +
+              (now ? ' stroke="#FFFFFF" stroke-width="4" paint-order="stroke"' : "") + ">?</text>") +
           "</g>";
       }
       var pad = 3;
@@ -1246,10 +1250,18 @@
       var along = tall ? b.h : b.w;
       var across = tall ? b.w : b.h;
       var size = Math.min(across * 0.62, (along - 2 * pad) / Math.max(1, txt.length * 0.52));
+      /* The blank he is being asked about has to be obvious at a glance on a
+         phone, so it gets a pulsing ring around it, a tinted fill and a big
+         question mark that is allowed to overflow the box. */
+      var qs = Math.max(26, b.h * 1.3);
       return '<g>' +
+        (now ? '<rect x="' + (b.x - 6) + '" y="' + (b.y - 6) + '" width="' + (b.w + 12) +
+               '" height="' + (b.h + 12) + '" rx="7" fill="none" stroke="#E8641A" ' +
+               'stroke-width="3.5" class="mappulse"/>' : "") +
         '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" ' +
-          'fill="#FFFFFF" stroke="' + (now ? "#E8641A" : done ? "#2E7D4F" : "#9AA6A0") + '" ' +
-          'stroke-width="' + (now ? 3 : 2) + '"' + (now ? ' class="mappulse"' : "") + "/>" +
+          'fill="' + (now ? "#FFF1E4" : "#FFFFFF") + '" stroke="' +
+          (now ? "#E8641A" : done ? "#2E7D4F" : "#9AA6A0") + '" ' +
+          'stroke-width="' + (now ? 3 : 2) + '"/>' +
         (done
           ? '<text x="' + (b.x + b.w / 2) + '" y="' + (b.y + b.h / 2 + size * 0.36) +
             '" text-anchor="middle" font-size="' + size.toFixed(1) +
@@ -1258,9 +1270,10 @@
             (tall ? ' transform="rotate(-90 ' + (b.x + b.w / 2) + " " + (b.y + b.h / 2) + ')"' : "") +
             ">" + esc(b.answer) + "</text>"
           : now
-            ? '<text x="' + (b.x + b.w / 2) + '" y="' + (b.y + b.h / 2 + b.h * 0.2) +
-              '" text-anchor="middle" font-size="' + (b.h * 0.6).toFixed(1) +
-              '" font-family="Arial, sans-serif" font-weight="700" fill="#E8641A">?</text>'
+            ? '<text x="' + (b.x + b.w / 2) + '" y="' + (b.y + b.h / 2 + qs * 0.36) +
+              '" text-anchor="middle" font-size="' + qs.toFixed(1) +
+              '" font-family="Arial, sans-serif" font-weight="700" fill="#E8641A" ' +
+              'stroke="#FFFFFF" stroke-width="4" paint-order="stroke">?</text>'
             : "") +
         "</g>";
     }
