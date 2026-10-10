@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Oct 6 \u2014 build 39";
+const BUILD = "Oct 10 \u2014 build 40";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -37,185 +37,211 @@ const SUBJECTS = [
    "optional" is the gray-italic only-if-not-finished-in-class kind, "test" is
    the red kind. ----------------------------------------------------------- */
 const HOMEWORK = {
-  "asOf": "2026-10-06",
-  "label": "Week of Oct 5 – Oct 9",
+  "asOf": "2026-10-10",
+  "label": "Week of Oct 12 – Oct 16",
   "tests": [
     {
-      "date": "2026-10-07",
-      "text": "Science Quiz: label the plant cell"
+      "date": "2026-10-15",
+      "text": "Bible Unit 3 Test"
     },
     {
-      "date": "2026-10-08",
-      "text": "History Map Test: Israel — filled-in maps are in his history binder"
+      "date": "2026-10-16",
+      "text": "Math Test: Multiply and Divide Fractions and Mixed Numbers"
     },
     {
-      "date": "2026-10-08",
-      "text": "Spelling Test: List 4"
+      "date": "2026-10-16",
+      "text": "Bible Quiz: John 15:7, word for word"
     },
     {
-      "date": "2026-10-09",
-      "text": "History Vocab Test: Ancient Israel"
-    },
-    {
-      "date": "2026-10-09",
-      "text": "Bible Quiz: John 15:6, word for word"
+      "date": "2026-10-16",
+      "text": "History: not posted yet"
     }
   ],
   "soon": [
     {
-      "date": "2026-10-09",
-      "text": "Science Cell Project due"
-    },
-    {
-      "date": "2026-10-09",
-      "text": "Math IXL K.3, K.5, K.6 — 80%+ on each"
+      "date": "2026-10-14",
+      "text": "Spelling Study Guide due — Greek and Latin Roots"
     },
     {
       "date": "2026-10-15",
-      "text": "ELA Green Energy Speech due"
+      "text": "ELA Green Energy Speech due (in-class project)"
+    },
+    {
+      "date": "2026-10-16",
+      "text": "Science Animal Robotics project due (in-class)"
+    },
+    {
+      "date": "2026-10-16",
+      "text": "Lit Ch. 20–24 Observations due"
+    },
+    {
+      "date": "2026-10-16",
+      "text": "Fall Break after Friday — no reading log"
+    },
+    {
+      "date": "2026-10-28",
+      "text": "Spelling Test: Greek and Latin Roots"
     }
   ],
   "days": [
     {
-      "date": "2026-10-05",
+      "date": "2026-10-12",
       "tasks": [
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:6"
+          "text": "Study John 15:7"
         },
         {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Ch. 15–18 Observations"
+          "text": "Ch. 20–24 Observations — due Friday"
         },
         {
           "cls": "ELA / Grammar",
           "teacher": "Mrs. Servizzi · C208",
-          "text": "New: Green Energy Speech — due Thu 10/15"
+          "text": "Green Energy Speech — in-class project, due Thursday"
         },
         {
           "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "Study List 4 — test Thursday"
+          "text": "New: Greek and Latin Roots"
+        },
+        {
+          "cls": "Spelling",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "Study Guide — due Wednesday"
         },
         {
           "cls": "Science",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "science",
-          "text": "pp. 71–72"
+          "text": "p. 81"
         },
         {
           "cls": "History",
           "teacher": "Mrs. Martinez",
           "subject": "history",
-          "text": "Study Israel maps + vocab"
+          "text": "TBD — not posted yet"
         },
         {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
-          "text": "IXL K.3, K.5, K.6 — 80%+ on each, due Friday"
+          "text": "Finish dividing fractions worksheet — due Tuesday",
+          "optional": true
         }
       ]
     },
     {
-      "date": "2026-10-06",
+      "date": "2026-10-13",
       "tasks": [
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:6"
+          "text": "Study John 15:7"
         },
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Thinking it Through for 3.7"
+          "text": "Study for Unit 3 Test — Thursday"
         },
         {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Ch. 15–18 Observations"
+          "text": "Ch. 20–24 Observations — due Friday"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "3 Analyzing Literature IXLs — due Thursday by 9 pm"
+        },
+        {
+          "cls": "ELA / Grammar",
+          "teacher": "Mrs. Servizzi · C208",
+          "text": "Green Energy Speech — due Thursday"
         },
         {
           "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "Study List 4 — test Thursday"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "pp. 73–74"
-        },
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "Study Israel maps + vocab"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "Finish pp. 140 & 142 selected exercises — due Wednesday",
+          "text": "Finish Study Guide — due Wednesday",
           "optional": true
         },
         {
           "cls": "Science",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "science",
-          "text": "Study the plant cell diagram for tomorrow’s quiz"
+          "text": "pp. 83–84"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "TBD — not posted yet"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "Finish dividing mixed numbers worksheet — due Wednesday",
+          "optional": true
         }
       ]
     },
     {
-      "date": "2026-10-07",
+      "date": "2026-10-14",
       "tasks": [
         {
-          "cls": "Science",
+          "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "QUIZ: label the plant cell",
+          "subject": "ela",
+          "text": "DUE: Study Guide",
           "test": true
         },
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:6"
+          "text": "Study John 15:7"
+        },
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study for Unit 3 Test — Thursday"
         },
         {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Finish Ch. 15–18 Observations — due Thursday",
+          "text": "Finish 3 Lit IXLs by 9 pm",
           "optional": true
         },
         {
-          "cls": "Spelling",
+          "cls": "ELA / Grammar",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
-          "text": "Study List 4 for Thursday test"
+          "text": "Green Energy Speech — due Thursday"
         },
         {
           "cls": "Science",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "science",
-          "text": "pp. 75–76"
+          "text": "Service Day"
         },
         {
           "cls": "History",
           "teacher": "Mrs. Martinez",
           "subject": "history",
-          "text": "Study Israel maps for Thursday test"
+          "text": "TBD — not posted yet"
         },
         {
           "cls": "Math",
@@ -226,108 +252,102 @@ const HOMEWORK = {
       ]
     },
     {
-      "date": "2026-10-08",
+      "date": "2026-10-15",
       "tasks": [
         {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "MAP TEST: Israel",
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "TEST: Unit 3",
           "test": true
         },
         {
-          "cls": "Spelling",
+          "cls": "ELA / Grammar",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
-          "text": "TEST: Spelling List 4",
+          "text": "DUE: Green Energy Speech",
           "test": true
         },
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:6 for Friday quiz"
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "“Love According to God”"
+          "text": "Study John 15:7 for Friday quiz"
         },
         {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Due: Ch. 15–18 Observations"
+          "text": "Finish Ch. 20–24 Observations — due Friday",
+          "optional": true
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "Animal Robotics — in-class project"
         },
         {
           "cls": "History",
           "teacher": "Mrs. Martinez",
           "subject": "history",
-          "text": "Study vocab for Friday test"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "pp. 77–78"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "Finish Cell Project — due Friday",
-          "optional": true
+          "text": "TBD — not posted yet"
         },
         {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
-          "text": "Multiplying fractions & mixed numbers worksheet — due Friday"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "Finish IXL skills — due Friday",
-          "optional": true
+          "text": "Review notes and anchor charts for Friday test"
         }
       ]
     },
     {
-      "date": "2026-10-09",
+      "date": "2026-10-16",
       "tasks": [
         {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "VOCAB TEST: Ancient Israel",
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "TEST: Multiply and Divide Fractions and Mixed Numbers",
           "test": true
         },
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "QUIZ: John 15:6",
+          "text": "QUIZ: John 15:7",
           "test": true
         },
         {
           "cls": "Science",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "science",
-          "text": "DUE: Cell Project",
+          "text": "DUE: Animal Robotics project",
           "test": true
         },
         {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "pp. 79–80"
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "DUE: Ch. 20–24 Observations",
+          "test": true
         },
         {
-          "cls": "ELA / Grammar",
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Fall Break: no reading log"
+        },
+        {
+          "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
-          "text": "Weekend: work on Green Energy Speech"
+          "subject": "ela",
+          "text": "Test is Wed 10/28"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "TBD — not posted yet"
         }
       ]
     }
@@ -6765,5 +6785,371 @@ const STUDY_ITEMS = [
       "meaning"
     ],
     "assess": "quiz"
+  },
+  {
+    "id": "bible-unit-3-test",
+    "subject": "bible",
+    "title": "Bible Unit 3 Test",
+    "added": "2026-10-10",
+    "quiz": "2026-10-15",
+    "pin": true,
+    "note": "Test Thursday 10/15. Twelve definitions plus the short answers. Watch the two pairs that swap: general vs special revelation, and transcendence vs immanence.",
+    "type": "bundle",
+    "words": [
+      {
+        "word": "Trinity",
+        "meaning": "Three in one."
+      },
+      {
+        "word": "truth",
+        "meaning": "What matches reality as interpreted by God — how God sees it."
+      },
+      {
+        "word": "goodness",
+        "meaning": "That which is like God."
+      },
+      {
+        "word": "beauty",
+        "meaning": "Discovery and display of God's creational order."
+      },
+      {
+        "word": "love",
+        "meaning": "Liking, affection; my heart going out to something."
+      },
+      {
+        "word": "God's glory",
+        "meaning": "His amazing reputation and fame; the glowing magnificence that surrounds Him."
+      },
+      {
+        "word": "general revelation",
+        "meaning": "God reveals Himself to all men through creation."
+      },
+      {
+        "word": "special revelation",
+        "meaning": "God reveals Himself through the Scriptures and through Jesus."
+      },
+      {
+        "word": "biblical theism",
+        "meaning": "Belief in God that agrees with the Bible."
+      },
+      {
+        "word": "transcendence",
+        "meaning": "God is above all and superior to everything."
+      },
+      {
+        "word": "immanence",
+        "meaning": "God is actively involved in His creation, and in our lives."
+      },
+      {
+        "word": "infinite",
+        "meaning": "God has no beginning and no end; eternal in both directions, past and future."
+      }
+    ],
+    "questions": [
+      {
+        "kind": "correct",
+        "prompt": "The Trinity means three in one.",
+        "underlined": "three in one",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Three in one."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Truth is what matches reality as interpreted by people.",
+        "underlined": "people",
+        "answer": false,
+        "correction": "God",
+        "options": [
+          "God",
+          "people",
+          "science",
+          "the church"
+        ],
+        "why": "As interpreted by GOD — how God sees it. That is the whole point of the definition."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Beauty is the discovery and display of God's creational order.",
+        "underlined": "creational order",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Discovery AND display. Both halves."
+      },
+      {
+        "kind": "correct",
+        "prompt": "General revelation is God revealing Himself through the Scriptures.",
+        "underlined": "Scriptures",
+        "answer": false,
+        "correction": "creation",
+        "options": [
+          "creation",
+          "Scriptures",
+          "Jesus",
+          "prophets"
+        ],
+        "why": "GENERAL revelation is through CREATION, to all men. Through the Scriptures and Jesus is SPECIAL revelation. This is the pair most likely to get swapped."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Special revelation is God revealing Himself through the Scriptures and through Jesus.",
+        "underlined": "Scriptures and through Jesus",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Special revelation: the Scriptures and Jesus. General revelation: creation."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Transcendence means God is actively involved in His creation.",
+        "underlined": "actively involved in His creation",
+        "answer": false,
+        "correction": "above all and superior to everything",
+        "options": [
+          "above all and superior to everything",
+          "actively involved in His creation",
+          "three in one",
+          "without beginning or end"
+        ],
+        "why": "TRANSCENDENCE is God above all and superior to everything. Being actively involved in His creation is IMMANENCE. The other pair that gets swapped."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Immanence means God is actively involved in His creation and in our lives.",
+        "underlined": "actively involved",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Immanence: God is in it, with us. Transcendence: God is above it."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Biblical theism is belief in God that agrees with the Bible.",
+        "underlined": "agrees with the Bible",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Belief in God that agrees with the Bible."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Infinite means God has no beginning and no end.",
+        "underlined": "no beginning and no end",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Eternal in BOTH directions, past and future. Not just no end."
+      },
+      {
+        "kind": "correct",
+        "prompt": "God's glory is His amazing reputation and fame.",
+        "underlined": "reputation and fame",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "His reputation and fame, and the glowing magnificence that surrounds Him."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word means “God is above all and superior to everything”?",
+        "options": [
+          "immanence",
+          "transcendence",
+          "infinite",
+          "biblical theism"
+        ],
+        "answer": "transcendence",
+        "why": "TRANS means across or beyond — God is beyond it all. Immanence is the opposite: God involved IN it."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which word means “God is actively involved in His creation”?",
+        "options": [
+          "transcendence",
+          "Trinity",
+          "immanence",
+          "general revelation"
+        ],
+        "answer": "immanence",
+        "why": "Immanence. Think of the word “remain” — God remains with His creation."
+      },
+      {
+        "kind": "mc",
+        "prompt": "God revealing Himself to all men THROUGH CREATION is —",
+        "options": [
+          "special revelation",
+          "general revelation",
+          "biblical theism",
+          "God's glory"
+        ],
+        "answer": "general revelation",
+        "why": "General, because everyone in general can see creation."
+      },
+      {
+        "kind": "mc",
+        "prompt": "God revealing Himself through the SCRIPTURES AND JESUS is —",
+        "options": [
+          "general revelation",
+          "special revelation",
+          "immanence",
+          "truth"
+        ],
+        "answer": "special revelation",
+        "why": "Special, because it is given specially, not just to everyone through nature."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Why can't we be the standard for truth?",
+        "options": [
+          "Because we are limited, finite and sinful",
+          "Because we have not read enough",
+          "Because truth keeps changing",
+          "Because only teachers can be"
+        ],
+        "answer": "Because we are limited, finite and sinful",
+        "why": "God is the standard for truth because He IS the truth. We are limited, finite and sinful."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What is the ultimate end or goal for your life?",
+        "options": [
+          "To be happy",
+          "To glorify God",
+          "To be successful",
+          "To do good works"
+        ],
+        "answer": "To glorify God",
+        "why": "To glorify God."
+      },
+      {
+        "kind": "multi",
+        "prompt": "List the attributes of God studied in this unit. Check ALL that apply.",
+        "options": [
+          "omnipotent",
+          "omniscient",
+          "omnipresent",
+          "eternal",
+          "unchanging",
+          "self-existent",
+          "invisible",
+          "impatient"
+        ],
+        "answers": [
+          "omnipotent",
+          "omniscient",
+          "omnipresent",
+          "eternal",
+          "unchanging",
+          "self-existent"
+        ],
+        "why": "SIX of them: omnipotent (all powerful), omniscient (all knowing), omnipresent (present everywhere), eternal, unchanging, self-existent. Six is a lot to remember — count them as you write."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which THREE attributes start with “omni”? Check ALL that apply.",
+        "options": [
+          "omnipotent",
+          "omniscient",
+          "omnipresent",
+          "eternal",
+          "self-existent"
+        ],
+        "answers": [
+          "omnipotent",
+          "omniscient",
+          "omnipresent"
+        ],
+        "why": "Omni means all. Potent = all POWERFUL. Scient = all KNOWING. Present = present EVERYWHERE."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Omnipotent means —",
+        "options": [
+          "all knowing",
+          "all powerful",
+          "present everywhere",
+          "never changing"
+        ],
+        "answer": "all powerful",
+        "why": "Potent means power. All powerful."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Omniscient means —",
+        "options": [
+          "all powerful",
+          "present everywhere",
+          "all knowing",
+          "self-existent"
+        ],
+        "answer": "all knowing",
+        "why": "Science comes from the same root — knowing. All knowing. Spell it omniSCIent."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Omnipresent means —",
+        "options": [
+          "all powerful",
+          "all knowing",
+          "present everywhere",
+          "eternal"
+        ],
+        "answer": "present everywhere",
+        "why": "Present everywhere, all at once."
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "Define all twelve terms out loud: Trinity, truth, goodness, beauty, love, God's glory, general revelation, special revelation, biblical theism, transcendence, immanence, infinite.",
+        "answer": "Trinity: three in one. Truth: what matches reality as interpreted by God. Goodness: that which is like God. Beauty: discovery and display of God's creational order. Love: liking, affection, my heart going out to something. God's glory: His amazing reputation and fame, the glowing magnificence that surrounds Him. General revelation: God reveals Himself to all men through creation. Special revelation: God reveals Himself through the Scriptures and through Jesus. Biblical theism: belief in God that agrees with the Bible. Transcendence: God is above all and superior to everything. Immanence: God is actively involved in His creation. Infinite: God has no beginning and no end, eternal in both directions."
+      },
+      {
+        "prompt": "Why can't we be the standard for truth?",
+        "answer": "God is the standard for truth, because He IS the truth. We cannot be, because we are limited, finite and sinful."
+      },
+      {
+        "prompt": "List the attributes of God studied in this unit.",
+        "answer": "Omnipotent (all powerful), omniscient (all knowing), omnipresent (present everywhere), eternal, unchanging, and self-existent. Six of them."
+      },
+      {
+        "prompt": "What is the ultimate end or goal for your life?",
+        "answer": "To glorify God."
+      },
+      {
+        "prompt": "What is the difference between general and special revelation?",
+        "answer": "General revelation is God showing Himself to ALL men through CREATION. Special revelation is God showing Himself through the SCRIPTURES and through JESUS."
+      },
+      {
+        "prompt": "What is the difference between transcendence and immanence?",
+        "answer": "Transcendence: God is ABOVE all and superior to everything. Immanence: God is actively INVOLVED in His creation and in our lives. One puts Him above it, the other puts Him in it."
+      },
+      {
+        "prompt": "Spell these three the way the test will want them: all powerful, all knowing, present everywhere.",
+        "answer": "omnipotent, omniscient, omnipresent. The tricky one is omniSCIent — s, c, i, e, n, t."
+      }
+    ],
+    "drills": [
+      "match",
+      "meaning",
+      "corronly",
+      "extras"
+    ],
+    "rival": "Unit Two Rovers",
+    "matchLength": 8
+  },
+  {
+    "id": "bible-john-15-7",
+    "subject": "bible",
+    "title": "John 15:7",
+    "assess": "quiz",
+    "added": "2026-10-10",
+    "quiz": "2026-10-16",
+    "note": "Quiz Friday 10/16. Word for word, ESV. Carries straight on from 15:6.",
+    "type": "verse",
+    "reference": "John 15:7",
+    "version": "ESV",
+    "text": "If you abide in me, and my words abide in you, ask whatever you wish, and it will be done for you."
   }
 ];
