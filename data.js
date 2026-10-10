@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Oct 10 \u2014 build 40";
+const BUILD = "Oct 10 \u2014 build 41";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -7102,8 +7102,52 @@ const STUDY_ITEMS = [
     ],
     "extras": [
       {
-        "prompt": "Define all twelve terms out loud: Trinity, truth, goodness, beauty, love, God's glory, general revelation, special revelation, biblical theism, transcendence, immanence, infinite.",
-        "answer": "Trinity: three in one. Truth: what matches reality as interpreted by God. Goodness: that which is like God. Beauty: discovery and display of God's creational order. Love: liking, affection, my heart going out to something. God's glory: His amazing reputation and fame, the glowing magnificence that surrounds Him. General revelation: God reveals Himself to all men through creation. Special revelation: God reveals Himself through the Scriptures and through Jesus. Biblical theism: belief in God that agrees with the Bible. Transcendence: God is above all and superior to everything. Immanence: God is actively involved in His creation. Infinite: God has no beginning and no end, eternal in both directions."
+        "prompt": "Define Trinity.",
+        "answer": "Three in one."
+      },
+      {
+        "prompt": "Define truth.",
+        "answer": "What matches reality as interpreted by God — how God sees it."
+      },
+      {
+        "prompt": "Define goodness.",
+        "answer": "That which is like God."
+      },
+      {
+        "prompt": "Define beauty.",
+        "answer": "Discovery and display of God's creational order."
+      },
+      {
+        "prompt": "Define love.",
+        "answer": "Liking, affection; my heart going out to something."
+      },
+      {
+        "prompt": "Define God's glory.",
+        "answer": "His amazing reputation and fame; the glowing magnificence that surrounds Him."
+      },
+      {
+        "prompt": "Define general revelation.",
+        "answer": "God reveals Himself to all men through creation."
+      },
+      {
+        "prompt": "Define special revelation.",
+        "answer": "God reveals Himself through the Scriptures and through Jesus."
+      },
+      {
+        "prompt": "Define biblical theism.",
+        "answer": "Belief in God that agrees with the Bible."
+      },
+      {
+        "prompt": "Define transcendence.",
+        "answer": "God is above all and superior to everything."
+      },
+      {
+        "prompt": "Define immanence.",
+        "answer": "God is actively involved in His creation, and in our lives."
+      },
+      {
+        "prompt": "Define infinite.",
+        "answer": "God has no beginning and no end; eternal in both directions, past and future."
       },
       {
         "prompt": "Why can't we be the standard for truth?",
