@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Oct 10 \u2014 build 41";
+const BUILD = "Oct 12 \u2014 build 43";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -37,9 +37,13 @@ const SUBJECTS = [
    "optional" is the gray-italic only-if-not-finished-in-class kind, "test" is
    the red kind. ----------------------------------------------------------- */
 const HOMEWORK = {
-  "asOf": "2026-10-10",
+  "asOf": "2026-10-12",
   "label": "Week of Oct 12 – Oct 16",
   "tests": [
+    {
+      "date": "2026-10-13",
+      "text": "History Vocab Test, Part 2"
+    },
     {
       "date": "2026-10-15",
       "text": "Bible Unit 3 Test"
@@ -51,10 +55,6 @@ const HOMEWORK = {
     {
       "date": "2026-10-16",
       "text": "Bible Quiz: John 15:7, word for word"
-    },
-    {
-      "date": "2026-10-16",
-      "text": "History: not posted yet"
     }
   ],
   "soon": [
@@ -123,23 +123,30 @@ const HOMEWORK = {
           "text": "p. 81"
         },
         {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "TBD — not posted yet"
-        },
-        {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
           "text": "Finish dividing fractions worksheet — due Tuesday",
           "optional": true
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "Study for Tuesday vocab test — Blooket or Quizlet"
         }
       ]
     },
     {
       "date": "2026-10-13",
       "tasks": [
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "TEST: Vocab, Part 2",
+          "test": true
+        },
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
@@ -181,12 +188,6 @@ const HOMEWORK = {
           "teacher": "Mrs. Servizzi · C208",
           "subject": "science",
           "text": "pp. 83–84"
-        },
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "TBD — not posted yet"
         },
         {
           "cls": "Math",
@@ -238,16 +239,16 @@ const HOMEWORK = {
           "text": "Service Day"
         },
         {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "TBD — not posted yet"
-        },
-        {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
           "text": "No homework"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "Service Project"
         }
       ]
     },
@@ -287,16 +288,16 @@ const HOMEWORK = {
           "text": "Animal Robotics — in-class project"
         },
         {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "TBD — not posted yet"
-        },
-        {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
           "text": "Review notes and anchor charts for Friday test"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "In class: scenes from David: King of Kings"
         }
       ]
     },
@@ -347,7 +348,7 @@ const HOMEWORK = {
           "cls": "History",
           "teacher": "Mrs. Martinez",
           "subject": "history",
-          "text": "TBD — not posted yet"
+          "text": "In class: scenes from David: King of Kings"
         }
       ]
     }
@@ -6074,10 +6075,10 @@ const STUDY_ITEMS = [
   {
     "id": "hist-israel-vocab",
     "subject": "history",
-    "title": "Ancient Israel Vocab Test",
+    "title": "Ancient Israel Vocab — Part 2",
     "added": "2026-10-03",
-    "quiz": "2026-10-09",
-    "note": "Test Friday 10/9. Thirty terms. Mrs. Martinez: matching from a word bank, true/false with the underlined word corrected, and short written answers.",
+    "quiz": "2026-10-13",
+    "note": "Test Tuesday 10/13. Part 2, and nobody told us which of the thirty terms were on Part 1 — so all thirty are in here. Match Day first, then true-or-fix-the-word.",
     "type": "bundle",
     "words": [
       {
@@ -6606,7 +6607,8 @@ const STUDY_ITEMS = [
       "extras"
     ],
     "rival": "Babylon United",
-    "matchLength": 8
+    "matchLength": 8,
+    "pin": true
   },
   {
     "id": "bible-john-15-6",
