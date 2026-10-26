@@ -1255,3 +1255,21 @@ a.card:hover, a.card:focus-visible{
 @media (prefers-reduced-motion: reduce){
   .mappulse{ animation:none; }
 }
+
+
+/* --- Root, meaning, word ------------------------------------------------- */
+.wordbox{
+  font-family:inherit;
+  font-size:1.35rem;
+  font-weight:700;
+  text-align:center;
+  padding:.65rem 1rem;
+  width:min(100%, 320px);
+  border:2px solid var(--ink);
+  border-radius:var(--radius);
+  background:var(--chalk);
+  box-shadow:var(--shadow);
+  color:var(--ink);
+}
+.wordbox:focus{ outline:3px solid var(--flag); outline-offset:2px; }
+.wordbox:disabled{ opacity:1; }

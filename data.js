@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Oct 12 \u2014 build 43";
+const BUILD = "Oct 25 \u2014 build 46";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -37,200 +37,55 @@ const SUBJECTS = [
    "optional" is the gray-italic only-if-not-finished-in-class kind, "test" is
    the red kind. ----------------------------------------------------------- */
 const HOMEWORK = {
-  "asOf": "2026-10-12",
-  "label": "Week of Oct 12 – Oct 16",
+  "asOf": "2026-10-25",
+  "label": "Week of Oct 26 – Oct 30",
   "tests": [
     {
-      "date": "2026-10-13",
-      "text": "History Vocab Test, Part 2"
+      "date": "2026-10-28",
+      "text": "Spelling Test: Greek and Latin Roots"
     },
     {
-      "date": "2026-10-15",
-      "text": "Bible Unit 3 Test"
+      "date": "2026-10-28",
+      "text": "Science Test: Chapters 4–5"
     },
     {
-      "date": "2026-10-16",
-      "text": "Math Test: Multiply and Divide Fractions and Mixed Numbers"
+      "date": "2026-10-30",
+      "text": "Bible Quiz: John 15:8, word for word"
     },
     {
-      "date": "2026-10-16",
-      "text": "Bible Quiz: John 15:7, word for word"
+      "date": "2026-10-30",
+      "text": "Math: not posted yet"
     }
   ],
   "soon": [
     {
-      "date": "2026-10-14",
-      "text": "Spelling Study Guide due — Greek and Latin Roots"
-    },
-    {
-      "date": "2026-10-15",
-      "text": "ELA Green Energy Speech due (in-class project)"
-    },
-    {
-      "date": "2026-10-16",
-      "text": "Science Animal Robotics project due (in-class)"
-    },
-    {
-      "date": "2026-10-16",
+      "date": "2026-10-27",
       "text": "Lit Ch. 20–24 Observations due"
     },
     {
-      "date": "2026-10-16",
-      "text": "Fall Break after Friday — no reading log"
+      "date": "2026-10-29",
+      "text": "E-learning Day — work from home"
     },
     {
-      "date": "2026-10-28",
-      "text": "Spelling Test: Greek and Latin Roots"
+      "date": "2026-10-30",
+      "text": "Bronze Bow Final Project due"
     }
   ],
   "days": [
     {
-      "date": "2026-10-12",
+      "date": "2026-10-26",
       "tasks": [
         {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Study John 15:7"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Ch. 20–24 Observations — due Friday"
-        },
-        {
-          "cls": "ELA / Grammar",
-          "teacher": "Mrs. Servizzi · C208",
-          "text": "Green Energy Speech — in-class project, due Thursday"
-        },
-        {
           "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "New: Greek and Latin Roots"
-        },
-        {
-          "cls": "Spelling",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
-          "text": "Study Guide — due Wednesday"
+          "text": "Study Greek and Latin Roots — test Wednesday"
         },
         {
           "cls": "Science",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "science",
-          "text": "p. 81"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "Finish dividing fractions worksheet — due Tuesday",
-          "optional": true
-        },
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "Study for Tuesday vocab test — Blooket or Quizlet"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-13",
-      "tasks": [
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "TEST: Vocab, Part 2",
-          "test": true
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Study John 15:7"
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Study for Unit 3 Test — Thursday"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Ch. 20–24 Observations — due Friday"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "3 Analyzing Literature IXLs — due Thursday by 9 pm"
-        },
-        {
-          "cls": "ELA / Grammar",
-          "teacher": "Mrs. Servizzi · C208",
-          "text": "Green Energy Speech — due Thursday"
-        },
-        {
-          "cls": "Spelling",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
-          "text": "Finish Study Guide — due Wednesday",
-          "optional": true
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "pp. 83–84"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "Finish dividing mixed numbers worksheet — due Wednesday",
-          "optional": true
-        }
-      ]
-    },
-    {
-      "date": "2026-10-14",
-      "tasks": [
-        {
-          "cls": "Spelling",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
-          "text": "DUE: Study Guide",
-          "test": true
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Study John 15:7"
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Study for Unit 3 Test — Thursday"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Finish 3 Lit IXLs by 9 pm",
-          "optional": true
-        },
-        {
-          "cls": "ELA / Grammar",
-          "teacher": "Mrs. Servizzi · C208",
-          "text": "Green Energy Speech — due Thursday"
+          "text": "Study for Wednesday Ch. 4–5 test"
         },
         {
           "cls": "Science",
@@ -239,92 +94,60 @@ const HOMEWORK = {
           "text": "Service Day"
         },
         {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "No homework"
-        },
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "Service Project"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-15",
-      "tasks": [
-        {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "TEST: Unit 3",
-          "test": true
-        },
-        {
-          "cls": "ELA / Grammar",
-          "teacher": "Mrs. Servizzi · C208",
-          "text": "DUE: Green Energy Speech",
-          "test": true
+          "text": "Study John 15:8"
         },
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:7 for Friday quiz"
+          "text": "Thinking it Through 4.2",
+          "optional": true,
+          "tag": "may be done in class"
         },
         {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Finish Ch. 20–24 Observations — due Friday",
+          "text": "Step 1: Individual Outline for Paragraphs"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Finish Ch. 20–24 Observations — due Tuesday",
           "optional": true
         },
         {
-          "cls": "Science",
+          "cls": "ELA / Grammar",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "Animal Robotics — in-class project"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "Review notes and anchor charts for Friday test"
+          "text": "Dialogue unit — no homework listed"
         },
         {
           "cls": "History",
           "teacher": "Mrs. Martinez",
           "subject": "history",
-          "text": "In class: scenes from David: King of Kings"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-16",
-      "tasks": [
+          "text": "New unit: Intro to Ancient India"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "Use Blooket all week to study vocab, people and places"
+        },
         {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
-          "text": "TEST: Multiply and Divide Fractions and Mixed Numbers",
-          "test": true
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "QUIZ: John 15:7",
-          "test": true
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "DUE: Animal Robotics project",
-          "test": true
-        },
+          "text": "TBD — not posted yet"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-27",
+      "tasks": [
         {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
@@ -333,22 +156,154 @@ const HOMEWORK = {
           "test": true
         },
         {
+          "cls": "Spelling",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "Study Greek and Latin Roots for Wednesday test"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "Blooket: study for Ch. 4–5 test"
+        },
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:8"
+        },
+        {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Fall Break: no reading log"
+          "text": "Step 2: Rough Draft for Final Project"
         },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "TBD — not posted yet"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "tasks": [
         {
           "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "Test is Wed 10/28"
+          "text": "TEST: Greek and Latin Roots",
+          "test": true
         },
         {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "In class: scenes from David: King of Kings"
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "TEST: Chapters 4–5",
+          "test": true
+        },
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:8"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Step 3: Finish editing Rough Draft"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "TBD — not posted yet"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "tasks": [
+        {
+          "cls": "E-learning Day",
+          "teacher": "work from home",
+          "text": "No school building today"
+        },
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "4.3: read pp. 147–152 and Phil. 3:8"
+        },
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Thinking it Through 4.3 — full sentences"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Step 4: Final draft of Bronze Bow Final Project — due Friday"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "pp. 90–91"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "TBD — not posted yet"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "tasks": [
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "QUIZ: John 15:8",
+          "test": true
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "DUE: Bronze Bow Final Project",
+          "test": true
+        },
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:8 for quiz"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "pp. 92–93"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "No reading log due Monday"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "TBD — not posted yet"
         }
       ]
     }
@@ -3099,8 +3054,7 @@ const STUDY_ITEMS = [
         "prompt": "A stadium seats 62,005. There were 58,319 people at the game. How many seats were empty? Give the answer the way she wants it written.",
         "answer": "62,005 − 58,319 = 3,686 empty seats. The word 'seats' is the label — a bare 3,686 loses the mark."
       }
-    ],
-    "pin": true
+    ]
   },
   {
     "id": "math-divisibility",
@@ -4375,7 +4329,6 @@ const STUDY_ITEMS = [
     "title": "Multiply & Divide Decimals Test",
     "added": "2026-09-27",
     "quiz": "2026-10-02",
-    "pin": true,
     "note": "Test Friday 10/2. Her study guide lists five things — all five are in here. Work it out covers the arithmetic; the study guide questions cover the word problems and the four you missed.",
     "type": "bundle",
     "mathTopics": [
@@ -5495,7 +5448,6 @@ const STUDY_ITEMS = [
     "title": "Israel Map Test",
     "added": "2026-10-03",
     "quiz": "2026-10-08",
-    "pin": true,
     "note": "Test Thursday 10/8. Name it on the map uses the actual sheet — same blanks, same word bank. Do that one first.",
     "type": "bundle",
     "words": [
@@ -6607,8 +6559,7 @@ const STUDY_ITEMS = [
       "extras"
     ],
     "rival": "Babylon United",
-    "matchLength": 8,
-    "pin": true
+    "matchLength": 8
   },
   {
     "id": "bible-john-15-6",
@@ -6629,7 +6580,6 @@ const STUDY_ITEMS = [
     "title": "Plant Cell Labelling Quiz",
     "added": "2026-10-06",
     "quiz": "2026-10-07",
-    "pin": true,
     "note": "Quiz Wednesday 10/7. Labels taken from her answer key. Name it on the map uses his own sheet.",
     "type": "bundle",
     "maps": [
@@ -6794,7 +6744,6 @@ const STUDY_ITEMS = [
     "title": "Bible Unit 3 Test",
     "added": "2026-10-10",
     "quiz": "2026-10-15",
-    "pin": true,
     "note": "Test Thursday 10/15. Twelve definitions plus the short answers. Watch the two pairs that swap: general vs special revelation, and transcendence vs immanence.",
     "type": "bundle",
     "words": [
@@ -7197,5 +7146,1803 @@ const STUDY_ITEMS = [
     "reference": "John 15:7",
     "version": "ESV",
     "text": "If you abide in me, and my words abide in you, ask whatever you wish, and it will be done for you."
+  },
+  {
+    "id": "ela-greek-latin-roots",
+    "subject": "ela",
+    "title": "Greek and Latin Roots",
+    "added": "2026-10-25",
+    "quiz": "2026-10-28",
+    "pin": true,
+    "note": "Test Wednesday 10/28. Her study guide says it plainly: know each root’s meaning AND one example word. Root, meaning, word asks for both.",
+    "type": "bundle",
+    "roots": [
+      {
+        "root": "Uni",
+        "meaning": "one",
+        "example": "unicorn",
+        "accept": [
+          "unicorn",
+          "unicycle",
+          "uniform",
+          "unique",
+          "unite",
+          "unison",
+          "universe"
+        ]
+      },
+      {
+        "root": "In",
+        "meaning": "into, inside of",
+        "example": "interject",
+        "accept": [
+          "interject",
+          "inject",
+          "inside",
+          "inhale",
+          "income",
+          "insert",
+          "indoor",
+          "invade"
+        ]
+      },
+      {
+        "root": "Micro",
+        "meaning": "small",
+        "example": "micrograph",
+        "accept": [
+          "micrograph",
+          "microscope",
+          "microwave",
+          "microphone",
+          "microchip",
+          "microbe",
+          "microscopic"
+        ]
+      },
+      {
+        "root": "De",
+        "meaning": "down, off",
+        "example": "descend",
+        "accept": [
+          "descend",
+          "deflate",
+          "depart",
+          "decrease",
+          "demote",
+          "deduct",
+          "decline",
+          "depress"
+        ]
+      },
+      {
+        "root": "Bi",
+        "meaning": "two, twice",
+        "example": "bicycle",
+        "accept": [
+          "bicycle",
+          "binoculars",
+          "biweekly",
+          "bilingual",
+          "biplane",
+          "bisect",
+          "biceps"
+        ]
+      },
+      {
+        "root": "Pre",
+        "meaning": "before, prior to, in front of",
+        "example": "prepay",
+        "accept": [
+          "prepay",
+          "preview",
+          "predict",
+          "prefix",
+          "prepare",
+          "preheat",
+          "precaution",
+          "prehistoric"
+        ]
+      },
+      {
+        "root": "Tele",
+        "meaning": "far, far off, at a distance",
+        "example": "telephone",
+        "accept": [
+          "telephone",
+          "television",
+          "telescope",
+          "telegraph",
+          "telecast",
+          "telepathy",
+          "telephoto"
+        ]
+      },
+      {
+        "root": "Mis",
+        "meaning": "wrong, incorrect",
+        "example": "misread",
+        "accept": [
+          "misread",
+          "mistake",
+          "misspell",
+          "misbehave",
+          "misplace",
+          "mislead",
+          "misjudge",
+          "misfortune"
+        ]
+      },
+      {
+        "root": "Sub",
+        "meaning": "below, under",
+        "example": "submarine",
+        "accept": [
+          "submarine",
+          "subway",
+          "submerge",
+          "subtract",
+          "subzero",
+          "substandard",
+          "subsoil",
+          "subtitle"
+        ]
+      },
+      {
+        "root": "Bio",
+        "meaning": "life",
+        "example": "biography",
+        "accept": [
+          "biography",
+          "biology",
+          "biosphere",
+          "antibiotic",
+          "biodegradable",
+          "symbiotic",
+          "bionic"
+        ]
+      },
+      {
+        "root": "Graph",
+        "meaning": "write",
+        "example": "autograph",
+        "accept": [
+          "autograph",
+          "paragraph",
+          "photograph",
+          "graphite",
+          "biography",
+          "telegraph",
+          "calligraphy",
+          "geography"
+        ]
+      },
+      {
+        "root": "Rupt",
+        "meaning": "break, burst",
+        "example": "erupt",
+        "accept": [
+          "erupt",
+          "interrupt",
+          "rupture",
+          "disrupt",
+          "abrupt",
+          "bankrupt",
+          "corrupt",
+          "eruption"
+        ]
+      },
+      {
+        "root": "Tract",
+        "meaning": "to pull, drag, draw",
+        "example": "tractor",
+        "accept": [
+          "tractor",
+          "attract",
+          "subtract",
+          "extract",
+          "distract",
+          "contract",
+          "traction",
+          "retract"
+        ]
+      },
+      {
+        "root": "Tri",
+        "meaning": "three",
+        "example": "tricycle",
+        "accept": [
+          "tricycle",
+          "triangle",
+          "trio",
+          "tripod",
+          "triple",
+          "trident",
+          "trilogy",
+          "triplets"
+        ]
+      },
+      {
+        "root": "Quad",
+        "meaning": "four",
+        "example": "quadrilateral",
+        "accept": [
+          "quadrilateral",
+          "quad",
+          "quadruple",
+          "quadrant",
+          "quadruplets",
+          "quadriceps",
+          "quadrangle"
+        ]
+      },
+      {
+        "root": "Bene",
+        "meaning": "good, well",
+        "example": "benevolent",
+        "accept": [
+          "benevolent",
+          "benefit",
+          "beneficial",
+          "benefactor",
+          "benediction",
+          "beneficiary"
+        ]
+      },
+      {
+        "root": "Astr",
+        "meaning": "outer space, star",
+        "example": "astronaut",
+        "accept": [
+          "astronaut",
+          "astronomy",
+          "astrology",
+          "astronomer",
+          "astral"
+        ]
+      },
+      {
+        "root": "Aud",
+        "meaning": "hear, listen",
+        "example": "audio",
+        "accept": [
+          "audio",
+          "audience",
+          "auditorium",
+          "audible",
+          "audition",
+          "auditory",
+          "audiobook"
+        ]
+      },
+      {
+        "root": "Dict",
+        "meaning": "say, speak",
+        "example": "predict",
+        "accept": [
+          "predict",
+          "dictionary",
+          "dictate",
+          "contradict",
+          "verdict",
+          "diction",
+          "dictator",
+          "benediction"
+        ]
+      },
+      {
+        "root": "Geo",
+        "meaning": "earth, ground",
+        "example": "geography",
+        "accept": [
+          "geography",
+          "geology",
+          "geometry",
+          "geothermal",
+          "geode",
+          "geologist",
+          "geopolitics"
+        ]
+      }
+    ],
+    "rootRound": 8,
+    "words": [
+      {
+        "word": "Uni",
+        "meaning": "one (for example: unicorn)"
+      },
+      {
+        "word": "In",
+        "meaning": "into, inside of (for example: interject)"
+      },
+      {
+        "word": "Micro",
+        "meaning": "small (for example: micrograph)"
+      },
+      {
+        "word": "De",
+        "meaning": "down, off (for example: descend)"
+      },
+      {
+        "word": "Bi",
+        "meaning": "two, twice (for example: bicycle)"
+      },
+      {
+        "word": "Pre",
+        "meaning": "before, prior to, in front of (for example: prepay)"
+      },
+      {
+        "word": "Tele",
+        "meaning": "far, far off, at a distance (for example: telephone)"
+      },
+      {
+        "word": "Mis",
+        "meaning": "wrong, incorrect (for example: misread)"
+      },
+      {
+        "word": "Sub",
+        "meaning": "below, under (for example: submarine)"
+      },
+      {
+        "word": "Bio",
+        "meaning": "life (for example: biography)"
+      },
+      {
+        "word": "Graph",
+        "meaning": "write (for example: autograph)"
+      },
+      {
+        "word": "Rupt",
+        "meaning": "break, burst (for example: erupt)"
+      },
+      {
+        "word": "Tract",
+        "meaning": "to pull, drag, draw (for example: tractor)"
+      },
+      {
+        "word": "Tri",
+        "meaning": "three (for example: tricycle)"
+      },
+      {
+        "word": "Quad",
+        "meaning": "four (for example: quadrilateral)"
+      },
+      {
+        "word": "Bene",
+        "meaning": "good, well (for example: benevolent)"
+      },
+      {
+        "word": "Astr",
+        "meaning": "outer space, star (for example: astronaut)"
+      },
+      {
+        "word": "Aud",
+        "meaning": "hear, listen (for example: audio)"
+      },
+      {
+        "word": "Dict",
+        "meaning": "say, speak (for example: predict)"
+      },
+      {
+        "word": "Geo",
+        "meaning": "earth, ground (for example: geography)"
+      }
+    ],
+    "drills": [
+      "rootword",
+      "match",
+      "meaning"
+    ],
+    "rival": "Prefix Rangers",
+    "matchLength": 8
+  },
+  {
+    "id": "bible-john-15-8",
+    "subject": "bible",
+    "title": "John 15:8",
+    "assess": "quiz",
+    "added": "2026-10-25",
+    "quiz": "2026-10-30",
+    "note": "Quiz Friday 10/30. Word for word, ESV. Carries on from 15:7.",
+    "type": "verse",
+    "reference": "John 15:8",
+    "version": "ESV",
+    "text": "By this my Father is glorified, that you bear much fruit and so prove to be my disciples."
+  },
+  {
+    "id": "sci-ch4-test",
+    "subject": "science",
+    "title": "Science Test, Part 1: Chapter 4 Cells and Classification",
+    "added": "2026-10-25",
+    "quiz": "2026-10-28",
+    "pin": true,
+    "note": "Test Wednesday 10/28 covers Chapters 4 AND 5. This is the Chapter 4 half: all 24 Words to Know and the Key Ideas from p. 100, in the book’s wording.",
+    "type": "bundle",
+    "words": [
+      {
+        "word": "organism",
+        "meaning": "A complete living thing. Animals, plants, and even the mold on old bread are organisms."
+      },
+      {
+        "word": "life span",
+        "meaning": "For a living thing, the process of birth, growth, reproduction and death. A bristlecone pine can live thousands of years; an adult mayfly may live only a few hours."
+      },
+      {
+        "word": "life cycle",
+        "meaning": "Another name for the life span: born, grows into an adult, produces offspring, ages and dies. Reproduction lets the cycle begin again."
+      },
+      {
+        "word": "energy",
+        "meaning": "The ability to do work. Living things get their energy from food."
+      },
+      {
+        "word": "cell",
+        "meaning": "A tiny unit of living material surrounded by a thin membrane. It does nearly all the things living organisms do. The smallest unit of a living organism."
+      },
+      {
+        "word": "cell theory",
+        "meaning": "The idea, from Schwann and Schleiden’s conclusions, that all living things are made of cells, and that a cell can live on its own or be the smallest unit of a larger organism."
+      },
+      {
+        "word": "microscope",
+        "meaning": "An instrument that uses lenses to magnify objects hundreds or thousands of times."
+      },
+      {
+        "word": "cell membrane",
+        "meaning": "The outer boundary of the cell. It keeps out things that do not belong while letting in necessary things, such as food and oxygen."
+      },
+      {
+        "word": "cytoplasm",
+        "meaning": "The jellylike substance inside the cell membrane. Mostly water, with proteins and fats in it. Say SITE-uh-plaz-um."
+      },
+      {
+        "word": "organelles",
+        "meaning": "The many tiny structures inside the cytoplasm that help carry out the cell’s jobs. Say or-guh-NELZ."
+      },
+      {
+        "word": "nucleus",
+        "meaning": "A large, ball-shaped organelle with its own membrane. It holds the DNA, the coded instructions the cell follows."
+      },
+      {
+        "word": "mitochondria",
+        "meaning": "The cell’s engines. They break down the cell’s food and release energy. Say MY-tuh-KAHN-dree-uh."
+      },
+      {
+        "word": "vacuole",
+        "meaning": "A bubble-like organelle that stores material. Animal cells have small ones; a plant cell usually has one big central vacuole, and when it shrinks the plant droops."
+      },
+      {
+        "word": "cell wall",
+        "meaning": "The firm layer outside a PLANT cell’s membrane. It gives support and keeps the plant cell rigid and firm. Animal cells do not have one."
+      },
+      {
+        "word": "chloroplast",
+        "meaning": "A large structure in plant cells that is full of chlorophyll and stores energy from sunlight for photosynthesis."
+      },
+      {
+        "word": "chlorophyll",
+        "meaning": "A green pigment that absorbs energy from sunlight. Animal cells do not need it, because animals do not use sunlight for energy."
+      },
+      {
+        "word": "cell division",
+        "meaning": "How a single cell reproduces itself: by dividing into two cells."
+      },
+      {
+        "word": "mitosis",
+        "meaning": "The step-by-step cell division that makes two new cells EXACTLY the same as the parent cell. Say my-TOH-sis."
+      },
+      {
+        "word": "meiosis",
+        "meaning": "Cell division that forms special reproductive cells. The cell divides twice and makes four cells, each with HALF the parent’s chromosomes. Used in sexual reproduction. Say my-OH-sis."
+      },
+      {
+        "word": "bacteria",
+        "meaning": "The tiny one-celled organisms in Kingdom Eubacteria. The smallest living things known to man. They have no well-defined nucleus."
+      },
+      {
+        "word": "colony",
+        "meaning": "A group of organisms of the same kind living together. Bacteria, fungi and algae often grow in colonies."
+      },
+      {
+        "word": "protozoan",
+        "meaning": "A one-celled organism in Kingdom Protista that can move around, often living in pond water. The paramecium and the amoeba are protozoans."
+      },
+      {
+        "word": "algae",
+        "meaning": "Organisms in Kingdom Protista that are not as mobile as protozoans. They have chlorophyll, so they can use sunlight for energy. Say AL-jee."
+      },
+      {
+        "word": "photosynthesis",
+        "meaning": "The process plants use to turn the energy in sunlight into a usable source of energy: sugar. It also releases oxygen into the air."
+      }
+    ],
+    "orderGroups": [
+      {
+        "name": "Classification, largest to smallest",
+        "partOne": true,
+        "books": [
+          "Kingdom",
+          "Phylum",
+          "Class",
+          "Order",
+          "Family",
+          "Genus",
+          "Species"
+        ]
+      }
+    ],
+    "maps": [
+      {
+        "id": "plantcell",
+        "title": "Plant Cell (your Oct 7 quiz sheet)",
+        "src": "data:image/jpeg;base64,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",
+        "w": 620,
+        "h": 694,
+        "bank": [
+          "cell wall",
+          "mitochondrion",
+          "vacuole",
+          "chloroplast",
+          "cell membrane",
+          "ribosomes",
+          "endoplasmic reticulum",
+          "nucleolus",
+          "nucleus",
+          "cytoplasm"
+        ],
+        "blanks": [
+          {
+            "answer": "cell wall",
+            "x": 2,
+            "y": 74,
+            "w": 66,
+            "h": 16,
+            "why": "The thick dark green OUTER layer. Only plant cells have one. It provides support and keeps the cell rigid and firm.",
+            "prompt": "Which label goes here? This line stops on the thick dark outer layer."
+          },
+          {
+            "answer": "mitochondrion",
+            "x": 2,
+            "y": 153,
+            "w": 80,
+            "h": 16,
+            "why": "The red bean-shaped one. It breaks down the cell’s food and releases energy."
+          },
+          {
+            "answer": "vacuole",
+            "x": 2,
+            "y": 320,
+            "w": 55,
+            "h": 16,
+            "why": "The huge pale blue space. Plant cells usually have one central vacuole, sometimes more than half the cell’s volume."
+          },
+          {
+            "answer": "chloroplast",
+            "x": 2,
+            "y": 432,
+            "w": 66,
+            "h": 16,
+            "why": "The striped green oval. It holds chlorophyll, which absorbs sunlight for photosynthesis. Animal cells do not have these."
+          },
+          {
+            "answer": "cell membrane",
+            "x": 128,
+            "y": 44,
+            "w": 100,
+            "h": 16,
+            "why": "The thin pale layer just INSIDE the cell wall. It controls what gets in and out.",
+            "prompt": "Which label goes here? This line stops on the thin pale layer just inside the wall."
+          },
+          {
+            "answer": "ribosomes",
+            "x": 239,
+            "y": 25,
+            "w": 58,
+            "h": 16,
+            "why": "The tiny scattered dots. They make the proteins the cell needs by reading the code in the DNA."
+          },
+          {
+            "answer": "endoplasmic reticulum",
+            "x": 282,
+            "y": 46,
+            "w": 118,
+            "h": 16,
+            "why": "The folded blue ribbon network beside the nucleus. The cell’s transportation system."
+          },
+          {
+            "answer": "nucleolus",
+            "x": 405,
+            "y": 63,
+            "w": 66,
+            "h": 16,
+            "why": "The small dark purple circle in the MIDDLE of the nucleus.",
+            "prompt": "Which label goes here? This line points into the dark middle of the nucleus."
+          },
+          {
+            "answer": "nucleus",
+            "x": 534,
+            "y": 110,
+            "w": 58,
+            "h": 16,
+            "why": "The big pink sphere, the control centre. This line points into the PINK part.",
+            "prompt": "Which label goes here? This line points into the pink body, not the dark middle."
+          },
+          {
+            "answer": "cytoplasm",
+            "x": 316,
+            "y": 669,
+            "w": 64,
+            "h": 16,
+            "why": "The jelly filling the cell, where the organelles sit. This line comes up from the bottom into open green.",
+            "prompt": "Which label goes here? This line comes up from the bottom of the page."
+          }
+        ]
+      }
+    ],
+    "drills": [
+      "meaning",
+      "mixed",
+      "bank",
+      "maplabel"
+    ],
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "An organism is —",
+        "options": [
+          "a complete living thing",
+          "any object that moves",
+          "only an animal",
+          "a single cell"
+        ],
+        "answer": "a complete living thing",
+        "why": "You are an organism. So is the mold growing on old bread."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these are characteristics of living things? Check ALL that apply.",
+        "options": [
+          "are made of cells",
+          "use energy",
+          "grow and develop",
+          "reproduce",
+          "respond to their environment",
+          "grow by adding crystals",
+          "are moved by the wind"
+        ],
+        "answers": [
+          "are made of cells",
+          "use energy",
+          "grow and develop",
+          "reproduce",
+          "respond to their environment"
+        ],
+        "why": "All FIVE, pp. 80–83. A mineral crystal can grow in size, but it is not alive, so growing alone does not make something living."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Energy is —",
+        "options": [
+          "the ability to do work",
+          "a kind of food",
+          "the smallest unit of life",
+          "a gas living things breathe out"
+        ],
+        "answer": "the ability to do work",
+        "why": "Food gives the body energy the way gasoline gives a lawnmower energy."
+      },
+      {
+        "kind": "mc",
+        "prompt": "For a living thing, birth, growth, reproduction and death is called its —",
+        "options": [
+          "life span",
+          "cell theory",
+          "metamorphosis",
+          "classification"
+        ],
+        "answer": "life span",
+        "why": "Also called the life cycle."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Reproduction allows the life cycle to begin again.",
+        "answer": true,
+        "why": "New organisms replace the ones that age and die."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Who looked at cork through a microscope in 1665 and named the tiny chambers cells?",
+        "options": [
+          "Robert Hooke",
+          "Anton van Leeuwenhoek",
+          "Zacharias Jansen",
+          "Carolus Linnaeus"
+        ],
+        "answer": "Robert Hooke",
+        "why": "Hooke saw the cell walls of dead cork. He drew them in his book Micrographia."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Who is credited with inventing the first microscope?",
+        "options": [
+          "Zacharias Jansen",
+          "Robert Hooke",
+          "Anton van Leeuwenhoek",
+          "Theodor Schwann"
+        ],
+        "answer": "Zacharias Jansen",
+        "why": "A Dutch inventor, in the late 1500s."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Leeuwenhoek called the tiny creatures he saw swimming in water —",
+        "options": [
+          "animalcules",
+          "organelles",
+          "colonies",
+          "cells"
+        ],
+        "answer": "animalcules",
+        "why": "Leeuwenhoek, another Dutch scientist, ground his own lenses. His best microscope magnified about 300 times."
+      },
+      {
+        "kind": "tf",
+        "prompt": "According to the cell theory, all living things are made of cells.",
+        "answer": true,
+        "why": "Schwann and Schleiden found that every living thing they studied was made of cells and nonliving things were not."
+      },
+      {
+        "kind": "mc",
+        "prompt": "A tissue is —",
+        "options": [
+          "a group of cells working together",
+          "a group of organs working together",
+          "one single cell",
+          "a group of systems"
+        ],
+        "answer": "a group of cells working together",
+        "why": "Muscle tissue is a group of muscle cells working together."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which list goes from SMALLEST to LARGEST?",
+        "options": [
+          "cell → tissue → organ → system",
+          "tissue → cell → organ → system",
+          "cell → organ → tissue → system",
+          "organ → tissue → cell → system"
+        ],
+        "answer": "cell → tissue → organ → system",
+        "why": "Cells make tissues, tissues make organs, organs work together in systems."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Your heart is a tissue.",
+        "underlined": "tissue",
+        "answer": false,
+        "correction": "organ",
+        "options": [
+          "organ",
+          "cell",
+          "system",
+          "organelle"
+        ],
+        "why": "The heart is an ORGAN, made of tissues such as muscle and nerves."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Your blood vessels and heart working together make up the —",
+        "options": [
+          "circulatory system",
+          "nucleus",
+          "cell membrane",
+          "life cycle"
+        ],
+        "answer": "circulatory system",
+        "why": "Organs working together form a system."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which organelle holds the DNA, the coded instructions the cell follows?",
+        "options": [
+          "nucleus",
+          "mitochondria",
+          "vacuole",
+          "cell wall"
+        ],
+        "answer": "nucleus",
+        "why": "The large, ball-shaped one with its own membrane."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which organelles are the cell’s engines, breaking down food and releasing energy?",
+        "options": [
+          "mitochondria",
+          "chloroplasts",
+          "vacuoles",
+          "ribosomes"
+        ],
+        "answer": "mitochondria",
+        "why": "Mitochondria = engines."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The cell membrane gives support to the plant cell and keeps it rigid and firm.",
+        "underlined": "cell membrane",
+        "answer": false,
+        "correction": "cell wall",
+        "options": [
+          "cell wall",
+          "cytoplasm",
+          "nucleus",
+          "vacuole"
+        ],
+        "why": "The CELL WALL is the firm one. The membrane is the boundary that lets food and oxygen in and keeps other things out."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these do PLANT cells have that animal cells do NOT? Check ALL that apply.",
+        "options": [
+          "cell wall",
+          "chloroplasts",
+          "nucleus",
+          "cell membrane",
+          "mitochondria",
+          "cytoplasm"
+        ],
+        "answers": [
+          "cell wall",
+          "chloroplasts"
+        ],
+        "why": "Only plant cells have a cell wall and chloroplasts. Both kinds have a nucleus, a membrane, mitochondria and cytoplasm."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Animal cells are usually ___ shaped, while plant cells are usually ___ shaped.",
+        "options": [
+          "round; square",
+          "square; round",
+          "flat; round",
+          "long; flat"
+        ],
+        "answer": "round; square",
+        "why": "From the cell model activity, p. 88."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Chlorophyll is —",
+        "options": [
+          "a green pigment that absorbs energy from sunlight",
+          "the jelly inside a cell",
+          "the outer layer of a plant cell",
+          "a group of bacteria"
+        ],
+        "answer": "a green pigment that absorbs energy from sunlight",
+        "why": "It sits inside the chloroplasts."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Animal cells need chlorophyll because animals use sunlight for energy.",
+        "answer": false,
+        "why": "Animals do NOT use sunlight for energy, so their cells do not need chlorophyll."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which process makes two new cells that are exactly the same as the parent cell?",
+        "options": [
+          "mitosis",
+          "meiosis",
+          "photosynthesis",
+          "chemosynthesis"
+        ],
+        "answer": "mitosis",
+        "why": "Each chromosome copies itself, the copies move apart, and the cell splits into two identical cells."
+      },
+      {
+        "kind": "correct",
+        "prompt": "In mitosis, the parent cell divides into four new cells.",
+        "underlined": "four",
+        "answer": false,
+        "correction": "two",
+        "options": [
+          "two",
+          "three",
+          "eight"
+        ],
+        "why": "Mitosis makes TWO. Meiosis is the one that ends with four."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these are true of MEIOSIS? Check ALL that apply.",
+        "options": [
+          "the cell divides twice",
+          "it makes four new cells",
+          "each new cell has half the parent’s chromosomes",
+          "it forms special reproductive cells",
+          "the new cells are exactly the same as the parent"
+        ],
+        "answers": [
+          "the cell divides twice",
+          "it makes four new cells",
+          "each new cell has half the parent’s chromosomes",
+          "it forms special reproductive cells"
+        ],
+        "why": "Four are true. The last one describes mitosis, not meiosis."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Creating new life using cells from a male and a female organism is called —",
+        "options": [
+          "sexual reproduction",
+          "mitosis",
+          "photosynthesis",
+          "classification"
+        ],
+        "answer": "sexual reproduction",
+        "why": "It needs the special reproductive cells made by meiosis."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these are among the SIX kingdoms? Check ALL that apply.",
+        "options": [
+          "Eubacteria",
+          "Archaebacteria",
+          "Protista",
+          "Fungi",
+          "Plantae",
+          "Animalia",
+          "Chordata",
+          "Mammalia"
+        ],
+        "answers": [
+          "Eubacteria",
+          "Archaebacteria",
+          "Protista",
+          "Fungi",
+          "Plantae",
+          "Animalia"
+        ],
+        "why": "Six. Chordata is a PHYLUM and Mammalia is a CLASS, smaller groups inside Kingdom Animalia."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which kingdom lives in extreme places, like hot, acidic sulfur springs and the Dead Sea?",
+        "options": [
+          "Archaebacteria",
+          "Eubacteria",
+          "Fungi",
+          "Plantae"
+        ],
+        "answer": "Archaebacteria",
+        "why": "Some of them can even survive without oxygen."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Bacteria often live in groups called —",
+        "options": [
+          "colonies",
+          "pods",
+          "prides",
+          "tissues"
+        ],
+        "answer": "colonies",
+        "why": "Bacteria tend to live in colonies."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Bacteria are the largest living things known to man.",
+        "underlined": "largest",
+        "answer": false,
+        "correction": "smallest",
+        "options": [
+          "smallest",
+          "oldest",
+          "strongest"
+        ],
+        "why": "SMALLEST. They are almost everywhere, even on your desk."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Protozoans and algae belong to Kingdom —",
+        "options": [
+          "Protista",
+          "Fungi",
+          "Eubacteria",
+          "Plantae"
+        ],
+        "answer": "Protista",
+        "why": "Protozoans can move around; algae are not as mobile but can use sunlight."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Algae have chlorophyll, so they are able to use sunlight for energy.",
+        "answer": true,
+        "why": "Like plants."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these are FUNGI? Check ALL that apply.",
+        "options": [
+          "mushroom",
+          "mold on bread",
+          "yeast",
+          "paramecium",
+          "algae",
+          "staphylococcus"
+        ],
+        "answers": [
+          "mushroom",
+          "mold on bread",
+          "yeast"
+        ],
+        "why": "Mushrooms, mold and yeast are fungi. The paramecium and algae are Protista; staphylococcus is a bacterium."
+      },
+      {
+        "kind": "tf",
+        "prompt": "A fungus can make its own food.",
+        "answer": false,
+        "why": "Fungi cannot make their own food. They absorb the food they need from their surroundings."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Plants use photosynthesis to turn the energy in sunlight into —",
+        "options": [
+          "sugar",
+          "oxygen only",
+          "chlorophyll",
+          "cell walls"
+        ],
+        "answer": "sugar",
+        "why": "Sugar is the usable energy. Photosynthesis also releases oxygen into the air."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these are true of ALL animals? Check ALL that apply.",
+        "options": [
+          "they are multicellular",
+          "they cannot make their own food",
+          "their cells have no cell walls",
+          "they all have backbones",
+          "they make food by photosynthesis"
+        ],
+        "answers": [
+          "they are multicellular",
+          "they cannot make their own food",
+          "their cells have no cell walls"
+        ],
+        "why": "Three. Not all animals have backbones (most are invertebrates), and only plants and algae use photosynthesis."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Who invented the classification system scientists still use today?",
+        "options": [
+          "Carolus Linnaeus",
+          "Robert Hooke",
+          "Theodor Schwann",
+          "Anton van Leeuwenhoek"
+        ],
+        "answer": "Carolus Linnaeus",
+        "why": "A Swedish scientist. He first used only two kingdoms, Animalae and Plantae."
+      },
+      {
+        "kind": "mc",
+        "prompt": "In the scientific name Canis familiaris, Canis is the —",
+        "options": [
+          "genus name",
+          "species name",
+          "kingdom name",
+          "family name"
+        ],
+        "answer": "genus name",
+        "why": "First name = genus, second = species."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these are written CORRECTLY? Check ALL that apply.",
+        "options": [
+          "Canis familiaris (in italics)",
+          "Canis familiaris (underlined)",
+          "canis familiaris",
+          "Canis Familiaris"
+        ],
+        "answers": [
+          "Canis familiaris (in italics)",
+          "Canis familiaris (underlined)"
+        ],
+        "why": "Genus capitalized, species lowercase, and the name italicized or underlined."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Scientific names are written in which language?",
+        "options": [
+          "Latin",
+          "Greek",
+          "English",
+          "Swedish"
+        ],
+        "answer": "Latin",
+        "why": "Linnaeus chose Latin because it was widely known."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Bacteria-like organisms at deep-sea vents turn chemicals into food. What is that process called?",
+        "options": [
+          "photosynthesis",
+          "chemosynthesis",
+          "metamorphosis",
+          "echolocation"
+        ],
+        "answer": "chemosynthesis",
+        "why": "CHEMO = chemicals. Plants use photosynthesis, which needs sunlight; there is no sunlight at a deep-sea vent."
+      }
+    ]
+  },
+  {
+    "id": "sci-ch4-5-test",
+    "subject": "science",
+    "title": "Science Test, Part 2: Chapter 5 Animals",
+    "added": "2026-10-25",
+    "quiz": "2026-10-28",
+    "pin": true,
+    "note": "Test Wednesday 10/28 covers Chapters 4 AND 5. This is the Chapter 5 half: all 27 Words to Know from p. 136, now in the book’s own wording. Do Part 1 too.",
+    "type": "bundle",
+    "words": [
+      {
+        "word": "invertebrate",
+        "meaning": "An animal WITHOUT a backbone. We know vertebrates better, but about 95 percent of animals are invertebrates."
+      },
+      {
+        "word": "vertebrate",
+        "meaning": "An animal WITH a backbone. Vertebrates are usually larger, because the backbone supports their greater weight."
+      },
+      {
+        "word": "nematocyst",
+        "meaning": "A tiny stinging organelle on the tentacles of jellyfish, sea anemones and corals. They use nematocysts to capture food: the sting can paralyze a small animal that brushes against them."
+      },
+      {
+        "word": "mollusk",
+        "meaning": "An animal with a soft body and a mantle, a special part of the body that sometimes forms a shell. Snails, clams, oysters, squid and octopuses are mollusks."
+      },
+      {
+        "word": "spicule",
+        "meaning": "A thin, glassy spine that supports and protects a glass sponge. Spicules also act like optical fibers and carry light."
+      },
+      {
+        "word": "radial symmetry",
+        "meaning": "Body parts that repeat around a central part, like the spokes of a wheel. Most adult echinoderms, such as starfish and sand dollars, have it."
+      },
+      {
+        "word": "bilateral symmetry",
+        "meaning": "The body can be divided down the middle and be the same on each side. Flatworms have it, and so do you."
+      },
+      {
+        "word": "filter feeder",
+        "meaning": "An animal that strains tiny food, such as plankton, out of the water. Many echinoderms are filter feeders, and so are the whale shark and the basking shark, which filter food through their gills."
+      },
+      {
+        "word": "parasite",
+        "meaning": "An organism that lives on or in another living organism, called a HOST, and depends on the host for nourishment."
+      },
+      {
+        "word": "free-living",
+        "meaning": "Independent of other organisms. A free-living worm lives on its own instead of in a host. The opposite of a parasite."
+      },
+      {
+        "word": "setae",
+        "meaning": "The hairlike structures an earthworm uses to grip the ground and pull itself along. Say SEE-tee."
+      },
+      {
+        "word": "arthropod",
+        "meaning": "Means “jointed foot.” An animal with jointed legs, a segmented body and an exoskeleton. Crustaceans, arachnids and insects are arthropods."
+      },
+      {
+        "word": "exoskeleton",
+        "meaning": "A hard covering that acts like a knight’s armor, protecting an arthropod’s body. A skeleton on the OUTSIDE."
+      },
+      {
+        "word": "molt",
+        "meaning": "To shed the old exoskeleton and grow a new one. An arthropod must molt in order to grow."
+      },
+      {
+        "word": "crustacean",
+        "meaning": "An arthropod with at least FIVE pairs of jointed legs and TWO pairs of antennae. It breathes through gills. Crabs, lobsters, shrimp, barnacles."
+      },
+      {
+        "word": "arachnid",
+        "meaning": "An arthropod with EIGHT legs and TWO body segments. Spiders, scorpions, ticks and mites."
+      },
+      {
+        "word": "insect",
+        "meaning": "An arthropod with THREE body segments (head, thorax, abdomen), three pairs of legs on the thorax, and usually two pairs of wings."
+      },
+      {
+        "word": "metamorphosis",
+        "meaning": "The change in form an animal goes through to become an adult. Insects: complete (egg, larva, pupa, adult) or incomplete (egg, nymph, adult). Frogs: egg, larva (tadpole), adult."
+      },
+      {
+        "word": "cold-blooded",
+        "meaning": "The animal’s body temperature changes with its surroundings. Fish, amphibians and reptiles are cold-blooded."
+      },
+      {
+        "word": "warm-blooded",
+        "meaning": "The animal’s body temperature stays basically the same no matter where it is. Birds and mammals are warm-blooded."
+      },
+      {
+        "word": "cartilage",
+        "meaning": "A bonelike substance that is softer and more bendable than bone. Your nose and ears are made of it, and so is a shark’s whole skeleton."
+      },
+      {
+        "word": "amphibian",
+        "meaning": "Means “double life.” A cold-blooded vertebrate that lives part of its life in water and part on land, like frogs, toads and salamanders."
+      },
+      {
+        "word": "nocturnal",
+        "meaning": "Active at night. Bats are usually nocturnal."
+      },
+      {
+        "word": "echolocation",
+        "meaning": "How a bat knows where it is flying: it makes high-frequency clicks, the sound bounces off objects, and the bat judges distance by how long it takes to return. In humans we call it sonar."
+      },
+      {
+        "word": "pride",
+        "meaning": "A group of lions. Most cats are solitary, but lions live in prides."
+      },
+      {
+        "word": "pod",
+        "meaning": "A group of whales. Whales are social and talk to their pods with sounds."
+      },
+      {
+        "word": "blubber",
+        "meaning": "A thick, fatty substance under the skin that insulates whales and walruses against the cold."
+      }
+    ],
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "What is the difference between an invertebrate and a vertebrate?",
+        "options": [
+          "A vertebrate has a backbone; an invertebrate does not",
+          "An invertebrate has a backbone; a vertebrate does not",
+          "A vertebrate is always bigger",
+          "An invertebrate lives only in water"
+        ],
+        "answer": "A vertebrate has a backbone; an invertebrate does not",
+        "why": "VERTEBRAte = backbone (vertebrae). IN- means not. Most phyla of the animal kingdom are invertebrates."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Name the FIVE classes of vertebrates. Check ALL that apply.",
+        "options": [
+          "fish",
+          "amphibians",
+          "reptiles",
+          "birds",
+          "mammals",
+          "insects",
+          "mollusks",
+          "arachnids"
+        ],
+        "answers": [
+          "fish",
+          "amphibians",
+          "reptiles",
+          "birds",
+          "mammals"
+        ],
+        "why": "Five: fish, amphibians, reptiles, birds, mammals. Insects, mollusks and arachnids have no backbone, so they are invertebrates."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which classes of vertebrates are COLD-BLOODED? Check ALL that apply.",
+        "options": [
+          "fish",
+          "amphibians",
+          "reptiles",
+          "birds",
+          "mammals"
+        ],
+        "answers": [
+          "fish",
+          "amphibians",
+          "reptiles"
+        ],
+        "why": "Fish, amphibians and reptiles are cold-blooded. Birds and mammals are the warm-blooded two. Learn it as a split of five into three and two."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which classes of vertebrates are WARM-BLOODED? Check ALL that apply.",
+        "options": [
+          "birds",
+          "mammals",
+          "fish",
+          "reptiles",
+          "amphibians"
+        ],
+        "answers": [
+          "birds",
+          "mammals"
+        ],
+        "why": "Only birds and mammals. Warm-blooded means the body temperature stays basically the same wherever the animal is."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which THREE groups are arthropods? Check ALL that apply.",
+        "options": [
+          "crustaceans",
+          "arachnids",
+          "insects",
+          "mollusks",
+          "amphibians"
+        ],
+        "answers": [
+          "crustaceans",
+          "arachnids",
+          "insects"
+        ],
+        "why": "All arthropods have an exoskeleton, jointed legs and a segmented body. Mollusks are soft-bodied, and amphibians are vertebrates."
+      },
+      {
+        "kind": "mc",
+        "prompt": "How many legs does an arachnid have?",
+        "options": [
+          "six",
+          "eight",
+          "ten",
+          "four"
+        ],
+        "answer": "eight",
+        "why": "Eight legs, two body sections — spiders, ticks, scorpions. An INSECT is the one with six."
+      },
+      {
+        "kind": "mc",
+        "prompt": "How many body sections and legs does an insect have?",
+        "options": [
+          "two sections, eight legs",
+          "three sections, six legs",
+          "one section, six legs",
+          "three sections, eight legs"
+        ],
+        "answer": "three sections, six legs",
+        "why": "Three body sections, six legs, usually wings. The arachnid is two sections, eight legs."
+      },
+      {
+        "kind": "multi",
+        "prompt": "What are the FOUR stages of COMPLETE metamorphosis, in order? Check ALL that apply.",
+        "options": [
+          "egg",
+          "larva",
+          "pupa",
+          "adult",
+          "nymph"
+        ],
+        "answers": [
+          "egg",
+          "larva",
+          "pupa",
+          "adult"
+        ],
+        "why": "Egg, larva, pupa, adult. The grain beetle does this: the larva is the mealworm, then the pupa, then the adult beetle. NYMPH belongs to incomplete metamorphosis."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What are the stages of INCOMPLETE metamorphosis?",
+        "options": [
+          "egg, larva, pupa, adult",
+          "egg, nymph, adult",
+          "larva, pupa, adult",
+          "egg, tadpole, adult"
+        ],
+        "answer": "egg, nymph, adult",
+        "why": "Three stages, and no pupa. The nymph looks like a small adult. Complete metamorphosis is the four-stage one with a pupa."
+      },
+      {
+        "kind": "mc",
+        "prompt": "In the grain beetle’s life cycle, what is the mealworm?",
+        "options": [
+          "the egg",
+          "the larva",
+          "the pupa",
+          "the adult"
+        ],
+        "answer": "the larva",
+        "why": "The LARVA of a grain beetle is called a mealworm. After the pupal stage the adult beetle appears."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Cartilage is a bonelike substance that is harder and stiffer than bone.",
+        "underlined": "harder and stiffer",
+        "answer": false,
+        "correction": "softer and more bendable",
+        "options": [
+          "softer and more bendable",
+          "harder and stiffer",
+          "exactly the same as",
+          "made of shell"
+        ],
+        "why": "Softer and MORE bendable. Your nose and ears are cartilage. Sharks, rays and skates have skeletons made completely of it."
+      },
+      {
+        "kind": "correct",
+        "prompt": "All fish breathe through gills and are cold-blooded.",
+        "underlined": "gills",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Every fish: gills, and cold-blooded."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Birds are cold-blooded, so their body temperature changes with their surroundings.",
+        "underlined": "cold-blooded",
+        "answer": false,
+        "correction": "warm-blooded",
+        "options": [
+          "warm-blooded",
+          "cold-blooded",
+          "nocturnal",
+          "free-living"
+        ],
+        "why": "Birds are WARM-blooded; their temperature stays basically the same. Reptiles, fish and amphibians are the cold-blooded ones."
+      },
+      {
+        "kind": "correct",
+        "prompt": "An animal that is active at night is called nocturnal.",
+        "underlined": "nocturnal",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Nocturnal. Bats are usually nocturnal."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Bats find their way in the dark using a technique called metamorphosis.",
+        "underlined": "metamorphosis",
+        "answer": false,
+        "correction": "echolocation",
+        "options": [
+          "echolocation",
+          "metamorphosis",
+          "hibernation",
+          "camouflage"
+        ],
+        "why": "Echolocation. The clicks bounce off objects and the bat judges distance by how long the sound takes to come back. In humans we call it sonar."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Lions live in groups called pods.",
+        "underlined": "pods",
+        "answer": false,
+        "correction": "prides",
+        "options": [
+          "prides",
+          "pods",
+          "packs",
+          "herds"
+        ],
+        "why": "Lions live in PRIDES. A POD is whales or dolphins. Dogs run in packs. Three group words, do not mix them."
+      },
+      {
+        "kind": "correct",
+        "prompt": "An exoskeleton is a hard skeleton on the outside of the body.",
+        "underlined": "outside",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "EXO means outside. To grow, the animal has to molt — shed it and make a bigger one."
+      },
+      {
+        "kind": "correct",
+        "prompt": "A parasite lives on its own and does not harm any other organism.",
+        "underlined": "lives on its own and does not harm",
+        "answer": false,
+        "correction": "lives on or in another organism and harms it",
+        "options": [
+          "lives on or in another organism and harms it",
+          "lives on its own and does not harm",
+          "eats only plants",
+          "strains food from water"
+        ],
+        "why": "That describes a FREE-LIVING organism. A parasite lives on or in a host and harms it. They are the opposite pair."
+      },
+      {
+        "kind": "mc",
+        "prompt": "A jellyfish can be divided into matching halves many different ways. What is that called?",
+        "options": [
+          "bilateral symmetry",
+          "radial symmetry",
+          "an exoskeleton",
+          "metamorphosis"
+        ],
+        "answer": "radial symmetry",
+        "why": "RADIAL, like the spokes of a wheel radiating from a centre. BILATERAL is two matching sides only, like you."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Whale sharks and basking sharks strain their food out of the water through their gills. What are they called?",
+        "options": [
+          "parasites",
+          "filter feeders",
+          "insectivores",
+          "carnivores"
+        ],
+        "answer": "filter feeders",
+        "why": "Filter feeders. Most sharks are shy of people and eat only small fish and plankton."
+      },
+      {
+        "kind": "mc",
+        "prompt": "An animal that eats ONLY plants is a —",
+        "options": [
+          "carnivore",
+          "herbivore",
+          "omnivore",
+          "insectivore"
+        ],
+        "answer": "herbivore",
+        "why": "HERB = plant. A carnivore eats meat, an omnivore eats both, an insectivore eats insects."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Moles and shrews eat insects as their main food. What are they called?",
+        "options": [
+          "herbivores",
+          "carnivores",
+          "insectivores",
+          "omnivores"
+        ],
+        "answer": "insectivores",
+        "why": "Insectivores. They are similar to rodents but their teeth form differently."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these are true of ALL mammals? Check ALL that apply.",
+        "options": [
+          "feed their young with milk",
+          "warm-blooded",
+          "breathe using lungs",
+          "have a four-chambered heart",
+          "have three ear bones",
+          "all bear live young",
+          "have gills"
+        ],
+        "answers": [
+          "feed their young with milk",
+          "warm-blooded",
+          "breathe using lungs",
+          "have a four-chambered heart",
+          "have three ear bones"
+        ],
+        "why": "Careful with “all bear live young” — MOST do, but monotremes lay eggs. Every mammal, even the egg-layers, feeds its young with milk."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which two animals are monotremes — the mammals that lay eggs?",
+        "options": [
+          "kangaroo and koala",
+          "platypus and echidna",
+          "capybara and mole",
+          "seal and walrus"
+        ],
+        "answer": "platypus and echidna",
+        "why": "The platypus and the echidna both lay eggs. Marsupials like kangaroos and koalas carry babies in a pouch instead."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Kangaroos, koalas and wallabies carry their developing babies in pouches. What group is that?",
+        "options": [
+          "monotremes",
+          "marsupials",
+          "rodents",
+          "pinnipeds"
+        ],
+        "answer": "marsupials",
+        "why": "Marsupials. Most of them live in Australia."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Seals, walruses and sea lions belong to which group of carnivores?",
+        "options": [
+          "pinnipeds",
+          "marsupials",
+          "monotremes",
+          "arachnids"
+        ],
+        "answer": "pinnipeds",
+        "why": "Pinnipeds. Their main food is fish, though they will eat mollusks, crustaceans and even careless penguins."
+      },
+      {
+        "kind": "correct",
+        "prompt": "Blubber is a thick layer of fat that insulates arctic animals against the cold.",
+        "underlined": "fat",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Under a walrus’s thick skin is a layer of blubber. It is what the Blubber Mitts activity tested."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What are the stages of metamorphosis for a FROG?",
+        "options": [
+          "egg, larva (tadpole), adult",
+          "egg, nymph, adult",
+          "egg, larva, pupa, adult",
+          "tadpole, pupa, frog"
+        ],
+        "answer": "egg, larva (tadpole), adult",
+        "why": "Three stages, p. 120. The tadpole is the larval stage: it loses its gills, grows legs and moves onto land. Insects are the ones with a pupa or a nymph."
+      },
+      {
+        "kind": "correct",
+        "prompt": "The term amphibian means “double life.”",
+        "underlined": "double life",
+        "answer": true,
+        "correction": null,
+        "options": [],
+        "why": "Correct as written. Amphibians live part of life in the water and part on land."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Sponges belong to which phylum?",
+        "options": [
+          "Porifera",
+          "Cnidaria",
+          "Chordata",
+          "Arthropoda"
+        ],
+        "answer": "Porifera",
+        "why": "Porifera (puh RIF uh ruh). Sponges sit on the ocean floor and pump water through tiny pores to catch food."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Jellyfish, sea anemones and corals belong to which phylum?",
+        "options": [
+          "Cnidaria",
+          "Porifera",
+          "Chordata",
+          "Arthropoda"
+        ],
+        "answer": "Cnidaria",
+        "why": "Cnidaria (nye DAIR ee uh), the stinging animals. They use nematocysts to capture food."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these are ECHINODERMS? Check ALL that apply.",
+        "options": [
+          "sea star",
+          "sand dollar",
+          "sea urchin",
+          "brittle star",
+          "jellyfish",
+          "octopus",
+          "crab"
+        ],
+        "answers": [
+          "sea star",
+          "sand dollar",
+          "sea urchin",
+          "brittle star"
+        ],
+        "why": "Echinoderms have radial symmetry and hard skeletons. Jellyfish are cnidarians, octopuses are mollusks, crabs are crustaceans."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which of these are MOLLUSKS? Check ALL that apply.",
+        "options": [
+          "snail",
+          "slug",
+          "clam",
+          "octopus",
+          "squid",
+          "starfish",
+          "earthworm",
+          "crab"
+        ],
+        "answers": [
+          "snail",
+          "slug",
+          "clam",
+          "octopus",
+          "squid"
+        ],
+        "why": "Soft body and a mantle. A slug is a mollusk without a shell, and an octopus’s shell is gone too. Starfish are echinoderms, earthworms are segmented worms, crabs are crustaceans."
+      },
+      {
+        "kind": "mc",
+        "prompt": "An earthworm belongs to which group of worms?",
+        "options": [
+          "segmented worms (annelids)",
+          "flatworms",
+          "roundworms",
+          "nematocysts"
+        ],
+        "answer": "segmented worms (annelids)",
+        "why": "Its body is made of many segments. It grips the soil with its setae."
+      },
+      {
+        "kind": "mc",
+        "prompt": "The word arthropod means —",
+        "options": [
+          "jointed foot",
+          "head footed",
+          "stomach footed",
+          "double life"
+        ],
+        "answer": "jointed foot",
+        "why": "Arthropod = jointed foot. Head footed is cephalopod (squid, octopus). Stomach footed is gastropod (snail). Double life is amphibian."
+      },
+      {
+        "kind": "mc",
+        "prompt": "According to your book, what is the REAL difference between man and the animals?",
+        "options": [
+          "Man was created separately, in the image of God",
+          "Man is warm-blooded",
+          "Man breathes using lungs",
+          "Man has a four-chambered heart"
+        ],
+        "answer": "Man was created separately, in the image of God",
+        "why": "Pages 97 and 131. Physically, humans have all the traits of mammals. Some scientists say man is different only because he can think, but the real difference is that God created man separately, in His image."
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "Name the five classes of vertebrates, and say which are cold-blooded and which are warm-blooded.",
+        "answer": "Fish, amphibians, reptiles, birds and mammals. Cold-blooded: fish, amphibians, reptiles. Warm-blooded: birds and mammals."
+      },
+      {
+        "prompt": "What is the difference between an invertebrate and a vertebrate? Give an example of each.",
+        "answer": "A vertebrate has a backbone, an invertebrate does not. Vertebrate: a fish, a frog, a bird. Invertebrate: a jellyfish, a clam, a spider, an insect."
+      },
+      {
+        "prompt": "Name the four stages of complete metamorphosis, in order, and give an animal that goes through it.",
+        "answer": "Egg, larva, pupa, adult. The grain beetle does this — and its larva is the mealworm."
+      },
+      {
+        "prompt": "How is incomplete metamorphosis different from complete metamorphosis?",
+        "answer": "Incomplete has only three stages — egg, nymph, adult — and no pupa. The nymph already looks like a small version of the adult."
+      },
+      {
+        "prompt": "Describe the stages of metamorphosis for a frog.",
+        "answer": "Egg, larva (the tadpole, living in water), adult. As it changes, the tadpole loses its gills, grows legs and moves onto land."
+      },
+      {
+        "prompt": "Name the phylum or group for: sponges, jellyfish, starfish, snails, earthworms, spiders.",
+        "answer": "Sponges: Porifera. Jellyfish: Cnidaria. Starfish: echinoderms. Snails: mollusks. Earthworms: segmented worms (annelids). Spiders: arthropods (arachnids)."
+      },
+      {
+        "prompt": "Name the three groups of arthropods and say what makes each one different.",
+        "answer": "Crustaceans: at least five pairs of jointed legs, two pairs of antennae, breathe through gills (crabs, lobsters, shrimp). Arachnids: eight legs and two body segments (spiders, scorpions, ticks, mites). Insects: three body segments (head, thorax, abdomen), six legs, usually two pairs of wings."
+      },
+      {
+        "prompt": "Explain the difference between a herbivore, a carnivore, an omnivore and an insectivore.",
+        "answer": "Herbivore eats only plants. Carnivore eats meat. Omnivore eats both plants and meat. Insectivore eats insects as its main food, like a mole or a shrew."
+      },
+      {
+        "prompt": "What is echolocation, and which animal uses it?",
+        "answer": "Bats use it. The bat makes high-frequency clicks, the sound bounces off an object, and the bat judges how far away the object is by how long the sound takes to return. In humans we call the artificial form sonar."
+      },
+      {
+        "prompt": "Explain the difference between radial symmetry and bilateral symmetry, with an example of each.",
+        "answer": "Radial symmetry: body parts arranged around a centre like spokes, so it can be split into matching halves many ways — a jellyfish or starfish. Bilateral symmetry: matching left and right halves only — you, a dog, a fish."
+      },
+      {
+        "prompt": "Name the three mammal group words and what animals belong to each: monotremes, marsupials, pinnipeds.",
+        "answer": "Monotremes lay eggs — the platypus and the echidna. Marsupials carry babies in a pouch — kangaroos, koalas, wallabies. Pinnipeds are carnivores of the sea — seals, walruses, sea lions."
+      },
+      {
+        "prompt": "Give the group word for lions, for whales or dolphins, and for dogs.",
+        "answer": "Lions live in a PRIDE. Whales and dolphins travel in a POD. Dogs run in a PACK."
+      },
+      {
+        "prompt": "Why is man not an animal?",
+        "answer": "Physically, humans have all the traits of mammals. Some scientists say man is different only because he is rational, meaning he can think. But the real difference is that God created man separately from the rest of creation, in His own image (Genesis 1:27). That is why humans have a sense of right and wrong and can have a personal relationship with God."
+      }
+    ],
+    "drills": [
+      "match",
+      "meaning",
+      "mixed",
+      "extras"
+    ],
+    "rival": "Vertebrate Vikings",
+    "matchLength": 8
   }
 ];

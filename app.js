@@ -141,6 +141,9 @@
     maps: [
       { id: "maplabel", name: "Name it on the map", blurb: "The real map sheet. One blank at a time \u2014 tap the name that belongs in it." }
     ],
+    roots: [
+      { id: "rootword", name: "Root, meaning, word", blurb: "Two steps, the way the test asks it. Pick what the root means, then type a word that uses it." }
+    ],
     decision: [
       { id: "decide", name: "GCF or LCM, then solve", blurb: "A word problem. Pick which one it needs, then work out the answer \u2014 with the label." }
     ],
@@ -211,6 +214,7 @@
     if ((item.orderGroups || []).length) list.push(pick("sequence", "bank"));
     if ((item.spellWords || []).length) list.unshift(pick("spelling", "spell"));
     if ((item.mathTopics || []).length) list.unshift(pick("math", "numpad"));
+    if ((item.roots || []).length) list.unshift(pick("roots", "rootword"));
     if ((item.maps || []).length) list.unshift(pick("maps", "maplabel"));
     if ((item.decideProblems || []).length) list.unshift(pick("decision", "decide"));
     if ((item.divisors || []).length) list.unshift(pick("divisibility", "divis"));
@@ -222,7 +226,7 @@
   /* Every drill the app knows about, for resolving an item's own list. */
   function allDrills() {
     var all = [];
-    ["vocab", "questions", "categorize", "sequence", "verse", "spelling", "math", "maps", "decision", "divisibility"].forEach(function (grp) {
+    ["vocab", "questions", "categorize", "sequence", "verse", "spelling", "math", "maps", "roots", "decision", "divisibility"].forEach(function (grp) {
       all = all.concat(DRILLS[grp] || []);
     });
     all.push(EXTRAS_DRILL);
@@ -723,7 +727,7 @@
     if (drillId === "extras") { renderSelfCheck(item, item.extras, "extras"); return; }
     if (item.type === "questions" ||
         (item.type === "bundle" &&
-         ["maplabel", "decide", "divis", "numpad", "spell", "match", "keyonly", "tfonly", "mconly",
+         ["rootword", "maplabel", "decide", "divis", "numpad", "spell", "match", "keyonly", "tfonly", "mconly",
           "multionly", "corronly", "mixed"].indexOf(drillId) > -1)) {
       renderQuestionSet(item, drillId); return;
     }
@@ -1373,6 +1377,182 @@
     }
 
     startMap();
+  }
+
+
+  /* ---------- root, meaning, word ----------------------------------------
+
+     Mrs. Servizzi's study guide says it plainly: know each root's definition
+     AND one example word. So this runs in two stages, in that order. Stage one
+     is a choice of meanings. Stage two makes him PRODUCE a word rather than
+     recognise one, because recognition alone has never stuck for him. Any
+     genuine word using the root counts, not only the one he wrote on the
+     sheet, so a right answer is never marked wrong. */
+
+  function renderRootWord(item) {
+    var all = (item.roots || []).slice();
+    if (!all.length) { app.innerHTML = '<p class="lede">No roots on this item.</p>'; return; }
+    var deck = shuffle(all.slice()).slice(0, item.rootRound || 8);
+    var g = { idx: 0, clean: 0 };
+
+    function head(extra) {
+      var dots = deck.map(function (_, i) {
+        return '<span class="dot' + (i < g.idx ? " dot--hit" : i === g.idx ? " dot--now" : "") + '"></span>';
+      }).join("");
+      return '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<div class="scoreboard"><div class="score-side">' +
+          '<span class="score-label">Clean</span><span class="score-num">' + g.clean + "</span></div>" +
+          '<div class="score-dots">' + dots + "</div>" +
+          '<div class="score-side"><span class="score-label">Of</span>' +
+          '<span class="score-num">' + deck.length + "</span></div></div>" +
+        '<p class="eyebrow">Root ' + (g.idx + 1) + " of " + deck.length +
+        (extra ? " \u00b7 " + extra : "") + "</p>";
+    }
+
+    function rootCard(r) {
+      return '<div class="q"><p class="q-text" style="font-size:2rem;letter-spacing:.04em">' +
+             esc(r.root) + "</p></div>";
+    }
+
+    function start() {
+      if (g.idx >= deck.length) return done();
+      stageMeaning(deck[g.idx], { clean: true });
+    }
+
+    /* Stage one \u2014 what does the root mean? */
+    function stageMeaning(r, run) {
+      var wrong = shuffle(all.filter(function (x) { return x.root !== r.root; }))
+                    .slice(0, 3).map(function (x) { return x.meaning; });
+      var opts = shuffle([r.meaning].concat(wrong));
+      var picked = null;
+
+      function draw(locked) {
+        app.innerHTML = head("what does it mean?") + rootCard(r) +
+          '<p class="chant-hint">What does this root mean?</p>' +
+          '<div class="answers answers--long" id="picks">' +
+            opts.map(function (t) {
+              return '<button class="answer' + (picked === t ? " answer--picked" : "") +
+                     '" data-t="' + esc(t) + '">' + esc(t) + "</button>";
+            }).join("") +
+          "</div>" +
+          '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>' +
+          (locked ? "" : '<div class="btn-row"><button class="btn" id="check"' +
+            (picked ? "" : " disabled") + ">Check it</button></div>");
+        if (locked) return;
+        document.getElementById("picks").addEventListener("click", function (e) {
+          var b = e.target.closest(".answer");
+          if (!b) return;
+          picked = b.dataset.t;
+          draw(false);
+        });
+        document.getElementById("check").addEventListener("click", check);
+      }
+
+      function check() {
+        var right = picked === r.meaning;
+        if (!right) run.clean = false;
+        draw(true);
+        Array.prototype.slice.call(document.querySelectorAll(".answer")).forEach(function (b) {
+          b.disabled = true;
+          if (b.dataset.t === r.meaning) b.classList.add("answer--right");
+          else if (b.dataset.t === picked) b.classList.add("answer--wrong");
+          else b.classList.add("answer--dim");
+        });
+        var v = document.getElementById("verdict");
+        v.className = "verdict " + (right ? "verdict--goal" : "verdict--card");
+        v.innerHTML = right
+          ? "<strong>" + esc(r.root) + " means " + esc(r.meaning) + "</strong>"
+          : "<strong>" + esc(r.root) + " means " + esc(r.meaning) + "</strong><small>Say it again before you move on.</small>";
+        var row = document.createElement("div");
+        row.className = "btn-row";
+        row.innerHTML = '<button class="btn" id="on">Now the word \u2192</button>';
+        v.after(row);
+        var btn = document.getElementById("on");
+        btn.addEventListener("click", function () { stageWord(r, run); });
+        btn.focus();
+      }
+      draw(false);
+    }
+
+    /* Stage two \u2014 now give a word that uses it. */
+    function stageWord(r, run) {
+      var norm = function (t) { return String(t || "").toLowerCase().replace(/[^a-z]/g, ""); };
+      var root = norm(r.root);
+      var ok = (r.accept || []).map(norm);
+
+      function draw(locked, verdict, tone, typed) {
+        app.innerHTML = head("now a word") + rootCard(r) +
+          '<p class="chant-hint">' + esc(r.meaning) + '<br>Type a word that uses <strong>' +
+            esc(r.root) + "</strong>.</p>" +
+          '<div class="btn-row"><input class="wordbox" id="box" type="text" ' +
+            'autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" ' +
+            'inputmode="text" placeholder="your word" value="' + esc(typed || "") + '"' +
+            (locked ? " disabled" : "") + "></div>" +
+          '<div class="verdict' + (tone ? " " + tone : "") + '" id="verdict" role="status" aria-live="polite">' +
+            (verdict || "") + "</div>" +
+          (locked ? "" : '<div class="btn-row"><button class="btn" id="check">Check it</button></div>');
+        if (locked) return;
+        var box = document.getElementById("box");
+        box.focus();
+        box.addEventListener("keydown", function (e) { if (e.key === "Enter") check(); });
+        document.getElementById("check").addEventListener("click", check);
+      }
+
+      function check() {
+        var typed = document.getElementById("box").value;
+        var n = norm(typed);
+        if (!n) return;
+        var listed = ok.indexOf(n) >= 0;
+        /* A word he thought of that is not on my list still counts, as long as
+           it really contains the root. Short roots must start the word, or
+           "in" would match almost anything. */
+        var carries = root.length >= 3 ? n.indexOf(root) >= 0 : n.indexOf(root) === 0;
+        var right = listed || (carries && n.length > root.length + 1);
+
+        if (!right) { run.clean = false; }
+        else if (run.clean) { g.clean++; }
+
+        var others = (r.accept || []).filter(function (w) { return norm(w) !== n; }).slice(0, 4);
+        var msg = right
+          ? "<strong>" + esc(typed.trim()) + "</strong><small>" +
+            (listed ? "" : "Not the one on your sheet, but it uses " + esc(r.root) + ", so it counts. ") +
+            esc(r.root) + " = " + esc(r.meaning) + ". Others: " + others.map(esc).join(", ") + ".</small>"
+          : "<strong>Not quite</strong><small>" + esc(typed.trim()) + " does not use <strong>" +
+            esc(r.root) + "</strong>. Try one of these: " + (r.accept || []).slice(0, 4).map(esc).join(", ") + ".</small>";
+
+        draw(true, msg, right ? "verdict--goal" : "verdict--card", typed);
+        g.idx++;
+        var row = document.createElement("div");
+        row.className = "btn-row";
+        row.innerHTML = '<button class="btn" id="on">' +
+          (g.idx >= deck.length ? "See the result" : "Next root \u2192") + "</button>";
+        document.getElementById("verdict").after(row);
+        var btn = document.getElementById("on");
+        btn.addEventListener("click", start);
+        btn.focus();
+      }
+      draw(false);
+    }
+
+    function done() {
+      var rating = g.clean === deck.length ? "Clean sheet"
+                 : g.clean >= deck.length * 0.7 ? "Nearly there" : "Back to the study guide";
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="result-rating">' + rating + "</p>" +
+          '<p class="result-score">' + g.clean + "/" + deck.length + "</p>" +
+          '<p class="result-of">Meaning AND a word, both right first time</p>' +
+          '<p class="lede" style="margin:1rem auto 0">The test wants both halves for every root. ' +
+          "Getting the meaning but not a word is still half a mark.</p>" +
+          '<div class="btn-row">' +
+            '<button class="btn" id="again">Go again</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '">Other drills</a>' +
+          "</div>" +
+        "</div>";
+      document.getElementById("again").addEventListener("click", function () { renderRootWord(item); });
+    }
+
+    start();
   }
 
   function renderDivisibility(item) {
@@ -2325,6 +2505,7 @@
   /* ---------- mixed question sets (true/false, choice, mark-all) ----------- */
 
   function renderQuestionSet(item, drillId) {
+    if (drillId === "rootword") return renderRootWord(item);
     if (drillId === "maplabel") return renderMapLabel(item);
     if (drillId === "decide") return renderDecide(item);
     if (drillId === "divis") return renderDivisibility(item);
