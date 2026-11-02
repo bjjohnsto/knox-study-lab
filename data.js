@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Oct 28 \u2014 build 48";
+const BUILD = "Nov 1 \u2014 build 52";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -37,251 +37,102 @@ const SUBJECTS = [
    "optional" is the gray-italic only-if-not-finished-in-class kind, "test" is
    the red kind. ----------------------------------------------------------- */
 const HOMEWORK = {
-  "asOf": "2026-10-28",
-  "label": "Week of Oct 26 – Oct 30",
+  "asOf": "2026-11-01",
+  "label": "Week of Nov 2 – Nov 6",
   "tests": [
     {
-      "date": "2026-10-28",
-      "text": "Spelling Test: Greek and Latin Roots"
+      "date": "2026-11-02",
+      "text": "Science make-up test: Chapters 4–5"
     },
     {
-      "date": "2026-10-28",
-      "text": "Science Test: Chapters 4–5 — Knox missed it (appt). Make-up Mon 11/2"
+      "date": "2026-11-06",
+      "text": "Bible Quiz: John 15:9, word for word"
     },
     {
-      "date": "2026-10-30",
-      "text": "Bible Quiz: John 15:8, word for word"
+      "date": "2026-11-06",
+      "text": "Literature Vocab Quiz (pp. 83–84 words)"
     },
     {
-      "date": "2026-10-30",
-      "text": "Math IXL due: 80%+ on each skill"
+      "date": "2026-11-06",
+      "text": "Science Test: Ch. 6 Plant Classification"
     }
   ],
   "soon": [
     {
-      "date": "2026-10-27",
-      "text": "Lit Ch. 20–24 Observations due"
-    },
-    {
-      "date": "2026-10-29",
+      "date": "2026-11-03",
       "text": "E-learning Day — work from home"
     },
     {
-      "date": "2026-10-30",
-      "text": "Bronze Bow Final Project due"
+      "date": "2026-11-03",
+      "text": "Field trip payment due"
+    },
+    {
+      "date": "2026-11-04",
+      "text": "History Activity p. 82 due (turn in at homeroom)"
+    },
+    {
+      "date": "2026-11-04",
+      "text": "Math e-learning assignment due"
+    },
+    {
+      "date": "2026-11-06",
+      "text": "ELA Nativity Research due"
+    },
+    {
+      "date": "2026-11-06",
+      "text": "Pro sports dress-down day"
+    },
+    {
+      "date": "2026-11-09",
+      "text": "Reading Log due"
+    },
+    {
+      "date": "2026-11-10",
+      "text": "Field trip"
+    },
+    {
+      "date": "2026-11-12",
+      "text": "Bible Unit 4 Test · Spelling List 5 Test · History India Map Quiz"
+    },
+    {
+      "date": "2026-11-13",
+      "text": "History Test · Literary Terms Test"
     }
   ],
   "days": [
     {
-      "date": "2026-10-26",
+      "date": "2026-11-02",
       "tasks": [
         {
-          "cls": "Spelling",
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "MAKE-UP TEST: Chapters 4–5",
+          "test": true
+        },
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:9"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Vocab pp. 83–84 + index card definitions"
+        },
+        {
+          "cls": "ELA",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "Study Greek and Latin Roots — test Wednesday"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "Study for Wednesday Ch. 4–5 test"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "Service Day"
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Study John 15:8"
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Thinking it Through 4.2",
-          "optional": true,
-          "tag": "may be done in class"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Step 1: Individual Outline for Paragraphs"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Finish Ch. 20–24 Observations — due Tuesday",
-          "optional": true
-        },
-        {
-          "cls": "ELA / Grammar",
-          "teacher": "Mrs. Servizzi · C208",
-          "text": "Dialogue unit — no homework listed"
-        },
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "New unit: Intro to Ancient India"
-        },
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "Use Blooket all week to study vocab, people and places"
-        }
-
-      ]
-    },
-    {
-      "date": "2026-10-27",
-      "tasks": [
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "DUE: Ch. 20–24 Observations",
-          "test": true
+          "text": "Nativity Research (due Fri)"
         },
         {
           "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "Study Greek and Latin Roots for Wednesday test"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "Blooket: study for Ch. 4–5 test"
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Study John 15:8"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Step 2: Rough Draft for Final Project"
-        }
-
-      ]
-    },
-    {
-      "date": "2026-10-28",
-      "tasks": [
-        {
-          "cls": "Spelling",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
-          "text": "TEST: Greek and Latin Roots",
-          "test": true
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "TEST: Chapters 4–5 — missed (appt). Make-up Mon 11/2",
-          "test": true
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Study John 15:8"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Step 3: Finish editing Rough Draft"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "Begin IXL sections 0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.10. Earn 80% or higher on EACH skill. Due Friday"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-29",
-      "tasks": [
-        {
-          "cls": "E-learning Day",
-          "teacher": "work from home",
-          "text": "No school building today"
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "4.3: read pp. 147–152 and Phil. 3:8"
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Thinking it Through 4.3 — full sentences"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Step 4: Final draft of Bronze Bow Final Project — due Friday"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "pp. 90–91"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "Keep studying Ch. 4–5 for Monday's make-up test — start with her Blooket review"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "IXL sections 0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.10, 80%+ on each skill. This is part of today's math e-learning assignment"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-30",
-      "tasks": [
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "QUIZ: John 15:8",
-          "test": true
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "DUE: Bronze Bow Final Project",
-          "test": true
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Study John 15:8 for quiz"
+          "text": "New: List 5 (test Thu 11/12)"
         },
         {
           "cls": "Science",
@@ -290,23 +141,201 @@ const HOMEWORK = {
           "text": "pp. 92–93"
         },
         {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "Keep studying Ch. 4–5 for Monday's make-up test"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "No reading log due Monday"
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "Bring home Activity p. 82 + textbook for Tue"
         },
         {
           "cls": "Math",
           "teacher": "Mrs. George · C205",
           "subject": "math",
-          "text": "DUE: IXL sections 0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.10, 80%+ on each skill",
+          "text": "Finish decimal, fraction, and percent worksheet",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "date": "2026-11-03",
+      "tasks": [
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "E-learning: Study John 15:9. Read 4.4, Philippians 3:8–9. Read “Your Redemption” pp. 151–159. Thinking it Through 4.4, p. 158 (full sentences)"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "E-learning: Read “The Kid Who Invented the Popsicle” pp. 212–221. Graphic organizer p. 92: every invention, accident vs. research, how invented"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "E-learning: pp. 101–102"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "E-learning: Activity p. 82 (needs textbook), due Wed"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "E-learning assignment (due Wed)"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
+      "tasks": [
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "DUE: Activity p. 82 at homeroom",
           "test": true
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "DUE: e-learning assignment",
+          "test": true
+        },
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:9"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Study for Friday vocab quiz"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "pp. 97–98 in class (not homework)",
+          "optional": true,
+          "tag": "in class, not homework"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "Optional: review India map",
+          "optional": true,
+          "tag": "optional"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "Finish page 4",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "date": "2026-11-05",
+      "tasks": [
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:9 for Friday quiz. Unit 4 Study Guide comes home (test Thu 11/12)"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Study for Friday vocab quiz"
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "Blooket: study for Friday's Ch. 6 test"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "Optional: review India map + Blooket",
+          "optional": true,
+          "tag": "optional"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "Finish page 8",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "date": "2026-11-06",
+      "tasks": [
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "QUIZ: John 15:9",
+          "test": true
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "QUIZ: Vocab",
+          "test": true
+        },
+        {
+          "cls": "ELA",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "DUE: Nativity Research",
+          "test": true
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "TEST: Ch. 6 Plant Classification",
+          "test": true
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Nonsense Poem. Literary Terms Review (test Fri 11/13). Reading Log due Monday"
+        },
+        {
+          "cls": "Spelling",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "Weekend: study List 5"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "Weekend: review map (quiz 11/12) + Blooket (test 11/13)"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "No homework"
         }
       ]
     }
@@ -8438,5 +8467,1015 @@ const STUDY_ITEMS = [
     ],
     "rival": "Blooket Bandits",
     "matchLength": 10
+  },
+  {
+    "id": "bible-john-15-9",
+    "subject": "bible",
+    "title": "John 15:9",
+    "assess": "quiz",
+    "added": "2026-11-01",
+    "quiz": "2026-11-06",
+    "note": "Quiz Friday 11/6. Word for word, ESV. Carries on from 15:8.",
+    "type": "verse",
+    "reference": "John 15:9",
+    "version": "ESV",
+    "text": "As the Father has loved me, so have I loved you. Abide in my love."
+  },
+  {
+    "id": "hist-india-map",
+    "subject": "history",
+    "title": "India Map",
+    "assess": "quiz",
+    "added": "2026-11-01",
+    "quiz": "2026-11-12",
+    "note": "Map quiz Thursday 11/12. Built from Mrs. Martinez's map sheet with the names taken off, so he has to put each one back.",
+    "type": "bundle",
+    "maps": [
+      {
+        "id": "india",
+        "title": "South Asia: India and its neighbors",
+        "src": "data:image/jpeg;base64,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KACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoNFFAABiiiigAooooAKKKKACiiigCrqeoQaVp9zfXLhILaJpZGIzhVGSfyrl7DxJ4n123iutN8P21rbS5+e/uikijJGQiKwPTOCwqf4kyPH4eCr92a7toX56q8yKQfUYJ4710tooFtGFAACgAD6UAcra+DLu/wBdi1jxLe22oy2mWsoYbcxRWzHq2C7bnxxnjgniuvUAcClooAKKKKACiiigAooxRQAUUUUAZniLQ4PEWj3elXRbyLuJ4ZAvcMMVxWhxeO/BemWeijS7TxDaWkYj+3/azDcS9eTEVK8eu+vSDSFcigDB0vxbYXVlNLczRWk1qSlzFK4BicD5h7/Udat6H4j0zxJbPdaVdpdQo5QsoIww6gggEdaztV+H/hvWdS/tLUNJtri54yzjIfHTcvRvxFcn4G1rRNA8V+KdOvrq00q+vNVj8izmdYjKv2WBR5SnG4ZB6d6APUaKZG4cBgcgjINPoAKKKKACiiigAoopC2O1AEV3ax3lvJbzIrxSoUdSOGUjBFcZZeAb3wvG8XhbWXtITJvS1vo/PghXGBHGqsmxfbmusudWsrKaCC6u4IJbhikKSOFaRhjIUHqee1S3tt9stJYPMeLzFK70OGXI6g9jQBzfgbxLqOvNq1vqUFsJNNvDai4tifKnwisWAPIwW2kc4IPJrrK818G6ja+BvEKfD+6DvPdPPfWM5ZS86OzyOXx/EGL9umO9elDmgAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKQk1gap4ys9HvGtr221CNdqlJlti8chOflUrk5GOcgCgCl4/23i6NpYciS61S2YKP4hFIsrD/vlDXWIAq4UYArjdJh1fxD4lbWL63NnploNunwSL+9kYj5pXH8PVlA5yOfauzAwKACiiigAoooJxQAUAYoooAKKKKACiiigAooooARhkVmXfhzSLydLmfTLOa5QhkneIGRCOhDHkfnSa74k0/wAPQGfUJxDHjg9SxzgADqSTjgVzukax4t8Sm+nis49Jsw6fYzcLmZ1HLF07Z6DntmgDE8U+IfEXwvhW7kEWo+HRNHCHb5JrRWYIoPJ80bmUDgEd8549RX7orh9W+Gp8RTsNZ1u/vbF5VmaxcjySVYMox6AgH8K7kDAoAKKKKACiiigArlfiTDq8nhO9l0W+ks7u2C3IaPbukVDuaMFuBuAIz2zXVVg+NtEu/EnhfVNHs7r7LNe20kCy4ztLKRmgDzt/D+nr4Z0/xreXeoX9/FJBcebfuZTFtbbtVYvLUYyecc4Gc4ro/FHiPW9U1ey0HwlIgaRhLeX5TeltDsJGOcFidnHoT9as+Gbm2Cy+CtUitVltrVUMGSRcxEYLcgDnnIGcZrZ8MeCPDvg2KSLw/pNtpscrb5FgXG8+9AGR4V8Az6brE/iDXtSTV9YkRYI5xbiNYIlzgICWIJ3Nk55z2rtBQBxRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFJsGcjrS0UAIFA570tFFABRRRQAHigetGM9aKACiiigAooooAKKKKACiigmgDzzx7p6y+OfBt3Pay3FqlxPHIwPyQMYXCsw75YgD0JzXfwoqoMfSvOvGWtQW/xJ0HTtSnt7SxNuZYp5ztDzsWQIpyBu6cc9a9FgG2MLknHc96AJKKKKACiiigAooooAKRhS0N0oA80S7j1X4xTfbbi1tU0iz8q0QyKsty82N/yk5IGxcYHc16WOleY+INLGoePRc63cPbadpaLfWoiAVZmUHcJGPXHGAMda6jwT470vx1ZzXeml1ET7SkmAxU8q+Ou1lIYHuCKAOmooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKQetLjmigAooooAKKKKACiiigAooooARjgVyPizxnLpurWXh3R7T7drd8plSN3MccUS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vYurLnOxx/EvJOKfdeLZNDt7WO/0bWLhvLxNcW0KSRqQBljhs4PJ6UAdNRVLR9asde0+LUNOnE9tLna474OD+tXaACiiigAooooAKKRnVepArmda+Imi6JqTaXILu5vVjEhhtoS7bT09B2oAf4+htbzwxd2t0VMcrRqV3IN37xTj5yB26GtuytYbWBI4YUiRVACqAAB6VwNp4Iv/ABZdrqviDV9TNut297aacWEaxKSTGsgGclVODg9R3r0SJSiAHqBQA8UUGsyTxBYRan/ZslzGtzgEIW5PGen0oA06ZM4jjZjnAGTSq4YZBBFZXibURp+mSEeU0s37mJJJNgdm4Azj60Ac94IabXtY1zxBPva1luPs1lG5yI0i+RmA6fMyls9ea7gDFZnhvRoNB0a1063iESQoAVBz82OTnvzmtOgAooooAKKKKACiiigAooooAKKKKACiisfxZ4t0jwTodxrWt3S21pAPq0jdkQfxMewoAta3rmn+HNLuNU1S6jtbS3QvJI5wAK8r8P6Fe/GjV08VeJ4Z4PDFtIG0jSZPlFzg8TyjuPRTT9C8J638WtRg8UePIHstEibzdM8Ok8Y/hluP7zdwvQV68iLGioiqqKAFVRgAegoAUAKAAMAcAUUUUAFFFFABRRRQAUUUUAFFFFABSEUtFAHJ6zb3+hXseqaVB9ohkYJdWqkDcP769sj9c1t6Xrthq6k2lwrlcbkIKuv1U8joevpV50V8BgDjnmuU1Xw5pd1dSXthfSaZqTctNaOAx/31OVYdfvAjmgj4djrQwPSkLgdSBXFLpfjTTZGnsdftdUgZRtjv7dc/8BMe39aW4sfHlygEmr6PbluhtrVt6fi7MP0oLOmn13TraWWOW9t0MIDShpBmMHpkZyM+9Sabq1pqqyNaSiVY22swUgZwDwT169q8f1DwLbeJ/GEtlDLdh4tp1TUDO4+1NuBWLaCF7McYwPbNewaZp0GmW4gtkCRDoo6Cqko20M4SbvdFyiiipNAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACqWpahZ6dbNLe3UFrFnbvldUGcHjJ78VdrgvivpN9qem6S1loC6+LPU0uJrF3jVZY/KlU538EAuDigC38K2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UUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFcp8RvBDeN9Ht4ba8+w6lYXMd7ZXRXcIpUOQSPQ8j8a6uigDlPAXgUeDhqt1cXn2/UtWu3u7q5KbcknhQOeAMCuroooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACg9KKDQByPiC2ktfGGg6rE2xHL2tyxPBQqxQfXeRXWI2RkVleItPN9p7iMhLiIrLDITja6sGH54x9DS6DrUOrW5KDbLG2yRM52tTs7XJurmtmigUUigooooAKKKKACjNNY4qne6vYacoe8vbe3U95ZAv8zTSuJtLVmR8RLZbzwjqMLlgHTHynBPNW/B1r9i8M6VB3jtY1P1CisjxX4m0W60C6ig1SymkYAKiTKSxyMDANdDoKNFpNojqysIkyG6g4ptyS5XsKMoy2NCiiipKCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKDRQaAMnxPD5+iXq/NxCx+UkE457Vxng1zoviUaUmfKnt1dcnJ43nJJ5Jya9DnTfGwwDkY5rznwnpOrza/bXOoCIPYebb3DBjuYklkx7YcDn0rSM7QcTlqwftIzij0sUtIKWszqCiiigAooNJk0AQ3cxgiZwu7A6A449a880HQovEHjXXr7U7KO+sg6rZvMN8e3Ymdqnj72/kd81teNbq+vb6w8O6fJHG9+Wa4dlJKW6r8xGD3YqP+BGul06wj0+ygtYgBHCgRcDHAGKcZOOxnOnzNXKMXhHw/EwaPRdORgcgrbICD+ArYAxS4oxQ23uVGKWwUUUUigooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigBG+lcXczX2meO7FAh+y6okgkPG1WjXjnOcnd+ldrWN4n0+S905pbZd15bAzWwzwZF5UH2JAoA2BS1m6BrMGuaZBewMGEiDcB1Ru6n0IPatKgAozRSHpQAySZYxuf5R6msjWPF2kaNam4uryNVwSADlmx1AA+orD1ATeMtUvtGhunh0+zeIXDxuVaRsK5QMOcdM49SKn074aaHazvNc2/wBsYsSn2h2cJ06AnA6VrFQSvIxqOd7ROb8MeKrHxb8QodQ0oXqqLSRZvtMTIApK4C56kkLXqgqpBptpbMGhtoo2AxlFA4rxPxV+03d+HNQdE8A6tLp0c7wfbZX8tHKsVJHy8DI70qsoyd4qyLpxaWrPd6K8msfjhrl/bRTwfDLX5UlGUaGeN0b6MKm/4Sv4u6+27SPBmlaHb9C2r3LPKPcKmBWZZ6nRXlvlfG+3/eLc+Ers9fJeJ0H0yDVzw38TdYj8SW3hbxvoCaNqd4G+yXFvJ5ltdEDJVSeQcdjQB6NRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABSEUtFAHJarp954ZabVdEgNyZpF860LYXbk5ZepB5rotO1K21O1E9rKsiZKkg9GBwQfcGrTKGGDXN3GhX+mait5oUsUULyF7i0fO2Vj1cH+90/KgDpc8Vn63qcek6TeXzkEW8Ly7em4gE4/Gse88VahEjLFol28udqkr8gOcZPfH0pqeH7rXZXl124863cKUtIGIgXHc5wWP1oE/Ii+HGnSrpD6zcyM9xrL/bmUrt8pXA2J+C7QT6iuvxUdvbx2sKQwoEjjUKqjoAOgqSgYVXvNPs9QtZLS7tobi3kBDxSIGVs+xqxRQB4x4j0S5+Bl2nijw5NM/hV5lTU9IZiywKzY82H0xnkV7LDNHcRJNE4eORQysOhBGQaxfHWjx6/4N1nS5V3LdWcsZH1U1jfBXV31z4VeGL2Vt8hskiY9yYyY+ff5aAO1ry34xceLfhsR1/4SCMZ/wCANXqVeXfGND/wlPw2fHA8RRj/AMcagD1GiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoxRRQAm2gKAMAAClooAKKKKACiiigBHQSIyNyGBBrzD4BMbXRvE2iDiHSPEV7bQL/diJV1H/j5r1CvK/A0o8PfGrxzoEzCNNVjtdYs0PG4bDHKR6/MooA9Ury/4zyeX4g+GxxnPieFfzRxXqFeVfGK8tLvxP8PdOgnjm1CPxHbz+QjBnWNc72IHQAGgD1WiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK5Lxz8NNJ8dSWl5PPeafqljn7Nf2UmyWMHqpPdfY11tFAHlq/BTVJspffEnxPcQHrGhSMkf7wFdH4Q+FPhfwVcm90+0muNQYbWvryUzTkf7x6fhXX0UAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/Z",
+        "w": 730,
+        "h": 717,
+        "pinR": 10,
+        "bank": [
+          "Afghanistan",
+          "Pakistan",
+          "India",
+          "China",
+          "Nepal",
+          "Bhutan",
+          "Bangladesh",
+          "Myanmar",
+          "Sri Lanka"
+        ],
+        "blanks": [
+          {
+            "x": 45,
+            "y": 95,
+            "pin": true,
+            "answer": "Afghanistan",
+            "fill": "#F5C542",
+            "labelW": 100,
+            "prompt": "Which country is this pin on?",
+            "why": "The country in the far NORTH-WEST corner, above Pakistan."
+          },
+          {
+            "x": 122,
+            "y": 183,
+            "pin": true,
+            "answer": "Pakistan",
+            "fill": "#C77DBF",
+            "labelW": 78,
+            "prompt": "Which country is this pin on?",
+            "why": "West of India, between Afghanistan and the Arabian Sea."
+          },
+          {
+            "x": 255,
+            "y": 340,
+            "pin": true,
+            "answer": "India",
+            "fill": "#D62828",
+            "labelW": 50,
+            "prompt": "Which country is this pin on?",
+            "why": "The big triangle in the middle that points south into the ocean."
+          },
+          {
+            "x": 465,
+            "y": 115,
+            "pin": true,
+            "answer": "China",
+            "fill": "#F4A6B8",
+            "labelW": 56,
+            "prompt": "Which country is this pin on?",
+            "why": "The huge country across the whole TOP, north of the mountains."
+          },
+          {
+            "x": 370,
+            "y": 250,
+            "pin": true,
+            "answer": "Nepal",
+            "fill": "#8BC34A",
+            "labelW": 54,
+            "prompt": "Which country is this pin on?",
+            "why": "The long, thin country along India's northern edge. The bigger of the two mountain countries, to the WEST."
+          },
+          {
+            "x": 497,
+            "y": 263,
+            "pin": true,
+            "answer": "Bhutan",
+            "fill": "#5B8DD6",
+            "labelW": 60,
+            "prompt": "Which country is this pin on?",
+            "why": "The SMALL mountain country to the EAST of Nepal, squeezed between India and China.",
+            "labelDx": -30,
+            "labelDy": -24
+          },
+          {
+            "x": 487,
+            "y": 345,
+            "pin": true,
+            "answer": "Bangladesh",
+            "fill": "#E8459B",
+            "labelW": 96,
+            "prompt": "Which country is this pin on?",
+            "why": "Nearly wrapped by India, at the top of the Bay of Bengal, just west of Myanmar.",
+            "labelDx": -48,
+            "labelDy": 30
+          },
+          {
+            "x": 640,
+            "y": 420,
+            "pin": true,
+            "answer": "Myanmar",
+            "fill": "#E07B24",
+            "labelW": 78,
+            "prompt": "Which country is this pin on?",
+            "why": "The big country farthest EAST on the map.",
+            "labelDx": -40,
+            "labelDy": 28
+          },
+          {
+            "x": 291,
+            "y": 693,
+            "pin": true,
+            "answer": "Sri Lanka",
+            "fill": "#4B3A8C",
+            "labelW": 80,
+            "prompt": "Which country is this pin on?",
+            "why": "The island just off the southern tip of India."
+          }
+        ]
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "Without looking, name every country on the map, west to east.",
+        "answer": "Afghanistan and Pakistan in the west. India in the middle. China across the top. Then Nepal, Bhutan, Bangladesh and Myanmar running east. Sri Lanka is the island off India's southern tip."
+      },
+      {
+        "prompt": "Two small countries sit between India and China in the mountains. Which is which?",
+        "answer": "Nepal is the long, thin one to the WEST. Bhutan is the small one to the EAST."
+      },
+      {
+        "prompt": "Bangladesh and Myanmar are side by side in the east. How do you tell them apart?",
+        "answer": "Bangladesh is the smaller one, almost wrapped by India. Myanmar is the big one farthest east."
+      }
+    ],
+    "drills": [
+      "maplabel",
+      "extras"
+    ]
+  },
+  {
+    "id": "ela-spelling-5",
+    "subject": "ela",
+    "title": "Spelling List 5",
+    "added": "2026-11-01",
+    "quiz": "2026-11-12",
+    "note": "Twenty words, test Thursday 11/12. Build it from letters, then spot the right spelling.",
+    "type": "bundle",
+    "spellWords": [
+      "decoy",
+      "neutral",
+      "moisture",
+      "euphoric",
+      "awkward",
+      "awesome",
+      "beautifully",
+      "exhausted",
+      "precaution",
+      "renewable",
+      "newsworthy",
+      "unauthorized",
+      "indescribable",
+      "anchored",
+      "ascending",
+      "bouldering",
+      "formations",
+      "error",
+      "errant",
+      "describing"
+    ],
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "decoy",
+          "decoi",
+          "decoye",
+          "dekoy"
+        ],
+        "answer": "decoy",
+        "why": "\"decoy\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "neutrel",
+          "nutral",
+          "nuetral",
+          "neutral"
+        ],
+        "answer": "neutral",
+        "why": "\"neutral\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "moistere",
+          "moischure",
+          "moistur",
+          "moisture"
+        ],
+        "answer": "moisture",
+        "why": "\"moisture\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "euphorric",
+          "euphoric",
+          "uphoric",
+          "euforic"
+        ],
+        "answer": "euphoric",
+        "why": "\"euphoric\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "akward",
+          "awkward",
+          "awkwerd",
+          "awkwad"
+        ],
+        "answer": "awkward",
+        "why": "\"awkward\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "awesume",
+          "awesom",
+          "awesome",
+          "awsome"
+        ],
+        "answer": "awesome",
+        "why": "\"awesome\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "beutifully",
+          "beautifully",
+          "beautifuly",
+          "beautifly"
+        ],
+        "answer": "beautifully",
+        "why": "\"beautifully\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "exausted",
+          "exhasted",
+          "exhausted",
+          "exhuasted"
+        ],
+        "answer": "exhausted",
+        "why": "\"exhausted\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "precaution",
+          "precaushun",
+          "precation",
+          "precausion"
+        ],
+        "answer": "precaution",
+        "why": "\"precaution\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "renewabel",
+          "renuable",
+          "renewable",
+          "renewible"
+        ],
+        "answer": "renewable",
+        "why": "\"renewable\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "newsworthey",
+          "newsworthie",
+          "newzworthy",
+          "newsworthy"
+        ],
+        "answer": "newsworthy",
+        "why": "\"newsworthy\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "unautherized",
+          "unauthorrized",
+          "unauthorized",
+          "unathorized"
+        ],
+        "answer": "unauthorized",
+        "why": "\"unauthorized\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "indescribible",
+          "indescribeable",
+          "indescribable",
+          "indiscribable"
+        ],
+        "answer": "indescribable",
+        "why": "\"indescribable\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "anckored",
+          "anchored",
+          "anchord",
+          "ancored"
+        ],
+        "answer": "anchored",
+        "why": "\"anchored\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "acending",
+          "ascending",
+          "assending",
+          "ascendding"
+        ],
+        "answer": "ascending",
+        "why": "\"ascending\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "boulderring",
+          "bouldering",
+          "boldering",
+          "bouldring"
+        ],
+        "answer": "bouldering",
+        "why": "\"bouldering\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "formatons",
+          "formations",
+          "fourmations",
+          "formasions"
+        ],
+        "answer": "formations",
+        "why": "\"formations\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "errorr",
+          "error",
+          "eror",
+          "errer"
+        ],
+        "answer": "error",
+        "why": "\"error\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "errint",
+          "errent",
+          "errant",
+          "erant"
+        ],
+        "answer": "errant",
+        "why": "\"errant\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "describing",
+          "descrbing",
+          "discribing",
+          "describeing"
+        ],
+        "answer": "describing",
+        "why": "\"describing\" is the one on her list."
+      }
+    ],
+    "drills": [
+      "spell",
+      "mconly"
+    ]
+  },
+  {
+    "id": "sci-ch6-test",
+    "subject": "science",
+    "title": "Science Test: Chapter 6, Plant Classification",
+    "added": "2026-11-01",
+    "quiz": "2026-11-06",
+    "pin": true,
+    "note": "Test Friday 11/6. Built from pp. 137–158: the 18 Words to Know and the Key Ideas on p. 158, in the book's wording.",
+    "type": "bundle",
+    "words": [
+      {
+        "word": "vascular plant",
+        "meaning": "A plant with tubelike structures that transport water from the roots to the stems and leaves. Ferns, conifers and flowering plants."
+      },
+      {
+        "word": "nonvascular plant",
+        "meaning": "A plant that does NOT have tubelike structures to carry water. Mosses and liverworts. Most do not grow very big or tall."
+      },
+      {
+        "word": "rhizoids",
+        "meaning": "Thin, rootlike structures that mosses and liverworts have instead of true roots."
+      },
+      {
+        "word": "rhizomes",
+        "meaning": "Underground stems. Horsetails and ferns grow from rhizomes."
+      },
+      {
+        "word": "frond",
+        "meaning": "The leafy branch of a fern."
+      },
+      {
+        "word": "fiddlehead",
+        "meaning": "The coiled-up frond of a young fern. Named because it looks like the top of a violin."
+      },
+      {
+        "word": "annual",
+        "meaning": "An angiosperm that lives for only ONE growing season. It grows, flowers, makes seeds and dies all in the same season. Marigolds, tomatoes, sunflowers."
+      },
+      {
+        "word": "biennial",
+        "meaning": "An angiosperm that needs TWO growing seasons. Leaves the first year, rests in winter, then flowers, makes seeds and dies the second year. Parsley, carrots, cabbage, onions, foxgloves."
+      },
+      {
+        "word": "perennial",
+        "meaning": "An angiosperm that can live for THREE or more years, making new seeds year after year. Trees, bushes like oaks and roses, spearmint, carnations."
+      },
+      {
+        "word": "cotyledon",
+        "meaning": "The tiny seed leaf of a plant embryo, with stored food in it. Monocots have one; dicots have two."
+      },
+      {
+        "word": "xylem",
+        "meaning": "Tubes that carry water and minerals from the roots to the top of the plant."
+      },
+      {
+        "word": "phloem",
+        "meaning": "Tubes that carry sugars and food throughout the plant."
+      },
+      {
+        "word": "cambium",
+        "meaning": "A layer of cells tucked between the xylem and phloem. It divides to make more xylem and phloem, so the tree grows wider each year."
+      },
+      {
+        "word": "herbaceous",
+        "meaning": "Describes stems that are soft and green, like the stems of most flowers and vegetables."
+      },
+      {
+        "word": "primary root",
+        "meaning": "The first root that comes out of a seed."
+      },
+      {
+        "word": "taproot",
+        "meaning": "In most dicots, the primary root keeps growing into one big root that goes straight down, with smaller roots branching off. A dandelion has one."
+      },
+      {
+        "word": "fibrous root",
+        "meaning": "Many thin roots spreading out in all directions, because the primary root stops growing. Most monocots, like grass, have them."
+      },
+      {
+        "word": "aerial root",
+        "meaning": "A root that never touches the soil. It soaks up moisture from the air. Orchids and Spanish moss."
+      }
+    ],
+    "questions": [
+      {
+        "kind": "multi",
+        "prompt": "Which are NONVASCULAR plants? Check ALL that apply.",
+        "options": [
+          "mosses",
+          "liverworts",
+          "ferns",
+          "horsetails",
+          "club mosses",
+          "conifers"
+        ],
+        "answers": [
+          "mosses",
+          "liverworts"
+        ],
+        "why": "Only mosses and liverworts. Careful: club mosses are VASCULAR, even with 'moss' in the name."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which are SEEDLESS vascular plants? Check ALL that apply.",
+        "options": [
+          "horsetails",
+          "club mosses",
+          "ferns",
+          "cycads",
+          "mosses",
+          "conifers"
+        ],
+        "answers": [
+          "horsetails",
+          "club mosses",
+          "ferns"
+        ],
+        "why": "Horsetails, club mosses and ferns. Cycads and conifers have seeds. Mosses are nonvascular."
+      },
+      {
+        "kind": "multi",
+        "prompt": "What are the four groups of gymnosperms? Check ALL that apply.",
+        "options": [
+          "cycads",
+          "ginkgoes",
+          "gnetophytes",
+          "conifers",
+          "ferns",
+          "monocots",
+          "horsetails"
+        ],
+        "answers": [
+          "cycads",
+          "ginkgoes",
+          "gnetophytes",
+          "conifers"
+        ],
+        "why": "Cycads, ginkgoes, gnetophytes and conifers. Conifers are the biggest group."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which describe MONOCOTS? Check ALL that apply.",
+        "options": [
+          "one cotyledon",
+          "petals in groups of three or six",
+          "parallel veins",
+          "fibrous roots",
+          "scattered vascular bundles",
+          "two cotyledons",
+          "taproot",
+          "branching veins"
+        ],
+        "answers": [
+          "one cotyledon",
+          "petals in groups of three or six",
+          "parallel veins",
+          "fibrous roots",
+          "scattered vascular bundles"
+        ],
+        "why": "Monocots: ONE cotyledon, petals in 3s or 6s, parallel veins, fibrous roots, scattered bundles. Two cotyledons, taproots and branching veins are dicots."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which describe DICOTS? Check ALL that apply.",
+        "options": [
+          "two cotyledons",
+          "petals in groups of four or five",
+          "branching veins",
+          "taproot",
+          "vascular bundles arranged in a ring",
+          "one cotyledon",
+          "parallel veins",
+          "fibrous roots"
+        ],
+        "answers": [
+          "two cotyledons",
+          "petals in groups of four or five",
+          "branching veins",
+          "taproot",
+          "vascular bundles arranged in a ring"
+        ],
+        "why": "Dicots: TWO cotyledons, petals in 4s or 5s, branching veins, a taproot, bundles in a ring."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which products are made from conifer RESIN? Check ALL that apply.",
+        "options": [
+          "tar",
+          "turpentine",
+          "rosin for violin bows",
+          "aspirin",
+          "chocolate",
+          "cork"
+        ],
+        "answers": [
+          "tar",
+          "turpentine",
+          "rosin for violin bows"
+        ],
+        "why": "Resin gives tar, turpentine, inks, paints, adhesives and rosin. Aspirin, chocolate and cork come from angiosperms."
+      },
+      {
+        "kind": "multi",
+        "prompt": "What do roots do? Check ALL that apply.",
+        "options": [
+          "anchor and support the plant",
+          "absorb water and nutrients",
+          "store starches and sugars",
+          "make the plant's flowers",
+          "make food from sunlight"
+        ],
+        "answers": [
+          "anchor and support the plant",
+          "absorb water and nutrients",
+          "store starches and sugars"
+        ],
+        "why": "Roots anchor and support, absorb water and nutrients, and can store starches and sugars (beets, sweet potatoes, radishes)."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which are BIENNIALS? Check ALL that apply.",
+        "options": [
+          "parsley",
+          "carrots",
+          "onions",
+          "marigolds",
+          "sunflowers",
+          "oak trees"
+        ],
+        "answers": [
+          "parsley",
+          "carrots",
+          "onions"
+        ],
+        "why": "Biennials: parsley, carrots, cabbage, onions, foxgloves. Marigolds and sunflowers are annuals; oak trees are perennials."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which are made from ANGIOSPERMS? Check ALL that apply.",
+        "options": [
+          "rubber",
+          "cork",
+          "chewing gum",
+          "digitalis",
+          "turpentine",
+          "amber"
+        ],
+        "answers": [
+          "rubber",
+          "cork",
+          "chewing gum",
+          "digitalis"
+        ],
+        "why": "Rubber, cork, rope, chewing gum, coffee, chocolate and medicines like digitalis come from angiosperms. Turpentine and amber come from conifer resin."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What are the two main classifications of plants?",
+        "options": [
+          "vascular and nonvascular",
+          "seedless and seedbearing",
+          "monocots and dicots",
+          "annuals and perennials"
+        ],
+        "answer": "vascular and nonvascular",
+        "why": "Scientists usually sort plants by how they transport water: vascular or nonvascular."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Mosses do not have true roots. What do they have instead?",
+        "options": [
+          "rhizoids",
+          "rhizomes",
+          "taproots",
+          "fronds"
+        ],
+        "answer": "rhizoids",
+        "why": "Rhizoids are thin, rootlike structures. Rhizomes are the underground stems of ferns and horsetails."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Horsetails and ferns grow from underground stems called...",
+        "options": [
+          "rhizomes",
+          "rhizoids",
+          "cotyledons",
+          "fronds"
+        ],
+        "answer": "rhizomes",
+        "why": "Rhizomes are underground stems. Rhizoids are the rootlike bits on mosses."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Why is a young fern's coiled-up frond called a fiddlehead?",
+        "options": [
+          "It looks like the top of a violin",
+          "It makes a sound in the wind",
+          "It grows near fiddle makers",
+          "It is shaped like a bow"
+        ],
+        "answer": "It looks like the top of a violin",
+        "why": "A fiddle is a violin. The coiled frond looks like the scroll at the top."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What is the easiest way to identify a conifer?",
+        "options": [
+          "Look at its leaves",
+          "Count its rings",
+          "Measure its height",
+          "Smell its resin"
+        ],
+        "answer": "Look at its leaves",
+        "why": "The book says the easiest way is to look at the leaves (needles)."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which tree has its needles bound together in bundles?",
+        "options": [
+          "pine",
+          "fir",
+          "spruce",
+          "ginkgo"
+        ],
+        "answer": "pine",
+        "why": "Pine needles come in bundles (2, 3 or 5). Fir needles are flat and attached directly; spruce needles are stiff and on little woody pegs."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Where are gymnosperm seeds produced?",
+        "options": [
+          "inside cones",
+          "inside fruit",
+          "inside flowers",
+          "underground"
+        ],
+        "answer": "inside cones",
+        "why": "Gymnosperms have no flowers. Their seeds are usually produced inside cones. Angiosperm seeds are protected inside a fruit."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which tubes carry water and minerals from the roots up to the top of the plant?",
+        "options": [
+          "xylem",
+          "phloem",
+          "cambium",
+          "rhizomes"
+        ],
+        "answer": "xylem",
+        "why": "Xylem carries water UP. Phloem carries sugars and food."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What layer of cells makes a tree grow wider each year?",
+        "options": [
+          "cambium",
+          "xylem",
+          "bark",
+          "phloem"
+        ],
+        "answer": "cambium",
+        "why": "Cambium sits between the xylem and phloem and keeps making more of both, so a new ring is added each year."
+      },
+      {
+        "kind": "mc",
+        "prompt": "How can you tell the approximate age of a tree?",
+        "options": [
+          "Count its annual rings",
+          "Measure its height",
+          "Count its branches",
+          "Measure its roots"
+        ],
+        "answer": "Count its annual rings",
+        "why": "One ring forms each year. Wide rings mean plenty of water; narrow rings mean less."
+      },
+      {
+        "kind": "mc",
+        "prompt": "A baked potato is actually what part of the plant?",
+        "options": [
+          "a storage stem (tuber)",
+          "a root",
+          "a seed",
+          "a fruit"
+        ],
+        "answer": "a storage stem (tuber)",
+        "why": "The potato is a tuber, a stem that stores food."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What kind of root does a dandelion have?",
+        "options": [
+          "taproot",
+          "fibrous root",
+          "aerial root",
+          "rhizoid"
+        ],
+        "answer": "taproot",
+        "why": "The book shows the dandelion taproot. Grass has fibrous roots."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Orchids and Spanish moss have roots that never touch the soil. What are they called?",
+        "options": [
+          "aerial roots",
+          "taproots",
+          "fibrous roots",
+          "rhizomes"
+        ],
+        "answer": "aerial roots",
+        "why": "Aerial roots take in moisture from the air."
+      },
+      {
+        "kind": "mc",
+        "prompt": "A lichen, like reindeer moss, is really two organisms living together. Which two?",
+        "options": [
+          "algae and fungi",
+          "moss and fern",
+          "bacteria and moss",
+          "algae and moss"
+        ],
+        "answer": "algae and fungi",
+        "why": "The algae make food by photosynthesis; the fungi provide water and protection. Each helps the other."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which heart medicine is made from the purple foxglove?",
+        "options": [
+          "digitalis",
+          "aspirin",
+          "penicillin",
+          "resin"
+        ],
+        "answer": "digitalis",
+        "why": "Digitalis comes from foxglove. Aspirin, once made from angiosperms, treats fever and inflammation."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What is the largest group of gymnosperms?",
+        "options": [
+          "conifers",
+          "cycads",
+          "ginkgoes",
+          "gnetophytes"
+        ],
+        "answer": "conifers",
+        "why": "Conifers, like pines, firs, spruces and redwoods."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Club mosses are closely related to true mosses.",
+        "answer": false,
+        "why": "FALSE. They look similar but have little in common. Club mosses are vascular; mosses are not."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Gymnosperms produce flowers.",
+        "answer": false,
+        "why": "FALSE. Gymnosperms have no flowers; their seeds grow in cones. ANGIOSPERMS have flowers."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Most conifers are evergreen.",
+        "answer": true,
+        "why": "TRUE. Almost all conifers stay green and make food all year."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Monocot stems become thicker each year.",
+        "answer": false,
+        "why": "FALSE. Monocot stems do NOT get thicker each year. Dicots can, which is why many have woody stems."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Dicots are the larger group of angiosperms.",
+        "answer": true,
+        "why": "TRUE. Most angiosperms are dicots, including broad-leafed trees."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Aquatic angiosperms are found only in fresh water.",
+        "answer": false,
+        "why": "FALSE. They are found in BOTH salt water and fresh water."
+      }
+    ],
+    "sortGroups": [
+      {
+        "name": "Nonvascular",
+        "partOne": true,
+        "books": [
+          "Mosses",
+          "Liverworts"
+        ]
+      },
+      {
+        "name": "Seedless vascular",
+        "partOne": true,
+        "books": [
+          "Horsetails",
+          "Club mosses",
+          "Ferns"
+        ]
+      },
+      {
+        "name": "Gymnosperms (seeds in cones)",
+        "partOne": true,
+        "books": [
+          "Cycads",
+          "Ginkgoes",
+          "Gnetophytes",
+          "Conifers",
+          "Pine trees",
+          "Redwoods"
+        ]
+      },
+      {
+        "name": "Angiosperms (flowers and fruit)",
+        "partOne": true,
+        "books": [
+          "Monocots",
+          "Dicots",
+          "Roses",
+          "Grasses"
+        ]
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "Draw the plant classification chart from memory, top to bottom.",
+        "answer": "PLANTS split into Vascular and Nonvascular. Nonvascular: mosses and liverworts. Vascular splits into Seedless (club mosses, horsetails, ferns) and Seedbearing. Seedbearing splits into Gymnosperms (cycads, ginkgoes, gnetophytes, conifers) and Angiosperms (dicotyledons and monocotyledons)."
+      },
+      {
+        "prompt": "What is the difference between angiosperms and gymnosperms?",
+        "answer": "Angiosperms have flowers, and their seeds are protected inside a fruit. Gymnosperms have no flowers, and their seeds are usually produced inside cones, with only a seed coat for protection."
+      },
+      {
+        "prompt": "Compare monocots and dicots. Give five differences.",
+        "answer": "Monocots: one cotyledon, petals in 3s or 6s, parallel veins, fibrous roots, scattered vascular bundles. Dicots: two cotyledons, petals in 4s or 5s, branching veins, a taproot, bundles in a ring."
+      },
+      {
+        "prompt": "Describe the parts of a plant's vascular system.",
+        "answer": "Xylem carries water and minerals up from the roots. Phloem carries sugars and food throughout the plant. They are grouped in vascular bundles, with a layer of cambium between them that makes the stem grow wider each year."
+      },
+      {
+        "prompt": "Compare taproots and fibrous roots.",
+        "answer": "A taproot is one big root that grows straight down, with smaller roots off it. Most dicots, like the dandelion. Fibrous roots are many thin roots spreading in all directions. Most monocots, like grass."
+      },
+      {
+        "prompt": "Name the three ways angiosperms are classified by growing season.",
+        "answer": "Annual (one season), biennial (two seasons), perennial (three or more years)."
+      },
+      {
+        "prompt": "Give examples and uses of conifers.",
+        "answer": "Pines, firs, spruces, cedars and redwoods. Wood for lumber, cabinets, fence posts, telephone poles, paper, pencils, plywood and musical instruments. Resin for tar, turpentine, inks, paints, adhesives and rosin."
+      },
+      {
+        "prompt": "Name some products made from plants.",
+        "answer": "Food, coffee, hot chocolate, cola, medicines like digitalis and aspirin, rubber, cork, rope, chewing gum, lumber and paper."
+      },
+      {
+        "prompt": "Solve the Problem: Tanya pulled up the dandelions, but a week later they were back everywhere. Why?",
+        "answer": "Dandelions have a TAPROOT. She pulled up the leaves and a few thin roots but left the taproot in the ground, and it grew back. She needed to dig up the whole taproot. (The book does not print an answer; this one comes from the taproot section on p. 154.)"
+      }
+    ],
+    "drills": [
+      "groupall",
+      "meaning",
+      "multionly",
+      "extras",
+      "match"
+    ],
+    "rival": "Fern Gully FC",
+    "matchLength": 8
   }
 ];
