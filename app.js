@@ -139,7 +139,8 @@
       { id: "match",    name: "Match Day",            blurb: "Play a match. Right answers earn you a shot on goal \u2014 but the keeper gets a say." }
     ],
     maps: [
-      { id: "maplabel", name: "Name it on the map", blurb: "The real map sheet. One blank at a time \u2014 tap the name that belongs in it." }
+      { id: "maplabel", name: "Name it on the map", blurb: "The real map sheet. One blank at a time \u2014 tap the name that belongs in it." },
+      { id: "maptype",  name: "Write it on the map", blurb: "Same map, no word bank. Type the name yourself \u2014 close spelling still counts." }
     ],
     roots: [
       { id: "rootword", name: "Root, meaning, word", blurb: "Two steps, the way the test asks it. Pick what the root means, then type a word that uses it." }
@@ -155,6 +156,9 @@
     ],
     spelling: [
       { id: "spell", name: "Look, cover, build it", blurb: "Study the word, then build it back from scrambled letters with it hidden." }
+    ],
+    exact: [
+      { id: "exact", name: "Word for word", blurb: "See the question, type the answer exactly the way the study guide says it. Hints if you need them." }
     ],
     verse: [
       { id: "read",  name: "Read it out loud",  blurb: "The whole verse. Say it five times before you move on." },
@@ -215,7 +219,8 @@
     if ((item.spellWords || []).length) list.unshift(pick("spelling", "spell"));
     if ((item.mathTopics || []).length) list.unshift(pick("math", "numpad"));
     if ((item.roots || []).length) list.unshift(pick("roots", "rootword"));
-    if ((item.maps || []).length) list.unshift(pick("maps", "maplabel"));
+    if ((item.exact || []).length) list.unshift(pick("exact", "exact"));
+    if ((item.maps || []).length) { list.unshift(pick("maps", "maptype")); list.unshift(pick("maps", "maplabel")); }
     if ((item.decideProblems || []).length) list.unshift(pick("decision", "decide"));
     if ((item.divisors || []).length) list.unshift(pick("divisibility", "divis"));
     if ((item.extras || []).length) list.push(EXTRAS_DRILL);
@@ -226,7 +231,7 @@
   /* Every drill the app knows about, for resolving an item's own list. */
   function allDrills() {
     var all = [];
-    ["vocab", "questions", "categorize", "sequence", "verse", "spelling", "math", "maps", "roots", "decision", "divisibility"].forEach(function (grp) {
+    ["vocab", "questions", "categorize", "sequence", "verse", "spelling", "math", "maps", "exact", "roots", "decision", "divisibility"].forEach(function (grp) {
       all = all.concat(DRILLS[grp] || []);
     });
     all.push(EXTRAS_DRILL);
@@ -727,7 +732,7 @@
     if (drillId === "extras") { renderSelfCheck(item, item.extras, "extras"); return; }
     if (item.type === "questions" ||
         (item.type === "bundle" &&
-         ["rootword", "maplabel", "decide", "divis", "numpad", "spell", "match", "keyonly", "tfonly", "mconly",
+         ["rootword", "maplabel", "maptype", "exact", "decide", "divis", "numpad", "spell", "match", "keyonly", "tfonly", "mconly",
           "multionly", "corronly", "mixed"].indexOf(drillId) > -1)) {
       renderQuestionSet(item, drillId); return;
     }
@@ -1203,16 +1208,52 @@
      on each country, and a right answer fills that country in its colour, so by
      the end he has the finished map in front of him. */
 
-  function renderMapLabel(item) {
+  /* Typed mode ("Write it on the map"): the test is a blank map he fills in
+     himself, so a word bank is a crutch. He types the name instead. Spelling
+     is forgiven within a few letters, as long as what he typed is closer to
+     the right name than to any other name on the map; a near miss counts but
+     shows the correct spelling. Two real misses and the name is shown so he
+     can type it and move on. */
+  function mapNorm(s) { return String(s || "").toLowerCase().replace(/[^a-z]/g, ""); }
+  function mapDist(a, b) {
+    var m = a.length, n = b.length, d = [], i, j;
+    for (i = 0; i <= m; i++) { d[i] = [i]; }
+    for (j = 0; j <= n; j++) { d[0][j] = j; }
+    for (i = 1; i <= m; i++) for (j = 1; j <= n; j++) {
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1,
+                         d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      /* swapped neighbours ("Indai") count as one slip, not two */
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1])
+        d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
+    }
+    return d[m][n];
+  }
+  function mapJudge(typed, target, bank) {
+    var t = mapNorm(typed), goal = mapNorm(target);
+    if (!t) return { kind: "empty" };
+    if (t === goal) return { kind: "exact" };
+    var best = null, bestD = 1e9;
+    bank.forEach(function (name) {
+      var dd = mapDist(t, mapNorm(name));
+      if (dd < bestD) { bestD = dd; best = name; }
+    });
+    var dGoal = mapDist(t, goal);
+    var allow = goal.length <= 5 ? 1 : goal.length <= 8 ? 2 : 3;
+    if (dGoal <= allow && dGoal <= bestD) return { kind: "close" };
+    if (best && best !== target && bestD <= (mapNorm(best).length <= 5 ? 1 : 2)) return { kind: "other", name: best };
+    return { kind: "wrong" };
+  }
+
+  function renderMapLabel(item, typed) {
     var maps = (item.maps || []).filter(function (m) { return (m.blanks || []).length; });
     if (!maps.length) { app.innerHTML = '<p class="lede">No maps on this item.</p>'; return; }
 
-    var g = { map: 0, pos: 0, clean: 0, total: 0, order: [], solved: {}, missed: false };
+    var g = { map: 0, pos: 0, clean: 0, total: 0, order: [], solved: {}, missed: false, tries: 0, shown: false };
     maps.forEach(function (m) { g.total += m.blanks.length; });
 
     function startMap() {
       g.order = shuffle(maps[g.map].blanks.map(function (_, i) { return i; }));
-      g.pos = 0; g.solved = {}; g.missed = false;
+      g.pos = 0; g.solved = {}; g.missed = false; g.tries = 0; g.shown = false;
       paint();
     }
 
@@ -1306,16 +1347,31 @@
           '<image href="' + m.src + '" x="0" y="0" width="' + m.w + '" height="' + m.h + '"/>' +
           m.blanks.map(function (bb, i) { return overlay(m, i, bb); }).join("") +
           "</svg></div>" +
-        '<p class="chant-hint">' + esc(b.prompt || "Which name goes in the highlighted blank?") + "</p>" +
-        '<div class="mapbank" id="bank">' +
+        '<p class="chant-hint">' + esc(typed ? (b.pin ? "Type the name of the country with the glowing pin."
+                                                       : "Type the name that goes in the highlighted blank.")
+                                             : (b.prompt || "Which name goes in the highlighted blank?")) + "</p>" +
+        (typed
+          ? finished ? "" : '<div class="btn-row"><input class="wordbox" id="box" type="text" autocomplete="off" ' +
+              'autocapitalize="words" autocorrect="off" spellcheck="false" placeholder="type the name"></div>' +
+            '<div class="btn-row"><button class="btn" id="check">Check it</button></div>'
+          : '<div class="mapbank" id="bank">' +
           m.bank.map(function (name) {
             return '<button class="chip' + (used[name] ? " chip--placed" : "") + '"' +
               (used[name] ? " disabled" : "") + ' data-n="' + esc(name) + '">' + esc(name) + "</button>";
           }).join("") +
-        "</div>" +
+        "</div>") +
         '<div class="verdict' + (tone ? " " + tone : "") + '" id="verdict" role="status" aria-live="polite">' +
           (msg || "") + "</div>";
 
+      if (typed) {
+        if (finished) return;
+        var box = document.getElementById("box");
+        var go = function () { typedAnswer(box.value); };
+        box.addEventListener("keydown", function (e) { if (e.key === "Enter") go(); });
+        document.getElementById("check").addEventListener("click", go);
+        box.focus();
+        return;
+      }
       document.getElementById("bank").addEventListener("click", function (e) {
         var t = e.target.closest(".chip");
         if (!t || t.disabled) return;
@@ -1323,7 +1379,32 @@
       });
     }
 
-    function answer(name) {
+    var finished = false;
+    function typedAnswer(text) {
+      var m = maps[g.map];
+      var b = m.blanks[g.order[g.pos]];
+      if (finished) return;
+      var j = mapJudge(text, b.answer, m.bank);
+      if (j.kind === "empty") return;
+      if (j.kind === "exact" || j.kind === "close") {
+        return answer(b.answer, j.kind === "close" && !g.shown
+          ? "Counts! Check the spelling: <strong>" + esc(b.answer) + "</strong>. " : "");
+      }
+      g.missed = true;
+      g.tries++;
+      if (g.tries >= 2) {
+        g.shown = true;
+        paint("It\u2019s <strong>" + esc(b.answer) + "</strong><small>Type it in to fill it on the map.</small>",
+              "verdict--card");
+        return;
+      }
+      paint(j.kind === "other"
+        ? "That\u2019s " + esc(j.name) + "<small>" + esc(j.name) + " is somewhere else on this map. Look again at where the pin sits.</small>"
+        : "Not that one<small>Look at where it sits and try once more.</small>", "verdict--card");
+    }
+
+    function answer(name, note) {
+      note = note || "";
       var m = maps[g.map];
       var bi = g.order[g.pos];
       var b = m.blanks[bi];
@@ -1335,17 +1416,18 @@
       }
       g.solved[bi] = true;
       if (!g.missed) g.clean++;
-      g.missed = false;
+      g.missed = false; g.tries = 0; g.shown = false;
       g.pos++;
 
       if (g.pos < g.order.length) {
-        paint("<strong>" + esc(b.answer) + "</strong><small>" + esc(b.why || "") + "</small>", "verdict--goal");
+        paint("<strong>" + esc(b.answer) + "</strong><small>" + note + esc(b.why || "") + "</small>", "verdict--goal");
         return;
       }
       /* map finished */
       g.pos = g.order.length - 1;
+      finished = true;
       var more = g.map + 1 < maps.length;
-      paint("<strong>" + esc(b.answer) + "</strong><small>" + esc(b.why || "") +
+      paint("<strong>" + esc(b.answer) + "</strong><small>" + note + esc(b.why || "") +
             " That is the whole map filled in.</small>", "verdict--goal");
       var row = document.createElement("div");
       row.className = "btn-row";
@@ -1353,6 +1435,7 @@
       document.getElementById("verdict").after(row);
       var btn = document.getElementById("on");
       btn.addEventListener("click", function () {
+        finished = false;
         if (more) { g.map++; startMap(); } else done();
       });
       btn.focus();
@@ -1373,12 +1456,137 @@
             '<a class="btn btn--quiet" href="#/i/' + item.id + '">Other drills</a>' +
           "</div>" +
         "</div>";
-      document.getElementById("again").addEventListener("click", function () { renderMapLabel(item); });
+      document.getElementById("again").addEventListener("click", function () { renderMapLabel(item, typed); });
     }
 
     startMap();
   }
 
+
+
+  /* ---------- word for word -------------------------------------------------
+
+     Mrs. Vowels wants study-guide answers word for word, and picking from a
+     list never makes him produce the words. He sees the question, types the
+     answer, and gets it back word by word: green for right, orange for a word
+     he left out, struck through for a word that isn't in her answer. A small
+     typo inside a long word is forgiven (that's spelling, not memory), but a
+     wrong or missing word is not. Hints go first letters, then the whole
+     answer, so he is never stuck. */
+
+  function exactTokens(s) {
+    return String(s || "").toLowerCase().replace(/&/g, " and ").replace(/['\u2019-]/g, "")
+      .replace(/[\/\u2013\u2014]/g, " ").replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter(Boolean);
+  }
+  function exactSame(a, b) {
+    if (a === b) return true;
+    if (a.length < 5 || b.length < 5) return false;
+    return mapDist(a, b) <= 1;
+  }
+  function exactDiff(typed, target) {
+    var t = exactTokens(typed), g = String(target).replace(/\//g, " / ").split(/\s+/).filter(Boolean);
+    var gn = g.map(function (w) { return exactTokens(w).join(""); });
+    var n = t.length, m = g.length, i, j, L = [];
+    for (i = 0; i <= n; i++) { L[i] = []; for (j = 0; j <= m; j++) L[i][j] = 0; }
+    for (i = n - 1; i >= 0; i--) for (j = m - 1; j >= 0; j--)
+      L[i][j] = gn[j] && exactSame(t[i], gn[j]) ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
+    var out = [], ok = true; i = 0; j = 0;
+    while (i < n || j < m) {
+      if (j < m && !gn[j]) { out.push({ k: "ok", w: g[j] }); j++; continue; }
+      if (i < n && j < m && exactSame(t[i], gn[j])) { out.push({ k: "ok", w: g[j] }); i++; j++; }
+      else if (j < m && (i >= n || L[i][j + 1] >= L[i + 1][j])) { out.push({ k: "miss", w: g[j] }); ok = false; j++; }
+      else { out.push({ k: "extra", w: t[i] }); ok = false; i++; }
+    }
+    return { ok: ok, parts: out };
+  }
+
+  function renderExact(item, subset) {
+    var all = item.exact || [];
+    var deck = subset && subset.length ? subset : all;
+    var at = 0, hint = 0, misses = [], tries = 0;
+
+    function paint(result, typedText) {
+      var e = deck[at];
+      var words = String(e.answer).replace(/\//g, " / ").split(/\s+/).filter(Boolean);
+      var hintHtml = hint === 1 ? words.map(wordSkeleton).join(" ")
+                   : hint >= 2 ? esc(e.answer) : "";
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<p class="eyebrow">' + esc(e.section || "") + " \u00b7 " + (at + 1) + " of " + deck.length + "</p>" +
+        '<div class="prompt-card">' + esc(e.cue) + "</div>" +
+        (hintHtml ? '<div class="verse"><span class="verse-line">' + hintHtml + "</span></div>" : "") +
+        (result
+          ? '<div class="verse' + (result.ok ? " chant--open" : "") + '"><span class="verse-line">' +
+              result.parts.map(function (p) {
+                return p.k === "ok" ? esc(p.w)
+                     : p.k === "miss" ? '<strong style="color:#C2410C;text-decoration:underline">' + esc(p.w) + "</strong>"
+                     : '<s style="color:#8A8F8C">' + esc(p.w) + "</s>";
+              }).join(" ") + "</span></div>" +
+            '<p class="chant-hint">' + (result.ok
+              ? "Word for word. That\u2019s exactly her answer."
+              : "Orange underlined = a word you left out or changed. Crossed out = not in her answer.") + "</p>" +
+            '<div class="btn-row">' +
+              (result.ok ? '<button class="btn" id="next">' + (at + 1 < deck.length ? "Next \u2192" : "See the result") + "</button>"
+                         : '<button class="btn" id="retry">Try it again</button>' +
+                           '<button class="btn btn--quiet" id="next">Move on</button>') +
+            "</div>"
+          : '<textarea class="wordbox" id="box" rows="3" style="width:min(100%,560px);text-align:left;font-size:1.1rem" ' +
+              'autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" ' +
+              'placeholder="Type her answer, word for word">' + esc(typedText || "") + "</textarea>" +
+            '<div class="btn-row"><button class="btn" id="check">Check it</button>' +
+              (hint < 2 ? '<button class="btn btn--quiet" id="hint">' + (hint === 0 ? "First letters" : "Show me") + "</button>" : "") +
+            "</div>") +
+        '<p class="card-counter">' + (at + 1) + " of " + deck.length + "</p>";
+
+      if (result) {
+        document.getElementById("next").addEventListener("click", function () {
+          if (!result.ok || tries > 1 || hint > 0) { if (misses.indexOf(e) < 0) misses.push(e); }
+          at++; hint = 0; tries = 0;
+          if (at >= deck.length) done(); else paint();
+        });
+        if (document.getElementById("retry"))
+          document.getElementById("retry").addEventListener("click", function () { paint(null, ""); });
+        document.getElementById("next").focus();
+        return;
+      }
+      var box = document.getElementById("box");
+      box.focus();
+      box.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); check(); }
+      });
+      document.getElementById("check").addEventListener("click", check);
+      if (document.getElementById("hint"))
+        document.getElementById("hint").addEventListener("click", function () { hint++; paint(null, box.value); });
+      function check() {
+        if (!box.value.trim()) return;
+        tries++;
+        paint(exactDiff(box.value, e.answer));
+      }
+    }
+
+    function done() {
+      var got = deck.length - misses.length;
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="result-rating">' + (misses.length ? "Keep going" : "Clean sheet") + "</p>" +
+          '<p class="result-score">' + got + "/" + deck.length + "</p>" +
+          '<p class="result-of">Word for word, first try, no hints</p>' +
+          '<p class="lede" style="margin:1rem auto 0">' + (misses.length
+            ? "Run the ones that tripped you up. Those are the ones she\u2019ll catch."
+            : "Every answer exactly the way she wrote it. Run it again tomorrow.") + "</p>" +
+          '<div class="btn-row">' +
+            (misses.length ? '<button class="btn" id="redo">Run those ' + misses.length + " again</button>" : "") +
+            '<button class="btn' + (misses.length ? " btn--quiet" : "") + '" id="allagain">Start over</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '">Other drills</a>' +
+          "</div></div>";
+      var again = misses.slice();
+      if (document.getElementById("redo"))
+        document.getElementById("redo").addEventListener("click", function () { renderExact(item, again); });
+      document.getElementById("allagain").addEventListener("click", function () { renderExact(item); });
+    }
+
+    paint();
+  }
 
   /* ---------- root, meaning, word ----------------------------------------
 
@@ -2507,6 +2715,8 @@
   function renderQuestionSet(item, drillId) {
     if (drillId === "rootword") return renderRootWord(item);
     if (drillId === "maplabel") return renderMapLabel(item);
+    if (drillId === "maptype") return renderMapLabel(item, true);
+    if (drillId === "exact") return renderExact(item);
     if (drillId === "decide") return renderDecide(item);
     if (drillId === "divis") return renderDivisibility(item);
     if (drillId === "numpad") return renderNumpad(item);

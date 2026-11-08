@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Nov 1 \u2014 build 52";
+const BUILD = "Nov 7 \u2014 build 57";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -8488,7 +8488,7 @@ const STUDY_ITEMS = [
     "assess": "quiz",
     "added": "2026-11-01",
     "quiz": "2026-11-12",
-    "note": "Map quiz Thursday 11/12. Built from Mrs. Martinez's map sheet with the names taken off, so he has to put each one back.",
+    "note": "Map quiz Thursday 11/12. Mrs. Martinez's own map with the names taken off. Start with Write it on the map: he types each name, and close spelling still counts.",
     "type": "bundle",
     "maps": [
       {
@@ -8624,6 +8624,7 @@ const STUDY_ITEMS = [
       }
     ],
     "drills": [
+      "maptype",
       "maplabel",
       "extras"
     ]
@@ -9477,5 +9478,591 @@ const STUDY_ITEMS = [
     ],
     "rival": "Fern Gully FC",
     "matchLength": 8
+  },
+  {
+    "id": "lit-literary-terms",
+    "subject": "literature",
+    "title": "Literary Terms Test",
+    "added": "2026-11-07",
+    "quiz": "2026-11-13",
+    "note": "Test Friday 11/13. The 20 terms highlighted and numbered on the Handbook of Literary Terms pages, in the handbook's wording plus Knox's own notes.",
+    "type": "bundle",
+    "words": [
+      {
+        "word": "alliteration",
+        "meaning": "The repetition of consonant sounds at the beginning of words that are close together. Example: wet, windy weather.",
+        "sentence": "\"Betty Botter bought some butter\" is an example of ___."
+      },
+      {
+        "word": "antagonist",
+        "meaning": "An opponent or adversary. The antagonist works against the protagonist.",
+        "sentence": "The villain who keeps trying to stop the hero is the ___."
+      },
+      {
+        "word": "character",
+        "meaning": "A person or animal who is one of the actors in a story, poem, or play.",
+        "sentence": "Every person or animal acting in a story is a ___."
+      },
+      {
+        "word": "climax",
+        "meaning": "The turning point in a story: the moment of greatest intensity.",
+        "sentence": "The most exciting moment, when everything turns, is the ___."
+      },
+      {
+        "word": "conflict",
+        "meaning": "A struggle between opposing forces. It is the problem in a story, and it drives the story.",
+        "sentence": "The problem the characters struggle with is the story's ___."
+      },
+      {
+        "word": "dialogue",
+        "meaning": "The conversation between characters.",
+        "sentence": "The words the characters say to each other are called ___."
+      },
+      {
+        "word": "fable",
+        "meaning": "A short story or poem that has a moral, or teaches a lesson. The characters are usually animals.",
+        "sentence": "The Fox and the Grapes is a ___ because animals teach a lesson."
+      },
+      {
+        "word": "fairy tale",
+        "meaning": "A story with a vague setting (\"once upon a time\"), characters known only by their role or first name, and good and evil magical creatures.",
+        "sentence": "A story that starts \"Once upon a time\" and has a wicked witch is a ___."
+      },
+      {
+        "word": "fantasy",
+        "meaning": "Fiction about imaginative characters or situations: people, places, creatures, and events that do not exist in the real world.",
+        "sentence": "A story about talking dragons in a made-up kingdom is ___."
+      },
+      {
+        "word": "fiction",
+        "meaning": "Any form of prose in which the plot and characters are created by the author.",
+        "sentence": "When the author makes up the characters and plot, the story is ___."
+      },
+      {
+        "word": "genre",
+        "meaning": "A category, or type, of literature, such as short stories, novels, poetry, drama, biography, or essay.",
+        "sentence": "Poetry, drama, and biography are each a different ___."
+      },
+      {
+        "word": "historical fiction",
+        "meaning": "Fiction set in a historical period. The setting is the part that is largely factual.",
+        "sentence": "A made-up story set during the American Revolution is ___."
+      },
+      {
+        "word": "imagery",
+        "meaning": "The use of images that appeal to one or more of the five senses: sight, sound, touch, taste, and smell.",
+        "sentence": "Writing that lets you smell the bread and hear the rain uses ___."
+      },
+      {
+        "word": "internal dialogue",
+        "meaning": "The mental conversation a character has with him- or herself. A character's thoughts.",
+        "sentence": "When we read what a character is thinking to himself, that is ___."
+      },
+      {
+        "word": "memoir",
+        "meaning": "Autobiographical writing about the writer's memories of important events or people in his or her past. Not the whole life story.",
+        "sentence": "A writer remembering one summer from childhood is writing a ___."
+      },
+      {
+        "word": "metaphor",
+        "meaning": "A figure of speech that compares two unlike things WITHOUT using like or as.",
+        "sentence": "\"My back is my roof\" is a ___."
+      },
+      {
+        "word": "plot",
+        "meaning": "The \"story\" of a work of fiction: the sequence of events.",
+        "sentence": "Everything that happens in a story, in order, is the ___."
+      },
+      {
+        "word": "protagonist",
+        "meaning": "The main character in a literary work.",
+        "sentence": "The main character of a story is the ___."
+      },
+      {
+        "word": "setting",
+        "meaning": "The backdrop against which the action takes place: where and when the story happens.",
+        "sentence": "A small adobe house on a desert road is the story's ___."
+      },
+      {
+        "word": "simile",
+        "meaning": "A figure of speech that uses the words like or as to compare two unlike things.",
+        "sentence": "\"White as snow\" and \"sings like a bird\" are each a ___."
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "What is the difference between a simile and a metaphor?",
+        "answer": "Both compare two unlike things. A simile uses LIKE or AS (\"white as snow\"). A metaphor does NOT (\"my back is my roof\")."
+      },
+      {
+        "prompt": "Protagonist vs. antagonist?",
+        "answer": "The protagonist is the main character. The antagonist works against the protagonist."
+      },
+      {
+        "prompt": "How can you tell a fable, a fairy tale, and a fantasy apart?",
+        "answer": "A fable teaches a lesson (a moral), usually with animal characters. A fairy tale has a vague \"once upon a time\" setting and good and evil magical creatures. A fantasy is any fiction about things that don't exist in the real world."
+      },
+      {
+        "prompt": "What is the difference between plot and setting?",
+        "answer": "Plot is what happens, the sequence of events. Setting is where and when it happens."
+      },
+      {
+        "prompt": "Name the five senses that imagery appeals to.",
+        "answer": "Sight, sound, touch, taste, and smell."
+      },
+      {
+        "prompt": "How is a memoir different from someone's whole life story?",
+        "answer": "A memoir focuses on the writer's memories of important events or people, not the whole life."
+      },
+      {
+        "prompt": "Where in a story is the conflict usually resolved?",
+        "answer": "At the climax, the turning point."
+      },
+      {
+        "prompt": "Make up your own example of alliteration.",
+        "answer": "Any phrase where nearby words start with the same consonant sound, like \"big brown bear.\""
+      }
+    ],
+    "drills": [
+      "meaning",
+      "blank",
+      "extras",
+      "match"
+    ],
+    "rival": "Plot Twist United",
+    "matchLength": 10
+  },
+  {
+    "id": "bible-unit-4-test",
+    "subject": "bible",
+    "title": "Bible Unit 4 Test: Identity in Christ",
+    "added": "2026-11-07",
+    "quiz": "2026-11-12",
+    "pin": true,
+    "note": "Test Thursday 11/12. Every answer on the Unit 4 Study Guide, word for word. Start with Word for word: type each answer and see exactly which words are off.",
+    "type": "bundle",
+    "exact": [
+      {
+        "section": "4.1 Sources of Identity",
+        "cue": "Ethnicity",
+        "answer": "from where you come (people/nation)"
+      },
+      {
+        "section": "4.1 Sources of Identity",
+        "cue": "Pop Culture",
+        "answer": "popular culture"
+      },
+      {
+        "section": "4.1 Sources of Identity",
+        "cue": "Ability/Talent",
+        "answer": "given to you by God"
+      },
+      {
+        "section": "4.1 Sources of Identity",
+        "cue": "Wealth/Possessions",
+        "answer": "given to you by God"
+      },
+      {
+        "section": "4.1 Sources of Identity",
+        "cue": "What can go wrong when a person tries to find his identity in one of these things? (a)",
+        "answer": "may focus on what he can do rather than God’s desires for him"
+      },
+      {
+        "section": "4.1 Sources of Identity",
+        "cue": "What can go wrong when a person tries to find his identity in one of these things? (b)",
+        "answer": "something we have/are can become overly important to us, an idol"
+      },
+      {
+        "section": "4.1 Sources of Identity",
+        "cue": "What can go wrong when a person tries to find his identity in one of these things? (c)",
+        "answer": "might spend time only with similar people instead of reaching out to share Christ"
+      },
+      {
+        "section": "4.1 Gender Confusion",
+        "cue": "Transgender",
+        "answer": "people who were born male or female, but reject their God-given gender"
+      },
+      {
+        "section": "4.1 The Bible & Your Identity",
+        "cue": "The Bible tells me I am... (three things, in order)",
+        "answer": "created in the image of God, fallen in Adam, redeemable in Christ"
+      },
+      {
+        "section": "4.1 The Bible & Your Identity",
+        "cue": "Redeem",
+        "answer": "bought from the slave market of sin and made free from the penalty of sin"
+      },
+      {
+        "section": "4.4 Your Redemption",
+        "cue": "Adoption",
+        "answer": "to move from one family into another"
+      },
+      {
+        "section": "4.4 Your Redemption",
+        "cue": "Positional Sanctification",
+        "answer": "adoption; placed into the body of Christ (all believers) when one accepts Christ as Savior"
+      },
+      {
+        "section": "4.4 Your Redemption",
+        "cue": "Progressive Sanctification",
+        "answer": "gaining a family resemblance to God"
+      },
+      {
+        "section": "4.4 Your Redemption",
+        "cue": "Glorification",
+        "answer": "when in the presence of God for eternity; our sanctification is complete"
+      },
+      {
+        "section": "4.5 Your Victory in Christ",
+        "cue": "Christ’s followers cannot bear fruit unless they ______ in God.",
+        "answer": "abide (remain close to)"
+      },
+      {
+        "section": "4.5 Your Victory in Christ",
+        "cue": "In Christ, you are... (all six, in order)",
+        "answer": "free, not guilty, alive, forgiven, righteous, victorious"
+      },
+      {
+        "section": "4.6 The Battle Within",
+        "cue": "Flesh",
+        "answer": "fallen nature of a person"
+      },
+      {
+        "section": "4.6 The Battle Within",
+        "cue": "The opposite of living in the flesh is living in step with the ______.",
+        "answer": "Holy Spirit"
+      },
+      {
+        "section": "4.6 The Battle Within",
+        "cue": "Original sin",
+        "answer": "all humanity is born with a bent to evil"
+      },
+      {
+        "section": "4.6 The Battle Within",
+        "cue": "To conquer the flesh, we must... (two things)",
+        "answer": "put off the old self, put on the new self"
+      },
+      {
+        "section": "4.7 The Battle Without",
+        "cue": "There are two right reactions to temptation. What are they?",
+        "answer": "flee: temptation that is dangerous; fight: stand & fight against temptation"
+      }
+    ],
+    "words": [
+      {
+        "word": "Ethnicity",
+        "meaning": "from where you come (people/nation)"
+      },
+      {
+        "word": "Pop Culture",
+        "meaning": "popular culture"
+      },
+      {
+        "word": "Ability/Talent",
+        "meaning": "given to you by God"
+      },
+      {
+        "word": "Wealth/Possessions",
+        "meaning": "given to you by God"
+      },
+      {
+        "word": "Transgender",
+        "meaning": "people who were born male or female, but reject their God-given gender"
+      },
+      {
+        "word": "Redeem",
+        "meaning": "bought from the slave market of sin and made free from the penalty of sin"
+      },
+      {
+        "word": "Adoption",
+        "meaning": "to move from one family into another"
+      },
+      {
+        "word": "Positional Sanctification",
+        "meaning": "adoption; placed into the body of Christ (all believers) when one accepts Christ as Savior"
+      },
+      {
+        "word": "Progressive Sanctification",
+        "meaning": "gaining a family resemblance to God"
+      },
+      {
+        "word": "Glorification",
+        "meaning": "when in the presence of God for eternity; our sanctification is complete"
+      },
+      {
+        "word": "Flesh",
+        "meaning": "fallen nature of a person"
+      },
+      {
+        "word": "Original sin",
+        "meaning": "all humanity is born with a bent to evil"
+      }
+    ],
+    "drills": [
+      "exact",
+      "flash",
+      "match"
+    ],
+    "rival": "Abide Athletic",
+    "matchLength": 8
+  },
+  {
+    "id": "hist-india-test",
+    "subject": "history",
+    "title": "History Test: Ancient India",
+    "added": "2026-11-07",
+    "quiz": "2026-11-13",
+    "pin": true,
+    "note": "Test Friday 11/13. All 30 terms worded exactly the way her Blooket says them. Do one level a day if you can.",
+    "type": "bundle",
+    "words": [
+      {
+        "word": "Ganges & Indus Rivers",
+        "meaning": "major rivers of India that flow melting glaciers near Himalayan Mountains"
+      },
+      {
+        "word": "Monsoon",
+        "meaning": "a wind that reverses direction with the change of season"
+      },
+      {
+        "word": "Harappan civilization",
+        "meaning": "people who settled in the Indus Valley and established the ancient cities of Harappa & Mohenjo-Daro"
+      },
+      {
+        "word": "Harappa",
+        "meaning": "a city of one of the first civilizations in the Indus Valley; the sister city of Mohenjo-Daro"
+      },
+      {
+        "word": "Mohenjo-Daro",
+        "meaning": "a city of one of the first civilizations in the Indus Valley; the sister city of Harappa"
+      },
+      {
+        "word": "Sir John Marshall",
+        "meaning": "British archaeologist who discovered and helped excavate Harappa and Mohenjo-Daro in the Indus Valley in the 1920s"
+      },
+      {
+        "word": "Pictographs",
+        "meaning": "a picture or symbol used in early writing to represent a word, a group of words, or an idea"
+      },
+      {
+        "word": "Aryans",
+        "meaning": "nomads believed to have moved into the Indus Valley around 1500 BC; conquered the people of northwestern India"
+      },
+      {
+        "word": "Indo-European",
+        "meaning": "a group of languages spoken by people of Europe and parts of Asia"
+      },
+      {
+        "word": "Sanskrit",
+        "meaning": "written language of the Aryans"
+      },
+      {
+        "word": "Linguist",
+        "meaning": "a scholar who studies languages"
+      },
+      {
+        "word": "Vedas",
+        "meaning": "collections of sacred hymn texts of Hinduism"
+      },
+      {
+        "word": "Raja",
+        "meaning": "a chief, prince, or ruler in India"
+      },
+      {
+        "word": "Hinduism",
+        "meaning": "a major Indian religion based on Vedic religious beliefs; belief in Brahman and reincarnation that serves as a unifying influence in India's diverse society"
+      },
+      {
+        "word": "Brahman",
+        "meaning": "Divine being of Hinduism believed to be the cause and material of creation; also called \"the great soul\" or \"the world soul\""
+      },
+      {
+        "word": "Pantheism",
+        "meaning": "belief that everything in the universe is part of a supreme being"
+      },
+      {
+        "word": "Reincarnation",
+        "meaning": "the belief that after a person dies, he comes back in another form"
+      },
+      {
+        "word": "Karma",
+        "meaning": "the Hindu belief that a person's deeds, good or bad, determine his state in reincarnation"
+      },
+      {
+        "word": "Dharma",
+        "meaning": "religious duties of a Hindu or a Buddhist"
+      },
+      {
+        "word": "Caste",
+        "meaning": "a strict social class a person is born into"
+      },
+      {
+        "word": "Outcaste",
+        "meaning": "anyone from outside the groups of the Hindu caste system; bound by strict social restrictions"
+      },
+      {
+        "word": "Gautama, Siddhartha",
+        "meaning": "Founder of Buddhism"
+      },
+      {
+        "word": "Buddha",
+        "meaning": "the name Siddhartha Gautama took for himself after he left Hinduism; \"Enlightened One\""
+      },
+      {
+        "word": "Enlightened",
+        "meaning": "Having received knowledge or understanding"
+      },
+      {
+        "word": "Nirvana",
+        "meaning": "The Buddhist belief in a state of complete enlightenment where a person has peace and freedom from desire"
+      },
+      {
+        "word": "Buddhism",
+        "meaning": "a religion founded by Siddhartha Gautama; Buddhists follow the Eightfold Path and the Four Noble Truths"
+      },
+      {
+        "word": "Stupa",
+        "meaning": "a dome-shaped Buddhist shrine"
+      },
+      {
+        "word": "Chandragupta Maurya",
+        "meaning": "Indian warrior who conquered a large part of India and began the Mauryan dynasty"
+      },
+      {
+        "word": "Pataliputra",
+        "meaning": "the city chosen by Chandragupta to be the capital of the Mauryan Empire"
+      },
+      {
+        "word": "Asoka",
+        "meaning": "Ruler of the Mauryan Empire in ancient India; promoted Buddhism"
+      }
+    ],
+    "exact": [
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Wind that switches with seasons",
+        "answer": "Monsoon"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Written language of the Aryans",
+        "answer": "Sanskrit"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Dome-shaped Buddhist shrine",
+        "answer": "Stupa"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Deeds decide your next life",
+        "answer": "Karma"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Dug up the Indus cities",
+        "answer": "Sir John Marshall"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Chandragupta's capital city",
+        "answer": "Pataliputra"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Religious duties",
+        "answer": "Dharma"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Sacred hymn texts of Hinduism",
+        "answer": "Vedas"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Class you're born into",
+        "answer": "Caste"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Ruler who promoted Buddhism",
+        "answer": "Asoka"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "All is part of a supreme being",
+        "answer": "Pantheism"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Picture symbols in early writing",
+        "answer": "Pictographs"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Nomads who came around 1500 BC",
+        "answer": "Aryans"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Total peace, no desire",
+        "answer": "Nirvana"
+      },
+      {
+        "section": "Boss Battle: name the term",
+        "cue": "Scholar who studies languages",
+        "answer": "Linguist"
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "Harappa vs. Mohenjo-Daro: what's the difference?",
+        "answer": "Each one is the \"sister city\" of the other. Harappa is the sister city of Mohenjo-Daro; Mohenjo-Daro is the sister city of Harappa."
+      },
+      {
+        "prompt": "Siddhartha vs. Buddha?",
+        "answer": "Siddhartha Gautama is the Founder of Buddhism. Buddha is the name he took: \"Enlightened One.\""
+      },
+      {
+        "prompt": "Enlightened vs. Nirvana?",
+        "answer": "Enlightened = received knowledge or understanding. Nirvana = complete enlightenment, peace, and freedom from desire."
+      },
+      {
+        "prompt": "Caste vs. Outcaste?",
+        "answer": "Caste = the strict social class you're born into. Outcaste = anyone outside the caste system."
+      },
+      {
+        "prompt": "Brahman vs. Pantheism?",
+        "answer": "Brahman = the divine being, \"the world soul.\" Pantheism = the belief that everything is part of a supreme being."
+      },
+      {
+        "prompt": "Karma vs. Reincarnation?",
+        "answer": "Karma = your deeds decide your next life. Reincarnation = coming back in another form."
+      },
+      {
+        "prompt": "Sanskrit vs. Indo-European?",
+        "answer": "Sanskrit = written language of the Aryans. Indo-European = a group of languages of Europe and parts of Asia."
+      },
+      {
+        "prompt": "Chandragupta vs. Asoka?",
+        "answer": "Chandragupta Maurya began the Mauryan dynasty. Asoka ruled later and promoted Buddhism."
+      },
+      {
+        "prompt": "Harappan civilization vs. Harappa?",
+        "answer": "Harappan civilization is the PEOPLE who settled the Indus Valley. Harappa is one of their cities."
+      },
+      {
+        "prompt": "How do dharma, karma, and reincarnation connect?",
+        "answer": "Dharma: you do your religious duties. Karma: your good and bad deeds add up. Reincarnation: you die and come back in another form, and karma decides what form."
+      }
+    ],
+    "drills": [
+      "meaning",
+      "exact",
+      "extras",
+      "match"
+    ],
+    "rival": "Mohenjo-Daro Dynamos",
+    "matchLength": 10
   }
 ];
