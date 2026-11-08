@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Nov 7 \u2014 build 57";
+const BUILD = "Nov 8 \u2014 build 58";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -37,51 +37,35 @@ const SUBJECTS = [
    "optional" is the gray-italic only-if-not-finished-in-class kind, "test" is
    the red kind. ----------------------------------------------------------- */
 const HOMEWORK = {
-  "asOf": "2026-11-01",
-  "label": "Week of Nov 2 – Nov 6",
+  "asOf": "2026-11-08",
+  "label": "Week of Nov 9 – Nov 13",
   "tests": [
     {
-      "date": "2026-11-02",
-      "text": "Science make-up test: Chapters 4–5"
+      "date": "2026-11-12",
+      "text": "Bible Unit 4 Test"
     },
     {
-      "date": "2026-11-06",
-      "text": "Bible Quiz: John 15:9, word for word"
+      "date": "2026-11-12",
+      "text": "Spelling Test: List 5"
     },
     {
-      "date": "2026-11-06",
-      "text": "Literature Vocab Quiz (pp. 83–84 words)"
+      "date": "2026-11-12",
+      "text": "History Map Quiz: countries around India"
     },
     {
-      "date": "2026-11-06",
-      "text": "Science Test: Ch. 6 Plant Classification"
+      "date": "2026-11-13",
+      "text": "Literary Terms Test"
+    },
+    {
+      "date": "2026-11-13",
+      "text": "History Unit Test: Ancient India"
+    },
+    {
+      "date": "2026-11-13",
+      "text": "Bible Quiz: John 15:10, word for word"
     }
   ],
   "soon": [
-    {
-      "date": "2026-11-03",
-      "text": "E-learning Day — work from home"
-    },
-    {
-      "date": "2026-11-03",
-      "text": "Field trip payment due"
-    },
-    {
-      "date": "2026-11-04",
-      "text": "History Activity p. 82 due (turn in at homeroom)"
-    },
-    {
-      "date": "2026-11-04",
-      "text": "Math e-learning assignment due"
-    },
-    {
-      "date": "2026-11-06",
-      "text": "ELA Nativity Research due"
-    },
-    {
-      "date": "2026-11-06",
-      "text": "Pro sports dress-down day"
-    },
     {
       "date": "2026-11-09",
       "text": "Reading Log due"
@@ -91,251 +75,166 @@ const HOMEWORK = {
       "text": "Field trip"
     },
     {
-      "date": "2026-11-12",
-      "text": "Bible Unit 4 Test · Spelling List 5 Test · History India Map Quiz"
-    },
-    {
       "date": "2026-11-13",
-      "text": "History Test · Literary Terms Test"
+      "text": "Math, Science and ELA: not posted yet"
     }
   ],
   "days": [
     {
-      "date": "2026-11-02",
+      "date": "2026-11-09",
       "tasks": [
         {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "MAKE-UP TEST: Chapters 4–5",
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "DUE: Reading Log",
           "test": true
         },
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:9"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Vocab pp. 83–84 + index card definitions"
-        },
-        {
-          "cls": "ELA",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
-          "text": "Nativity Research (due Fri)"
+          "text": "Study John 15:10"
         },
         {
           "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "New: List 5 (test Thu 11/12)"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "pp. 92–93"
+          "text": "Study List 5 (test Thu)"
         },
         {
           "cls": "History",
           "teacher": "Mrs. Martinez",
           "subject": "history",
-          "text": "Bring home Activity p. 82 + textbook for Tue"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "Finish decimal, fraction, and percent worksheet",
-          "optional": true
+          "text": "Review India map (hard copy) + Blooket"
         }
       ]
     },
     {
-      "date": "2026-11-03",
+      "date": "2026-11-10",
       "tasks": [
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "E-learning: Study John 15:9. Read 4.4, Philippians 3:8–9. Read “Your Redemption” pp. 151–159. Thinking it Through 4.4, p. 158 (full sentences)"
+          "text": "Study John 15:10"
         },
         {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "E-learning: Read “The Kid Who Invented the Popsicle” pp. 212–221. Graphic organizer p. 92: every invention, accident vs. research, how invented"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "E-learning: pp. 101–102"
-        },
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "E-learning: Activity p. 82 (needs textbook), due Wed"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "E-learning assignment (due Wed)"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-04",
-      "tasks": [
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "DUE: Activity p. 82 at homeroom",
-          "test": true
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "DUE: e-learning assignment",
-          "test": true
-        },
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Study John 15:9"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Study for Friday vocab quiz"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "pp. 97–98 in class (not homework)",
-          "optional": true,
-          "tag": "in class, not homework"
-        },
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "Optional: review India map",
-          "optional": true,
-          "tag": "optional"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "Finish page 4",
-          "optional": true
-        }
-      ]
-    },
-    {
-      "date": "2026-11-05",
-      "tasks": [
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "Study John 15:9 for Friday quiz. Unit 4 Study Guide comes home (test Thu 11/12)"
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Study for Friday vocab quiz"
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "Blooket: study for Friday's Ch. 6 test"
-        },
-        {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "Optional: review India map + Blooket",
-          "optional": true,
-          "tag": "optional"
-        },
-        {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "Finish page 8",
-          "optional": true
-        }
-      ]
-    },
-    {
-      "date": "2026-11-06",
-      "tasks": [
-        {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "QUIZ: John 15:9",
-          "test": true
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "QUIZ: Vocab",
-          "test": true
-        },
-        {
-          "cls": "ELA",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
-          "text": "DUE: Nativity Research",
-          "test": true
-        },
-        {
-          "cls": "Science",
-          "teacher": "Mrs. Servizzi · C208",
-          "subject": "science",
-          "text": "TEST: Ch. 6 Plant Classification",
-          "test": true
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Nonsense Poem. Literary Terms Review (test Fri 11/13). Reading Log due Monday"
+          "text": "Workbook p. 165"
         },
         {
           "cls": "Spelling",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "Weekend: study List 5"
+          "text": "Study List 5 (test Thu)"
         },
         {
           "cls": "History",
           "teacher": "Mrs. Martinez",
           "subject": "history",
-          "text": "Weekend: review map (quiz 11/12) + Blooket (test 11/13)"
+          "text": "Review India map (hard copy) + Blooket"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-11",
+      "tasks": [
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:10. Study for Unit 4 Test (Blooket)"
         },
         {
-          "cls": "Math",
-          "teacher": "Mrs. George · C205",
-          "subject": "math",
-          "text": "No homework"
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Study for Literary Terms Test (Blooket)"
+        },
+        {
+          "cls": "Spelling",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "Study List 5 for Thursday test"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "Finish Study Guide. Study India map for Thursday quiz"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-12",
+      "tasks": [
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "TEST: Unit 4",
+          "test": true
+        },
+        {
+          "cls": "Spelling",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "TEST: List 5",
+          "test": true
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "QUIZ: India Map",
+          "test": true
+        },
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "Study John 15:10 for Friday quiz"
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Study for Literary Terms Test"
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "Study for Friday test (Blooket)"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-13",
+      "tasks": [
+        {
+          "cls": "Bible",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "bible",
+          "text": "QUIZ: John 15:10",
+          "test": true
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "TEST: Literary Terms",
+          "test": true
+        },
+        {
+          "cls": "History",
+          "teacher": "Mrs. Martinez",
+          "subject": "history",
+          "text": "TEST: Ancient India Unit",
+          "test": true
         }
       ]
     }
@@ -10064,5 +9963,18 @@ const STUDY_ITEMS = [
     ],
     "rival": "Mohenjo-Daro Dynamos",
     "matchLength": 10
+  },
+  {
+    "id": "bible-john-15-10",
+    "subject": "bible",
+    "title": "John 15:10",
+    "assess": "quiz",
+    "added": "2026-11-07",
+    "quiz": "2026-11-13",
+    "note": "Quiz Friday 11/13. Word for word, ESV. Carries on from 15:9.",
+    "type": "verse",
+    "reference": "John 15:10",
+    "version": "ESV",
+    "text": "If you keep my commandments, you will abide in my love, just as I have kept my Father's commandments and abide in his love."
   }
 ];

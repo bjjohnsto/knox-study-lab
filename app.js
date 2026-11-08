@@ -158,7 +158,7 @@
       { id: "spell", name: "Look, cover, build it", blurb: "Study the word, then build it back from scrambled letters with it hidden." }
     ],
     exact: [
-      { id: "exact", name: "Word for word", blurb: "See the question, type the answer exactly the way the study guide says it. Hints if you need them." }
+      { id: "exact", name: "Word for word", blurb: "See the question, type the answer from memory. Every word gets checked. A hint opens up only after a miss." }
     ],
     verse: [
       { id: "read",  name: "Read it out loud",  blurb: "The whole verse. Say it five times before you move on." },
@@ -168,7 +168,7 @@
   };
 
   var EXTRAS_DRILL = { id: "extras", name: "Study guide questions",
-    blurb: "The written questions. Answer out loud, then check yourself." };
+    blurb: "The written questions. Type your answer, then check it against hers." };
 
   /* Which question kinds does this item actually contain? */
   function hasKind(item, k) {
@@ -604,18 +604,28 @@
     if (!item || isPast(item)) { location.hash = "#/"; return; }
     var subj = subjectById(item.subject);
 
-    var drills = drillsFor(item).map(function (d) {
+    /* Quiz drills first. Anything that shows him the answer before asking
+       goes underneath, under a "Study first" heading, so the top of the
+       page is always a real test of what he knows. */
+    var STUDY = ["flash", "spell", "read"];
+    var card = function (d) {
       return '<a class="card" href="#/i/' + item.id + "/" + d.id + '">' +
         '<h2 class="card-title">' + esc(d.name) + "</h2>" +
         '<p class="card-note">' + esc(d.blurb) + "</p></a>";
-    }).join("");
+    };
+    var list = drillsFor(item);
+    var drills = list.filter(function (d) { return STUDY.indexOf(d.id) < 0; }).map(card).join("");
+    var study = list.filter(function (d) { return STUDY.indexOf(d.id) > -1; }).map(card).join("");
 
     app.innerHTML =
       '<a class="backlink" href="#/s/' + item.subject + '">\u2190 ' + esc(subj ? subj.name : "Back") + "</a>" +
       '<p class="eyebrow">' + (item.quiz ? assessWord(item) + " " + fmtDate(item.quiz) : "Study set") + "</p>" +
       '<h1 class="page-title">' + esc(item.title) + "</h1>" +
       (item.note ? '<p class="lede">' + esc(item.note) + "</p>" : "") +
-      '<div class="stack">' + drills +
+      '<p class="eyebrow" style="margin-top:1.2rem">Quiz yourself</p>' +
+      '<div class="stack">' + drills + "</div>" +
+      '<p class="eyebrow" style="margin-top:1.6rem">Study first \u2014 these show you the answers</p>' +
+      '<div class="stack">' + study +
         '<a class="card" href="#/i/' + item.id + '/sheet">' +
           '<h2 class="card-title">Team sheet</h2>' +
           '<p class="card-note">Just the list. Read it over before you drill.</p></a>' +
@@ -1534,8 +1544,9 @@
               'autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" ' +
               'placeholder="Type her answer, word for word">' + esc(typedText || "") + "</textarea>" +
             '<div class="btn-row"><button class="btn" id="check">Check it</button>' +
-              (hint < 2 ? '<button class="btn btn--quiet" id="hint">' + (hint === 0 ? "First letters" : "Show me") + "</button>" : "") +
-            "</div>") +
+              (tries > 0 && hint === 0 ? '<button class="btn btn--quiet" id="hint">First letters</button>' : "") +
+            "</div>" +
+            (tries === 0 ? '<p class="chant-hint">From memory first. A hint opens up after one try.</p>' : "")) +
         '<p class="card-counter">' + (at + 1) + " of " + deck.length + "</p>";
 
       if (result) {
@@ -3186,6 +3197,12 @@
     var deck = subset && subset.length ? subset : cards;
     var i = 0, shown = false;
     var missed = [];
+    /* Study-guide questions used to be "say it out loud, then peek", which
+       made peeking free. Now he types his answer first; hers only appears
+       once he has committed to something, and his sits right above it so
+       the comparison is honest. Verse fades still work out loud. */
+    var typedMode = drillId === "extras";
+    var mine = "";
 
     function paint() {
       var c = deck[i];
@@ -3196,12 +3213,20 @@
         '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
         '<p class="eyebrow">' + esc(c.label || ("Question " + (i + 1) + " of " + deck.length)) + "</p>" +
         (isVerse ? "" : '<div class="prompt-card">' + esc(c.prompt) + "</div>") +
+        (shown && typedMode
+          ? '<p class="eyebrow" style="margin-top:1rem">Your answer</p>' +
+            '<div class="verse" style="text-align:left">' + esc(mine) + "</div>" +
+            '<p class="eyebrow">Her answer</p>' : "") +
         (shown
           ? '<div class="verse chant--open">' + esc(c.answer) + "</div>"
-          : isVerse ? '<div class="verse"><span class="verse-line">' + front + "</span></div>" : "") +
+          : isVerse ? '<div class="verse"><span class="verse-line">' + front + "</span></div>"
+          : typedMode ? '<textarea class="wordbox" id="mine" rows="3" style="width:min(100%,560px);text-align:left;font-size:1.1rem" ' +
+              'autocomplete="off" spellcheck="false" placeholder="Type your answer first">' + esc(mine) + "</textarea>" : "") +
         '<p class="chant-hint">' +
-          (shown ? "Did you get it? Be honest \u2014 nobody's keeping score."
+          (shown ? (typedMode ? "Does yours say the same thing? Be honest \u2014 nobody's keeping score."
+                              : "Did you get it? Be honest \u2014 nobody's keeping score.")
                  : isVerse ? "Say the whole verse out loud, then check."
+                 : typedMode ? "Type your answer, then check it against hers."
                            : "Answer it out loud in a full sentence, then check.") +
         "</p>" +
         '<div class="btn-row">' +
@@ -3212,8 +3237,19 @@
         "</div>" +
         '<p class="card-counter">' + (i + 1) + " of " + deck.length + "</p>";
 
+      if (typedMode && !shown) {
+        var mb = document.getElementById("mine");
+        var sb = document.getElementById("show");
+        sb.textContent = "Check it";
+        sb.disabled = mb.value.trim().length < 2;
+        mb.addEventListener("input", function () { mine = mb.value; sb.disabled = mb.value.trim().length < 2; });
+        mb.focus();
+      }
       if (document.getElementById("show"))
-        document.getElementById("show").addEventListener("click", function () { shown = true; paint(); });
+        document.getElementById("show").addEventListener("click", function () {
+          if (typedMode) { mine = document.getElementById("mine").value; if (mine.trim().length < 2) return; }
+          shown = true; paint();
+        });
       if (document.getElementById("got"))
         document.getElementById("got").addEventListener("click", function () { mark(true); });
       if (document.getElementById("miss"))
@@ -3222,7 +3258,7 @@
 
     function mark(ok) {
       if (!ok) missed.push(deck[i]);
-      i++; shown = false;
+      i++; shown = false; mine = "";
       if (i >= deck.length) done(); else paint();
     }
 
