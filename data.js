@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Nov 8 \u2014 build 58";
+const BUILD = "Nov 8 \u2014 build 59";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -9699,11 +9699,248 @@ const STUDY_ITEMS = [
     ],
     "drills": [
       "exact",
-      "flash",
-      "match"
+      "mconly",
+      "match",
+      "flash"
     ],
     "rival": "Abide Athletic",
-    "matchLength": 8
+    "matchLength": 12,
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "4.1 What can go wrong when a person finds his identity in what he can do (ability)?",
+        "options": [
+          "He may focus on what he can do rather than God’s desires for him",
+          "He may gain a family resemblance to God",
+          "He may be placed into the body of Christ",
+          "He may live in step with the Holy Spirit"
+        ],
+        "answer": "He may focus on what he can do rather than God’s desires for him",
+        "why": "Study guide 4.1 #5a.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.1 Something we have or are can become overly important to us. What does it become?",
+        "options": [
+          "an idol",
+          "an identity",
+          "a talent",
+          "a possession"
+        ],
+        "answer": "an idol",
+        "why": "Study guide 4.1 #5b: something we have/are can become overly important to us, an idol.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.1 What can go wrong if he finds his identity only in people like him?",
+        "options": [
+          "He might spend time only with similar people instead of reaching out to share Christ",
+          "He might move from one family into another",
+          "He might flee temptation",
+          "He might bear more fruit"
+        ],
+        "answer": "He might spend time only with similar people instead of reaching out to share Christ",
+        "why": "Study guide 4.1 #5c.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.1 The Bible tells me I am created in the image of God, ______ in Adam, and redeemable in Christ.",
+        "options": [
+          "fallen",
+          "born",
+          "glorified",
+          "adopted"
+        ],
+        "answer": "fallen",
+        "why": "Created in the image of God, fallen in Adam, redeemable in Christ.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.1 The Bible tells me I am created in the image of God, fallen in Adam, and ______ in Christ.",
+        "options": [
+          "redeemable",
+          "victorious",
+          "glorified",
+          "righteous"
+        ],
+        "answer": "redeemable",
+        "why": "Created in the image of God, fallen in Adam, redeemable in Christ.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.1 The Bible tells me I am ______ in the image of God.",
+        "options": [
+          "created",
+          "fallen",
+          "redeemable",
+          "adopted"
+        ],
+        "answer": "created",
+        "why": "Created in the image of God, fallen in Adam, redeemable in Christ.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "What does REDEEM mean?",
+        "options": [
+          "bought from the slave market of sin and made free from the penalty of sin",
+          "to move from one family into another",
+          "gaining a family resemblance to God",
+          "when in the presence of God for eternity"
+        ],
+        "answer": "bought from the slave market of sin and made free from the penalty of sin",
+        "why": "Redeem = bought from the slave market of sin and made free from the penalty of sin.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.5 Christ’s followers cannot bear fruit unless they ______ in God.",
+        "options": [
+          "abide",
+          "believe",
+          "pray",
+          "work"
+        ],
+        "answer": "abide",
+        "why": "Abide means remain close to.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.5 What does ABIDE mean?",
+        "options": [
+          "remain close to",
+          "run away from",
+          "stand and fight",
+          "be born again"
+        ],
+        "answer": "remain close to",
+        "why": "Abide (remain close to) in God.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.5 In Christ, you are free, not guilty, alive, forgiven, righteous, and ______.",
+        "options": [
+          "victorious",
+          "perfect",
+          "famous",
+          "powerful"
+        ],
+        "answer": "victorious",
+        "why": "Free, not guilty, alive, forgiven, righteous, victorious.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.5 Which one is NOT on the list of what you are in Christ?",
+        "options": [
+          "perfect",
+          "forgiven",
+          "not guilty",
+          "alive"
+        ],
+        "answer": "perfect",
+        "why": "The list: free, not guilty, alive, forgiven, righteous, victorious.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.6 What is the FLESH?",
+        "options": [
+          "fallen nature of a person",
+          "the human body",
+          "a bent to evil",
+          "the old self"
+        ],
+        "answer": "fallen nature of a person",
+        "why": "Flesh = fallen nature of a person.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.6 The opposite of living in the flesh is living in step with the ______.",
+        "options": [
+          "Holy Spirit",
+          "law",
+          "church",
+          "new self"
+        ],
+        "answer": "Holy Spirit",
+        "why": "Living in step with the Holy Spirit.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.6 What is ORIGINAL SIN?",
+        "options": [
+          "all humanity is born with a bent to evil",
+          "fallen nature of a person",
+          "the first sin Adam chose",
+          "something that becomes an idol"
+        ],
+        "answer": "all humanity is born with a bent to evil",
+        "why": "Original sin = all humanity is born with a bent to evil.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.6 To conquer the flesh, we must put off the old self and ______.",
+        "options": [
+          "put on the new self",
+          "flee temptation",
+          "abide in God",
+          "be adopted"
+        ],
+        "answer": "put on the new self",
+        "why": "Put off the old self; put on the new self.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.7 What are the two right reactions to temptation?",
+        "options": [
+          "flee and fight",
+          "pray and wait",
+          "run and hide",
+          "ignore and forget"
+        ],
+        "answer": "flee and fight",
+        "why": "Flee (temptation that is dangerous) and fight (stand & fight against temptation).",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.7 Which kind of temptation should you FLEE?",
+        "options": [
+          "temptation that is dangerous",
+          "every small temptation",
+          "temptation from friends",
+          "temptation you can fight"
+        ],
+        "answer": "temptation that is dangerous",
+        "why": "Flee = temptation that is dangerous.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.7 What does FIGHT mean as a reaction to temptation?",
+        "options": [
+          "stand & fight against temptation",
+          "argue with whoever tempted you",
+          "run from temptation",
+          "put on the old self"
+        ],
+        "answer": "stand & fight against temptation",
+        "why": "Fight = stand & fight against temptation.",
+        "longOptions": true
+      }
+    ]
   },
   {
     "id": "hist-india-test",

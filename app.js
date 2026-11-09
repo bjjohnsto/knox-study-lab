@@ -3599,7 +3599,11 @@
   /* ---------- flashcards --------------------------------------------------- */
 
   function renderFlash(item) {
-    var cards = shuffle(item.words);
+    /* A word-for-word item keeps its full question list in "exact"; flashcards
+       should cover every one of those, not just the short terms. */
+    var cards = shuffle((item.exact || []).length
+      ? item.exact.map(function (e) { return { word: e.cue, meaning: e.answer }; })
+      : item.words);
     var i = 0, flipped = false;
 
     function paint() {
