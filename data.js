@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Nov 12 \u2014 build 62";
+const BUILD = "Nov 13 \u2014 build 63";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -10279,10 +10279,11 @@ const STUDY_ITEMS = [
     "added": "2026-11-12",
     "quiz": "2026-11-13",
     "pin": true,
-    "note": "Test Friday 11/13. Solve for x with +, −, × and ÷, whole numbers and fractions mixed. Pick the first step, then find x. The cheat sheet has every rule.",
+    "note": "Test Friday 11/13. Start with First step only: fast reps on picking the right rule. Then Solve for x. Whole numbers and fractions mixed; the cheat sheet has every rule.",
     "type": "bundle",
     "algebra": true,
     "drills": [
+      "firststep",
       "solvex"
     ]
   }

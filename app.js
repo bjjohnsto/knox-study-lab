@@ -158,6 +158,7 @@
       { id: "spell", name: "Look, cover, build it", blurb: "Study the word, then build it back from scrambled letters with it hidden." }
     ],
     algebra: [
+      { id: "firststep", name: "First step only", blurb: "15 mixed equations, no solving. Just pick the first step to get x alone. Fast reps on the rules." },
       { id: "solvex", name: "Solve for x", blurb: "10 mixed equations. Pick the first step, then find x. Fractions included, cheat sheet one tap away." }
     ],
     exact: [
@@ -223,7 +224,7 @@
     if ((item.mathTopics || []).length) list.unshift(pick("math", "numpad"));
     if ((item.roots || []).length) list.unshift(pick("roots", "rootword"));
     if ((item.exact || []).length) list.unshift(pick("exact", "exact"));
-    if (item.algebra) list.unshift(pick("algebra", "solvex"));
+    if (item.algebra) { list.unshift(pick("algebra", "solvex")); list.unshift(pick("algebra", "firststep")); }
     if ((item.maps || []).length) { list.unshift(pick("maps", "maptype")); list.unshift(pick("maps", "maplabel")); }
     if ((item.decideProblems || []).length) list.unshift(pick("decision", "decide"));
     if ((item.divisors || []).length) list.unshift(pick("divisibility", "divis"));
@@ -747,7 +748,7 @@
     if (drillId === "extras") { renderSelfCheck(item, item.extras, "extras"); return; }
     if (item.type === "questions" ||
         (item.type === "bundle" &&
-         ["rootword", "maplabel", "maptype", "exact", "solvex", "decide", "divis", "numpad", "spell", "match", "keyonly", "tfonly", "mconly",
+         ["rootword", "maplabel", "maptype", "exact", "firststep", "solvex", "decide", "divis", "numpad", "spell", "match", "keyonly", "tfonly", "mconly",
           "multionly", "corronly", "mixed"].indexOf(drillId) > -1)) {
       renderQuestionSet(item, drillId); return;
     }
@@ -1498,6 +1499,7 @@
      generated answer can't be off by a rounding error. */
 
   var SX_STATS = {};          /* "add-w": { seen, miss } for this visit */
+  var SXF_STATS = {};         /* the same, for the first-step-only game */
   var SX_OPS = ["add", "sub", "mul", "div"];
   var SX_OPNAME = { add: "Addition", sub: "Subtraction", mul: "Multiplication", div: "Division" };
 
@@ -1699,7 +1701,8 @@
   }
 
   /* 10 problems: every operation at least twice, about half fractions. */
-  function sxRound(level, focus) {
+  function sxRound(level, focus, n) {
+    n = n || 10;
     var slots = [];
     if (focus && focus.length) {
       /* Weak-spot round: 7 from the missed categories (most-missed weighted),
@@ -1707,14 +1710,17 @@
          in too, so the basic rule is reinforced alongside the twist. */
       var bag = [];
       focus.forEach(function (f) { for (var k = 0; k < f.miss; k++) bag.push(f.key); });
-      for (var i = 0; i < 7; i++) slots.push(sxPick(bag));
+      for (var i = 0; i < Math.round(n * 0.7); i++) slots.push(sxPick(bag));
       focus.forEach(function (f) {
-        if (/-f$/.test(f.key) && slots.length < 10) slots.push(f.key.replace("-f", "-w"));
+        if (/-f$/.test(f.key) && slots.length < n) slots.push(f.key.replace("-f", "-w"));
       });
-      while (slots.length < 10) slots.push(sxPick(SX_OPS) + (Math.random() < 0.5 ? "-w" : "-f"));
+      while (slots.length < n) slots.push(sxPick(SX_OPS) + (Math.random() < 0.5 ? "-w" : "-f"));
     } else {
-      var ops = shuffle(SX_OPS.concat(SX_OPS, [sxPick(SX_OPS), sxPick(SX_OPS)]));
-      var nFrac = sxRand(4, 6);
+      var ops = [];
+      while (ops.length + 4 <= n) ops = ops.concat(SX_OPS);
+      while (ops.length < n) ops.push(sxPick(SX_OPS));
+      ops = shuffle(ops);
+      var nFrac = Math.round(n / 2) + sxRand(-1, 1);
       var fr = shuffle(ops.map(function (_, k) { return k < nFrac; }));
       slots = ops.map(function (o, k) { return o + (fr[k] ? "-f" : "-w"); });
     }
@@ -1796,6 +1802,11 @@
     opts = opts || {};
     var level = opts.level || "medium";
     var g = null;
+    /* First step only: same problems, same rules, but each one ends once he
+       has picked the step. Faster, so a round is 15 instead of 10. */
+    var stepOnly = !!opts.stepOnly;
+    var STATS = stepOnly ? SXF_STATS : SX_STATS;
+    var ROUND = stepOnly ? 15 : 10;
 
     function top(extra) {
       return '<div class="sx-top"><a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
@@ -1812,8 +1823,10 @@
 
     function startScreen() {
       app.innerHTML = top() +
-        '<div class="q"><p class="q-kicker">Solve for x</p>' +
-          '<p class="q-text">10 mixed problems. First pick the first step, then find x.</p></div>' +
+        '<div class="q"><p class="q-kicker">' + (stepOnly ? "First step only" : "Solve for x") + "</p>" +
+          '<p class="q-text">' + (stepOnly
+            ? "15 mixed problems. Just pick the first step to get x alone — no solving."
+            : "10 mixed problems. First pick the first step, then find x.") + "</p></div>" +
         '<p class="lede" style="text-align:center">Plus, minus, times, divide \u2014 whole numbers and fractions all mixed together, like the test.</p>' +
         '<div class="sx-levels">' + ["easy", "medium", "hard"].map(function (l) {
           return '<button class="btn btn--quiet" data-l="' + l + '" aria-pressed="' + (l === level) + '">' +
@@ -1831,7 +1844,7 @@
     }
 
     function begin(focus) {
-      g = { deck: sxRound(level, focus), idx: 0, clean: 0, points: 0, streak: 0, best: 0,
+      g = { deck: sxRound(level, focus, ROUND), idx: 0, clean: 0, points: 0, streak: 0, best: 0,
             miss: {}, seen: {}, focus: !!(focus && focus.length), stepOK: false, typed: "" };
       ask();
     }
@@ -1849,7 +1862,7 @@
       if (g.idx >= g.deck.length) return finish();
       var p = g.deck[g.idx];
       app.innerHTML = top(status()) +
-        '<p class="q-kicker" style="text-align:center;margin-top:1rem">' + (p.frac ? "Fraction" : "Whole number") + " \u00b7 Step 1</p>" +
+        '<p class="q-kicker" style="text-align:center;margin-top:1rem">' + (p.frac ? "Fraction" : "Whole number") + (stepOnly ? "" : " \u00b7 Step 1") + "</p>" +
         '<div class="sx-eq">' + p.eq + "</div>" +
         '<p class="q-text" style="text-align:center">What\u2019s the first step to get x alone?</p>' +
         '<div class="answers answers--long" id="answers">' +
@@ -1867,6 +1880,7 @@
           else b.classList.add(b === btn ? "answer--wrong" : "answer--dim");
         });
         g.stepOK = btn.dataset.v === p.right;
+        if (stepOnly) return stepOnlyResult(p);
         if (g.stepOK) g.points += 5;
         var v = document.getElementById("verdict");
         v.className = "verdict " + (g.stepOK ? "verdict--goal" : "verdict--card");
@@ -1879,6 +1893,34 @@
         document.getElementById("go").addEventListener("click", solve);
         document.getElementById("go").focus();
       });
+    }
+
+    /* First-step-only game: score the step, show the rule, move on. */
+    function stepOnlyResult(p) {
+      var key = p.op + (p.frac ? "-f" : "-w");
+      g.seen[key] = (g.seen[key] || 0) + 1;
+      STATS[key] = STATS[key] || { seen: 0, miss: 0 };
+      STATS[key].seen++;
+      if (g.stepOK) {
+        g.clean++; g.streak++; g.points += 10;
+        if (g.streak > g.best) g.best = g.streak;
+        if (g.streak >= 3) g.points += 5;
+      } else {
+        g.streak = 0;
+        g.miss[key] = (g.miss[key] || 0) + 1;
+        STATS[key].miss++;
+      }
+      var v = document.getElementById("verdict");
+      v.className = "verdict " + (g.stepOK ? "verdict--goal" : "verdict--card");
+      v.innerHTML = (g.stepOK ? (g.streak >= 3 ? "\uD83D\uDD25 " + g.streak + " in a row!" : "Right rule!")
+                              : "Not that one. The first step is: " + esc(p.right)) +
+        "<small>" + esc(p.rule) + "</small>";
+      var row = document.createElement("div");
+      row.className = "btn-row";
+      row.innerHTML = '<button class="btn" id="go">' + (g.idx + 1 < g.deck.length ? "Next problem \u2192" : "See my score") + "</button>";
+      v.after(row);
+      document.getElementById("go").addEventListener("click", function () { g.idx++; ask(); });
+      document.getElementById("go").focus();
     }
 
     /* Part 2: type x on a keypad that has a fraction bar and a minus key. */
@@ -1936,8 +1978,8 @@
       Array.prototype.forEach.call(document.querySelectorAll("#sxpad button"), function (b) { b.disabled = true; });
       var key = p.op + (p.frac ? "-f" : "-w");
       g.seen[key] = (g.seen[key] || 0) + 1;
-      SX_STATS[key] = SX_STATS[key] || { seen: 0, miss: 0 };
-      SX_STATS[key].seen++;
+      STATS[key] = STATS[key] || { seen: 0, miss: 0 };
+      STATS[key].seen++;
       var clean = ok && g.stepOK;
       if (ok) g.points += 10;
       if (clean) {
@@ -1946,7 +1988,7 @@
       } else {
         g.streak = 0;
         g.miss[key] = (g.miss[key] || 0) + 1;
-        SX_STATS[key].miss++;
+        STATS[key].miss++;
       }
       var mixed = fMixed(p.x);
       var shown = fText(p.x) + (mixed ? " (or " + mixed + ")" : "");
@@ -1969,8 +2011,8 @@
 
     /* Categories he has missed this visit, most-missed first. */
     function weakSpots() {
-      return Object.keys(SX_STATS).filter(function (k) { return SX_STATS[k].miss > 0; })
-        .map(function (k) { return { key: k, miss: SX_STATS[k].miss }; })
+      return Object.keys(STATS).filter(function (k) { return STATS[k].miss > 0; })
+        .map(function (k) { return { key: k, miss: STATS[k].miss }; })
         .sort(function (a, b) { return b.miss - a.miss; }).slice(0, 3);
     }
 
@@ -1992,14 +2034,15 @@
            op === "div" ? "when x is divided by a fraction, multiply by that SAME fraction, no flip." :
            "same rule as whole numbers, just match the bottoms."));
       });
-      var rating = g.clean >= 9 ? "Ready for the test" : g.clean >= 7 ? "Nearly there" : g.clean >= 5 ? "Getting it" : "Keep practicing";
+      var pc = g.clean / g.deck.length;
+      var rating = pc >= .9 ? "Ready for the test" : pc >= .7 ? "Nearly there" : pc >= .5 ? "Getting it" : "Keep practicing";
       var weak = weakSpots();
       app.innerHTML =
         '<div class="result">' +
           '<p class="eyebrow">' + (g.focus ? "Weak-spot round" : "Round") + " complete \u00b7 " + level + "</p>" +
           '<p class="result-rating">' + rating + "</p>" +
           '<p class="result-score">' + g.clean + "/" + g.deck.length + "</p>" +
-          '<p class="result-of">first step AND x right \u00b7 \u2B50 ' + g.points + " points \u00b7 best streak " + g.best + "</p>" +
+          '<p class="result-of">' + (stepOnly ? "first steps right" : "first step AND x right") + " \u00b7 \u2B50 " + g.points + " points \u00b7 best streak " + g.best + "</p>" +
           '<table class="sx-table"><thead><tr><th></th><th>Whole numbers</th><th>Fractions</th></tr></thead><tbody>' +
             SX_OPS.map(function (op) {
               return "<tr><td>" + SX_OPNAME[op] + "</td>" + cell(op + "-w") + cell(op + "-f") + "</tr>";
@@ -3457,6 +3500,7 @@
     if (drillId === "maptype") return renderMapLabel(item, true);
     if (drillId === "exact") return renderExact(item);
     if (drillId === "solvex") return renderSolveX(item);
+    if (drillId === "firststep") return renderSolveX(item, { stepOnly: true });
     if (drillId === "decide") return renderDecide(item);
     if (drillId === "divis") return renderDivisibility(item);
     if (drillId === "numpad") return renderNumpad(item);
