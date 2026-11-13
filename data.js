@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Nov 8 \u2014 build 59";
+const BUILD = "Nov 12 \u2014 build 62";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -9647,59 +9647,10 @@ const STUDY_ITEMS = [
         "answer": "flee: temptation that is dangerous; fight: stand & fight against temptation"
       }
     ],
-    "words": [
-      {
-        "word": "Ethnicity",
-        "meaning": "from where you come (people/nation)"
-      },
-      {
-        "word": "Pop Culture",
-        "meaning": "popular culture"
-      },
-      {
-        "word": "Ability/Talent",
-        "meaning": "given to you by God"
-      },
-      {
-        "word": "Wealth/Possessions",
-        "meaning": "given to you by God"
-      },
-      {
-        "word": "Transgender",
-        "meaning": "people who were born male or female, but reject their God-given gender"
-      },
-      {
-        "word": "Redeem",
-        "meaning": "bought from the slave market of sin and made free from the penalty of sin"
-      },
-      {
-        "word": "Adoption",
-        "meaning": "to move from one family into another"
-      },
-      {
-        "word": "Positional Sanctification",
-        "meaning": "adoption; placed into the body of Christ (all believers) when one accepts Christ as Savior"
-      },
-      {
-        "word": "Progressive Sanctification",
-        "meaning": "gaining a family resemblance to God"
-      },
-      {
-        "word": "Glorification",
-        "meaning": "when in the presence of God for eternity; our sanctification is complete"
-      },
-      {
-        "word": "Flesh",
-        "meaning": "fallen nature of a person"
-      },
-      {
-        "word": "Original sin",
-        "meaning": "all humanity is born with a bent to evil"
-      }
-    ],
+    "words": [],
     "drills": [
       "exact",
-      "mconly",
+      "mixed",
       "match",
       "flash"
     ],
@@ -9708,7 +9659,48 @@ const STUDY_ITEMS = [
     "questions": [
       {
         "kind": "mc",
-        "prompt": "4.1 What can go wrong when a person finds his identity in what he can do (ability)?",
+        "prompt": "4.1 Sources of Identity: ETHNICITY means...",
+        "options": [
+          "from where you come (people/nation)",
+          "popular culture",
+          "given to you by God",
+          "a strict social class"
+        ],
+        "answer": "from where you come (people/nation)",
+        "why": "Ethnicity = from where you come (people/nation).",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.1 Sources of Identity: POP CULTURE means...",
+        "options": [
+          "popular culture",
+          "from where you come (people/nation)",
+          "given to you by God",
+          "the fallen nature of a person"
+        ],
+        "answer": "popular culture",
+        "why": "Pop Culture = popular culture.",
+        "longOptions": true
+      },
+      {
+        "kind": "multi",
+        "prompt": "4.1 Sources of Identity: Which TWO are “given to you by God”? Pick two.",
+        "options": [
+          "Ability/Talent",
+          "Wealth/Possessions",
+          "Ethnicity",
+          "Pop Culture"
+        ],
+        "answers": [
+          "Ability/Talent",
+          "Wealth/Possessions"
+        ],
+        "why": "Ability/Talent and Wealth/Possessions are both given to you by God."
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.1 #5a What can go wrong when a person tries to find his identity in one of these things?",
         "options": [
           "He may focus on what he can do rather than God’s desires for him",
           "He may gain a family resemblance to God",
@@ -9721,7 +9713,7 @@ const STUDY_ITEMS = [
       },
       {
         "kind": "mc",
-        "prompt": "4.1 Something we have or are can become overly important to us. What does it become?",
+        "prompt": "4.1 #5b Something we have or are can become overly important to us. What does it become?",
         "options": [
           "an idol",
           "an identity",
@@ -9734,7 +9726,7 @@ const STUDY_ITEMS = [
       },
       {
         "kind": "mc",
-        "prompt": "4.1 What can go wrong if he finds his identity only in people like him?",
+        "prompt": "4.1 #5c What else can go wrong?",
         "options": [
           "He might spend time only with similar people instead of reaching out to share Christ",
           "He might move from one family into another",
@@ -9747,33 +9739,20 @@ const STUDY_ITEMS = [
       },
       {
         "kind": "mc",
-        "prompt": "4.1 The Bible tells me I am created in the image of God, ______ in Adam, and redeemable in Christ.",
+        "prompt": "4.1 Gender Confusion: TRANSGENDER means...",
         "options": [
-          "fallen",
-          "born",
-          "glorified",
-          "adopted"
+          "people who were born male or female, but reject their God-given gender",
+          "from where you come (people/nation)",
+          "popular culture",
+          "the fallen nature of a person"
         ],
-        "answer": "fallen",
-        "why": "Created in the image of God, fallen in Adam, redeemable in Christ.",
+        "answer": "people who were born male or female, but reject their God-given gender",
+        "why": "Transgender = people who were born male or female, but reject their God-given gender.",
         "longOptions": true
       },
       {
         "kind": "mc",
-        "prompt": "4.1 The Bible tells me I am created in the image of God, fallen in Adam, and ______ in Christ.",
-        "options": [
-          "redeemable",
-          "victorious",
-          "glorified",
-          "righteous"
-        ],
-        "answer": "redeemable",
-        "why": "Created in the image of God, fallen in Adam, redeemable in Christ.",
-        "longOptions": true
-      },
-      {
-        "kind": "mc",
-        "prompt": "4.1 The Bible tells me I am ______ in the image of God.",
+        "prompt": "4.1 The Bible tells me I am #1: ______ in the image of God.",
         "options": [
           "created",
           "fallen",
@@ -9781,7 +9760,33 @@ const STUDY_ITEMS = [
           "adopted"
         ],
         "answer": "created",
-        "why": "Created in the image of God, fallen in Adam, redeemable in Christ.",
+        "why": "1. Created in the image of God. 2. Fallen in Adam. 3. Redeemable in Christ.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.1 The Bible tells me I am #2: ______ in Adam.",
+        "options": [
+          "fallen",
+          "created",
+          "born",
+          "glorified"
+        ],
+        "answer": "fallen",
+        "why": "1. Created in the image of God. 2. Fallen in Adam. 3. Redeemable in Christ.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.1 The Bible tells me I am #3: ______ in Christ.",
+        "options": [
+          "redeemable",
+          "victorious",
+          "glorified",
+          "righteous"
+        ],
+        "answer": "redeemable",
+        "why": "1. Created in the image of God. 2. Fallen in Adam. 3. Redeemable in Christ.",
         "longOptions": true
       },
       {
@@ -9799,7 +9804,59 @@ const STUDY_ITEMS = [
       },
       {
         "kind": "mc",
-        "prompt": "4.5 Christ’s followers cannot bear fruit unless they ______ in God.",
+        "prompt": "4.4 Your Redemption: ADOPTION means...",
+        "options": [
+          "to move from one family into another",
+          "gaining a family resemblance to God",
+          "when in the presence of God for eternity; our sanctification is complete",
+          "bought from the slave market of sin"
+        ],
+        "answer": "to move from one family into another",
+        "why": "Adoption = to move from one family into another.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.4 POSITIONAL SANCTIFICATION means...",
+        "options": [
+          "adoption; placed into the body of Christ (all believers) when one accepts Christ as Savior",
+          "gaining a family resemblance to God",
+          "when in the presence of God for eternity; our sanctification is complete",
+          "to move from one family into another"
+        ],
+        "answer": "adoption; placed into the body of Christ (all believers) when one accepts Christ as Savior",
+        "why": "Positional sanctification = adoption; placed into the body of Christ (all believers) when one accepts Christ as Savior.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.4 PROGRESSIVE SANCTIFICATION means...",
+        "options": [
+          "gaining a family resemblance to God",
+          "adoption; placed into the body of Christ when one accepts Christ as Savior",
+          "when in the presence of God for eternity; our sanctification is complete",
+          "to move from one family into another"
+        ],
+        "answer": "gaining a family resemblance to God",
+        "why": "Progressive sanctification = gaining a family resemblance to God.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.4 GLORIFICATION means...",
+        "options": [
+          "when in the presence of God for eternity; our sanctification is complete",
+          "gaining a family resemblance to God",
+          "to move from one family into another",
+          "adoption; placed into the body of Christ"
+        ],
+        "answer": "when in the presence of God for eternity; our sanctification is complete",
+        "why": "Glorification = when in the presence of God for eternity; our sanctification is complete.",
+        "longOptions": true
+      },
+      {
+        "kind": "mc",
+        "prompt": "4.5 #1 Christ’s followers cannot bear fruit unless they ______ in God.",
         "options": [
           "abide",
           "believe",
@@ -9807,7 +9864,7 @@ const STUDY_ITEMS = [
           "work"
         ],
         "answer": "abide",
-        "why": "Abide means remain close to.",
+        "why": "Abide (remain close to) in God.",
         "longOptions": true
       },
       {
@@ -9820,38 +9877,35 @@ const STUDY_ITEMS = [
           "be born again"
         ],
         "answer": "remain close to",
-        "why": "Abide (remain close to) in God.",
+        "why": "Abide = remain close to.",
         "longOptions": true
       },
       {
-        "kind": "mc",
-        "prompt": "4.5 In Christ, you are free, not guilty, alive, forgiven, righteous, and ______.",
+        "kind": "multi",
+        "prompt": "4.5 #2 In Christ, you are... Pick all SIX.",
         "options": [
+          "free",
+          "not guilty",
+          "alive",
+          "forgiven",
+          "righteous",
           "victorious",
           "perfect",
-          "famous",
-          "powerful"
+          "famous"
         ],
-        "answer": "victorious",
-        "why": "Free, not guilty, alive, forgiven, righteous, victorious.",
-        "longOptions": true
-      },
-      {
-        "kind": "mc",
-        "prompt": "4.5 Which one is NOT on the list of what you are in Christ?",
-        "options": [
-          "perfect",
-          "forgiven",
+        "answers": [
+          "free",
           "not guilty",
-          "alive"
+          "alive",
+          "forgiven",
+          "righteous",
+          "victorious"
         ],
-        "answer": "perfect",
-        "why": "The list: free, not guilty, alive, forgiven, righteous, victorious.",
-        "longOptions": true
+        "why": "Free, not guilty, alive, forgiven, righteous, victorious. Choose three to memorize."
       },
       {
         "kind": "mc",
-        "prompt": "4.6 What is the FLESH?",
+        "prompt": "4.6 #1 What is the FLESH?",
         "options": [
           "fallen nature of a person",
           "the human body",
@@ -9864,7 +9918,7 @@ const STUDY_ITEMS = [
       },
       {
         "kind": "mc",
-        "prompt": "4.6 The opposite of living in the flesh is living in step with the ______.",
+        "prompt": "4.6 #2 The opposite of living in the flesh is living in step with the ______.",
         "options": [
           "Holy Spirit",
           "law",
@@ -9877,51 +9931,55 @@ const STUDY_ITEMS = [
       },
       {
         "kind": "mc",
-        "prompt": "4.6 What is ORIGINAL SIN?",
+        "prompt": "4.6 #3 What is ORIGINAL SIN?",
         "options": [
           "all humanity is born with a bent to evil",
           "fallen nature of a person",
-          "the first sin Adam chose",
-          "something that becomes an idol"
+          "something that becomes an idol",
+          "rejecting your God-given gender"
         ],
         "answer": "all humanity is born with a bent to evil",
         "why": "Original sin = all humanity is born with a bent to evil.",
         "longOptions": true
       },
       {
-        "kind": "mc",
-        "prompt": "4.6 To conquer the flesh, we must put off the old self and ______.",
+        "kind": "multi",
+        "prompt": "4.6 #4 To conquer the flesh, we must... Pick TWO.",
         "options": [
+          "put off the old self",
           "put on the new self",
-          "flee temptation",
-          "abide in God",
-          "be adopted"
+          "flee the new self",
+          "put on the old self"
         ],
-        "answer": "put on the new self",
-        "why": "Put off the old self; put on the new self.",
-        "longOptions": true
+        "answers": [
+          "put off the old self",
+          "put on the new self"
+        ],
+        "why": "a. Put off the old self. b. Put on the new self."
       },
       {
-        "kind": "mc",
-        "prompt": "4.7 What are the two right reactions to temptation?",
+        "kind": "multi",
+        "prompt": "4.7 There are two right reactions to temptation. Pick TWO.",
         "options": [
-          "flee and fight",
-          "pray and wait",
-          "run and hide",
-          "ignore and forget"
+          "flee",
+          "fight",
+          "hide",
+          "ignore it"
         ],
-        "answer": "flee and fight",
-        "why": "Flee (temptation that is dangerous) and fight (stand & fight against temptation).",
-        "longOptions": true
+        "answers": [
+          "flee",
+          "fight"
+        ],
+        "why": "a. Flee: temptation that is dangerous. b. Fight: stand & fight against temptation."
       },
       {
         "kind": "mc",
-        "prompt": "4.7 Which kind of temptation should you FLEE?",
+        "prompt": "4.7 FLEE is for which kind of temptation?",
         "options": [
           "temptation that is dangerous",
           "every small temptation",
           "temptation from friends",
-          "temptation you can fight"
+          "temptation you can win"
         ],
         "answer": "temptation that is dangerous",
         "why": "Flee = temptation that is dangerous.",
@@ -9929,7 +9987,7 @@ const STUDY_ITEMS = [
       },
       {
         "kind": "mc",
-        "prompt": "4.7 What does FIGHT mean as a reaction to temptation?",
+        "prompt": "4.7 What does FIGHT mean?",
         "options": [
           "stand & fight against temptation",
           "argue with whoever tempted you",
@@ -10213,5 +10271,19 @@ const STUDY_ITEMS = [
     "reference": "John 15:10",
     "version": "ESV",
     "text": "If you keep my commandments, you will abide in my love, just as I have kept my Father's commandments and abide in his love."
+  },
+  {
+    "id": "math-one-step-equations",
+    "subject": "math",
+    "title": "Math Test: One-Step Equations",
+    "added": "2026-11-12",
+    "quiz": "2026-11-13",
+    "pin": true,
+    "note": "Test Friday 11/13. Solve for x with +, −, × and ÷, whole numbers and fractions mixed. Pick the first step, then find x. The cheat sheet has every rule.",
+    "type": "bundle",
+    "algebra": true,
+    "drills": [
+      "solvex"
+    ]
   }
 ];

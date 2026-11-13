@@ -157,6 +157,9 @@
     spelling: [
       { id: "spell", name: "Look, cover, build it", blurb: "Study the word, then build it back from scrambled letters with it hidden." }
     ],
+    algebra: [
+      { id: "solvex", name: "Solve for x", blurb: "10 mixed equations. Pick the first step, then find x. Fractions included, cheat sheet one tap away." }
+    ],
     exact: [
       { id: "exact", name: "Word for word", blurb: "See the question, type the answer from memory. Every word gets checked. A hint opens up only after a miss." }
     ],
@@ -220,6 +223,7 @@
     if ((item.mathTopics || []).length) list.unshift(pick("math", "numpad"));
     if ((item.roots || []).length) list.unshift(pick("roots", "rootword"));
     if ((item.exact || []).length) list.unshift(pick("exact", "exact"));
+    if (item.algebra) list.unshift(pick("algebra", "solvex"));
     if ((item.maps || []).length) { list.unshift(pick("maps", "maptype")); list.unshift(pick("maps", "maplabel")); }
     if ((item.decideProblems || []).length) list.unshift(pick("decision", "decide"));
     if ((item.divisors || []).length) list.unshift(pick("divisibility", "divis"));
@@ -231,7 +235,7 @@
   /* Every drill the app knows about, for resolving an item's own list. */
   function allDrills() {
     var all = [];
-    ["vocab", "questions", "categorize", "sequence", "verse", "spelling", "math", "maps", "exact", "roots", "decision", "divisibility"].forEach(function (grp) {
+    ["vocab", "questions", "categorize", "sequence", "verse", "spelling", "math", "maps", "exact", "algebra", "roots", "decision", "divisibility"].forEach(function (grp) {
       all = all.concat(DRILLS[grp] || []);
     });
     all.push(EXTRAS_DRILL);
@@ -624,11 +628,12 @@
       (item.note ? '<p class="lede">' + esc(item.note) + "</p>" : "") +
       '<p class="eyebrow" style="margin-top:1.2rem">Quiz yourself</p>' +
       '<div class="stack">' + drills + "</div>" +
-      '<p class="eyebrow" style="margin-top:1.6rem">Study first \u2014 these show you the answers</p>' +
+      (item.algebra && !study ? "" : '<p class="eyebrow" style="margin-top:1.6rem">Study first \u2014 these show you the answers</p>') +
       '<div class="stack">' + study +
+        (item.algebra ? "" :
         '<a class="card" href="#/i/' + item.id + '/sheet">' +
           '<h2 class="card-title">Team sheet</h2>' +
-          '<p class="card-note">Just the list. Read it over before you drill.</p></a>' +
+          '<p class="card-note">Just the list. Read it over before you drill.</p></a>') +
       "</div>";
   }
 
@@ -742,7 +747,7 @@
     if (drillId === "extras") { renderSelfCheck(item, item.extras, "extras"); return; }
     if (item.type === "questions" ||
         (item.type === "bundle" &&
-         ["rootword", "maplabel", "maptype", "exact", "decide", "divis", "numpad", "spell", "match", "keyonly", "tfonly", "mconly",
+         ["rootword", "maplabel", "maptype", "exact", "solvex", "decide", "divis", "numpad", "spell", "match", "keyonly", "tfonly", "mconly",
           "multionly", "corronly", "mixed"].indexOf(drillId) > -1)) {
       renderQuestionSet(item, drillId); return;
     }
@@ -1473,6 +1478,547 @@
   }
 
 
+
+
+  /* ---------- solve for x (one-step equations) -----------------------------
+
+     Knox can do x + 2 = 5 in his head. Where it falls apart is a mixed sheet,
+     where he has to work out WHICH rule applies, and above all fractions:
+     when to flip and when not to. So every problem has two parts. First he
+     picks the first step (that is the rule-recognition part, graded on its
+     own). Then he types x on a keypad that takes 3/2, 1.5 or 1 1/2.
+
+     A round is 10 problems: all four operations mixed, about half whole
+     numbers and half fractions. Misses are counted per operation AND per
+     whole/fraction, so the end screen can tell "doesn't know the rule" apart
+     from "only the fraction twist". Counts last while the page is open,
+     which is what "Practice my weak spots" uses. Nothing is saved.
+
+     Arithmetic is exact (numerator/denominator pairs, never floats), so a
+     generated answer can't be off by a rounding error. */
+
+  var SX_STATS = {};          /* "add-w": { seen, miss } for this visit */
+  var SX_OPS = ["add", "sub", "mul", "div"];
+  var SX_OPNAME = { add: "Addition", sub: "Subtraction", mul: "Multiplication", div: "Division" };
+
+  function sxGcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { var t = a % b; a = b; b = t; } return a || 1; }
+  function F(n, d) {
+    d = d === undefined ? 1 : d;
+    if (d < 0) { n = -n; d = -d; }
+    var g = sxGcd(n, d);
+    return { n: n / g, d: d / g };
+  }
+  function fAdd(a, b) { return F(a.n * b.d + b.n * a.d, a.d * b.d); }
+  function fSub(a, b) { return F(a.n * b.d - b.n * a.d, a.d * b.d); }
+  function fMul(a, b) { return F(a.n * b.n, a.d * b.d); }
+  function fDiv(a, b) { return F(a.n * b.d, a.d * b.n); }
+  function fEq(a, b) { return a.n === b.n && a.d === b.d; }
+  function fRecip(a) { return F(a.d, a.n); }
+  function fText(a) { return (a.n < 0 ? "\u2212" : "") + Math.abs(a.n) + (a.d === 1 ? "" : "/" + a.d); }
+  function fMixed(a) {
+    if (a.d === 1 || Math.abs(a.n) < a.d) return "";
+    var w = Math.floor(Math.abs(a.n) / a.d), r = Math.abs(a.n) % a.d;
+    return (a.n < 0 ? "\u2212" : "") + w + " " + r + "/" + a.d;
+  }
+  /* A fraction drawn stacked, the way it is on paper. */
+  function fHtml(a) {
+    if (a.d === 1) return (a.n < 0 ? "\u2212" : "") + Math.abs(a.n);
+    return (a.n < 0 ? "\u2212" : "") +
+      '<span class="sx-frac"><span>' + Math.abs(a.n) + "</span><span>" + a.d + "</span></span>";
+  }
+  /* A number written inside a sentence: "subtract 3/4 from both sides". */
+  function fWord(a) { return fText(a); }
+
+  function sxRand(lo, hi) { return lo + Math.floor(Math.random() * (hi - lo + 1)); }
+  function sxPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function sxSign() { return Math.random() < 0.5 ? -1 : 1; }
+
+  /* Parse what he typed: 3, -3, 3/2, -3/2, 1.5, 1 1/2, -1 1/2. Returns a
+     fraction, or null if it isn't a number. A long decimal (3.33 for 10/3)
+     is accepted if it rounds to the right value at two places. */
+  function sxParse(s) {
+    s = String(s || "").replace(/\u2212/g, "-").trim().replace(/\s+/g, " ");
+    if (!s) return null;
+    var neg = false;
+    if (s.charAt(0) === "-") { neg = true; s = s.slice(1).trim(); }
+    var m;
+    if ((m = s.match(/^(\d+) (\d+)\/(\d+)$/))) {
+      if (+m[3] === 0) return null;
+      var v = F(+m[1] * +m[3] + +m[2], +m[3]);
+      return neg ? F(-v.n, v.d) : v;
+    }
+    if ((m = s.match(/^(\d+)\/(\d+)$/))) {
+      if (+m[2] === 0) return null;
+      return F((neg ? -1 : 1) * +m[1], +m[2]);
+    }
+    if ((m = s.match(/^(\d*)\.(\d+)$/)) || (m = s.match(/^(\d+)\.?$/))) {
+      var whole = m[1] || "0", dec = m[2] || "";
+      var den = Math.pow(10, dec.length);
+      return { n: (neg ? -1 : 1) * (+whole * den + (+dec || 0)), d: den, decimal: dec.length > 0 };
+    }
+    return null;
+  }
+  function sxMatches(typed, ans) {
+    var p = sxParse(typed);
+    if (!p) return null;
+    if (p.decimal) {
+      var exact = F(p.n, p.d);
+      if (fEq(exact, ans)) return true;
+      /* 10/3 typed as 3.33: right if it agrees to two decimal places */
+      return Math.abs(p.n / p.d - ans.n / ans.d) < 0.006 && String(p.d).length >= 3;
+    }
+    return fEq(F(p.n, p.d), ans);
+  }
+
+  /* ---- problem generators: one per operation, whole or fraction, by level */
+
+  var SX_PROPER = { 2: [1], 3: [1, 2], 4: [1, 3], 5: [1, 2, 3, 4], 6: [1, 5], 8: [1, 3, 5, 7] };
+  var SX_PAIRS = [[2, 4], [4, 2], [3, 6], [6, 3], [2, 3], [3, 2], [4, 8], [8, 4], [2, 6], [5, 10], [2, 5], [3, 4]];
+  function sxProper(d) { return F(sxPick(SX_PROPER[d] || [1]), d); }
+
+  function sxGen(op, frac, level) {
+    var x, a, b;                       /* x = answer, a = the number with x, b = right side */
+    var L = level === "easy" ? 0 : level === "hard" ? 2 : 1;
+    if (!frac) {
+      if (op === "add" || op === "sub") {
+        var hiA = [9, 15, 25][L], hiX = [10, 20, 20][L];
+        a = F(sxRand(L ? 3 : 1, hiA));
+        x = L === 2 ? F(sxRand(-12, 18) || 4) : F(sxRand(1, hiX));
+        if (op === "sub" && L < 2 && x.n <= a.n) x = F(a.n + sxRand(1, 10));
+      } else if (op === "mul") {
+        a = F([sxRand(2, 5), sxRand(2, 9), sxSign() * sxRand(2, 12)][L]);
+        x = F([sxRand(1, 10), sxRand(2, 12), sxSign() * sxRand(2, 12)][L]);
+      } else {
+        a = F([sxRand(2, 5), sxRand(2, 9), sxRand(2, 12)][L]);
+        x = fMul(a, F([sxRand(1, 10), sxRand(2, 12), sxSign() * sxRand(2, 12)][L]));
+      }
+    } else {
+      if (op === "add" || op === "sub") {
+        if (L === 0) {
+          var d0 = sxPick([2, 3, 4, 5, 8]);
+          a = sxProper(d0);
+          x = F(sxRand(1, d0 + 2), d0);
+          if (op === "sub") x = fAdd(a, F(sxRand(1, d0), d0));
+        } else {
+          var pr = sxPick(SX_PAIRS);
+          a = sxProper(pr[0]);
+          x = L === 1 ? sxProper(pr[1]) : fMul(sxProper(pr[1]), F(sxPick([-1, 3, 5, -3])));
+          if (op === "sub" && L === 1) x = fAdd(a, sxProper(pr[1]));
+        }
+      } else if (op === "mul") {
+        if (L === 0) { a = F(1, sxPick([2, 3, 4, 5])); x = fMul(F(a.d), F(sxRand(1, 6))); }
+        else if (L === 1) {
+          a = sxPick([F(2, 3), F(3, 4), F(2, 5), F(3, 5), F(4, 5), F(5, 6), F(3, 2), F(5, 4)]);
+          x = fMul(F(a.d), F(sxRand(1, 5)));
+        } else {
+          a = sxPick([F(2, 3), F(3, 4), F(2, 5), F(4, 5), F(5, 6), F(3, 2)]);
+          x = sxPick([F(1, 2), F(2, 3), F(3, 4), F(5, 2), F(4, 3), F(-3, 2), F(-1, 2)]);
+          if (fEq(x, fRecip(a))) x = F(5, 2);
+        }
+      } else {
+        if (L === 0) { a = F(1, sxPick([2, 3, 4])); x = F(sxRand(1, 6)); }
+        else if (L === 1) { a = sxPick([F(2, 3), F(3, 4), F(2, 5), F(3, 2)]); x = fMul(F(a.n), F(sxRand(1, 5))); }
+        else { a = sxPick([F(2, 3), F(3, 4), F(1, 2), F(4, 5)]); x = sxPick([F(1, 2), F(2, 3), F(3, 4), F(-1, 3), F(5, 2)]); }
+      }
+    }
+    b = op === "add" ? fAdd(x, a) : op === "sub" ? fSub(x, a) : op === "mul" ? fMul(a, x) : fDiv(x, a);
+    return sxBuild(op, frac, a, b, x);
+  }
+
+  function sxBuild(op, frac, a, b, x) {
+    var neg = a.n < 0;
+    var aT = fWord(a), aAbs = fWord(F(Math.abs(a.n), a.d));
+    var lhs;
+    if (op === "add") lhs = "x + " + fHtml(a);
+    else if (op === "sub") lhs = "x \u2212 " + fHtml(a);
+    else if (op === "mul") lhs = (a.d === 1 ? fHtml(a) : "(" + fHtml(a) + ")") + "x";
+    else lhs = '<span class="sx-frac sx-frac--big"><span>x</span><span>' + fHtml(a) + "</span></span>";
+    var eq = lhs + " = " + fHtml(b);
+    var eqText = (op === "add" ? "x + " + aT : op === "sub" ? "x \u2212 " + aT
+                : op === "mul" ? (a.d === 1 ? aT : "(" + aT + ")") + "x" : "x/" + (a.d === 1 ? aT : "(" + aT + ")")) + " = " + fText(b);
+
+    /* The right first step, plus wrong ones built from the mistakes he
+       actually makes: the wrong opposite, not flipping, flipping when he
+       shouldn't, dividing instead of multiplying. None of the wrong ones is
+       secretly also right (dividing by 2/3 = multiplying by 3/2, so that
+       one is never offered as a "wrong" answer). */
+    var right, wrong;
+    var rec = fWord(fRecip(a));
+    if (op === "add") {
+      right = "Subtract " + aT + " from both sides";
+      wrong = ["Add " + aT + " to both sides", "Divide both sides by " + aT, "Multiply both sides by " + aT];
+    } else if (op === "sub") {
+      right = "Add " + aT + " to both sides";
+      wrong = ["Subtract " + aT + " from both sides", "Multiply both sides by " + aT, "Divide both sides by " + aT];
+    } else if (op === "mul" && a.d === 1) {
+      right = "Divide both sides by " + aT;
+      wrong = ["Multiply both sides by " + aT, "Subtract " + aT + " from both sides",
+               neg ? "Divide both sides by " + aAbs : "Add " + aT + " to both sides"];
+    } else if (op === "mul") {
+      right = "Multiply both sides by " + rec + " (flip it)";
+      wrong = ["Multiply both sides by " + aT, "Divide both sides by " + rec, "Subtract " + aT + " from both sides"];
+    } else if (a.d === 1) {
+      right = "Multiply both sides by " + aT;
+      wrong = ["Divide both sides by " + aT, "Subtract " + aT + " from both sides", "Add " + aT + " to both sides"];
+    } else {
+      right = "Multiply both sides by " + aT + " (no flip)";
+      wrong = ["Multiply both sides by " + rec, "Divide both sides by " + aT, "Subtract " + aT + " from both sides"];
+    }
+
+    /* Plain-words rule plus the worked steps. Always shown on a miss, even
+       on an easy one, because the point is the rule, not the arithmetic. */
+    var rule, steps;
+    var bT = fText(b), xT = fText(x);
+    if (op === "add") {
+      rule = "x + " + aT + " means " + aT + " was ADDED to x. Subtraction undoes addition, so subtract " + aT +
+             " from both sides." + (frac ? " With fractions, make the bottoms match first." : "");
+      steps = ["x + " + aT + " \u2212 " + aT + " = " + bT + " \u2212 " + aT, "x = " + xT];
+    } else if (op === "sub") {
+      rule = "x \u2212 " + aT + " means " + aT + " was SUBTRACTED from x. Addition undoes subtraction, so add " + aT +
+             " to both sides." + (frac ? " With fractions, make the bottoms match first." : "");
+      steps = ["x \u2212 " + aT + " + " + aT + " = " + bT + " + " + aT, "x = " + xT];
+    } else if (op === "mul" && a.d === 1) {
+      rule = aT + "x means x was MULTIPLIED by " + aT + ". Division undoes multiplication, so divide both sides by " + aT + "." +
+             (neg ? " Keep the negative sign: divide by " + aT + ", not " + aAbs + "." : "");
+      steps = [aT + "x \u00F7 " + aT + " = " + bT + " \u00F7 " + aT, "x = " + xT];
+    } else if (op === "mul") {
+      rule = "(" + aT + ")x means x was MULTIPLIED by the fraction " + aT +
+             ". To undo multiplying by a fraction, multiply both sides by its reciprocal \u2014 flip it to " + rec +
+             ". Flip when x is MULTIPLIED by a fraction.";
+      steps = ["(" + rec + ")(" + aT + ")x = " + bT + " \u00D7 " + rec, "1x = " + fText(fMul(b, fRecip(a))), "x = " + xT];
+    } else if (a.d === 1) {
+      rule = "x/" + aT + " means x was DIVIDED by " + aT + ". Multiplication undoes division, so multiply both sides by " + aT + ".";
+      steps = ["x/" + aT + " \u00D7 " + aT + " = " + bT + " \u00D7 " + aT, "x = " + xT];
+    } else {
+      rule = "x/(" + aT + ") means x was DIVIDED by " + aT + ". Multiplication undoes division, so multiply both sides by " + aT +
+             " \u2014 the same fraction, NO flip. Only flip when x is multiplied by a fraction.";
+      steps = ["x/(" + aT + ") \u00D7 " + aT + " = " + bT + " \u00D7 " + aT, "x = " + xT];
+    }
+    return { op: op, frac: frac, a: a, b: b, x: x, eq: eq, eqText: eqText,
+             right: right, options: shuffle([right].concat(wrong)), rule: rule, steps: steps };
+  }
+
+  /* 10 problems: every operation at least twice, about half fractions. */
+  function sxRound(level, focus) {
+    var slots = [];
+    if (focus && focus.length) {
+      /* Weak-spot round: 7 from the missed categories (most-missed weighted),
+         and whenever a fraction category is weak, its whole-number twin goes
+         in too, so the basic rule is reinforced alongside the twist. */
+      var bag = [];
+      focus.forEach(function (f) { for (var k = 0; k < f.miss; k++) bag.push(f.key); });
+      for (var i = 0; i < 7; i++) slots.push(sxPick(bag));
+      focus.forEach(function (f) {
+        if (/-f$/.test(f.key) && slots.length < 10) slots.push(f.key.replace("-f", "-w"));
+      });
+      while (slots.length < 10) slots.push(sxPick(SX_OPS) + (Math.random() < 0.5 ? "-w" : "-f"));
+    } else {
+      var ops = shuffle(SX_OPS.concat(SX_OPS, [sxPick(SX_OPS), sxPick(SX_OPS)]));
+      var nFrac = sxRand(4, 6);
+      var fr = shuffle(ops.map(function (_, k) { return k < nFrac; }));
+      slots = ops.map(function (o, k) { return o + (fr[k] ? "-f" : "-w"); });
+    }
+    var seen = {};
+    return shuffle(slots).map(function (key) {
+      var p, tries = 0;
+      do { p = sxGen(key.split("-")[0], key.slice(-1) === "f", level); tries++; }
+      while (seen[p.eqText] && tries < 20);
+      seen[p.eqText] = true;
+      return p;
+    });
+  }
+
+  function sxCheatSheet() {
+    var ex = function (eq, step, ans) {
+      return '<div class="sx-ex"><span class="sx-ex-eq">' + eq + '</span><span class="sx-ex-step">' + step +
+             '</span><span class="sx-ex-ans">' + ans + "</span></div>";
+    };
+    return '<div class="sx-cheat" id="sxcheat" hidden>' +
+      '<p class="eyebrow">Rule cheat sheet</p>' +
+      "<h3>Whole numbers first</h3>" +
+      "<p><strong>1. Use the opposite operation to get x alone.</strong> Addition and subtraction undo each other. Multiplication and division undo each other.</p>" +
+      ex("x + 4 = 9", "+4 \u2192 subtract 4", "x = 5") +
+      ex("x \u2212 3 = 7", "\u22123 \u2192 add 3", "x = 10") +
+      ex("5x = 20", "\u00D75 \u2192 divide by 5", "x = 4") +
+      ex("x/3 = 4", "\u00F73 \u2192 multiply by 3", "x = 12") +
+      "<p><strong>2. Whatever you do to one side, do to the other.</strong> A number that is added on one side gets subtracted on the other. Positive on one side becomes negative when it moves across, and negative becomes positive.</p>" +
+      ex("x + 6 = 2", "subtract 6 from BOTH sides", "x = \u22124") +
+      "<h3>Then fractions</h3>" +
+      "<p><strong>3. Adding or subtracting a fraction:</strong> same rule, just make the bottoms match.</p>" +
+      ex("x + 1/4 = 3/4", "subtract 1/4", "x = 2/4 = 1/2") +
+      "<p><strong>4. x DIVIDED by a number or fraction:</strong> multiply both sides by that same number. No flip.</p>" +
+      ex("x/(1/2) = 6", "multiply by 1/2", "x = 3") +
+      "<p><strong>5. x MULTIPLIED by a fraction:</strong> multiply both sides by the reciprocal \u2014 flip the fraction.</p>" +
+      ex("(2/3)x = 6", "multiply by 3/2", "x = 9") +
+      '<p class="sx-tip">How to remember: <strong>flip only when x is multiplied by the fraction.</strong> If x is divided by it, just multiply by it.</p>' +
+      "</div>";
+  }
+
+  function sxStyles() {
+    if (document.getElementById("sx-css")) return;
+    var st = document.createElement("style");
+    st.id = "sx-css";
+    st.textContent =
+      ".sx-eq{font-size:clamp(2rem,9vw,3rem);font-weight:800;text-align:center;margin:.6rem 0 1rem;line-height:1.2}" +
+      ".sx-frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.72em;line-height:1.05;margin:0 .08em}" +
+      ".sx-frac>span:first-child{border-bottom:.08em solid currentColor;padding:0 .12em}" +
+      ".sx-frac>span:last-child{padding:0 .12em}" +
+      ".sx-frac--big{font-size:1em}.sx-frac--big .sx-frac{font-size:.7em}" +
+      ".sx-top{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}" +
+      ".sx-bar{height:12px;border-radius:99px;background:rgba(0,0,0,.08);overflow:hidden;margin:.5rem 0 .2rem}" +
+      ".sx-bar>span{display:block;height:100%;background:var(--turf,#2E8B57);transition:width .3s}" +
+      ".sx-stats{display:flex;justify-content:space-between;font-weight:700;font-size:.95rem}" +
+      ".sx-step{text-align:center;font-weight:700;margin:.2rem 0 .6rem;opacity:.85}" +
+      ".sx-display{font-size:2rem;font-weight:800;text-align:center;min-height:3.2rem;border:2px solid var(--ink,#222);" +
+        "border-radius:var(--radius,12px);background:var(--chalk,#fff);padding:.4rem;margin:0 auto .6rem;max-width:320px}" +
+      ".sx-pad{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;max-width:360px;margin:0 auto}" +
+      ".sx-pad button{min-height:58px;font-size:1.5rem;font-weight:800;border-radius:12px;border:2px solid var(--ink,#222);" +
+        "background:var(--chalk,#fff);color:var(--ink,#222);cursor:pointer;touch-action:manipulation}" +
+      ".sx-pad button:active{transform:scale(.96)}" +
+      ".sx-pad .sx-wide{grid-column:span 2;font-size:1.1rem}" +
+      ".sx-pad .sx-go{background:var(--turf,#2E8B57);color:#fff;border-color:var(--turf,#2E8B57)}" +
+      ".sx-cheat{border:2px solid var(--ink,#222);border-radius:var(--radius,12px);background:var(--chalk,#fff);padding:1rem;margin:.6rem 0 1rem;text-align:left}" +
+      ".sx-cheat h3{margin:.8rem 0 .3rem}.sx-cheat p{margin:.4rem 0}" +
+      ".sx-ex{display:grid;grid-template-columns:1fr 1.4fr .8fr;gap:.4rem;padding:.35rem .5rem;border-radius:8px;background:rgba(0,0,0,.04);margin:.25rem 0;font-weight:600}" +
+      ".sx-ex-ans{text-align:right}.sx-tip{background:#FFF4D6;padding:.6rem;border-radius:8px}" +
+      ".sx-work{text-align:left;margin:.6rem 0 0;padding-left:1.2rem}.sx-work li{margin:.15rem 0;font-family:inherit}" +
+      ".sx-table{width:100%;border-collapse:collapse;margin:.6rem 0;font-weight:600}" +
+      ".sx-table th,.sx-table td{border-bottom:1px solid rgba(0,0,0,.12);padding:.45rem;text-align:center}" +
+      ".sx-table td:first-child,.sx-table th:first-child{text-align:left}" +
+      ".sx-bad{color:#C2410C;font-weight:800}.sx-ok{color:var(--turf,#2E8B57)}" +
+      ".sx-levels{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin:.6rem 0}" +
+      ".sx-levels .btn[aria-pressed=true]{outline:4px solid var(--flag,#F2B705);outline-offset:2px}";
+    document.head.appendChild(st);
+  }
+
+  function renderSolveX(item, opts) {
+    sxStyles();
+    opts = opts || {};
+    var level = opts.level || "medium";
+    var g = null;
+
+    function top(extra) {
+      return '<div class="sx-top"><a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the drill</a>' +
+        '<button class="btn btn--quiet" id="sxcheatbtn" type="button">Rule cheat sheet</button></div>' +
+        sxCheatSheet() + (extra || "");
+    }
+    function wireCheat() {
+      var b = document.getElementById("sxcheatbtn"), c = document.getElementById("sxcheat");
+      b.addEventListener("click", function () {
+        c.hidden = !c.hidden;
+        b.textContent = c.hidden ? "Rule cheat sheet" : "Hide cheat sheet";
+      });
+    }
+
+    function startScreen() {
+      app.innerHTML = top() +
+        '<div class="q"><p class="q-kicker">Solve for x</p>' +
+          '<p class="q-text">10 mixed problems. First pick the first step, then find x.</p></div>' +
+        '<p class="lede" style="text-align:center">Plus, minus, times, divide \u2014 whole numbers and fractions all mixed together, like the test.</p>' +
+        '<div class="sx-levels">' + ["easy", "medium", "hard"].map(function (l) {
+          return '<button class="btn btn--quiet" data-l="' + l + '" aria-pressed="' + (l === level) + '">' +
+            l.charAt(0).toUpperCase() + l.slice(1) + "</button>";
+        }).join("") + "</div>" +
+        '<div class="btn-row"><button class="btn" id="sxgo">Start the round</button></div>' +
+        (weakSpots().length ? '<div class="btn-row"><button class="btn btn--quiet" id="sxweak">Practice my weak spots</button></div>' : "");
+      wireCheat();
+      Array.prototype.forEach.call(document.querySelectorAll(".sx-levels .btn"), function (b) {
+        b.addEventListener("click", function () { level = b.dataset.l; startScreen(); });
+      });
+      document.getElementById("sxgo").addEventListener("click", function () { begin(); });
+      if (document.getElementById("sxweak"))
+        document.getElementById("sxweak").addEventListener("click", function () { begin(weakSpots()); });
+    }
+
+    function begin(focus) {
+      g = { deck: sxRound(level, focus), idx: 0, clean: 0, points: 0, streak: 0, best: 0,
+            miss: {}, seen: {}, focus: !!(focus && focus.length), stepOK: false, typed: "" };
+      ask();
+    }
+
+    function status() {
+      var pct = Math.round(g.idx / g.deck.length * 100);
+      return '<div class="sx-bar" aria-hidden="true"><span style="width:' + pct + '%"></span></div>' +
+        '<div class="sx-stats"><span>Problem ' + (g.idx + 1) + " of " + g.deck.length + "</span>" +
+        "<span>\u2B50 " + g.points + "</span>" +
+        "<span>" + (g.streak >= 2 ? "\uD83D\uDD25 " + g.streak + " in a row" : "Streak " + g.streak) + "</span></div>";
+    }
+
+    /* Part 1: pick the first step. */
+    function ask() {
+      if (g.idx >= g.deck.length) return finish();
+      var p = g.deck[g.idx];
+      app.innerHTML = top(status()) +
+        '<p class="q-kicker" style="text-align:center;margin-top:1rem">' + (p.frac ? "Fraction" : "Whole number") + " \u00b7 Step 1</p>" +
+        '<div class="sx-eq">' + p.eq + "</div>" +
+        '<p class="q-text" style="text-align:center">What\u2019s the first step to get x alone?</p>' +
+        '<div class="answers answers--long" id="answers">' +
+          p.options.map(function (o) { return '<button class="answer" data-v="' + esc(o) + '">' + esc(o) + "</button>"; }).join("") +
+        "</div>" +
+        '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>';
+      wireCheat();
+      document.getElementById("answers").addEventListener("click", function (e) {
+        var btn = e.target.closest(".answer");
+        if (!btn || btn.disabled) return;
+        var all = Array.prototype.slice.call(document.querySelectorAll(".answer"));
+        all.forEach(function (b) {
+          b.disabled = true;
+          if (b.dataset.v === p.right) b.classList.add("answer--right");
+          else b.classList.add(b === btn ? "answer--wrong" : "answer--dim");
+        });
+        g.stepOK = btn.dataset.v === p.right;
+        if (g.stepOK) g.points += 5;
+        var v = document.getElementById("verdict");
+        v.className = "verdict " + (g.stepOK ? "verdict--goal" : "verdict--card");
+        v.innerHTML = (g.stepOK ? "Right rule!" : "Not that one \u2014 here\u2019s the rule") +
+          "<small>" + esc(p.rule) + "</small>";
+        var row = document.createElement("div");
+        row.className = "btn-row";
+        row.innerHTML = '<button class="btn" id="go">Now find x \u2192</button>';
+        v.after(row);
+        document.getElementById("go").addEventListener("click", solve);
+        document.getElementById("go").focus();
+      });
+    }
+
+    /* Part 2: type x on a keypad that has a fraction bar and a minus key. */
+    function solve() {
+      var p = g.deck[g.idx];
+      g.typed = "";
+      var keys = ["7", "8", "9", "\u232B", "4", "5", "6", "/", "1", "2", "3", "\u2212", "0", ".", "space"];
+      app.innerHTML = top(status()) +
+        '<p class="q-kicker" style="text-align:center;margin-top:1rem">Step 2 \u00b7 find x</p>' +
+        '<div class="sx-eq">' + p.eq + "</div>" +
+        '<p class="sx-step">First step: ' + esc(p.right) + "</p>" +
+        '<div class="sx-display" id="sxdisp" aria-live="polite">x = <span id="sxval"></span></div>' +
+        '<div class="sx-pad" id="sxpad">' +
+          keys.map(function (k) {
+            return k === "space" ? '<button data-k=" " aria-label="space for a mixed number">space</button>'
+                 : '<button data-k="' + k + '">' + k + "</button>";
+          }).join("") +
+          '<button class="sx-go sx-wide" data-k="go" style="grid-column:span 4">Check x</button>' +
+        "</div>" +
+        '<p class="chant-hint" style="text-align:center">Fractions like 3/2, mixed numbers like 1 1/2, or decimals like 1.5 all work.</p>' +
+        '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>';
+      wireCheat();
+      var val = document.getElementById("sxval");
+      function press(k) {
+        if (k === "go") return check();
+        if (k === "\u232B") g.typed = g.typed.slice(0, -1);
+        else if (g.typed.length < 12) g.typed += k === "\u2212" ? "\u2212" : k;
+        val.textContent = g.typed;
+      }
+      document.getElementById("sxpad").addEventListener("click", function (e) {
+        var b = e.target.closest("button");
+        if (b && !b.disabled) press(b.dataset.k);
+      });
+      document.onkeydown = function (e) {
+        if (!document.getElementById("sxpad")) { document.onkeydown = null; return; }
+        if (/^[0-9\/. ]$/.test(e.key)) press(e.key);
+        else if (e.key === "-") press("\u2212");
+        else if (e.key === "Backspace") press("\u232B");
+        else if (e.key === "Enter") press("go");
+        else return;
+        e.preventDefault();
+      };
+    }
+
+    function check() {
+      var p = g.deck[g.idx];
+      var ok = sxMatches(g.typed, p.x);
+      var v = document.getElementById("verdict");
+      if (ok === null) {
+        v.className = "verdict verdict--card";
+        v.innerHTML = "That\u2019s not a number yet<small>Type something like 4, \u22122, 3/2, 1 1/2 or 1.5.</small>";
+        return;
+      }
+      document.onkeydown = null;
+      Array.prototype.forEach.call(document.querySelectorAll("#sxpad button"), function (b) { b.disabled = true; });
+      var key = p.op + (p.frac ? "-f" : "-w");
+      g.seen[key] = (g.seen[key] || 0) + 1;
+      SX_STATS[key] = SX_STATS[key] || { seen: 0, miss: 0 };
+      SX_STATS[key].seen++;
+      var clean = ok && g.stepOK;
+      if (ok) g.points += 10;
+      if (clean) {
+        g.clean++; g.streak++; if (g.streak > g.best) g.best = g.streak;
+        if (g.streak >= 3) g.points += 5;
+      } else {
+        g.streak = 0;
+        g.miss[key] = (g.miss[key] || 0) + 1;
+        SX_STATS[key].miss++;
+      }
+      var mixed = fMixed(p.x);
+      var shown = fText(p.x) + (mixed ? " (or " + mixed + ")" : "");
+      v.className = "verdict " + (ok ? "verdict--goal" : "verdict--card");
+      v.innerHTML = ok
+        ? (clean ? (g.streak >= 3 ? "\uD83D\uDD25 " + g.streak + " in a row! x = " + shown : "Correct! x = " + shown)
+                 : "x = " + shown + " \u2014 right answer! Watch the first step next time.") +
+          (clean ? "" : "<small>" + esc(p.rule) + "</small>")
+        : "Not quite. x = " + shown +
+          "<small>" + esc(p.rule) + "</small>" +
+          '<ol class="sx-work"><li>' + esc(p.eqText) + "</li>" +
+          p.steps.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol>";
+      var row = document.createElement("div");
+      row.className = "btn-row";
+      row.innerHTML = '<button class="btn" id="go">' + (g.idx + 1 < g.deck.length ? "Next problem \u2192" : "See my score") + "</button>";
+      v.after(row);
+      document.getElementById("go").addEventListener("click", function () { g.idx++; ask(); });
+      document.getElementById("go").focus();
+    }
+
+    /* Categories he has missed this visit, most-missed first. */
+    function weakSpots() {
+      return Object.keys(SX_STATS).filter(function (k) { return SX_STATS[k].miss > 0; })
+        .map(function (k) { return { key: k, miss: SX_STATS[k].miss }; })
+        .sort(function (a, b) { return b.miss - a.miss; }).slice(0, 3);
+    }
+
+    function finish() {
+      document.onkeydown = null;
+      var cell = function (k) {
+        var s = g.seen[k] || 0, m = g.miss[k] || 0;
+        if (!s) return '<td style="opacity:.4">\u2014</td>';
+        return "<td>" + (m ? '<span class="sx-bad">' + m + " missed</span>" : '<span class="sx-ok">\u2713</span>') +
+          ' <span style="opacity:.6">of ' + s + "</span></td>";
+      };
+      /* Plain-words diagnosis: basic rule vs only the fraction twist. */
+      var notes = [];
+      SX_OPS.forEach(function (op) {
+        var w = g.miss[op + "-w"] || 0, f = g.miss[op + "-f"] || 0;
+        if (w) notes.push(SX_OPNAME[op] + ": missed with whole numbers too \u2014 that\u2019s the basic rule. Check the cheat sheet, rule 1.");
+        else if (f) notes.push(SX_OPNAME[op] + ": fine with whole numbers, only the fraction version \u2014 " +
+          (op === "mul" ? "remember to FLIP when x is multiplied by a fraction." :
+           op === "div" ? "when x is divided by a fraction, multiply by that SAME fraction, no flip." :
+           "same rule as whole numbers, just match the bottoms."));
+      });
+      var rating = g.clean >= 9 ? "Ready for the test" : g.clean >= 7 ? "Nearly there" : g.clean >= 5 ? "Getting it" : "Keep practicing";
+      var weak = weakSpots();
+      app.innerHTML =
+        '<div class="result">' +
+          '<p class="eyebrow">' + (g.focus ? "Weak-spot round" : "Round") + " complete \u00b7 " + level + "</p>" +
+          '<p class="result-rating">' + rating + "</p>" +
+          '<p class="result-score">' + g.clean + "/" + g.deck.length + "</p>" +
+          '<p class="result-of">first step AND x right \u00b7 \u2B50 ' + g.points + " points \u00b7 best streak " + g.best + "</p>" +
+          '<table class="sx-table"><thead><tr><th></th><th>Whole numbers</th><th>Fractions</th></tr></thead><tbody>' +
+            SX_OPS.map(function (op) {
+              return "<tr><td>" + SX_OPNAME[op] + "</td>" + cell(op + "-w") + cell(op + "-f") + "</tr>";
+            }).join("") +
+          "</tbody></table>" +
+          (notes.length ? '<div style="text-align:left">' + notes.map(function (n) { return "<p>" + esc(n) + "</p>"; }).join("") + "</div>"
+                        : '<p class="lede">No misses this round. Try a harder level.</p>') +
+          '<div class="btn-row">' +
+            (weak.length ? '<button class="btn" id="sxweak">Practice my weak spots</button>' : "") +
+            '<button class="btn' + (weak.length ? " btn--quiet" : "") + '" id="sxagain">New round</button>' +
+            '<a class="btn btn--quiet" href="#/i/' + item.id + '">Back to drills</a>' +
+          "</div></div>";
+      if (document.getElementById("sxweak"))
+        document.getElementById("sxweak").addEventListener("click", function () { begin(weakSpots()); });
+      document.getElementById("sxagain").addEventListener("click", function () { startScreen(); });
+    }
+
+    startScreen();
+  }
 
   /* ---------- word for word -------------------------------------------------
 
@@ -2425,12 +2971,12 @@
     var keyed = hasKeyMaterial(item);
     var words = (item.words || []).filter(function (w) { return keyed ? w.key : true; });
     var qs = (item.questions || []).filter(function (q) {
-      return (q.kind === "tf" || q.kind === "mc") && (keyed ? q.key : true);
+      return (q.kind === "tf" || q.kind === "mc" || q.kind === "multi") && (keyed ? q.key : true);
     });
 
     var pool = qs.map(function (q) {
       return { kind: q.kind, prompt: q.prompt, options: q.options,
-               answer: q.answer, why: q.why, longOptions: q.longOptions };
+               answer: q.answer, answers: q.answers, why: q.why, longOptions: q.longOptions };
     });
 
     if (words.length > 3) {
@@ -2444,6 +2990,57 @@
     return shuffle(pool).slice(0, item.matchLength || 10);
   }
 
+
+  /* Mystery-box prizes. Jerseys are plain shirts in a player's usual national
+     team colours with his name and number; no crests or logos. */
+  var MATCH_JERSEYS = [
+    { name: "MESSI", num: 10, team: "Argentina", body: "#75AADB", trim: "#FFFFFF", ink: "#1B2A4A", stripes: true },
+    { name: "RONALDO", num: 7, team: "Portugal", body: "#C8102E", trim: "#046A38", ink: "#FFFFFF" },
+    { name: "MBAPP\u00C9", num: 10, team: "France", body: "#1E2A78", trim: "#ED2939", ink: "#FFFFFF" },
+    { name: "HAALAND", num: 9, team: "Norway", body: "#BA0C2F", trim: "#00205B", ink: "#FFFFFF" },
+    { name: "KANE", num: 9, team: "England", body: "#FFFFFF", trim: "#1D2B5E", ink: "#1D2B5E" },
+    { name: "PULISIC", num: 10, team: "USA", body: "#FFFFFF", trim: "#B22234", ink: "#0A3161" },
+    { name: "SALAH", num: 10, team: "Egypt", body: "#CE1126", trim: "#000000", ink: "#FFFFFF" },
+    { name: "YAMAL", num: 19, team: "Spain", body: "#AA151B", trim: "#F1BF00", ink: "#F1BF00" },
+    { name: "VIN\u00CDCIUS JR", num: 7, team: "Brazil", body: "#FEDD00", trim: "#009C3B", ink: "#002776" },
+    { name: "BELLINGHAM", num: 10, team: "England", body: "#FFFFFF", trim: "#1D2B5E", ink: "#1D2B5E" }
+  ];
+
+  var MATCH_JOKES = [
+    ["Why did the soccer ball quit the team?", "It was tired of being kicked around."],
+    ["Why can\u2019t Cinderella play soccer?", "She always runs away from the ball."],
+    ["What do you call a pig who plays soccer?", "A ball hog."],
+    ["Why did the goalie bring string to the game?", "To tie up the score."],
+    ["What\u2019s a goalie\u2019s favourite snack?", "Butter fingers. (Hopefully not during the game.)"],
+    ["Why are soccer players good at math?", "They know how to use their heads."],
+    ["What did the soccer ball say to the player?", "I get a kick out of you."],
+    ["Where do soccer players dance?", "At a foot-ball."]
+  ];
+
+  function jerseySvg(j, size) {
+    var stripes = j.stripes
+      ? '<rect x="42" y="18" width="10" height="82" fill="#FFFFFF"/><rect x="68" y="18" width="10" height="82" fill="#FFFFFF"/>' : "";
+    var nm = j.name.length > 8 ? 9 : 12;
+    return '<svg viewBox="0 0 120 110" width="' + size + '" height="' + Math.round(size * 110 / 120) + '" aria-hidden="true">' +
+      '<path d="M38 8 L22 14 L4 34 L18 48 L28 40 L28 104 L92 104 L92 40 L102 48 L116 34 L98 14 L82 8 Q60 22 38 8 Z" ' +
+        'fill="' + j.body + '" stroke="' + j.trim + '" stroke-width="4" stroke-linejoin="round"/>' + stripes +
+      '<path d="M38 8 Q60 22 82 8" fill="none" stroke="' + j.trim + '" stroke-width="5"/>' +
+      '<text x="60" y="52" text-anchor="middle" font-size="' + nm + '" font-weight="800" fill="' + j.ink + '" font-family="inherit">' + j.name + "</text>" +
+      '<text x="60" y="92" text-anchor="middle" font-size="36" font-weight="900" fill="' + j.ink + '" font-family="inherit">' + j.num + "</text>" +
+      "</svg>";
+  }
+
+  (function addBoxStyles() {
+    if (document.getElementById("mbox-css")) return;
+    var st = document.createElement("style");
+    st.id = "mbox-css";
+    st.textContent =
+      "@keyframes mboxWiggle{0%,100%{transform:rotate(0)}20%{transform:rotate(-6deg)}40%{transform:rotate(6deg)}60%{transform:rotate(-3deg)}80%{transform:rotate(0)}}" +
+      "@keyframes mboxParty{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-14px) scale(1.12)}}" +
+      "@media (prefers-reduced-motion: reduce){.mbox{animation:none!important}}";
+    document.head.appendChild(st);
+  })();
+
   var GOAL_SPOTS = [
     { id: "left",   label: "Bottom left" },
     { id: "middle", label: "Down the middle" },
@@ -2452,7 +3049,7 @@
 
   function renderMatch(item) {
     var rival = item.rival || "The Rivals";
-    var g = { deck: gamePool(item), idx: 0, us: 0, them: 0, streak: 0, best: 0 };
+    var g = { deck: gamePool(item), idx: 0, us: 0, them: 0, streak: 0, best: 0, jerseys: [] };
 
     function board(extra) {
       var minute = Math.min(90, Math.round((g.idx / Math.max(g.deck.length, 1)) * 90));
@@ -2488,16 +3085,59 @@
         ? [{ v: "true", t: "True" }, { v: "false", t: "False" }]
         : shuffle(q.options).map(function (o) { return { v: o, t: o }; });
 
+      var isMulti = q.kind === "multi";
       app.innerHTML =
         '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the match</a>' +
         board() +
-        '<div class="q"><p class="q-kicker">Question ' + (g.idx + 1) + " of " + g.deck.length + "</p>" +
+        '<div class="q"><p class="q-kicker">Question ' + (g.idx + 1) + " of " + g.deck.length +
+          (isMulti ? " \u00b7 pick " + q.answers.length : "") + "</p>" +
           '<p class="q-text q-text--sentence" style="text-align:center">' + esc(q.prompt) + "</p></div>" +
-        '<div class="answers' + (q.kind === "mc" ? " answers--long" : "") + '" id="answers">' +
+        '<div class="answers' + (q.kind !== "tf" ? " answers--long" : "") + '" id="answers">' +
           opts.map(function (o) {
-            return '<button class="answer" data-v="' + esc(o.v) + '">' + esc(o.t) + "</button>";
+            return '<button class="answer" data-v="' + esc(o.v) + '"' +
+              (isMulti ? ' aria-pressed="false"' : "") + ">" + esc(o.t) + "</button>";
           }).join("") + "</div>" +
+        (isMulti ? '<div class="btn-row"><button class="btn" id="lock" disabled>Lock it in</button></div>' : "") +
         '<div class="verdict" id="verdict" role="status" aria-live="polite"></div>';
+
+      /* Pick-several questions: he toggles choices, then locks them in. It
+         only counts if the set is exactly right, same as on her tests. */
+      if (isMulti) {
+        var chosen = {};
+        var lock = document.getElementById("lock");
+        document.getElementById("answers").addEventListener("click", function (e) {
+          var btn = e.target.closest(".answer");
+          if (!btn || btn.disabled) return;
+          var v = btn.dataset.v;
+          if (chosen[v]) delete chosen[v]; else chosen[v] = true;
+          btn.setAttribute("aria-pressed", chosen[v] ? "true" : "false");
+          btn.style.outline = chosen[v] ? "4px solid var(--flag)" : "";
+          lock.disabled = !Object.keys(chosen).length;
+        });
+        lock.addEventListener("click", function () {
+          var buttons = Array.prototype.slice.call(document.querySelectorAll(".answer"));
+          buttons.forEach(function (b) { b.disabled = true; b.style.outline = ""; });
+          lock.parentNode.remove();
+          var picks = Object.keys(chosen);
+          var right = picks.length === q.answers.length &&
+                      picks.every(function (p) { return q.answers.indexOf(p) > -1; });
+          buttons.forEach(function (b) {
+            var good = q.answers.indexOf(b.dataset.v) > -1;
+            b.classList.add(good ? "answer--right" : chosen[b.dataset.v] ? "answer--wrong" : "answer--dim");
+          });
+          if (right) {
+            g.streak++;
+            if (g.streak > g.best) g.best = g.streak;
+            setVerdict("verdict--goal", "Through on goal!", q.why);
+            nextButton(g.streak >= 3 ? "Take the power shot" : "Take your shot", shoot);
+          } else {
+            g.streak = 0;
+            setVerdict("verdict--card", "Lost the ball", "You need all " + q.answers.length + ". " + (q.why || ""));
+            nextButton(esc(rival) + " break away \u2192", defend);
+          }
+        });
+        return;
+      }
 
       document.getElementById("answers").addEventListener("click", function (e) {
         var btn = e.target.closest(".answer");
@@ -2639,7 +3279,7 @@
                   : saved ? "He guessed your side. Try further into the corner next time."
                           : "Right into the corner. He was never getting there.");
           g.idx++;
-          nextButton(g.idx >= g.deck.length ? "Full time" : "Play on \u2192", question);
+          nextButton(g.idx >= g.deck.length ? "Full time" : boxDue() ? "Mystery box! \u2192" : "Play on \u2192", playOn);
         }
       });
     }
@@ -2691,7 +3331,87 @@
           (conceded ? "1\u20130 to them from that move" : "Let off the hook") +
         "</div>";
       g.idx++;
-      nextButton(g.idx >= g.deck.length ? "Full time" : "Play on \u2192", question);
+      nextButton(g.idx >= g.deck.length ? "Full time" : boxDue() ? "Mystery box! \u2192" : "Play on \u2192", playOn);
+    }
+
+
+    /* ---- Mystery box: every third question he picks one of three boxes.
+       Prizes are mostly for fun: a top player's jersey for his locker, a
+       bonus goal, a joke, or a goal celebration. Jerseys only last for this
+       match (nothing is saved), and the locker shows at full time. */
+    function boxDue() { return g.idx > 0 && g.idx < g.deck.length && g.idx % 3 === 0 && g.boxAt !== g.idx; }
+    function playOn() { if (boxDue()) mysteryBox(); else question(); }
+
+    function prizeDeck() {
+      var left = MATCH_JERSEYS.filter(function (j) {
+        return !g.jerseys.some(function (h) { return h.name === j.name; });
+      });
+      var bag = [];
+      for (var k = 0; k < 3; k++) {
+        var r = Math.random();
+        if (r < 0.45 && left.length) {
+          var j = left.splice(Math.floor(Math.random() * left.length), 1)[0];
+          bag.push({ kind: "jersey", jersey: j });
+        } else if (r < 0.65) bag.push({ kind: "goal" });
+        else if (r < 0.85) bag.push({ kind: "joke", joke: MATCH_JOKES[Math.floor(Math.random() * MATCH_JOKES.length)] });
+        else bag.push({ kind: "party" });
+      }
+      return bag;
+    }
+
+    function prizeHtml(p, big) {
+      if (p.kind === "jersey") return jerseySvg(p.jersey, big ? 150 : 70) +
+        '<div style="font-weight:800;font-size:' + (big ? "1.3rem" : ".85rem") + '">' + esc(p.jersey.name) + " #" + p.jersey.num + "</div>" +
+        (big ? '<div style="opacity:.75">' + esc(p.jersey.team) + "</div>" : "");
+      if (p.kind === "goal") return '<div style="font-size:' + (big ? "3.2rem" : "1.8rem") + '">\u26BD</div>' +
+        '<div style="font-weight:800;font-size:' + (big ? "1.3rem" : ".85rem") + '">Bonus goal!</div>';
+      if (p.kind === "joke") return '<div style="font-size:' + (big ? "3.2rem" : "1.8rem") + '">\uD83D\uDE02</div>' +
+        (big ? '<div style="font-weight:700;font-size:1.15rem;max-width:30ch;margin:0 auto">' + esc(p.joke[0]) +
+               '</div><div style="margin-top:.6rem;font-size:1.15rem">' + esc(p.joke[1]) + "</div>"
+             : '<div style="font-weight:800;font-size:.85rem">A joke</div>');
+      return '<div style="font-size:' + (big ? "3.2rem" : "1.8rem") + '">\uD83C\uDF89</div>' +
+        '<div style="font-weight:800;font-size:' + (big ? "1.3rem" : ".85rem") + '">' + (big ? "Knee slide celebration!" : "Celebration") + "</div>";
+    }
+
+    function mysteryBox() {
+      g.boxAt = g.idx;            /* one box per stop, however he gets here */
+      var bag = prizeDeck();
+      app.innerHTML =
+        '<a class="backlink" href="#/i/' + item.id + '">\u2190 Leave the match</a>' + board() +
+        '<div class="q"><p class="q-kicker">Mystery box</p>' +
+          '<p class="q-text">Pick a box. Any box.</p></div>' +
+        '<div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:1rem 0" id="boxes">' +
+          [0, 1, 2].map(function (k) {
+            return '<button class="answer mbox" data-k="' + k + '" style="width:110px;height:120px;font-size:3rem;' +
+              'display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .15s">' +
+              '\uD83C\uDF81<span style="font-size:1rem;font-weight:800">?</span></button>';
+          }).join("") + "</div>" +
+        '<div id="prize" role="status" aria-live="polite"></div>';
+      Array.prototype.forEach.call(document.querySelectorAll(".mbox"), function (b, k) {
+        b.style.animation = "mboxWiggle 1.4s ease-in-out " + (k * 0.2) + "s infinite";
+      });
+      document.getElementById("boxes").addEventListener("click", function (e) {
+        var b = e.target.closest(".mbox");
+        if (!b || b.disabled) return;
+        var k = +b.dataset.k, p = bag[k];
+        Array.prototype.forEach.call(document.querySelectorAll(".mbox"), function (x, i) {
+          x.disabled = true; x.style.animation = "none";
+          x.innerHTML = '<div style="transform:scale(.9)">' + prizeHtml(bag[i], false) + "</div>";
+          if (i !== k) x.classList.add("answer--dim"); else x.classList.add("answer--right");
+          x.style.fontSize = "1rem";
+        });
+        var head = p.kind === "jersey" ? "Jersey unlocked!" : p.kind === "goal" ? "Free goal for Knox FC!"
+                 : p.kind === "joke" ? "Halftime joke" : "GOOOAL celebration!";
+        if (p.kind === "jersey") g.jerseys.push(p.jersey);
+        if (p.kind === "goal") { g.us++; syncBoard(); }
+        document.getElementById("prize").innerHTML =
+          '<div class="verdict verdict--goal" id="verdict" style="text-align:center">' + head +
+            '<div style="margin-top:.8rem' + (p.kind === "party" ? ";animation:mboxParty .6s ease-in-out 4" : "") + '">' +
+            prizeHtml(p, true) + "</div>" +
+            (p.kind === "party" ? '<div aria-hidden="true" style="font-size:2rem;letter-spacing:.4rem;animation:mboxParty .5s ease-in-out 6">\u26BD\uD83C\uDF89\u26BD\uD83C\uDF89\u26BD</div>' : "") +
+          "</div>";
+        nextButton("Back to the match \u2192", question);
+      });
     }
 
     function fullTime() {
@@ -2708,6 +3428,14 @@
           '<p class="result-score">' + g.us + " \u2013 " + g.them + "</p>" +
           '<p class="result-of">Knox FC v ' + esc(rival) + "</p>" +
           '<p class="lede" style="margin:1rem auto 0">Best streak: ' + g.best + ". " + line + "</p>" +
+          (g.jerseys.length
+            ? '<p class="eyebrow" style="margin-top:1.4rem">Jersey locker · ' + g.jerseys.length + " collected</p>" +
+              '<div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">' +
+                g.jerseys.map(function (j) {
+                  return '<div style="text-align:center">' + jerseySvg(j, 64) +
+                    '<div style="font-size:.8rem;font-weight:800">' + esc(j.name) + "</div></div>";
+                }).join("") + "</div>"
+            : "") +
           '<div class="btn-row">' +
             '<button class="btn" id="again">Play again</button>' +
             '<a class="btn btn--quiet" href="#/i/' + item.id + '">Back to drills</a>' +
@@ -2728,6 +3456,7 @@
     if (drillId === "maplabel") return renderMapLabel(item);
     if (drillId === "maptype") return renderMapLabel(item, true);
     if (drillId === "exact") return renderExact(item);
+    if (drillId === "solvex") return renderSolveX(item);
     if (drillId === "decide") return renderDecide(item);
     if (drillId === "divis") return renderDivisibility(item);
     if (drillId === "numpad") return renderNumpad(item);
