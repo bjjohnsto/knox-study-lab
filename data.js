@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Nov 13 \u2014 build 63";
+const BUILD = "Nov 16 \u2014 build 66";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -37,204 +37,231 @@ const SUBJECTS = [
    "optional" is the gray-italic only-if-not-finished-in-class kind, "test" is
    the red kind. ----------------------------------------------------------- */
 const HOMEWORK = {
-  "asOf": "2026-11-08",
-  "label": "Week of Nov 9 – Nov 13",
+  "asOf": "2026-11-16",
+  "label": "Week of Nov 16 – Nov 20",
   "tests": [
     {
-      "date": "2026-11-12",
-      "text": "Bible Unit 4 Test"
+      "date": "2026-11-19",
+      "text": "Science Test: Chapter 7, Atoms and Molecules"
     },
     {
-      "date": "2026-11-12",
-      "text": "Spelling Test: List 5"
-    },
-    {
-      "date": "2026-11-12",
-      "text": "History Map Quiz: countries around India"
-    },
-    {
-      "date": "2026-11-13",
-      "text": "Literary Terms Test"
-    },
-    {
-      "date": "2026-11-13",
-      "text": "History Unit Test: Ancient India"
-    },
-    {
-      "date": "2026-11-13",
-      "text": "Bible Quiz: John 15:10, word for word"
+      "date": "2026-11-20",
+      "text": "Bible Quiz: John 15:11, word for word"
     }
   ],
   "soon": [
     {
-      "date": "2026-11-09",
-      "text": "Reading Log due"
+      "date": "2026-11-20",
+      "text": "Early release at 1:50 PM"
     },
     {
-      "date": "2026-11-10",
-      "text": "Field trip"
+      "date": "2026-11-23",
+      "text": "Nov 23–24: e-learning days"
     },
     {
-      "date": "2026-11-13",
-      "text": "Math, Science and ELA: not posted yet"
+      "date": "2026-11-25",
+      "text": "Nov 25–27: Thanksgiving, no school"
+    },
+    {
+      "date": "2026-12-03",
+      "text": "Spelling List 6 Test"
+    },
+    {
+      "date": "2026-12-14",
+      "text": "World History Unit 6 Ancient China test (mid-December). Unit 6 Blooket is on Teams"
     }
   ],
   "days": [
     {
-      "date": "2026-11-09",
+      "date": "2026-11-16",
       "tasks": [
         {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "DUE: Reading Log",
-          "test": true
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "Finish pg. 25 (skip #9 & 10), due Tue"
         },
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:10"
+          "text": "Study John 15:11"
         },
         {
-          "cls": "Spelling",
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "Reading log (due Friday)"
+        },
+        {
+          "cls": "ELA",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "Study List 5 (test Thu)"
+          "text": "Nativity rough typing (due Friday)"
         },
         {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "Review India map (hard copy) + Blooket"
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "Pages 113–114"
         }
       ]
     },
     {
-      "date": "2026-11-10",
+      "date": "2026-11-17",
       "tasks": [
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "Finish pg. 28, show all steps, due Wed"
+        },
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:10"
+          "text": "Study John 15:11"
         },
         {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Workbook p. 165"
+          "text": "Wickedness vs. Righteousness study"
         },
         {
-          "cls": "Spelling",
+          "cls": "ELA",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "Study List 5 (test Thu)"
+          "text": "Nativity rough typing (due Friday)"
         },
         {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "Review India map (hard copy) + Blooket"
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "Pages 119–120"
         }
       ]
     },
     {
-      "date": "2026-11-11",
+      "date": "2026-11-18",
       "tasks": [
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "DUE: cereal box",
+          "test": true
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "Finish pg. 32, show all steps, due Thu"
+        },
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:10. Study for Unit 4 Test (Blooket)"
+          "text": "Study John 15:11"
         },
         {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "Study for Literary Terms Test (Blooket)"
-        },
-        {
-          "cls": "Spelling",
+          "cls": "ELA",
           "teacher": "Mrs. Servizzi · C208",
           "subject": "ela",
-          "text": "Study List 5 for Thursday test"
+          "text": "Nativity rough typing (due Friday)"
         },
         {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "Finish Study Guide. Study India map for Thursday quiz"
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "Blooket: study for Thursday test"
         }
       ]
     },
     {
-      "date": "2026-11-12",
+      "date": "2026-11-19",
       "tasks": [
         {
-          "cls": "Bible",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "bible",
-          "text": "TEST: Unit 4",
-          "test": true
-        },
-        {
-          "cls": "Spelling",
+          "cls": "Science",
           "teacher": "Mrs. Servizzi · C208",
-          "subject": "ela",
-          "text": "TEST: List 5",
+          "subject": "science",
+          "text": "TEST: Chapter 7",
           "test": true
         },
         {
           "cls": "History",
           "teacher": "Mrs. Martinez",
           "subject": "history",
-          "text": "QUIZ: India Map",
-          "test": true
+          "text": "Shang graphic organizer (due Friday)"
         },
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "Study John 15:10 for Friday quiz"
+          "text": "Study John 15:11 for Friday quiz"
         },
         {
           "cls": "Literature",
           "teacher": "Mrs. Vowels · C206",
           "subject": "literature",
-          "text": "Study for Literary Terms Test"
+          "text": "Finish reading log"
         },
         {
-          "cls": "History",
-          "teacher": "Mrs. Martinez",
-          "subject": "history",
-          "text": "Study for Friday test (Blooket)"
+          "cls": "ELA",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "Nativity rough typing (due Friday)"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "No homework"
         }
       ]
     },
     {
-      "date": "2026-11-13",
+      "date": "2026-11-20",
       "tasks": [
         {
           "cls": "Bible",
           "teacher": "Mrs. Vowels · C206",
           "subject": "bible",
-          "text": "QUIZ: John 15:10",
-          "test": true
-        },
-        {
-          "cls": "Literature",
-          "teacher": "Mrs. Vowels · C206",
-          "subject": "literature",
-          "text": "TEST: Literary Terms",
+          "text": "QUIZ: John 15:11",
           "test": true
         },
         {
           "cls": "History",
           "teacher": "Mrs. Martinez",
           "subject": "history",
-          "text": "TEST: Ancient India Unit",
+          "text": "DUE: Shang graphic organizer",
           "test": true
+        },
+        {
+          "cls": "Literature",
+          "teacher": "Mrs. Vowels · C206",
+          "subject": "literature",
+          "text": "DUE: Reading log",
+          "test": true
+        },
+        {
+          "cls": "ELA",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "ela",
+          "text": "DUE: Nativity rough typing",
+          "test": true
+        },
+        {
+          "cls": "Science",
+          "teacher": "Mrs. Servizzi · C208",
+          "subject": "science",
+          "text": "Begin cereal boxes"
+        },
+        {
+          "cls": "Math",
+          "teacher": "Mrs. George · C205",
+          "subject": "math",
+          "text": "No homework"
         }
       ]
     }
@@ -10286,5 +10313,1041 @@ const STUDY_ITEMS = [
       "firststep",
       "solvex"
     ]
+  },
+  {
+    "id": "ela-spelling-6",
+    "subject": "ela",
+    "title": "Spelling List 6",
+    "added": "2026-11-15",
+    "quiz": "2026-12-03",
+    "note": "Twenty words, test Thursday 12/3 (after Thanksgiving). Spot the right spelling, then build each one from letters.",
+    "type": "bundle",
+    "spellWords": [
+      "status",
+      "bulletin",
+      "channel",
+      "random",
+      "versatile",
+      "obstinate",
+      "intramural",
+      "momentous",
+      "accustomed",
+      "statistics",
+      "spectator",
+      "grateful",
+      "inspiring",
+      "imitate",
+      "charity",
+      "qualified",
+      "diagram",
+      "association",
+      "linguistics",
+      "exposure"
+    ],
+    "questions": [
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "stadus",
+          "statis",
+          "stattus",
+          "status"
+        ],
+        "answer": "status",
+        "why": "\"status\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "bulletan",
+          "buletin",
+          "bullitin",
+          "bulletin"
+        ],
+        "answer": "bulletin",
+        "why": "\"bulletin\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "channel",
+          "chanel",
+          "channle",
+          "channal"
+        ],
+        "answer": "channel",
+        "why": "\"channel\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "rendom",
+          "randum",
+          "random",
+          "randome"
+        ],
+        "answer": "random",
+        "why": "\"random\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "versatil",
+          "versitile",
+          "versatile",
+          "vursatile"
+        ],
+        "answer": "versatile",
+        "why": "\"versatile\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "obstinet",
+          "obstanate",
+          "obstinnate",
+          "obstinate"
+        ],
+        "answer": "obstinate",
+        "why": "\"obstinate\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "intramurral",
+          "intramurel",
+          "intermural",
+          "intramural"
+        ],
+        "answer": "intramural",
+        "why": "\"intramural\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "momintous",
+          "momentious",
+          "momentus",
+          "momentous"
+        ],
+        "answer": "momentous",
+        "why": "\"momentous\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "accustumed",
+          "accustomed",
+          "acustomed",
+          "accustommed"
+        ],
+        "answer": "accustomed",
+        "why": "\"accustomed\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "statistics",
+          "statisticks",
+          "statstics",
+          "statistiks"
+        ],
+        "answer": "statistics",
+        "why": "\"statistics\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "spectater",
+          "spectatur",
+          "specktator",
+          "spectator"
+        ],
+        "answer": "spectator",
+        "why": "\"spectator\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "gratful",
+          "grateful",
+          "greatful",
+          "gratefull"
+        ],
+        "answer": "grateful",
+        "why": "\"grateful\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "inspirring",
+          "inspireing",
+          "enspiring",
+          "inspiring"
+        ],
+        "answer": "inspiring",
+        "why": "\"inspiring\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "imitate",
+          "imitait",
+          "imatate",
+          "immitate"
+        ],
+        "answer": "imitate",
+        "why": "\"imitate\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "cherity",
+          "charity",
+          "charaty",
+          "charitty"
+        ],
+        "answer": "charity",
+        "why": "\"charity\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "qualafied",
+          "quallified",
+          "qualifyed",
+          "qualified"
+        ],
+        "answer": "qualified",
+        "why": "\"qualified\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "dyagram",
+          "diagrum",
+          "diagramm",
+          "diagram"
+        ],
+        "answer": "diagram",
+        "why": "\"diagram\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "asociation",
+          "association",
+          "associasion",
+          "assosiation"
+        ],
+        "answer": "association",
+        "why": "\"association\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "linguistiks",
+          "linguistics",
+          "lingwistics",
+          "linguestics"
+        ],
+        "answer": "linguistics",
+        "why": "\"linguistics\" is the one on her list."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which spelling is correct?",
+        "options": [
+          "exposhure",
+          "exposure",
+          "expozure",
+          "exposur"
+        ],
+        "answer": "exposure",
+        "why": "\"exposure\" is the one on her list."
+      }
+    ],
+    "drills": [
+      "spell",
+      "mconly"
+    ]
+  },
+  {
+    "id": "sci-ch7-test",
+    "subject": "science",
+    "title": "Science Test: Chapter 7, Atoms and Molecules",
+    "added": "2026-11-16",
+    "quiz": "2026-11-19",
+    "pin": true,
+    "note": "Test Thursday 11/19. Every term on her Ch. 7 study guide in the book's wording, plus the Words to Know and Key Ideas from p. 186.",
+    "type": "bundle",
+    "words": [
+      {
+        "word": "atom",
+        "meaning": "The smallest piece of an element that can be recognized as that element."
+      },
+      {
+        "word": "atomic number",
+        "meaning": "The number of protons in an atom's nucleus. Each element has a different one: hydrogen 1, oxygen 8, gold 79."
+      },
+      {
+        "word": "chemical change",
+        "meaning": "A process in which atoms join with different types of atoms. Also called a chemical reaction. It usually produces molecules known as compounds."
+      },
+      {
+        "word": "chemical formula",
+        "meaning": "Uses chemical symbols and numbers to abbreviate the name of a compound, like CO₂ or H₂O."
+      },
+      {
+        "word": "chemistry",
+        "meaning": "The study of matter: what it is made of, what its usual characteristics are, and how it reacts with other matter."
+      },
+      {
+        "word": "element",
+        "meaning": "A substance containing only one kind of atom, such as gold, silver, iron, oxygen, and copper."
+      },
+      {
+        "word": "ion",
+        "meaning": "An atom that has gained or lost electrons."
+      },
+      {
+        "word": "salt",
+        "meaning": "An ionic compound formed from a reaction between an acid and a base. Example: table salt (NaCl)."
+      },
+      {
+        "word": "acid",
+        "meaning": "A compound that forms hydrogen ions (H⁺) when dissolved in water. Tastes sour; strong ones are corrosive."
+      },
+      {
+        "word": "base",
+        "meaning": "A compound that forms hydroxide ions (OH⁻) when dissolved in water. Tastes bitter and feels slippery."
+      },
+      {
+        "word": "electron",
+        "meaning": "The negatively charged (−) part of an atom that travels around the nucleus in shells."
+      },
+      {
+        "word": "proton",
+        "meaning": "The positively charged (+) part of an atom, found in the nucleus."
+      },
+      {
+        "word": "neutron",
+        "meaning": "The part of an atom with no charge (N), found in the nucleus."
+      },
+      {
+        "word": "nucleus",
+        "meaning": "The center section of the atom, made up of the protons and the neutrons."
+      },
+      {
+        "word": "atomic mass",
+        "meaning": "The number of protons and neutrons added together. Fluorine has 9 protons and 10 neutrons, so its atomic mass is about 19."
+      },
+      {
+        "word": "covalent bond",
+        "meaning": "A bond formed when atoms share pairs of electrons, like in water (H₂O)."
+      },
+      {
+        "word": "Niels Bohr",
+        "meaning": "Danish scientist best known for his research on atomic structure. He designed a model of the atom where electrons move in shells, and escaped the Nazis in World War II."
+      },
+      {
+        "word": "Dmitri Mendeleev",
+        "meaning": "Russian chemist who in 1869 organized all the known elements into the periodic table."
+      },
+      {
+        "word": "ionic bond",
+        "meaning": "A bond formed when positively and negatively charged ions attract each other. Held together by their opposite charges."
+      },
+      {
+        "word": "indicator",
+        "meaning": "A substance that changes color when exposed to acid or base solutions, like litmus paper."
+      },
+      {
+        "word": "decomposition",
+        "meaning": "A chemical reaction that breaks a complex compound down into two or more simpler compounds."
+      },
+      {
+        "word": "pH scale",
+        "meaning": "A scale numbered from 0 to 14 that measures how acidic or basic a solution is. 7 is neutral."
+      },
+      {
+        "word": "chemical symbol",
+        "meaning": "An abbreviation for the name of an element, like O for oxygen or Fe for iron."
+      },
+      {
+        "word": "molecule",
+        "meaning": "A unit formed when atoms join with other atoms."
+      },
+      {
+        "word": "compound",
+        "meaning": "A substance made when atoms of two or more different elements combine."
+      },
+      {
+        "word": "period",
+        "meaning": "A horizontal row of the periodic table. Elements in the same period have the same number of shells."
+      },
+      {
+        "word": "group",
+        "meaning": "A vertical column of the periodic table, also called a family. Elements in a group have the same number of outer-shell electrons and share similar properties."
+      },
+      {
+        "word": "alkalis",
+        "meaning": "Bases that dissolve in water."
+      },
+      {
+        "word": "neutral",
+        "meaning": "Neither acidic nor basic. A pH of 7.0, like pure water."
+      }
+    ],
+    "questions": [
+      {
+        "kind": "multi",
+        "prompt": "What are the three main parts of an atom? Mark ALL correct answers.",
+        "options": [
+          "protons",
+          "neutrons",
+          "electrons",
+          "molecules",
+          "ions"
+        ],
+        "answers": [
+          "protons",
+          "neutrons",
+          "electrons"
+        ],
+        "why": "All atoms are made of protons, neutrons, and electrons."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which parts are found in the NUCLEUS? Mark ALL correct answers.",
+        "options": [
+          "protons",
+          "neutrons",
+          "electrons",
+          "shells"
+        ],
+        "answers": [
+          "protons",
+          "neutrons"
+        ],
+        "why": "The protons and neutrons make up the nucleus. Electrons travel around it."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which part of the atom has a NEGATIVE charge?",
+        "options": [
+          "electron",
+          "proton",
+          "neutron",
+          "nucleus"
+        ],
+        "answer": "electron",
+        "why": "Electrons (−), protons (+), neutrons (N, no charge)."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which part of the atom has a POSITIVE charge?",
+        "options": [
+          "proton",
+          "electron",
+          "neutron",
+          "ion"
+        ],
+        "answer": "proton",
+        "why": "Protons (+). Electrons (−). Neutrons have no charge."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which part of the atom has NO charge?",
+        "options": [
+          "neutron",
+          "proton",
+          "electron",
+          "ion"
+        ],
+        "answer": "neutron",
+        "why": "Neutrons have no charge (N)."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Which parts are by far the heaviest parts of an atom?",
+        "options": [
+          "protons and neutrons",
+          "electrons",
+          "shells",
+          "ions"
+        ],
+        "answer": "protons and neutrons",
+        "why": "Electrons are so light they add almost nothing to the mass."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Fluorine has 9 protons and 10 neutrons. What is its atomic mass?",
+        "options": [
+          "19",
+          "9",
+          "10",
+          "1"
+        ],
+        "answer": "19",
+        "why": "Atomic mass = protons + neutrons. 9 + 10 = 19."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Oxygen has 8 protons. What is its atomic number?",
+        "options": [
+          "8",
+          "16",
+          "1",
+          "79"
+        ],
+        "answer": "8",
+        "why": "Atomic number = number of protons."
+      },
+      {
+        "kind": "mc",
+        "prompt": "How many electrons can the FIRST shell hold?",
+        "options": [
+          "2",
+          "8",
+          "1",
+          "18"
+        ],
+        "answer": "2",
+        "why": "The first shell holds a maximum of 2. The second shell can hold up to 8."
+      },
+      {
+        "kind": "tf",
+        "prompt": "In a normal atom, the number of protons equals the number of electrons.",
+        "answer": true,
+        "why": "TRUE. So a normal atom has no overall charge."
+      },
+      {
+        "kind": "tf",
+        "prompt": "An atom that has gained or lost electrons is called a molecule.",
+        "answer": false,
+        "why": "FALSE. It is called an ION. Lost electrons = positive ion; gained electrons = negative ion."
+      },
+      {
+        "kind": "mc",
+        "prompt": "An atom that has LOST electrons becomes a...",
+        "options": [
+          "positive ion",
+          "negative ion",
+          "neutron",
+          "molecule"
+        ],
+        "answer": "positive ion",
+        "why": "Losing electrons leaves more protons than electrons, so it is positive."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Who devised a model of the atom with electrons moving in shells?",
+        "options": [
+          "Niels Bohr",
+          "Dmitri Mendeleev",
+          "Luigi Galvani",
+          "Alessandro Volta"
+        ],
+        "answer": "Niels Bohr",
+        "why": "The Bohr model: electrons move in shells around the nucleus."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Who organized the elements into the first periodic table in 1869?",
+        "options": [
+          "Dmitri Mendeleev",
+          "Niels Bohr",
+          "Albert Einstein",
+          "Isaac Newton"
+        ],
+        "answer": "Dmitri Mendeleev",
+        "why": "Mendeleev, a Russian chemist. He even left gaps for elements nobody had discovered yet."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Niels Bohr was a Russian chemist who made the periodic table.",
+        "answer": false,
+        "why": "FALSE. Bohr was a DANISH scientist known for atomic structure. Mendeleev made the periodic table."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Mendeleev first put the elements in order by their...",
+        "options": [
+          "atomic weights",
+          "colors",
+          "names",
+          "atomic numbers"
+        ],
+        "answer": "atomic weights",
+        "why": "He ordered them by atomic weight. Scientists later found atomic number works better."
+      },
+      {
+        "kind": "mc",
+        "prompt": "The horizontal rows of the periodic table are called...",
+        "options": [
+          "periods",
+          "groups",
+          "families",
+          "shells"
+        ],
+        "answer": "periods",
+        "why": "Rows = periods. Columns = groups (or families)."
+      },
+      {
+        "kind": "mc",
+        "prompt": "The vertical columns of the periodic table are called...",
+        "options": [
+          "groups or families",
+          "periods",
+          "shells",
+          "compounds"
+        ],
+        "answer": "groups or families",
+        "why": "Elements in a group share similar properties."
+      },
+      {
+        "kind": "multi",
+        "prompt": "The periodic table sorts elements into which three categories? Mark ALL correct answers.",
+        "options": [
+          "metals",
+          "nonmetals",
+          "metalloids (semi-metals)",
+          "compounds",
+          "ions"
+        ],
+        "answers": [
+          "metals",
+          "nonmetals",
+          "metalloids (semi-metals)"
+        ],
+        "why": "Metals (left), nonmetals (right), and metalloids along the stairstep line."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What is the chemical symbol for IRON?",
+        "options": [
+          "Fe",
+          "I",
+          "Ir",
+          "Fr"
+        ],
+        "answer": "Fe",
+        "why": "From the Latin word ferrum."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What is the chemical symbol for SILVER?",
+        "options": [
+          "Ag",
+          "Si",
+          "S",
+          "Sv"
+        ],
+        "answer": "Ag",
+        "why": "From the Latin word argentum."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What is the chemical symbol for SODIUM?",
+        "options": [
+          "Na",
+          "S",
+          "So",
+          "Sd"
+        ],
+        "answer": "Na",
+        "why": "From the Latin word natrium."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which symbols come from LATIN names? Mark ALL correct answers.",
+        "options": [
+          "Fe (iron)",
+          "Pb (lead)",
+          "K (potassium)",
+          "O (oxygen)",
+          "C (carbon)"
+        ],
+        "answers": [
+          "Fe (iron)",
+          "Pb (lead)",
+          "K (potassium)"
+        ],
+        "why": "Fe ferrum, Pb plumbum, K kalium. O and C come from the English names."
+      },
+      {
+        "kind": "tf",
+        "prompt": "In a chemical symbol, the first letter is capitalized and the second letter is lowercase.",
+        "answer": true,
+        "why": "TRUE. Calcium is Ca, chlorine is Cl."
+      },
+      {
+        "kind": "mc",
+        "prompt": "In the formula CO₂, what does the small 2 tell you?",
+        "options": [
+          "There are two atoms of oxygen",
+          "There are two atoms of carbon",
+          "There are two molecules",
+          "It weighs 2"
+        ],
+        "answer": "There are two atoms of oxygen",
+        "why": "CO₂ = one carbon atom and two oxygen atoms."
+      },
+      {
+        "kind": "mc",
+        "prompt": "What is the chemical formula for water?",
+        "options": [
+          "H₂O",
+          "CO₂",
+          "NaCl",
+          "O₂"
+        ],
+        "answer": "H₂O",
+        "why": "Two hydrogen atoms and one oxygen atom."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Atoms sharing pairs of electrons form a...",
+        "options": [
+          "covalent bond",
+          "ionic bond",
+          "salt",
+          "period"
+        ],
+        "answer": "covalent bond",
+        "why": "Covalent = sharing. Water and oxygen gas have covalent bonds."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Positively and negatively charged ions attracting each other form a...",
+        "options": [
+          "ionic bond",
+          "covalent bond",
+          "molecule",
+          "neutron"
+        ],
+        "answer": "ionic bond",
+        "why": "Ionic bonds are held together by opposite charges, like table salt."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which are the types of chemical reactions? Mark ALL correct answers.",
+        "options": [
+          "synthesis",
+          "decomposition",
+          "single replacement",
+          "double replacement",
+          "evaporation"
+        ],
+        "answers": [
+          "synthesis",
+          "decomposition",
+          "single replacement",
+          "double replacement"
+        ],
+        "why": "Synthesis (combine), decomposition (break apart), single replacement (one element replaces another), double replacement (two switch places)."
+      },
+      {
+        "kind": "mc",
+        "prompt": "In a SYNTHESIS reaction, molecules...",
+        "options": [
+          "combine to form new substances",
+          "break apart",
+          "switch places",
+          "replace one element"
+        ],
+        "answer": "combine to form new substances",
+        "why": "Synthesis = combine. Decomposition = break apart."
+      },
+      {
+        "kind": "mc",
+        "prompt": "When our bodies digest sugar into water and carbon dioxide, that is a...",
+        "options": [
+          "decomposition reaction",
+          "synthesis reaction",
+          "single replacement",
+          "double replacement"
+        ],
+        "answer": "decomposition reaction",
+        "why": "A complex compound broken into simpler compounds."
+      },
+      {
+        "kind": "tf",
+        "prompt": "When elements combine into a compound, the compound usually has properties very different from the original elements.",
+        "answer": true,
+        "why": "TRUE. Sodium is explosive in water and chlorine is a poisonous gas, but together they make table salt."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Acids form ______ when dissolved in water.",
+        "options": [
+          "hydrogen ions (H⁺)",
+          "hydroxide ions (OH⁻)",
+          "salt",
+          "electrons"
+        ],
+        "answer": "hydrogen ions (H⁺)",
+        "why": "Acids = hydrogen ions. Bases = hydroxide ions."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Bases form ______ when dissolved in water.",
+        "options": [
+          "hydroxide ions (OH⁻)",
+          "hydrogen ions (H⁺)",
+          "protons",
+          "molecules"
+        ],
+        "answer": "hydroxide ions (OH⁻)",
+        "why": "Bases = hydroxide ions."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which describe ACIDS? Mark ALL correct answers.",
+        "options": [
+          "sour taste",
+          "strong ones are corrosive",
+          "pH from 0 to 6.9",
+          "bitter taste",
+          "feel slippery"
+        ],
+        "answers": [
+          "sour taste",
+          "strong ones are corrosive",
+          "pH from 0 to 6.9"
+        ],
+        "why": "Acids: sour, can be corrosive, pH below 7. Bitter and slippery describe bases."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which describe BASES? Mark ALL correct answers.",
+        "options": [
+          "bitter taste",
+          "feel slippery",
+          "pH from 7.1 to 14",
+          "sour taste",
+          "form hydrogen ions"
+        ],
+        "answers": [
+          "bitter taste",
+          "feel slippery",
+          "pH from 7.1 to 14"
+        ],
+        "why": "Bases: bitter, slippery, pH above 7."
+      },
+      {
+        "kind": "mc",
+        "prompt": "On the pH scale, what number is NEUTRAL?",
+        "options": [
+          "7",
+          "0",
+          "14",
+          "1"
+        ],
+        "answer": "7",
+        "why": "Pure water has a pH of 7.0."
+      },
+      {
+        "kind": "mc",
+        "prompt": "A substance with a pH of 1 is...",
+        "options": [
+          "highly acidic",
+          "highly basic",
+          "neutral",
+          "slightly basic"
+        ],
+        "answer": "highly acidic",
+        "why": "0 is highly acidic, 14 is highly basic."
+      },
+      {
+        "kind": "mc",
+        "prompt": "A substance with a pH of 13 is...",
+        "options": [
+          "highly basic",
+          "highly acidic",
+          "neutral",
+          "slightly acidic"
+        ],
+        "answer": "highly basic",
+        "why": "Bases measure 7.1 to 14 on the scale."
+      },
+      {
+        "kind": "mc",
+        "prompt": "The term pH comes from French words meaning...",
+        "options": [
+          "the power of hydrogen",
+          "the part of hydrogen",
+          "pure hydrogen",
+          "the point of heat"
+        ],
+        "answer": "the power of hydrogen",
+        "why": "pH = “the power of hydrogen.”"
+      },
+      {
+        "kind": "mc",
+        "prompt": "If you dip BLUE litmus paper into an ACID, it turns...",
+        "options": [
+          "red",
+          "blue",
+          "green",
+          "yellow"
+        ],
+        "answer": "red",
+        "why": "Acid turns blue litmus red. Base turns red litmus blue."
+      },
+      {
+        "kind": "mc",
+        "prompt": "If you dip RED litmus paper into a BASE, it turns...",
+        "options": [
+          "blue",
+          "red",
+          "green",
+          "purple"
+        ],
+        "answer": "blue",
+        "why": "Base turns red litmus blue."
+      },
+      {
+        "kind": "mc",
+        "prompt": "When an acid and a base come in contact, they...",
+        "options": [
+          "neutralize each other",
+          "explode",
+          "turn into metals",
+          "become ions"
+        ],
+        "answer": "neutralize each other",
+        "why": "The reaction produces water and a salt."
+      },
+      {
+        "kind": "mc",
+        "prompt": "An acid reacting with a base produces water and a...",
+        "options": [
+          "salt",
+          "metal",
+          "gas",
+          "neutron"
+        ],
+        "answer": "salt",
+        "why": "A salt is an ionic compound formed from a reaction between an acid and a base."
+      },
+      {
+        "kind": "mc",
+        "prompt": "Bases that dissolve in water are called...",
+        "options": [
+          "alkalis",
+          "acids",
+          "salts",
+          "indicators"
+        ],
+        "answer": "alkalis",
+        "why": "Alkalis = bases that dissolve in water."
+      },
+      {
+        "kind": "multi",
+        "prompt": "Which are examples of SALTS? Mark ALL correct answers.",
+        "options": [
+          "table salt (NaCl)",
+          "salt substitute (KCl)",
+          "chalk (CaCO₃)",
+          "water (H₂O)",
+          "vinegar"
+        ],
+        "answers": [
+          "table salt (NaCl)",
+          "salt substitute (KCl)",
+          "chalk (CaCO₃)"
+        ],
+        "why": "Table salt, salt substitute, and chalk are all salts."
+      }
+    ],
+    "extras": [
+      {
+        "prompt": "Dmitri Mendeleev: who was he and what did he do?",
+        "answer": "A Russian chemist. In 1869 he came up with a way to organize all the elements known at that time: the periodic table. He put them in order by atomic weight, grouped them into rows and columns by their chemical and physical properties, and left gaps for elements that hadn't been discovered yet. (Book p. 167)"
+      },
+      {
+        "prompt": "Niels Bohr: who was he and what did he do?",
+        "answer": "A Danish scientist born in 1885, best known for his research on atomic structure. He devised a model of the atom with electrons moving in shells (the Bohr model). He escaped the Nazis in 1943 on a fishing boat to Sweden. (Book pp. 164–165)"
+      },
+      {
+        "prompt": "List the three parts of an atom and their charges.",
+        "answer": "Proton: positive (+), in the nucleus. Neutron: no charge (N), in the nucleus. Electron: negative (−), travels around the nucleus in shells."
+      },
+      {
+        "prompt": "What is the difference between atomic number and atomic mass?",
+        "answer": "Atomic number = the number of protons. Atomic mass = protons + neutrons added together."
+      },
+      {
+        "prompt": "What are the two kinds of atomic bonds? How are they different?",
+        "answer": "Covalent bond: atoms SHARE pairs of electrons. Ionic bond: positive and negative ions ATTRACT each other."
+      },
+      {
+        "prompt": "What are the four types of chemical reactions?",
+        "answer": "Synthesis: molecules combine. Decomposition: compounds break apart. Single replacement: one element replaces another. Double replacement: two elements switch places."
+      },
+      {
+        "prompt": "Describe the pH scale.",
+        "answer": "It is numbered 0 to 14. Acids are 0 to 6.9 (0 = highly acidic). Bases are 7.1 to 14 (14 = highly basic). 7 is neutral, like pure water."
+      },
+      {
+        "prompt": "What is an indicator? Give an example.",
+        "answer": "A substance that changes color when exposed to an acid or a base. Litmus paper: acid turns blue litmus red; base turns red litmus blue. Red cabbage juice works too."
+      },
+      {
+        "prompt": "How is a salt formed?",
+        "answer": "From a reaction between an acid and a base. It contains positive ions from a base and negative ions from an acid."
+      },
+      {
+        "prompt": "Element Nature: where do elements come from?",
+        "answer": "Scientists have identified more than 100 elements. Some have been made in laboratories, but most occur naturally in the earth. There are over ninety naturally occurring elements. (Book pp. 164 and 170. Check this one against your notes.)"
+      },
+      {
+        "prompt": "Solve the Problem: a fire ant bite hurts because of the acid it contains. What could you use from your kitchen or bathroom to help, and why would it work?",
+        "answer": "A base, like baking soda or an antacid. A base neutralizes an acid. (Our answer, built from the neutralizing section on p. 181. The book doesn't print one.)"
+      }
+    ],
+    "drills": [
+      "meaning",
+      "multionly",
+      "mixed",
+      "extras",
+      "match"
+    ],
+    "rival": "Proton Power FC",
+    "matchLength": 10
+  },
+  {
+    "id": "bible-john-15-11",
+    "subject": "bible",
+    "title": "John 15:11",
+    "assess": "quiz",
+    "added": "2026-11-16",
+    "quiz": "2026-11-20",
+    "note": "Quiz Friday 11/20. Word for word, ESV. Carries on from 15:10.",
+    "type": "verse",
+    "reference": "John 15:11",
+    "version": "ESV",
+    "text": "These things I have spoken to you, that my joy may be in you, and that your joy may be full."
   }
 ];
