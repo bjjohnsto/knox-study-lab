@@ -14,7 +14,7 @@
 
 /* Bump this whenever you change this file. It shows in the footer of the site,
    so you can tell at a glance whether your upload actually went live. */
-const BUILD = "Nov 16 \u2014 build 66";
+const BUILD = "Nov 17 \u2014 build 67";
 
 
 /* --- The seven class tabs. You probably never need to change these. ------ */
@@ -10598,7 +10598,7 @@ const STUDY_ITEMS = [
     "added": "2026-11-16",
     "quiz": "2026-11-19",
     "pin": true,
-    "note": "Test Thursday 11/19. Every term on her Ch. 7 study guide in the book's wording, plus the Words to Know and Key Ideas from p. 186.",
+    "note": "Test Thursday 11/19. Every term on her Ch. 7 study guide in the book's wording, plus the Words to Know and Key Ideas from p. 186. Element nature = how an element behaves (from Mrs. Servizzi).",
     "type": "bundle",
     "words": [
       {
@@ -10694,6 +10694,10 @@ const STUDY_ITEMS = [
         "meaning": "An abbreviation for the name of an element, like O for oxygen or Fe for iron."
       },
       {
+        "word": "element nature",
+        "meaning": "How an element behaves."
+      },
+      {
         "word": "molecule",
         "meaning": "A unit formed when atoms join with other atoms."
       },
@@ -10719,6 +10723,24 @@ const STUDY_ITEMS = [
       }
     ],
     "questions": [
+      {
+        "kind": "mc",
+        "prompt": "What is ELEMENT NATURE?",
+        "options": [
+          "how an element behaves",
+          "where an element is found",
+          "the name of an element",
+          "the number of protons in an element"
+        ],
+        "answer": "how an element behaves",
+        "why": "Element nature = how an element behaves. Mrs. Servizzi says this one is on the test."
+      },
+      {
+        "kind": "tf",
+        "prompt": "Element nature means how an element behaves.",
+        "answer": true,
+        "why": "TRUE. That is Mrs. Servizzi’s wording, and it’s on the test."
+      },
       {
         "kind": "multi",
         "prompt": "What are the three main parts of an atom? Mark ALL correct answers.",
@@ -11319,8 +11341,8 @@ const STUDY_ITEMS = [
         "answer": "From a reaction between an acid and a base. It contains positive ions from a base and negative ions from an acid."
       },
       {
-        "prompt": "Element Nature: where do elements come from?",
-        "answer": "Scientists have identified more than 100 elements. Some have been made in laboratories, but most occur naturally in the earth. There are over ninety naturally occurring elements. (Book pp. 164 and 170. Check this one against your notes.)"
+        "prompt": "Element Nature: what does it mean?",
+        "answer": "How an element behaves. (Mrs. Servizzi’s own wording — this is a question on the test.)"
       },
       {
         "prompt": "Solve the Problem: a fire ant bite hurts because of the acid it contains. What could you use from your kitchen or bathroom to help, and why would it work?",
